@@ -11,7 +11,6 @@ class User < ActiveRecord::Base
 
   # == Validations ============================================================
   validates :name, :surname, :gender, :birth_date, :type, :time_zone, presence: true
-  #Add validation for phone format?
   validate :birth_date_not_to_be_in_past
 
   private
