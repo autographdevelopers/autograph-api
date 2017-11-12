@@ -10,5 +10,6 @@ FactoryBot.define do
     time_zone "+01:00"
     avatar FFaker::Avatar.image
     type ['Student', 'Employee'].sample
+    confirmed_at DateTime.now
   end
 end

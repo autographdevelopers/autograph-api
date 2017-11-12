@@ -13,6 +13,11 @@ class User < ActiveRecord::Base
   validates :name, :surname, :gender, :birth_date, :type, :time_zone, presence: true
   validate :birth_date_not_to_be_in_past
 
+  # == Scopes =================================================================
+  scope :with_email, -> (email) {
+    email ? where('lower(email) = ?', email.downcase) : none
+  }
+
   private
 
   def birth_date_not_to_be_in_past

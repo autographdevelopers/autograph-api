@@ -18,7 +18,7 @@ describe 'POST /api/v1/auth' do
   end
 
   before do
-    post "/api/v1/auth", params: params
+    post '/api/v1/auth', params: params
   end
 
   context 'when type is Student' do
@@ -35,6 +35,14 @@ describe 'POST /api/v1/auth' do
 
       it 'created user is active' do
         expect(subject.status).to eq 'active'
+      end
+
+      it 'created user is NOT confirmed' do
+        expect(subject.confirmed_at).to be nil
+      end
+
+      it 'sends confirmation email' do
+        expect(ActionMailer::Base.deliveries.count).to eq 1
       end
 
       it 'created record has proper password' do
@@ -168,6 +176,14 @@ describe 'POST /api/v1/auth' do
 
       it 'created user is active' do
         expect(subject.status).to eq 'active'
+      end
+
+      it 'created user is NOT confirmed' do
+        expect(subject.confirmed_at).to be nil
+      end
+
+      it 'sends confirmation email' do
+        expect(ActionMailer::Base.deliveries.count).to eq 1
       end
 
       it 'created record has proper password' do

@@ -47,5 +47,5 @@ DeviseTokenAuth.setup do |config|
   # config.enable_standard_devise_support = false
 
   #change in future
-  config.default_confirm_success_url = "google.com"
+  config.default_confirm_success_url = "http://localhost:3000"
 end

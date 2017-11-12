@@ -1,0 +1,5 @@
+<p><%= t(:welcome).capitalize + ' ' + @email %>!</p>
+
+<p><%= t '.confirm_link_msg' %> </p>
+
+<p><a href="<%= "#{Rails.application.secrets.react_frontend_url}/users/confirmation?confirmation_token=#{@token}" %>">Confirm</a></p>
