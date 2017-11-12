@@ -31,3 +31,10 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+      errors:
+        models:
+          user:
+            attributes:
+              birth_date:
+                birth_date_in_future: "can't be in the future"

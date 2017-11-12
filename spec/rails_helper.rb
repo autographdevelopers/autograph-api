@@ -4,7 +4,9 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require 'support/factory_bot'
+require 'support/api_helpers'
 
+include ApiHelpers
 
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -28,7 +30,6 @@ RSpec.configure do |config|
   end
 end
 
-#Configure shoulda-matchers
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
