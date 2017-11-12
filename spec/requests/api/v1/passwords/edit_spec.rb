@@ -1,4 +1,4 @@
-describe 'POST /api/v1/auth/password/edit' do
+describe 'GET /api/v1/auth/password/edit' do
   let(:params) { { reset_password_token: reset_password_token, redirect_url: '/' } }
 
   before do

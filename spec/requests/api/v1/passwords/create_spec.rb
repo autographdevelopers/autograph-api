@@ -1,5 +1,5 @@
 describe 'POST /api/v1/auth/password' do
-  let(:params) { { email: email, redirect_url: '/' } }
+  let(:params) { { email: email } }
 
   before do
     post '/api/v1/auth/password', params: params

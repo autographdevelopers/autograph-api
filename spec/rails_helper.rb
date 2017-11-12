@@ -6,12 +6,11 @@ require 'rspec/rails'
 require 'support/factory_bot'
 require 'support/api_helpers'
 
+include ApiHelpers
 
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-  include ApiHelpers
-
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
   config.infer_spec_type_from_file_location!

@@ -12,7 +12,7 @@ module ErrorsHandlers
     end
 
     def invalid_user_type
-      render json: { type: ['must by either Student or Employee'] }, status: 422
+      render json: { type: ['must by either Student or Employee'] }, status: :unprocessable_entity
     end
   end
 end
