@@ -1,8 +1,4 @@
 class Api::V1::UsersController < DeviseTokenAuth::RegistrationsController
-  def create
-    super
-  end
-
   protected
 
   def render_create_success
