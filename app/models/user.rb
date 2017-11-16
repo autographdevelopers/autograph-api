@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   private
 
+  #TODO find minimal required age
   def birth_date_not_to_be_in_past
     if birth_date && birth_date > Date.today
       errors.add(:birth_date, :birth_date_in_future)
