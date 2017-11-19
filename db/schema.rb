@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171116213424) do
+ActiveRecord::Schema.define(version: 20171119141504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,28 @@ ActiveRecord::Schema.define(version: 20171116213424) do
     t.datetime "updated_at", null: false
     t.index ["driving_school_id"], name: "index_employee_driving_schools_on_driving_school_id"
     t.index ["employee_id"], name: "index_employee_driving_schools_on_employee_id"
+  end
+
+  create_table "employee_privilege_sets", force: :cascade do |t|
+    t.bigint "employee_driving_school_id", null: false
+    t.boolean "can_manage_employees", default: false, null: false
+    t.boolean "can_manage_students", default: false, null: false
+    t.boolean "can_modify_schedules", default: false, null: false
+    t.boolean "is_driving", default: false, null: false
+    t.boolean "is_owner", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_driving_school_id"], name: "index_employee_privilege_sets_on_employee_driving_school_id"
+  end
+
+  create_table "student_driving_schools", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "driving_school_id", null: false
+    t.integer "status", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["driving_school_id"], name: "index_student_driving_schools_on_driving_school_id"
+    t.index ["student_id"], name: "index_student_driving_schools_on_student_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -81,4 +103,5 @@ ActiveRecord::Schema.define(version: 20171116213424) do
   end
 
   add_foreign_key "employee_driving_schools", "users", column: "employee_id"
+  add_foreign_key "student_driving_schools", "users", column: "student_id"
 end

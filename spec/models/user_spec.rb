@@ -4,10 +4,6 @@ describe User do
     it {should define_enum_for(:gender).with([:male, :female]) }
   end
 
-  context 'relations' do
-
-  end
-
   context 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:surname) }

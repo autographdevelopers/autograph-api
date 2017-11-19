@@ -42,3 +42,4 @@ gem 'ffaker'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise_token_auth'
+gem 'pundit'
