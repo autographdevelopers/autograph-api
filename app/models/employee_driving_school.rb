@@ -5,6 +5,7 @@ class EmployeeDrivingSchool < ApplicationRecord
   # == Relations ==============================================================
   belongs_to :employee
   belongs_to :driving_school
+  has_one :employee_privilege_set
 
   # == Validations ============================================================
   validates :status, presence: true

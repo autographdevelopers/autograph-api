@@ -1,16 +1,14 @@
 class DrivingSchoolPolicy < ApplicationPolicy
   class Scope < Struct.new(:user, :scope)
     def resolve
-      if user.is_a? Employee
+      if user.employee?
         return user.driving_schools
                  .where.not(employee_driving_schools: { status: :archived })
-                 .where(status: [:pending, :active])
-      elsif user.is_a? Student
+                 .where.not(status: :removed)
+      elsif user.student?
         return user.driving_schools
                  .where.not(student_driving_schools: { status: :archived })
-                 .where(status: [:pending, :active])
-      else
-        return scope.none
+                 .where.not(status: :removed)
       end
     end
   end

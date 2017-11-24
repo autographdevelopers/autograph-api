@@ -3,7 +3,7 @@ class CreateStudentDrivingSchools < ActiveRecord::Migration[5.1]
     create_table :student_driving_schools do |t|
       t.references :student, foreign_key: { to_table: :users }, null: false
       t.references :driving_school, null: false
-      t.integer :status, null: false
+      t.integer :status, null: false, default: 0
 
       t.timestamps
     end

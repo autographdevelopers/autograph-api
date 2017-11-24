@@ -6,6 +6,7 @@ describe EmployeeDrivingSchool do
   context 'relations' do
     it { should belong_to(:driving_school) }
     it { should belong_to(:employee) }
+    it { should have_one(:employee_privilege_set) }
   end
 
   context 'validations' do

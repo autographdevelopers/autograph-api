@@ -13,6 +13,16 @@ class User < ActiveRecord::Base
   validates :name, :surname, :gender, :birth_date, :type, :time_zone, presence: true
   validate :birth_date_not_to_be_in_past
 
+  # == Instance Methods =======================================================
+
+  def employee?
+    self.is_a? Employee
+  end
+
+  def student?
+    self.is_a? Student
+  end
+
   private
 
   #TODO find minimal required age

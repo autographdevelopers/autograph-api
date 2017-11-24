@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20171119141504) do
   create_table "employee_driving_schools", force: :cascade do |t|
     t.bigint "employee_id", null: false
     t.bigint "driving_school_id", null: false
-    t.integer "status", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["driving_school_id"], name: "index_employee_driving_schools_on_driving_school_id"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20171119141504) do
   create_table "student_driving_schools", force: :cascade do |t|
     t.bigint "student_id", null: false
     t.bigint "driving_school_id", null: false
-    t.integer "status", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["driving_school_id"], name: "index_student_driving_schools_on_driving_school_id"
