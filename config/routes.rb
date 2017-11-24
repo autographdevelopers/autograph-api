@@ -5,6 +5,8 @@ Rails.application.routes.draw do
         registrations: 'api/v1/users',
         sessions: 'api/v1/sessions'
       }
+
+      resources :driving_schools, only: [:index]
     end
   end
 end
