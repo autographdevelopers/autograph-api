@@ -7,6 +7,7 @@ class DrivingSchool < ApplicationRecord
   has_many :employees, through: :employee_driving_schools
   has_many :student_driving_schools
   has_many :students, through: :student_driving_schools
+  has_many :schedule_boundaries
 
   # == Validations ============================================================
   validates :name, :phone_numbers, :emails, :city, :zip_code, :country, presence: true
