@@ -3,7 +3,20 @@ class Api::V1::DrivingSchoolsController < ApplicationController
     @driving_schools = build_results(policy_scope(DrivingSchool))
   end
 
+  def create
+    authorize current_user, :employee?
+
+    @driving_school = CreateDrivingSchoolService.new(current_user, driving_school_params).call
+
+    render :create, status: :created
+  end
+
   private
+
+  def driving_school_params
+    params.require(:driving_school).permit(:name, :website_link, :additional_information, :city, :zip_code, :street,
+                                           :country, :profile_picture, :latitude, :longitude, phone_numbers: [], emails: [])
+  end
 
   def build_results(driving_schools)
     driving_schools_with_configurations_set = []

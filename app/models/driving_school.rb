@@ -1,6 +1,6 @@
 class DrivingSchool < ApplicationRecord
   # == Enumerators ============================================================
-  enum status: { pending: 0, active: 1, blocked: 2, removed: 3 }
+  enum status: { built: 0, pending: 1, active: 2, blocked: 3, removed: 4 }
 
   # == Relations ==============================================================
   has_many :employee_driving_schools

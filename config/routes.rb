@@ -6,7 +6,7 @@ Rails.application.routes.draw do
         sessions: 'api/v1/sessions'
       }
 
-      resources :driving_schools, only: [:index]
+      resources :driving_schools, only: [:index, :create]
     end
   end
 end

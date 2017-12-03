@@ -1,6 +1,6 @@
 describe DrivingSchool do
   context 'enumerators' do
-    it { should define_enum_for(:status).with([:pending, :active, :blocked, :removed]) }
+    it { should define_enum_for(:status).with([:built, :pending, :active, :blocked, :removed]) }
   end
 
   context 'relations' do

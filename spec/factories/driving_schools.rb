@@ -11,7 +11,6 @@ FactoryBot.define do
     country FFaker::AddressUS.country
     status [:pending, :active, :blocked, :removed].sample
     profile_picture 'default_picture_path'
-    verification_code SecureRandom.uuid
     latitude FFaker::Geolocation.lat
     longitude FFaker::Geolocation.lng
   end

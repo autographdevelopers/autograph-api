@@ -1,0 +1,2 @@
+class StudentPolicy < UserPolicy
+end
