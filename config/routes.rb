@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :driving_schools, only: [:index, :create] do
         resource :employee_notifications_settings_set, only: [:update]
         resource :schedule_setting, only: [:update]
+        resources :schedule_boundaries, only: [:create]
       end
     end
   end
