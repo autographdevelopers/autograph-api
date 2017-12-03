@@ -5,6 +5,7 @@ module ErrorsHandlers
     rescue_from ActiveRecord::SubclassNotFound, with: :invalid_user_type
     rescue_from ActionController::RoutingError, with: :routes_not_found
     rescue_from Pundit::NotAuthorizedError,     with: :not_authorized
+    rescue_from ActiveRecord::RecordNotFound,   with: :record_not_found
     rescue_from ActiveRecord::RecordInvalid,    with: :record_invalid
 
     private
@@ -23,6 +24,10 @@ module ErrorsHandlers
 
     def record_invalid(e)
       render json: e.record.errors.messages, status: :unprocessable_entity
+    end
+
+    def record_not_found(e)
+      render json: { error: e.message }, status: :not_found
     end
   end
 end

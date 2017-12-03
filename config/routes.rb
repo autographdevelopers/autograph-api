@@ -6,7 +6,9 @@ Rails.application.routes.draw do
         sessions: 'api/v1/sessions'
       }
 
-      resources :driving_schools, only: [:index, :create]
+      resources :driving_schools, only: [:index, :create] do
+        resource :employee_notifications_settings_set, only: [:update]
+      end
     end
   end
 end
