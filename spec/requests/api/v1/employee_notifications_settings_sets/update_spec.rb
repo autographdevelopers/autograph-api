@@ -8,7 +8,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employee_notifications_
   }
   let(:driving_school) { create(:driving_school) }
 
-  let(:response_keys) { %w(push_notifications_enabled weekly_emails_reports_enabled monthly_emails_reports_enabled) }
+  let(:response_keys) { %w(id push_notifications_enabled weekly_emails_reports_enabled monthly_emails_reports_enabled) }
 
   let(:valid_params) do
     {

@@ -1,11 +1,11 @@
 class Api::V1::DrivingSchoolsController < ApplicationController
+  before_action :verify_current_user_to_be_employee, only: [:create]
+
   def index
     @driving_schools = build_results(policy_scope(DrivingSchool))
   end
 
   def create
-    authorize current_user, :employee?
-
     @driving_school = CreateDrivingSchoolService.new(current_user, driving_school_params).call
 
     render :create, status: :created

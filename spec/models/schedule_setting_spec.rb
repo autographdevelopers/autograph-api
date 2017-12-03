@@ -4,7 +4,7 @@ describe ScheduleSetting do
   end
 
   context 'validations' do
-    it { should validate_presence_of(:holidays_enrollment_enabled) }
-    it { should validate_presence_of(:last_minute_booking_enabled) }
+    it { should validate_inclusion_of(:holidays_enrollment_enabled).in_array([true, false]) }
+    it { should validate_inclusion_of(:last_minute_booking_enabled).in_array([true, false]) }
   end
 end
