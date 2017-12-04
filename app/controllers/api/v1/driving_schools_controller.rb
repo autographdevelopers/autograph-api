@@ -9,7 +9,7 @@ class Api::V1::DrivingSchoolsController < ApplicationController
   def create
     @driving_school = CreateDrivingSchoolService.new(current_user, driving_school_params).call
 
-    render :create, status: :created
+    render @driving_school, status: :created
   end
 
   def confirm_registration

@@ -54,8 +54,8 @@ describe 'GET /api/v1/driving_schools' do
 
     it 'returned records contain proper keys' do
       expect(json_response.first.keys).to match_array %w(id name phone_numbers emails website_link additional_information
-                                                         city street country profile_picture driving_school_status
-                                                         student_driving_school_status)
+                                                         city street country profile_picture status student_driving_school_status
+                                                         zip_code)
     end
 
     it 'returns proper records' do
@@ -77,8 +77,9 @@ describe 'GET /api/v1/driving_schools' do
                                           'street' => driving_school_1.street,
                                           'country' => driving_school_1.country,
                                           'profile_picture' => driving_school_1.profile_picture,
-                                          'driving_school_status' => driving_school_1.status,
-                                          'student_driving_school_status' => employee_driving_school_1.status,
+                                          'status' => driving_school_1.status,
+                                          'zip_code' => driving_school_1.zip_code,
+                                          'student_driving_school_status' => employee_driving_school_1.status
                                         })
     end
   end
@@ -92,7 +93,7 @@ describe 'GET /api/v1/driving_schools' do
 
     it 'returned records contain proper keys' do
       expect(json_response.first.keys).to match_array %w(id name phone_numbers emails website_link additional_information
-                                                         city street country profile_picture driving_school_status
+                                                         city street country profile_picture zip_code status
                                                          employee_driving_school_status privilege_set)
     end
 
@@ -120,7 +121,8 @@ describe 'GET /api/v1/driving_schools' do
                                           'street' => driving_school_1.street,
                                           'country' => driving_school_1.country,
                                           'profile_picture' => driving_school_1.profile_picture,
-                                          'driving_school_status' => driving_school_1.status,
+                                          'status' => driving_school_1.status,
+                                          'zip_code' => driving_school_1.zip_code,
                                           'employee_driving_school_status' => employee_driving_school_1.status,
                                           'privilege_set' => {
                                             'can_manage_employees' => employee_driving_school_1.employee_privilege_set.can_manage_employees,
