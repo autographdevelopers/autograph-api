@@ -15,11 +15,9 @@ class Api::V1::DrivingSchoolsController < ApplicationController
   def confirm_registration
     authorize @driving_school
 
-    if @driving_school.confirm_registration
+    @driving_school.confirm_registration
 
-    else
-
-    end
+    render @driving_school
   end
 
   private
