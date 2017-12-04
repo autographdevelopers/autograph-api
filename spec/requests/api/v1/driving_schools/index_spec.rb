@@ -15,18 +15,18 @@ describe 'GET /api/v1/driving_schools' do
   let!(:driving_school_11) { create(:driving_school, status: :blocked) }
   let!(:driving_school_12) { create(:driving_school, status: :removed) }
 
-  let!(:employee_driving_school_1) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_1, status: :pending) }
-  let!(:employee_driving_school_2) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_2, status: :pending) }
-  let!(:employee_driving_school_3) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_3, status: :pending) }
-  let!(:employee_driving_school_4) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_4, status: :pending) }
-  let!(:employee_driving_school_5) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_5, status: :active) }
-  let!(:employee_driving_school_6) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_6, status: :active) }
-  let!(:employee_driving_school_7) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_7, status: :active) }
-  let!(:employee_driving_school_8) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_8, status: :active) }
-  let!(:employee_driving_school_9) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_9, status: :archived) }
-  let!(:employee_driving_school_10) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_10, status: :archived) }
-  let!(:employee_driving_school_11) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_11, status: :archived) }
-  let!(:employee_driving_school_12) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_12, status: :archived) }
+  let!(:employee_driving_school_1) { create(:employee_driving_school, employee: employee, driving_school: driving_school_1, status: :pending) }
+  let!(:employee_driving_school_2) { create(:employee_driving_school, employee: employee, driving_school: driving_school_2, status: :pending) }
+  let!(:employee_driving_school_3) { create(:employee_driving_school, employee: employee, driving_school: driving_school_3, status: :pending) }
+  let!(:employee_driving_school_4) { create(:employee_driving_school, employee: employee, driving_school: driving_school_4, status: :pending) }
+  let!(:employee_driving_school_5) { create(:employee_driving_school, employee: employee, driving_school: driving_school_5, status: :active) }
+  let!(:employee_driving_school_6) { create(:employee_driving_school, employee: employee, driving_school: driving_school_6, status: :active) }
+  let!(:employee_driving_school_7) { create(:employee_driving_school, employee: employee, driving_school: driving_school_7, status: :active) }
+  let!(:employee_driving_school_8) { create(:employee_driving_school, employee: employee, driving_school: driving_school_8, status: :active) }
+  let!(:employee_driving_school_9) { create(:employee_driving_school, employee: employee, driving_school: driving_school_9, status: :archived) }
+  let!(:employee_driving_school_10) { create(:employee_driving_school, employee: employee, driving_school: driving_school_10, status: :archived) }
+  let!(:employee_driving_school_11) { create(:employee_driving_school, employee: employee, driving_school: driving_school_11, status: :archived) }
+  let!(:employee_driving_school_12) { create(:employee_driving_school, employee: employee, driving_school: driving_school_12, status: :archived) }
 
   let!(:student_driving_school_1) { create(:student_driving_school, student: student, driving_school: driving_school_1, status: :pending) }
   let!(:student_driving_school_2) { create(:student_driving_school, student: student, driving_school: driving_school_2, status: :pending) }

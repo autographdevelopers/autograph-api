@@ -7,11 +7,10 @@ FactoryBot.define do
     transient do
       is_owner false
     end
-  end
 
-  trait :with_employee_privileges do
     after(:create) do |employee_driving_school, evaluator|
       create(:employee_privilege_set, employee_driving_school: employee_driving_school, is_owner: evaluator.is_owner)
+      create(:employee_notifications_settings_set, employee_driving_school: employee_driving_school)
     end
   end
 end

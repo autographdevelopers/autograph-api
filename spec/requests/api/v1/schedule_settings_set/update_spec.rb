@@ -1,9 +1,7 @@
 describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings_set' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
-  let!(:employee_driving_school) {
-    create(:employee_driving_school, :with_employee_privileges, is_owner: is_owner, employee: employee, driving_school: driving_school)
-  }
+  let!(:employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, employee: employee, driving_school: driving_school) }
   let(:driving_school) { create(:driving_school, :with_schedule_settings_set) }
 
   let(:response_keys) { %w(id holidays_enrollment_enabled last_minute_booking_enabled) }

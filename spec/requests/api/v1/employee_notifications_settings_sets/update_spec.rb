@@ -3,9 +3,6 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employee_notifications_
   let(:employee) { create(:employee) }
   let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school) }
   let!(:employee_driving_school) { create(:employee_driving_school, employee: employee, driving_school: driving_school) }
-  let!(:employee_notifications_settings_set) {
-    create(:employee_notifications_settings_set, employee_driving_school: employee_driving_school)
-  }
   let(:driving_school) { create(:driving_school) }
 
   let(:response_keys) { %w(id push_notifications_enabled weekly_emails_reports_enabled monthly_emails_reports_enabled) }
@@ -39,6 +36,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employee_notifications_
         end
 
         it 'updates EmployeeNotificationsSettingsSet record' do
+          employee_notifications_settings_set = employee_driving_school.employee_notifications_settings_set
           employee_notifications_settings_set.reload
           expect(employee_notifications_settings_set.attributes).to include(
                                                                       'push_notifications_enabled' => true,
@@ -91,7 +89,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employee_notifications_
       end
     end
 
-    context 'when is NOT accessing his driving school with VALID params' do
+    context 'with VALID params BUT is NOT accessing his driving school ' do
       let(:driving_school_id) { create(:driving_school).id }
       let(:params) { valid_params }
 
@@ -108,8 +106,8 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employee_notifications_
       let(:driving_school_id) { driving_school.id }
       let(:params) { valid_params }
 
-      it 'returns 404 http status code' do
-        expect(response.status).to eq 404
+      it 'returns 401 http status code' do
+        expect(response.status).to eq 401
       end
     end
   end
