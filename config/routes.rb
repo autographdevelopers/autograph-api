@@ -11,7 +11,7 @@ Rails.application.routes.draw do
           post :confirm_registration
         end
         resource :employee_notifications_settings_set, only: [:update]
-        resource :schedule_setting, only: [:update]
+        resource :schedule_settings_set, only: [:update]
         resources :schedule_boundaries, only: [:create]
       end
     end

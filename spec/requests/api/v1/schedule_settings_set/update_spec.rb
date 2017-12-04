@@ -1,17 +1,17 @@
-describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_setting' do
+describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings_set' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
   let!(:employee_driving_school) {
     create(:employee_driving_school, :with_employee_privileges, is_owner: is_owner, employee: employee, driving_school: driving_school)
   }
-  let(:driving_school) { create(:driving_school, :with_schedule_setting) }
+  let(:driving_school) { create(:driving_school, :with_schedule_settings_set) }
 
   let(:response_keys) { %w(id holidays_enrollment_enabled last_minute_booking_enabled) }
 
   let(:is_owner) { false }
   let(:valid_params) do
     {
-      schedule_setting: {
+      schedule_settings_set: {
         holidays_enrollment_enabled: true,
         last_minute_booking_enabled: false
       }
@@ -19,7 +19,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_setting' do
   end
 
   before do
-    put "/api/v1/driving_schools/#{driving_school_id}/schedule_setting",
+    put "/api/v1/driving_schools/#{driving_school_id}/schedule_settings_set",
         headers: current_user.create_new_auth_token, params: params
   end
 
@@ -40,8 +40,8 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_setting' do
           end
 
           it 'updates EmployeeNotificationsSettingsSet record' do
-            schedule_setting = driving_school.schedule_setting.reload
-            expect(schedule_setting.attributes).to include(
+            schedule_settings_set = driving_school.schedule_settings_set.reload
+            expect(schedule_settings_set.attributes).to include(
                                                      'holidays_enrollment_enabled' => true,
                                                      'last_minute_booking_enabled' => false
                                                    )
@@ -67,7 +67,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_setting' do
           context 'all fields blank' do
             let(:params) do
               {
-                schedule_setting: {
+                schedule_settings_set: {
                   holidays_enrollment_enabled: '',
                   last_minute_booking_enabled: ''
                 }

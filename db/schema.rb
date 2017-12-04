@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202200037) do
+ActiveRecord::Schema.define(version: 20171204184344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,13 +77,13 @@ ActiveRecord::Schema.define(version: 20171202200037) do
     t.index ["driving_school_id"], name: "index_schedule_boundaries_on_driving_school_id"
   end
 
-  create_table "schedule_settings", force: :cascade do |t|
+  create_table "schedule_settings_sets", force: :cascade do |t|
     t.boolean "holidays_enrollment_enabled", default: false, null: false
     t.boolean "last_minute_booking_enabled", default: false, null: false
     t.bigint "driving_school_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["driving_school_id"], name: "index_schedule_settings_on_driving_school_id"
+    t.index ["driving_school_id"], name: "index_schedule_settings_sets_on_driving_school_id"
   end
 
   create_table "student_driving_schools", force: :cascade do |t|

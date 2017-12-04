@@ -11,7 +11,7 @@ class DrivingSchool < ApplicationRecord
   has_many :student_driving_schools
   has_many :students, through: :student_driving_schools
   has_many :schedule_boundaries
-  has_one :schedule_setting
+  has_one :schedule_settings_set
 
   # == Validations ============================================================
   validates :name, :phone_numbers, :emails, :city, :zip_code, :country, presence: true
@@ -25,7 +25,7 @@ class DrivingSchool < ApplicationRecord
     state :built, :pending, :active, :blocked, :removed
 
     event :confirm_registration do
-      transitions from: :built, to: :pending, guard: [:has_owner?, :has_schedule_setting?]
+      transitions from: :built, to: :pending, guard: [:has_owner?, :has_schedule_settings_set?]
     end
   end
 
@@ -37,8 +37,8 @@ class DrivingSchool < ApplicationRecord
                                  .exists?
   end
 
-  def has_schedule_setting?
-    self.schedule_setting.present?
+  def has_schedule_settings_set?
+    self.schedule_settings_set.present?
   end
 
   def create_verification_code

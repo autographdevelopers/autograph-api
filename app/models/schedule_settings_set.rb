@@ -1,4 +1,4 @@
-class ScheduleSetting < ApplicationRecord
+class ScheduleSettingsSet < ApplicationRecord
   # == Relations ==============================================================
   belongs_to :driving_school
 

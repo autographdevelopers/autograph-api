@@ -1,4 +1,4 @@
-describe ScheduleSetting do
+describe ScheduleSettingsSet do
   context 'relations' do
     it { should belong_to(:driving_school) }
   end
