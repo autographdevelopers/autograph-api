@@ -1,5 +1,6 @@
 class Api::V1::DrivingSchoolsController < ApplicationController
-  before_action :verify_current_user_to_be_employee, only: [:create]
+  before_action :verify_current_user_to_be_employee, only: [:create, :confirm_registration]
+  before_action :set_driving_school, only: [:confirm_registration]
 
   def index
     @driving_schools = build_results(policy_scope(DrivingSchool))
@@ -11,11 +12,25 @@ class Api::V1::DrivingSchoolsController < ApplicationController
     render :create, status: :created
   end
 
+  def confirm_registration
+    authorize @driving_school
+
+    if @driving_school.confirm_registration
+
+    else
+
+    end
+  end
+
   private
 
   def driving_school_params
     params.require(:driving_school).permit(:name, :website_link, :additional_information, :city, :zip_code, :street,
                                            :country, :profile_picture, :latitude, :longitude, phone_numbers: [], emails: [])
+  end
+
+  def set_driving_school
+    @drivings_school = current_user.driving_schools.find(params[:id])
   end
 
   def build_results(driving_schools)

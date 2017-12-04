@@ -1,4 +1,7 @@
 class DrivingSchool < ApplicationRecord
+  # == Extensions =============================================================
+  include AASM
+
   # == Enumerators ============================================================
   enum status: { built: 0, pending: 1, active: 2, blocked: 3, removed: 4 }
 
@@ -16,7 +19,27 @@ class DrivingSchool < ApplicationRecord
   # == Callbacks ==============================================================
   before_create :create_verification_code
 
+  # == State Machine ==========================================================
+  aasm column: :status, enum: true do
+    state :built, initial: true
+    state :built, :pending, :active, :blocked, :removed
+
+    event :confirm_registration do
+      transitions from: :built, to: :pending, guard: [:has_owner?, :has_schedule_setting?]
+    end
+  end
+
   private
+
+  def has_owner?
+    self.employee_driving_schools.includes(:employee_privilege_set)
+                                 .where(employee_privilege_set: { is_owner: true })
+                                 .exists?
+  end
+
+  def has_schedule_setting?
+    self.schedule_setting.present?
+  end
 
   def create_verification_code
     self.verification_code = SecureRandom.uuid
