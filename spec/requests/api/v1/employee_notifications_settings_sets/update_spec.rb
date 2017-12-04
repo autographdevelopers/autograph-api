@@ -99,16 +99,13 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employee_notifications_
     end
   end
 
-  context 'when current_user is STUDENT' do
+  context 'when current_user is STUDENT and accessing his driving school with VALID params' do
     let(:current_user) { student }
+    let(:driving_school_id) { driving_school.id }
+    let(:params) { valid_params }
 
-    context 'when accessing his driving school with VALID params' do
-      let(:driving_school_id) { driving_school.id }
-      let(:params) { valid_params }
-
-      it 'returns 401 http status code' do
-        expect(response.status).to eq 401
-      end
+    it 'returns 401 http status code' do
+      expect(response.status).to eq 401
     end
   end
 end

@@ -6,7 +6,6 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings_set' 
 
   let(:response_keys) { %w(id holidays_enrollment_enabled last_minute_booking_enabled) }
 
-  let(:is_owner) { false }
   let(:valid_params) do
     {
       schedule_settings_set: {
@@ -40,9 +39,9 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings_set' 
           it 'updates EmployeeNotificationsSettingsSet record' do
             schedule_settings_set = driving_school.schedule_settings_set.reload
             expect(schedule_settings_set.attributes).to include(
-                                                     'holidays_enrollment_enabled' => true,
-                                                     'last_minute_booking_enabled' => false
-                                                   )
+                                                          'holidays_enrollment_enabled' => true,
+                                                          'last_minute_booking_enabled' => false
+                                                        )
           end
 
           context 'response body contains proper' do
@@ -88,6 +87,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings_set' 
 
       context 'when current_user is NOT owner of driving_school' do
         let(:params) { valid_params }
+        let(:is_owner) { false }
 
         it 'returns 401 http status code' do
           expect(response.status).to eq 401
@@ -98,6 +98,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings_set' 
     context 'when is NOT accessing his driving school' do
       let(:driving_school_id) { create(:driving_school).id }
       let(:params) { valid_params }
+      let(:is_owner) { true }
 
       it 'returns 404 http status code' do
         expect(response.status).to eq 404
@@ -107,14 +108,12 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings_set' 
 
   context 'when current_user is STUDENT' do
     let(:current_user) { student }
+    let(:driving_school_id) { driving_school.id }
+    let(:params) { valid_params }
+    let(:is_owner) { false }
 
-    context 'when accessing his driving school' do
-      let(:driving_school_id) { driving_school.id }
-      let(:params) { valid_params }
-
-      it 'returns 401 http status code' do
-        expect(response.status).to eq 401
-      end
+    it 'returns 401 http status code' do
+      expect(response.status).to eq 401
     end
   end
 end
