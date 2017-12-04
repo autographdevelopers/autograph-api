@@ -1,12 +1,5 @@
 class DrivingSchoolPolicy < ApplicationPolicy
-  def confirm_registration?
-    is_owner?
-  end
-
-  def is_owner?
-    privileges = EmployeeDrivingSchool.find_by(employee_id: user.id, driving_school_id: record.id).employee_privilege_set
-    privileges.is_owner?
-  end
+  allow :confirm_registration?, :owner?, if: -> { owner_of_driving_school?(record.id) }
 
   class Scope < Struct.new(:user, :scope)
     def resolve

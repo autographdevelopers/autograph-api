@@ -29,6 +29,8 @@ class DrivingSchool < ApplicationRecord
     end
   end
 
+  # == Instance Methods =======================================================
+
   private
 
   def has_owner?

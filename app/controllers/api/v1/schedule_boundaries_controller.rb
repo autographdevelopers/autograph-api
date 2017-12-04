@@ -3,7 +3,7 @@ class Api::V1::ScheduleBoundariesController < ApplicationController
   before_action :set_driving_school, only: [:create]
 
   def create
-    authorize @driving_school, :is_owner?
+    authorize @driving_school, :owner?
 
     CreateScheduleBoundariesService.new(@driving_school, schedule_boundaries_params).call
 

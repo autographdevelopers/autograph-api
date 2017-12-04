@@ -98,7 +98,7 @@ describe 'GET /api/v1/driving_schools' do
     end
 
     it 'returned records contain proper keys for privilege_set' do
-      expect(json_response.first['privilege_set'].keys).to match_array %w(can_manage_employees can_manage_students
+      expect(json_response.first['privilege_set'].keys).to match_array %w(id can_manage_employees can_manage_students
                                                                           can_modify_schedules is_driving is_owner)
     end
 
@@ -125,6 +125,7 @@ describe 'GET /api/v1/driving_schools' do
                                           'zip_code' => driving_school_1.zip_code,
                                           'employee_driving_school_status' => employee_driving_school_1.status,
                                           'privilege_set' => {
+                                            'id' => employee_driving_school_1.id,
                                             'can_manage_employees' => employee_driving_school_1.employee_privilege_set.can_manage_employees,
                                             'can_manage_students' => employee_driving_school_1.employee_privilege_set.can_manage_students,
                                             'can_modify_schedules' => employee_driving_school_1.employee_privilege_set.can_modify_schedules,

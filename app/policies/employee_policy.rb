@@ -1,2 +1,2 @@
-class EmployeePolicy < UserPolicy
+class EmployeePolicy < ApplicationPolicy
 end

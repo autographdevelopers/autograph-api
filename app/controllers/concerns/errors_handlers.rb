@@ -23,7 +23,7 @@ module ErrorsHandlers
     end
 
     def record_invalid(e)
-      render json: e.record.errors.messages, status: :unprocessable_entity
+      render json: e.record.errors, status: :unprocessable_entity
     end
 
     def record_not_found(e)

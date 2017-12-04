@@ -1,2 +1,2 @@
-class StudentPolicy < UserPolicy
+class StudentPolicy < ApplicationPolicy
 end
