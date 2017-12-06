@@ -114,8 +114,8 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/schedule_boundaries' d
       let(:params) { valid_params }
       let(:is_owner) { true }
 
-      it 'returns 401 http status code' do
-        expect(response.status).to eq 401
+      it 'returns 404 http status code' do
+        expect(response.status).to eq 404
       end
     end
   end

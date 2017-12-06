@@ -28,7 +28,7 @@ class Api::V1::DrivingSchoolsController < ApplicationController
   end
 
   def set_driving_school
-    @drivings_school = current_user.driving_schools.find(params[:id])
+    @driving_school = current_user.driving_schools.find(params[:id])
   end
 
   def build_results(driving_schools)

@@ -35,7 +35,7 @@ class DrivingSchool < ApplicationRecord
 
   def has_owner?
     self.employee_driving_schools.includes(:employee_privilege_set)
-                                 .where(employee_privilege_set: { is_owner: true })
+                                 .where(employee_privilege_sets: { is_owner: true })
                                  .exists?
   end
 

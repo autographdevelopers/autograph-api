@@ -7,6 +7,7 @@ module ErrorsHandlers
     rescue_from Pundit::NotAuthorizedError,     with: :not_authorized
     rescue_from ActiveRecord::RecordNotFound,   with: :record_not_found
     rescue_from ActiveRecord::RecordInvalid,    with: :record_invalid
+    rescue_from AASM::InvalidTransition,        with: :bad_request
 
     private
 
@@ -28,6 +29,10 @@ module ErrorsHandlers
 
     def record_not_found(e)
       render json: { error: e.message }, status: :not_found
+    end
+
+    def bad_request(e)
+      render json: { error: e.message }, status: :bad_request
     end
   end
 end
