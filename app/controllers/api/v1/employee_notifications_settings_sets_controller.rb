@@ -19,10 +19,8 @@ class Api::V1::EmployeeNotificationsSettingsSetsController < ApplicationControll
   end
 
   def set_employee_notifications_settings_set
-    @employee_notifications_settings_set = current_user.employee_driving_schools.find_by(
+    @employee_notifications_settings_set = current_user.employee_driving_schools.find_by!(
       driving_school_id: params[:driving_school_id]
-    )&.employee_notifications_settings_set
-
-    raise ActiveRecord::RecordNotFound unless @employee_notifications_settings_set
+    ).employee_notifications_settings_set
   end
 end

@@ -14,7 +14,7 @@ class DrivingSchool < ApplicationRecord
   has_one :schedule_settings_set
 
   # == Validations ============================================================
-  validates :name, :phone_numbers, :emails, :city, :zip_code, :country, presence: true
+  validates :name, :phone_numbers, :emails, :city, :street, :zip_code, :country, presence: true
 
   # == Callbacks ==============================================================
   before_create :create_verification_code
