@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # == Extensions =============================================================
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         #:confirmable
+         :confirmable
   include DeviseTokenAuth::Concerns::User
 
   # == Enumerators ============================================================
