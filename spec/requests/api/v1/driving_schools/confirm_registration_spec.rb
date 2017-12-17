@@ -10,7 +10,7 @@ describe 'POST /api/v1/driving_schools/driving_school_id/confirm_registration' d
   ) }
 
   before do
-    post "/api/v1/driving_schools/#{driving_school_id}/confirm_registration", headers: current_user.create_new_auth_token
+    put "/api/v1/driving_schools/#{driving_school_id}/confirm_registration", headers: current_user.create_new_auth_token
   end
 
   context 'when current_user is EMPLOYEE' do
@@ -23,14 +23,16 @@ describe 'POST /api/v1/driving_schools/driving_school_id/confirm_registration' d
         let(:is_owner) { true }
 
         context 'when driving_school fulfilled registration requirements' do
+          let(:driving_school) { create(:driving_school, :with_schedule_settings_set, status: :built) }
 
-          #Add tests later
-          xit 'set status of driving_school to pending' do
+          it 'set status of driving_school to pending' do
+            driving_school.reload
             expect(driving_school.status).to eq 'pending'
           end
         end
 
         context 'when driving_school did NOT fulfill registration requirements' do
+
           it 'returns 400 http status code' do
             expect(response.status).to eq 400
           end

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
       resources :driving_schools, only: [:index, :create] do
         member do
-          post :confirm_registration
+          put :confirm_registration
         end
         resource :employee_notifications_settings_set, only: [:update]
         resource :schedule_settings_set, only: [:update]

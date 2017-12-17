@@ -15,7 +15,7 @@ class Api::V1::DrivingSchoolsController < ApplicationController
   def confirm_registration
     authorize @driving_school
 
-    @driving_school.confirm_registration
+    @driving_school.confirm_registration!
 
     render @driving_school
   end
