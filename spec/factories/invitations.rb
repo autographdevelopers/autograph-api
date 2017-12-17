@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :invitation do
     email "MyString"
-    first_name "MyString"
-    last_name "MyString"
+    name "MyString"
+    surname "MyString"
     invitable nil
   end
 end
