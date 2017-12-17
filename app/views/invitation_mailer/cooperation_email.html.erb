@@ -1,0 +1,6 @@
+<h1>Welcome You were invited as an <%= @user_type %> to <%= @driving_school.name %> driving school.</h1>
+<% if @user_already_exists %>
+    <p>You can accept invitation by logging to AutoGraph application and accepting invitation. here goes link</p>
+<% else %>
+    <p>You can accept invitation by signing up to AutoGraph application using email: <%= @email %> and accepting invitation. here goes link</p>
+<% end %>

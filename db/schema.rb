@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171204184344) do
+ActiveRecord::Schema.define(version: 20171213081548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20171204184344) do
   end
 
   create_table "employee_driving_schools", force: :cascade do |t|
-    t.bigint "employee_id", null: false
+    t.bigint "employee_id"
     t.bigint "driving_school_id", null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
@@ -67,6 +67,17 @@ ActiveRecord::Schema.define(version: 20171204184344) do
     t.index ["employee_driving_school_id"], name: "index_employee_privilege_sets_on_employee_driving_school_id"
   end
 
+  create_table "invitations", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "name"
+    t.string "surname"
+    t.string "invitable_type"
+    t.bigint "invitable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invitable_type", "invitable_id"], name: "index_invitations_on_invitable_type_and_invitable_id"
+  end
+
   create_table "schedule_boundaries", force: :cascade do |t|
     t.integer "weekday", null: false
     t.datetime "start_time", null: false
@@ -87,7 +98,7 @@ ActiveRecord::Schema.define(version: 20171204184344) do
   end
 
   create_table "student_driving_schools", force: :cascade do |t|
-    t.bigint "student_id", null: false
+    t.bigint "student_id"
     t.bigint "driving_school_id", null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
