@@ -15,18 +15,18 @@ describe 'GET /api/v1/driving_schools' do
   let!(:driving_school_11) { create(:driving_school, status: :blocked) }
   let!(:driving_school_12) { create(:driving_school, status: :removed) }
 
-  let!(:employee_driving_school_1) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_1, status: :pending) }
-  let!(:employee_driving_school_2) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_2, status: :pending) }
-  let!(:employee_driving_school_3) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_3, status: :pending) }
-  let!(:employee_driving_school_4) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_4, status: :pending) }
-  let!(:employee_driving_school_5) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_5, status: :active) }
-  let!(:employee_driving_school_6) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_6, status: :active) }
-  let!(:employee_driving_school_7) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_7, status: :active) }
-  let!(:employee_driving_school_8) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_8, status: :active) }
-  let!(:employee_driving_school_9) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_9, status: :archived) }
-  let!(:employee_driving_school_10) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_10, status: :archived) }
-  let!(:employee_driving_school_11) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_11, status: :archived) }
-  let!(:employee_driving_school_12) { create(:employee_driving_school, :with_employee_privileges, employee: employee, driving_school: driving_school_12, status: :archived) }
+  let!(:employee_driving_school_1) { create(:employee_driving_school, employee: employee, driving_school: driving_school_1, status: :pending) }
+  let!(:employee_driving_school_2) { create(:employee_driving_school, employee: employee, driving_school: driving_school_2, status: :pending) }
+  let!(:employee_driving_school_3) { create(:employee_driving_school, employee: employee, driving_school: driving_school_3, status: :pending) }
+  let!(:employee_driving_school_4) { create(:employee_driving_school, employee: employee, driving_school: driving_school_4, status: :pending) }
+  let!(:employee_driving_school_5) { create(:employee_driving_school, employee: employee, driving_school: driving_school_5, status: :active) }
+  let!(:employee_driving_school_6) { create(:employee_driving_school, employee: employee, driving_school: driving_school_6, status: :active) }
+  let!(:employee_driving_school_7) { create(:employee_driving_school, employee: employee, driving_school: driving_school_7, status: :active) }
+  let!(:employee_driving_school_8) { create(:employee_driving_school, employee: employee, driving_school: driving_school_8, status: :active) }
+  let!(:employee_driving_school_9) { create(:employee_driving_school, employee: employee, driving_school: driving_school_9, status: :archived) }
+  let!(:employee_driving_school_10) { create(:employee_driving_school, employee: employee, driving_school: driving_school_10, status: :archived) }
+  let!(:employee_driving_school_11) { create(:employee_driving_school, employee: employee, driving_school: driving_school_11, status: :archived) }
+  let!(:employee_driving_school_12) { create(:employee_driving_school, employee: employee, driving_school: driving_school_12, status: :archived) }
 
   let!(:student_driving_school_1) { create(:student_driving_school, student: student, driving_school: driving_school_1, status: :pending) }
   let!(:student_driving_school_2) { create(:student_driving_school, student: student, driving_school: driving_school_2, status: :pending) }
@@ -54,8 +54,8 @@ describe 'GET /api/v1/driving_schools' do
 
     it 'returned records contain proper keys' do
       expect(json_response.first.keys).to match_array %w(id name phone_numbers emails website_link additional_information
-                                                         city street country profile_picture driving_school_status
-                                                         student_driving_school_status)
+                                                         city street country profile_picture status student_driving_school_status
+                                                         zip_code)
     end
 
     it 'returns proper records' do
@@ -77,8 +77,9 @@ describe 'GET /api/v1/driving_schools' do
                                           'street' => driving_school_1.street,
                                           'country' => driving_school_1.country,
                                           'profile_picture' => driving_school_1.profile_picture,
-                                          'driving_school_status' => driving_school_1.status,
-                                          'student_driving_school_status' => employee_driving_school_1.status,
+                                          'status' => driving_school_1.status,
+                                          'zip_code' => driving_school_1.zip_code,
+                                          'student_driving_school_status' => employee_driving_school_1.status
                                         })
     end
   end
@@ -92,12 +93,12 @@ describe 'GET /api/v1/driving_schools' do
 
     it 'returned records contain proper keys' do
       expect(json_response.first.keys).to match_array %w(id name phone_numbers emails website_link additional_information
-                                                         city street country profile_picture driving_school_status
+                                                         city street country profile_picture zip_code status
                                                          employee_driving_school_status privilege_set)
     end
 
     it 'returned records contain proper keys for privilege_set' do
-      expect(json_response.first['privilege_set'].keys).to match_array %w(can_manage_employees can_manage_students
+      expect(json_response.first['privilege_set'].keys).to match_array %w(id can_manage_employees can_manage_students
                                                                           can_modify_schedules is_driving is_owner)
     end
 
@@ -120,9 +121,11 @@ describe 'GET /api/v1/driving_schools' do
                                           'street' => driving_school_1.street,
                                           'country' => driving_school_1.country,
                                           'profile_picture' => driving_school_1.profile_picture,
-                                          'driving_school_status' => driving_school_1.status,
+                                          'status' => driving_school_1.status,
+                                          'zip_code' => driving_school_1.zip_code,
                                           'employee_driving_school_status' => employee_driving_school_1.status,
                                           'privilege_set' => {
+                                            'id' => employee_driving_school_1.id,
                                             'can_manage_employees' => employee_driving_school_1.employee_privilege_set.can_manage_employees,
                                             'can_manage_students' => employee_driving_school_1.employee_privilege_set.can_manage_students,
                                             'can_modify_schedules' => employee_driving_school_1.employee_privilege_set.can_modify_schedules,

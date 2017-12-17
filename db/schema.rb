@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171119141504) do
+ActiveRecord::Schema.define(version: 20171204184344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,16 @@ ActiveRecord::Schema.define(version: 20171119141504) do
     t.index ["employee_id"], name: "index_employee_driving_schools_on_employee_id"
   end
 
+  create_table "employee_notifications_settings_sets", force: :cascade do |t|
+    t.boolean "push_notifications_enabled", default: false, null: false
+    t.boolean "weekly_emails_reports_enabled", default: false, null: false
+    t.boolean "monthly_emails_reports_enabled", default: false, null: false
+    t.bigint "employee_driving_school_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_driving_school_id"], name: "index_employee_notification_settings_on_employee_driving_school"
+  end
+
   create_table "employee_privilege_sets", force: :cascade do |t|
     t.bigint "employee_driving_school_id", null: false
     t.boolean "can_manage_employees", default: false, null: false
@@ -55,6 +65,25 @@ ActiveRecord::Schema.define(version: 20171119141504) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["employee_driving_school_id"], name: "index_employee_privilege_sets_on_employee_driving_school_id"
+  end
+
+  create_table "schedule_boundaries", force: :cascade do |t|
+    t.integer "weekday", null: false
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
+    t.bigint "driving_school_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["driving_school_id"], name: "index_schedule_boundaries_on_driving_school_id"
+  end
+
+  create_table "schedule_settings_sets", force: :cascade do |t|
+    t.boolean "holidays_enrollment_enabled", default: false, null: false
+    t.boolean "last_minute_booking_enabled", default: false, null: false
+    t.bigint "driving_school_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["driving_school_id"], name: "index_schedule_settings_sets_on_driving_school_id"
   end
 
   create_table "student_driving_schools", force: :cascade do |t|

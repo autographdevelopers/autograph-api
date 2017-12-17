@@ -6,6 +6,7 @@ class EmployeeDrivingSchool < ApplicationRecord
   belongs_to :employee
   belongs_to :driving_school
   has_one :employee_privilege_set
+  has_one :employee_notifications_settings_set
 
   # == Validations ============================================================
   validates :status, presence: true

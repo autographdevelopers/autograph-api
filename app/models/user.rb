@@ -14,7 +14,6 @@ class User < ActiveRecord::Base
   validate :birth_date_not_to_be_in_past
 
   # == Instance Methods =======================================================
-
   def employee?
     self.is_a? Employee
   end

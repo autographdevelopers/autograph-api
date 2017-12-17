@@ -11,8 +11,13 @@ FactoryBot.define do
     country FFaker::AddressUS.country
     status [:pending, :active, :blocked, :removed].sample
     profile_picture 'default_picture_path'
-    verification_code SecureRandom.uuid
     latitude FFaker::Geolocation.lat
     longitude FFaker::Geolocation.lng
+  end
+
+  trait :with_schedule_settings_set do
+    after(:create) do |driving_school|
+      create(:schedule_settings_set, driving_school: driving_school)
+    end
   end
 end

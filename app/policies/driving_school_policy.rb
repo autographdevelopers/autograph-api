@@ -1,4 +1,6 @@
 class DrivingSchoolPolicy < ApplicationPolicy
+  allow :confirm_registration?, :owner?, if: -> { owner_of_driving_school?(record.id) }
+
   class Scope < Struct.new(:user, :scope)
     def resolve
       if user.employee?

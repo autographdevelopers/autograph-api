@@ -19,4 +19,12 @@ class ApplicationController < ActionController::API
       :name, :surname, :birth_date, :gender, :type, :time_zone
     ])
   end
+
+  def verify_current_user_to_be_employee
+    authorize current_user, :employee?
+  end
+
+  def verify_current_user_to_be_student
+    authorize current_user, :student?
+  end
 end
