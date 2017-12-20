@@ -1,6 +1,6 @@
 class Api::V1::DrivingSchoolsController < ApplicationController
-  before_action :verify_current_user_to_be_employee, only: [:create, :confirm_registration]
-  before_action :set_driving_school, only: [:confirm_registration]
+  before_action :verify_current_user_to_be_employee, except: [:index]
+  before_action :set_driving_school, only: [:confirm_registration, :update]
 
   def index
     @driving_schools = build_results(policy_scope(DrivingSchool))
@@ -10,6 +10,16 @@ class Api::V1::DrivingSchoolsController < ApplicationController
     @driving_school = CreateDrivingSchoolService.new(current_user, driving_school_params).call
 
     render @driving_school, status: :created
+  end
+
+  def update
+    authorize @driving_school
+
+    if @driving_school.update(driving_school_params)
+      render @driving_school, status: :ok
+    else
+      render json: @driving_school.errors, status: :unprocessable_entity
+    end
   end
 
   def confirm_registration
