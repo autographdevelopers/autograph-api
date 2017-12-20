@@ -1,7 +1,8 @@
 class Api::V1::InvitationsController < ApplicationController
-  before_action :verify_current_user_to_be_employee
-  before_action :set_driving_school
-  before_action :set_invited_user_type
+  before_action :verify_current_user_to_be_employee, only: [:create]
+  before_action :set_driving_school, onyl: [:create]
+  before_action :set_invited_user_type, only: [:create]
+  before_action :set_driving_school_relation, onyl: [:accept, :reject]
 
   def create
     authorize @driving_school, :can_manage_employees? if @invited_user_type == 'Employee'
@@ -15,6 +16,14 @@ class Api::V1::InvitationsController < ApplicationController
     ).call
 
     head :created
+  end
+
+  def accept
+    @driving_school_relation.activate!
+  end
+
+  def reject
+    @driving_school_relation.reject!
   end
 
   private
@@ -36,5 +45,9 @@ class Api::V1::InvitationsController < ApplicationController
 
   def set_driving_school
     @driving_school = current_user.driving_schools.find(params[:driving_school_id])
+  end
+
+  def set_driving_school_relation
+    @driving_school_relation = current_user.get_relation(params[:driving_school_id])
   end
 end

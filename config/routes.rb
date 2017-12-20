@@ -10,7 +10,12 @@ Rails.application.routes.draw do
         member do
           put :confirm_registration
         end
-        resources :invitations, only: [:create]
+        resources :invitations, only: [:create] do
+          collection do
+            put :accept
+            put :reject
+          end
+        end
         resource :employee_notifications_settings_set, only: [:update]
         resource :schedule_settings_set, only: [:update]
         resources :schedule_boundaries, only: [:create]

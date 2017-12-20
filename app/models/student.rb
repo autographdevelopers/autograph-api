@@ -16,6 +16,8 @@ class Student < User
       invitations.each do |invitation|
         invitation.invitable.update(student: self)
       end
+
+      invitations.destroy_all
     end
   end
 end

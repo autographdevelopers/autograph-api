@@ -16,6 +16,8 @@ class Employee < User
       invitations.each do |invitation|
         invitation.invitable.update(employee: self)
       end
+
+      invitations.destroy_all
     end
   end
 end
