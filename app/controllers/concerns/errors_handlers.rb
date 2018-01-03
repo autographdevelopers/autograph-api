@@ -36,6 +36,7 @@ module ErrorsHandlers
       render json: { error: e.message }, status: :bad_request
     end
 
+    # Rethink this approach
     def argument_error(e)
       render json: { error: e.message }, status: :bad_request
     end
