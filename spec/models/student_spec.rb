@@ -14,11 +14,11 @@ describe Student do
 
       it 'is invoked after create' do
         student = build(:student)
-        expect(student).to receive(:find_pending_invitation)
+        expect(student).to receive(:find_pending_invitation_and_relate_user_to_driving_school)
         student.save
       end
 
-      it 'finds pending invitations and assigns them to student' do
+      it 'finds pending invitations and assigns student to driving_school' do
         student = create(:student, email: 'test@gmail.com')
         expect(student.student_driving_schools.pluck(:id)).to match_array [student_driving_school_1.id, student_driving_school_2.id]
       end
