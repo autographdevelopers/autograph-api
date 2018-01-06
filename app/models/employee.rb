@@ -20,4 +20,8 @@ class Employee < User
       invitations.destroy_all
     end
   end
+
+  def can_manage_students?(driving_school)
+    self.employee_driving_schools.find_by(driving_school: driving_school).employee_privilege_set.can_manage_students?
+  end
 end
