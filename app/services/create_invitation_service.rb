@@ -9,6 +9,7 @@ class CreateInvitationService
 
     validate_invited_user_type
     validate_type_to_match_invited_user
+    validate_if_already_invited if invited_user
   end
 
   def call
@@ -41,6 +42,12 @@ class CreateInvitationService
 
   def validate_type_to_match_invited_user
     raise ArgumentError.new('Invited user already exists but with different role.') if invited_user && invited_user.type != invited_user_type
+  end
+
+  def validate_if_already_invited
+    relation = EmployeeDrivingSchool.find_by(driving_school: driving_school, employee: invited_user) || StudentDrivingSchool.find_by(driving_school: driving_school, student: invited_user)
+    raise ArgumentError.new('User is already invited.') if relation&.pending?
+    raise ArgumentError.new('User is already related with this school.') if relation&.active?
   end
 
   attr_reader :driving_school, :invited_user_type, :invited_user_params, :invited_user_privileges_params, :invited_user
