@@ -1,15 +1,18 @@
 describe 'GET /api/v1/driving_schools/:driving_school_id/students' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
-  let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school) }
+  let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school, status: :active) }
   let!(:employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, can_manage_students: can_manage_students,
                                           employee: employee, driving_school: driving_school) }
   let(:driving_school) { create(:driving_school) }
 
+  let(:invitation_student_driving_school) { create(:student_driving_school, student: nil, driving_school: driving_school, status: :pending) }
+  let!(:invitation) { create(:invitation, invitable: invitation_student_driving_school) }
+
   let(:is_owner) { false }
   let(:can_manage_students) { false }
 
-  let(:response_keys) { %w(id email name surname gender) }
+  let(:response_keys) { %w(id email name surname status) }
 
   before do
     get "/api/v1/driving_schools/#{driving_school_id}/students", headers: current_user.create_new_auth_token
@@ -33,16 +36,15 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students' do
         end
 
         it 'returns proper records' do
-          expect(json_response.pluck('id')).to match_array [student.id]
+          expect(json_response.pluck('id')).to match_array [student.id, invitation.id]
         end
 
         it 'response contains student attributes' do
-          expect(json_response.first).to eq({
+          expect(json_response.first).to include({
                                               'id' => student.id,
                                               'email' => student.email,
                                               'name' => student.name,
                                               'surname' => student.surname,
-                                              'gender' => student.gender,
                                             })
         end
       end
@@ -59,16 +61,15 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students' do
         end
 
         it 'returns proper records' do
-          expect(json_response.pluck('id')).to match_array [student.id]
+          expect(json_response.pluck('id')).to match_array [student.id, invitation.id]
         end
 
         it 'response contains student attributes' do
-          expect(json_response.first).to eq({
+          expect(json_response.first).to include({
                                               'id' => student.id,
                                               'email' => student.email,
                                               'name' => student.name,
                                               'surname' => student.surname,
-                                              'gender' => student.gender,
                                             })
         end
       end
@@ -87,12 +88,11 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students' do
         end
 
         it 'response contains student attributes' do
-          expect(json_response.first).to eq({
+          expect(json_response.first).to include({
                                               'id' => student.id,
                                               'email' => student.email,
                                               'name' => student.name,
                                               'surname' => student.surname,
-                                              'gender' => student.gender,
                                             })
         end
       end

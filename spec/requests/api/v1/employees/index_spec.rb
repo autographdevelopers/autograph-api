@@ -10,14 +10,17 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees' do
   let(:can_manage_employees) { false }
 
   let(:archived_employee) { create(:employee) }
-  let!(:archived_employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, can_manage_employees: can_manage_employees,
-                                                   employee: archived_employee, driving_school: driving_school, status: :archived) }
+  let!(:archived_employee_driving_school) { create(:employee_driving_school, employee: archived_employee,
+                                                   driving_school: driving_school, status: :archived) }
 
   let(:pending_employee) { create(:employee) }
-  let!(:pending_employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, can_manage_employees: can_manage_employees,
-                                                  employee: pending_employee, driving_school: driving_school, status: :pending) }
+  let!(:pending_employee_driving_school) { create(:employee_driving_school, employee: pending_employee,
+                                                  driving_school: driving_school, status: :pending) }
 
-  let(:response_keys) { %w(id email name surname gender) }
+  let(:invitation_employee_driving_school) { create(:employee_driving_school, employee: nil, driving_school: driving_school, status: :pending) }
+  let!(:invitation) { create(:invitation, invitable: invitation_employee_driving_school) }
+
+  let(:response_keys) { %w(id email name surname status) }
 
   before do
     get "/api/v1/driving_schools/#{driving_school_id}/employees", headers: current_user.create_new_auth_token
@@ -41,16 +44,15 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees' do
         end
 
         it 'returns proper records' do
-          expect(json_response.pluck('id')).to match_array [employee.id, archived_employee.id, pending_employee.id]
+          expect(json_response.pluck('id')).to match_array [employee.id, archived_employee.id, pending_employee.id, invitation.id]
         end
 
         it 'response contains employee attributes' do
-          expect(json_response.find { |i| i['id'] == employee.id }).to eq({
+          expect(json_response.find { |i| i['id'] == employee.id }).to include({
                                                                             'id' => employee.id,
                                                                             'email' => employee.email,
                                                                             'name' => employee.name,
                                                                             'surname' => employee.surname,
-                                                                            'gender' => employee.gender,
                                                                           })
         end
       end
@@ -67,16 +69,15 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees' do
         end
 
         it 'returns proper records' do
-          expect(json_response.pluck('id')).to match_array [employee.id, archived_employee.id, pending_employee.id]
+          expect(json_response.pluck('id')).to match_array [employee.id, archived_employee.id, pending_employee.id, invitation.id]
         end
 
         it 'response contains employee attributes' do
-          expect(json_response.find { |i| i['id'] == employee.id }).to eq({
+          expect(json_response.find { |i| i['id'] == employee.id }).to include({
                                                                             'id' => employee.id,
                                                                             'email' => employee.email,
                                                                             'name' => employee.name,
                                                                             'surname' => employee.surname,
-                                                                            'gender' => employee.gender,
                                                                           })
         end
       end
@@ -106,12 +107,11 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees' do
     end
 
     it 'response contains employee attributes' do
-      expect(json_response.first).to eq({
+      expect(json_response.first).to include({
                                           'id' => employee.id,
                                           'email' => employee.email,
                                           'name' => employee.name,
                                           'surname' => employee.surname,
-                                          'gender' => employee.gender,
                                         })
     end
   end
