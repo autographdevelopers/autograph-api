@@ -11,6 +11,8 @@ Rails.application.routes.draw do
           put :confirm_registration
         end
         resources :invitations, only: [:create]
+        resources :students, only: [:index]
+        resources :employees, only: [:index]
         resource :employee_notifications_settings_set, only: [:update]
         resource :schedule_settings_set, only: [:update]
         resources :schedule_boundaries, only: [:create]
