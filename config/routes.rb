@@ -13,9 +13,9 @@ Rails.application.routes.draw do
         resources :invitations, only: [:create]
         resources :students, only: [:index]
         resources :employees, only: [:index]
-        resource :employee_notifications_settings_set, only: [:update]
-        resource :schedule_settings_set, only: [:update]
-        resources :schedule_boundaries, only: [:create]
+        resource :employee_notifications_settings_set, only: [:update, :show]
+        resource :schedule_settings_set, only: [:update, :show]
+        resources :schedule_boundaries, only: [:create, :index]
       end
     end
   end

@@ -1,6 +1,6 @@
 class Api::V1::ScheduleBoundariesController < ApplicationController
   before_action :verify_current_user_to_be_employee, only: [:create]
-  before_action :set_driving_school, only: [:create]
+  before_action :set_driving_school, only: [:create, :index]
 
   def create
     authorize @driving_school, :owner?
@@ -10,6 +10,10 @@ class Api::V1::ScheduleBoundariesController < ApplicationController
     @schedule_boundaries = @driving_school.schedule_boundaries
 
     render :index, status: :created
+  end
+
+  def index
+    @schedule_boundaries = @driving_school.schedule_boundaries
   end
 
   private

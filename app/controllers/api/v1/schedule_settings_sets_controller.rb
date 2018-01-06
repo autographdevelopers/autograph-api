@@ -1,6 +1,6 @@
 class Api::V1::ScheduleSettingsSetsController < ApplicationController
-  before_action :verify_current_user_to_be_employee, only: [:update]
-  before_action :set_schedule_settings_set, only: [:update]
+  before_action :verify_current_user_to_be_employee, only: [:update, :show]
+  before_action :set_schedule_settings_set, only: [:update, :show]
 
   def update
     authorize @schedule_settings_set
@@ -10,6 +10,12 @@ class Api::V1::ScheduleSettingsSetsController < ApplicationController
     else
       render json: @schedule_settings_set.errors, status: :unprocessable_entity
     end
+  end
+
+  def show
+    authorize @schedule_settings_set
+
+    render @schedule_settings_set
   end
 
   private
