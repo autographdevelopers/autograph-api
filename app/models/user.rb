@@ -1,8 +1,10 @@
 class User < ActiveRecord::Base
+  TYPES = ['Employee', 'Student'].freeze
+
   # == Extensions =============================================================
   devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :trackable, :validatable,
-          :confirmable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :confirmable
   include DeviseTokenAuth::Concerns::User
 
   # == Enumerators ============================================================

@@ -7,8 +7,15 @@ class ApplicationPolicy
   end
 
   def owner_of_driving_school?(driving_school_id)
-    privileges = EmployeeDrivingSchool.find_by(employee_id: user.id, driving_school_id: driving_school_id).employee_privilege_set
-    privileges.is_owner?
+    get_employee_privileges(driving_school_id).is_owner?
+  end
+
+  def can_manage_employees_in_driving_school?(driving_school_id)
+    get_employee_privileges(driving_school_id).can_manage_employees?
+  end
+
+  def can_manage_students_in_driving_school?(driving_school_id)
+    get_employee_privileges(driving_school_id).can_manage_students?
   end
 
   def employee?
@@ -25,5 +32,11 @@ class ApplicationPolicy
         instance_exec(&options[:if])
       end
     end
+  end
+
+  private
+
+  def get_employee_privileges(driving_school_id)
+    EmployeeDrivingSchool.find_by(employee_id: user.id, driving_school_id: driving_school_id).employee_privilege_set
   end
 end

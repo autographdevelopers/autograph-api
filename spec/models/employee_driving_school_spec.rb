@@ -8,6 +8,7 @@ describe EmployeeDrivingSchool do
     it { should belong_to(:employee) }
     it { should have_one(:employee_privilege_set) }
     it { should have_one(:employee_notifications_settings_set) }
+    it { should have_one(:invitation) }
   end
 
   context 'validations' do
