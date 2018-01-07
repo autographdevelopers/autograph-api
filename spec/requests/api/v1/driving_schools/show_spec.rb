@@ -44,7 +44,7 @@ describe 'GET /api/v1/driving_schools/:id' do
                                       'profile_picture' => driving_school.profile_picture,
                                       'status' => driving_school.status,
                                       'zip_code' => driving_school.zip_code,
-                                      'student_driving_school_status' => employee_driving_school.status
+                                      'student_driving_school_status' => student_driving_school.status
                                     })
       end
     end
