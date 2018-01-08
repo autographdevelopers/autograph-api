@@ -6,7 +6,7 @@ Rails.application.routes.draw do
         sessions: 'api/v1/sessions'
       }
 
-      resources :driving_schools, only: [:index, :create, :update] do
+      resources :driving_schools, only: [:index, :create, :update, :show] do
         member do
           put :confirm_registration
         end
