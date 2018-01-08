@@ -7,7 +7,7 @@ class Api::V1::StudentsController < ApplicationController
       @student_driving_schools = @driving_school.student_driving_schools.includes(:student, :invitation)
     else
       # change to scope to students who had driving lessons with given employee
-      @student_driving_schools = @driving_school.student_driving_schools.includes(:student).where(status: :active)
+      @student_driving_schools = @driving_school.student_driving_schools.includes(:student).active
     end
   end
 
