@@ -1,6 +1,6 @@
 class Api::V1::DrivingSchoolsController < ApplicationController
-  before_action :verify_current_user_to_be_employee, except: [:index]
-  before_action :set_driving_school, only: [:confirm_registration, :update]
+  before_action :verify_current_user_to_be_employee, except: [:index, :show]
+  before_action :set_driving_school, only: [:confirm_registration, :update, :show]
 
   def index
     @driving_schools = build_results(policy_scope(DrivingSchool))
@@ -28,6 +28,14 @@ class Api::V1::DrivingSchoolsController < ApplicationController
     @driving_school.confirm_registration!
 
     render @driving_school
+  end
+
+  def show
+    if current_user.employee?
+      @employee_driving_school = @current_user.employee_driving_schools.find_by(driving_school: @driving_school)
+    elsif current_user.student?
+      @student_driving_school = @current_user.student_driving_schools.find_by(driving_school: @driving_school)
+    end
   end
 
   private
