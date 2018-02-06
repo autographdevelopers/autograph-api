@@ -17,10 +17,12 @@ Rails.application.routes.draw do
           end
         end
         resources :students, only: [:index]
-        resources :employees, only: [:index]
-        resource :employee_notifications_settings_set, only: [:update, :show]
-        resource :schedule_settings_set, only: [:update, :show]
-        resources :schedule_boundaries, only: [:create, :index]
+        resources :employees, only: [:index] do
+          resource :employee_privilege_set, only: [:update, :show]
+        end
+        resource :employee_notifications_settings_set, only: [:update]
+        resource :schedule_settings_set, only: [:update]
+        resources :schedule_boundaries, only: [:create]
       end
     end
   end
