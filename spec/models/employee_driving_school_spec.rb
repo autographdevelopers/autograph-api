@@ -1,6 +1,6 @@
 describe EmployeeDrivingSchool do
   context 'enumerators' do
-    it { should define_enum_for(:status).with([:pending, :active, :archived]) }
+    it { should define_enum_for(:status).with([:pending, :active, :archived, :rejected]) }
   end
 
   context 'relations' do

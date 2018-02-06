@@ -6,11 +6,16 @@ Rails.application.routes.draw do
         sessions: 'api/v1/sessions'
       }
 
-      resources :driving_schools, only: [:index, :create, :update] do
+      resources :driving_schools, only: [:index, :create, :update, :show] do
         member do
           put :confirm_registration
         end
-        resources :invitations, only: [:create]
+        resources :invitations, only: [:create] do
+          collection do
+            put :accept
+            put :reject
+          end
+        end
         resources :students, only: [:index]
         resources :employees, only: [:index] do
           resource :employee_privilege_set, only: [:update, :show]

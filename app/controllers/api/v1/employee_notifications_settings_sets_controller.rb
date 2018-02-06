@@ -1,6 +1,6 @@
 class Api::V1::EmployeeNotificationsSettingsSetsController < ApplicationController
-  before_action :verify_current_user_to_be_employee, only: [:update]
-  before_action :set_employee_notifications_settings_set, only: [:update]
+  before_action :verify_current_user_to_be_employee, only: [:update, :show]
+  before_action :set_employee_notifications_settings_set, only: [:update, :show]
 
   def update
     if @employee_notifications_settings_set.update(employee_notifications_settings_set_params)
@@ -8,6 +8,10 @@ class Api::V1::EmployeeNotificationsSettingsSetsController < ApplicationControll
     else
       render json: @employee_notifications_settings_set.errors, status: :unprocessable_entity
     end
+  end
+
+  def show
+    render @employee_notifications_settings_set
   end
 
   private
