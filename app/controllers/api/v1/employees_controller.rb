@@ -3,10 +3,10 @@ class Api::V1::EmployeesController < ApplicationController
 
   def index
     if current_user.student?
-      @employee_driving_schools = @driving_school.employee_driving_schools.includes(:employee).active
+      @employee_driving_schools = @driving_school.employee_driving_schools.includes(:employee).active.order('users.surname')
     elsif current_user.employee?
       authorize @driving_school, :can_manage_employees?
-      @employee_driving_schools = @driving_school.employee_driving_schools.includes(:employee, :invitation)
+      @employee_driving_schools = @driving_school.employee_driving_schools.includes(:employee, :invitation).order('users.surname')
     end
   end
 
