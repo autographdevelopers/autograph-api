@@ -8,14 +8,14 @@ class Api::V1::InvitationsController < ApplicationController
     authorize @driving_school, :can_manage_employees? if @invited_user_type == 'Employee'
     authorize @driving_school, :can_manage_students? if @invited_user_type == 'Student'
 
-    CreateInvitationService.new(
+    @user_driving_school_relation = CreateInvitationService.new(
       @driving_school,
       @invited_user_type,
       invited_user_params,
       invited_employee_privileges_params
     ).call
 
-    head :created
+    render :create, status: :created
   end
 
   def accept
