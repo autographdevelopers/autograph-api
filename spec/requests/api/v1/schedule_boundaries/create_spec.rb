@@ -3,7 +3,7 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/schedule_boundaries' d
   let(:employee) { create(:employee) }
   let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school) }
   let!(:employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, employee: employee, driving_school: driving_school) }
-  let(:driving_school) { create(:driving_school, :with_schedule_settings_set) }
+  let(:driving_school) { create(:driving_school, :with_schedule_settings_set, :with_schedule_boundaries) }
 
   let(:response_keys) { %w(id weekday start_time end_time) }
 
