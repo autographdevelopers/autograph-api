@@ -20,7 +20,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees' do
   let(:invitation_employee_driving_school) { create(:employee_driving_school, employee: nil, driving_school: driving_school, status: :pending) }
   let!(:invitation) { create(:invitation, invitable: invitation_employee_driving_school) }
 
-  let(:response_keys) { %w(id email name surname status) }
+  let(:response_keys) { %w(id email name surname status type) }
 
   before do
     get "/api/v1/driving_schools/#{driving_school_id}/employees", headers: current_user.create_new_auth_token
