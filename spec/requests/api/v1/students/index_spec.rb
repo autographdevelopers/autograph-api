@@ -12,7 +12,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students' do
   let(:is_owner) { false }
   let(:can_manage_students) { false }
 
-  let(:response_keys) { %w(id email name surname status) }
+  let(:response_keys) { %w(id email name surname status type) }
 
   before do
     get "/api/v1/driving_schools/#{driving_school_id}/students", headers: current_user.create_new_auth_token
