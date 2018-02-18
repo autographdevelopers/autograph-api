@@ -6,6 +6,7 @@ class CreateScheduleBoundariesService
 
   def call
     ScheduleBoundary.transaction do
+      driving_school.schedule_boundaries.destroy_all
       params.each do |schedule_boundary_params|
         driving_school.schedule_boundaries.create!(
           weekday: schedule_boundary_params[:weekday],
