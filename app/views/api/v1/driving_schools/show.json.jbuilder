@@ -1,4 +1,4 @@
-json.partial! 'driving_school', driving_school: @driving_school
+json.partial! 'api/v1/driving_schools/driving_school', driving_school: @driving_school
 
 if @current_user.employee?
   json.employee_driving_school_status @employee_driving_school.status
