@@ -18,8 +18,8 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/invitations/accept' do
     context 'when current_user has pending invitation' do
       let(:status) { :pending }
 
-      it 'returns 204 http status code' do
-        expect(response.status).to eq 204
+      it 'returns 200 http status code' do
+        expect(response.status).to eq 200
       end
 
       it 'changes relation status from pending to active' do
@@ -52,8 +52,8 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/invitations/accept' do
     context 'when current_user has pending invitation' do
       let(:status) { :pending }
 
-      it 'returns 204 http status code' do
-        expect(response.status).to eq 204
+      it 'returns 200 http status code' do
+        expect(response.status).to eq 200
       end
 
       it 'changes relation status from pending to active' do

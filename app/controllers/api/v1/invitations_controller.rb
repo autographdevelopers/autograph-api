@@ -20,6 +20,14 @@ class Api::V1::InvitationsController < ApplicationController
 
   def accept
     @driving_school_relation.activate!
+
+    if current_user.employee?
+      @employee_driving_school = @driving_school_relation
+    elsif current_user.student?
+      @student_driving_school = @driving_school_relation
+    end
+
+    render 'api/v1/driving_schools/show'
   end
 
   def reject
