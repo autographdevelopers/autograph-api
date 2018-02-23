@@ -1,7 +1,15 @@
 FactoryBot.define do
   factory :schedule do
-    repetition_period_in_weeks 1
-    slots_template ""
-    employee_driving_school nil
+    repetition_period_in_weeks 4
+    slots_template { {
+      monday: [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33],
+      tuesday: [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33],
+      wednesday: [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33],
+      thursday: [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33],
+      friday: [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33],
+      saturday: [],
+      sunday: []
+    } }
+    employee_driving_school
   end
 end
