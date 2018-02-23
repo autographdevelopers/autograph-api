@@ -3,6 +3,7 @@ student = FactoryBot.create(:student, email: 'student@gmail.com', password: 'pas
 owner = FactoryBot.create(:employee, email: 'owner@gmail.com', password: 'password')
 
 DrivingSchool.statuses.keys.each do |status|
+  driving_school = FactoryBot.create(:driving_school, status: status, )
   EmployeeDrivingSchool.statuses.keys.each do |e_status|
     FactoryBot.create(:employee_driving_school, driving_school: FactoryBot.create(:driving_school, status: status), employee: employee, status: e_status)
     FactoryBot.create(:employee_driving_school, driving_school: FactoryBot.create(:driving_school, status: status), employee: owner, status: e_status, is_owner: true)
