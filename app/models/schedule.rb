@@ -20,9 +20,9 @@ class Schedule < ApplicationRecord
   # == Validations ============================================================
   validates :current_template, :new_template, :new_template_binding_from, :repetition_period_in_weeks, presence: true
   validates :repetition_period_in_weeks, inclusion: MIN_SCHEDULE_REPETITION_PERIOD..MAX_SCHEDULE_REPETITION_PERIOD
-  validate :template_format
+  validate :template_format, if: -> { template.present? }
 
-  def slots_template_format
+  def template_format
     errors.add(:template, "has invalid weekday(s)") unless template_contains_valid_weekdays?
     errors.add(:template, "has invalid slot_start_times_id(s)") unless template_contains_valid_slot_start_times_ids?
   end
