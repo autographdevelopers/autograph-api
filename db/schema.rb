@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180223074018) do
+ActiveRecord::Schema.define(version: 20180223080856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,14 @@ ActiveRecord::Schema.define(version: 20180223074018) do
     t.index ["employee_driving_school_id"], name: "index_schedules_on_employee_driving_school_id"
   end
 
+  create_table "slots", force: :cascade do |t|
+    t.datetime "start_time", null: false
+    t.bigint "employee_driving_school_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_driving_school_id"], name: "index_slots_on_employee_driving_school_id"
+  end
+
   create_table "student_driving_schools", force: :cascade do |t|
     t.bigint "student_id"
     t.bigint "driving_school_id", null: false
@@ -153,5 +161,6 @@ ActiveRecord::Schema.define(version: 20180223074018) do
 
   add_foreign_key "employee_driving_schools", "users", column: "employee_id"
   add_foreign_key "schedules", "employee_driving_schools"
+  add_foreign_key "slots", "employee_driving_schools"
   add_foreign_key "student_driving_schools", "users", column: "student_id"
 end
