@@ -13,6 +13,7 @@ FactoryBot.define do
     profile_picture 'default_picture_path'
     latitude FFaker::Geolocation.lat
     longitude FFaker::Geolocation.lng
+    time_zone 'Poland'
   end
 
   trait :with_schedule_settings_set do
