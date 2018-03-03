@@ -43,6 +43,8 @@ GEM
     arel (8.0.0)
     bcrypt (3.1.11)
     builder (3.2.3)
+    bulk_insert (1.6.0)
+      activerecord (>= 4.1.0)
     byebug (9.1.0)
     concurrent-ruby (1.0.5)
     crass (1.0.2)
@@ -67,6 +69,7 @@ GEM
     ffi (1.9.18)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    holidays (6.3.0)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
@@ -161,6 +164,7 @@ GEM
       sprockets (>= 3.0.0)
     thor (0.20.0)
     thread_safe (0.3.6)
+    timezone (1.2.8)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
     warden (1.2.7)
@@ -174,11 +178,13 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  bulk_insert
   byebug
   database_cleaner
   devise_token_auth
   factory_bot_rails
   ffaker
+  holidays
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pg (~> 0.18)
@@ -189,6 +195,7 @@ DEPENDENCIES
   shoulda-matchers
   spring
   spring-watcher-listen (~> 2.0.0)
+  timezone
   tzinfo-data
 
 RUBY VERSION
