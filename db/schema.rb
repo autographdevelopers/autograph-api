@@ -51,7 +51,8 @@ ActiveRecord::Schema.define(version: 20180304142906) do
     t.decimal "longitude", precision: 9, scale: 6
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "time_zone"
+    t.string "time_zone", null: false
+    t.string "country_code", null: false
     t.index ["name"], name: "index_driving_schools_on_name"
   end
 

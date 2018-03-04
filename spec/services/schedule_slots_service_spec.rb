@@ -189,7 +189,7 @@ describe ScheduleSlotsService do
             let(:schedule) do
               create(:schedule,
                      repetition_period_in_weeks: 1,
-                     new_template_binding_from: 1.year.from_now,
+                     new_template_binding_from: nil,
                      current_template: {
                        monday: (0..10).to_a + (30..47).to_a,
                        tuesday: (16..31).to_a,

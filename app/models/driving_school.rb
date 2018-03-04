@@ -18,6 +18,8 @@ class DrivingSchool < ApplicationRecord
 
   # == Callbacks ==============================================================
   before_create :create_verification_code
+  before_create :assign_country_code
+  before_create :assign_time_zone
 
   # == State Machine ==========================================================
   aasm column: :status, enum: true do
@@ -49,5 +51,13 @@ class DrivingSchool < ApplicationRecord
 
   def create_verification_code
     self.verification_code = SecureRandom.uuid
+  end
+
+  def assign_time_zone
+    self.time_zone = 'Poland'
+  end
+
+  def assign_country_code
+    self.country_code = 'pl'
   end
 end

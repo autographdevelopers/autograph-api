@@ -1,5 +1,5 @@
 class AddTimeZoneToDrivingSchool < ActiveRecord::Migration[5.1]
   def change
-    add_column :driving_schools, :time_zone, :string
+    add_column :driving_schools, :time_zone, :string, null: false
   end
 end

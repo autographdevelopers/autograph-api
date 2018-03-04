@@ -37,7 +37,7 @@ class ScheduleSlotsService
 
     unless driving_school.schedule_settings_set.holidays_enrollment_enabled?
       dates_ranges.map! do |dates_range|
-        dates_range.select { |date| Holidays.on(date, :pl).empty? }
+        dates_range.select { |date| Holidays.on(date, driving_school.country_code.to_sym).empty? }
       end
     end
 
@@ -84,14 +84,18 @@ class ScheduleSlotsService
   end
 
   def parse_to_date_time(date, time)
-    Timezone[driving_school.time_zone].local_to_utc("#{date.to_s} #{time}".to_datetime)
+    driving_school_time_zone.local_to_utc("#{date.to_s} #{time}".to_datetime)
   end
 
   def current_date_for_driving_school_timezone
-    Timezone[driving_school.time_zone].utc_to_local(Time.now).to_date
+    driving_school_time_zone.utc_to_local(Time.now).to_date
   end
 
   def schedule_repetition_end_date_for_driving_school_timezone
-    Timezone[driving_school.time_zone].utc_to_local(schedule.repetition_period_in_weeks.to_i.weeks.from_now).to_date
+    driving_school_time_zone.utc_to_local(schedule.repetition_period_in_weeks.to_i.weeks.from_now).to_date
+  end
+
+  def driving_school_time_zone
+    Timezone[driving_school.time_zone]
   end
 end
