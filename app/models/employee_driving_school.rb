@@ -10,6 +10,9 @@ class EmployeeDrivingSchool < ApplicationRecord
   has_one :employee_privilege_set
   has_one :employee_notifications_settings_set
   has_one :invitation, as: :invitable
+  has_one :schedule
+  has_many :driving_lessons
+  has_many :slots
 
   # == Validations ============================================================
   validates :status, presence: true

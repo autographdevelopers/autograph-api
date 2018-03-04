@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171213081548) do
+ActiveRecord::Schema.define(version: 20180223085234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "driving_lessons", force: :cascade do |t|
+    t.datetime "start_time", null: false
+    t.bigint "student_driving_school_id", null: false
+    t.bigint "employee_driving_school_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_driving_school_id"], name: "index_driving_lessons_on_employee_driving_school_id"
+    t.index ["student_driving_school_id"], name: "index_driving_lessons_on_student_driving_school_id"
+  end
 
   create_table "driving_schools", force: :cascade do |t|
     t.string "name", null: false
@@ -97,6 +107,28 @@ ActiveRecord::Schema.define(version: 20171213081548) do
     t.index ["driving_school_id"], name: "index_schedule_settings_sets_on_driving_school_id"
   end
 
+  create_table "schedules", force: :cascade do |t|
+    t.integer "repetition_period_in_weeks", default: 0, null: false
+    t.json "current_template", default: {"monday"=>[], "tuesday"=>[], "wednesday"=>[], "thursday"=>[], "friday"=>[], "saturday"=>[], "sunday"=>[]}, null: false
+    t.json "new_template", default: {"monday"=>[], "tuesday"=>[], "wednesday"=>[], "thursday"=>[], "friday"=>[], "saturday"=>[], "sunday"=>[]}, null: false
+    t.date "new_template_binding_from"
+    t.bigint "employee_driving_school_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_driving_school_id"], name: "index_schedules_on_employee_driving_school_id"
+  end
+
+  create_table "slots", force: :cascade do |t|
+    t.datetime "start_time", null: false
+    t.bigint "employee_driving_school_id", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "driving_lesson_id"
+    t.index ["driving_lesson_id"], name: "index_slots_on_driving_lesson_id"
+    t.index ["employee_driving_school_id"], name: "index_slots_on_employee_driving_school_id"
+  end
+
   create_table "student_driving_schools", force: :cascade do |t|
     t.bigint "student_id"
     t.bigint "driving_school_id", null: false
@@ -142,6 +174,11 @@ ActiveRecord::Schema.define(version: 20171213081548) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "driving_lessons", "employee_driving_schools"
+  add_foreign_key "driving_lessons", "student_driving_schools"
   add_foreign_key "employee_driving_schools", "users", column: "employee_id"
+  add_foreign_key "schedules", "employee_driving_schools"
+  add_foreign_key "slots", "driving_lessons"
+  add_foreign_key "slots", "employee_driving_schools"
   add_foreign_key "student_driving_schools", "users", column: "student_id"
 end
