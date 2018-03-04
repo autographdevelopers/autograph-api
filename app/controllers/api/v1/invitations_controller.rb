@@ -5,8 +5,8 @@ class Api::V1::InvitationsController < ApplicationController
   before_action :set_driving_school_relation, onyl: [:accept, :reject]
 
   def create
-    authorize @driving_school, :can_manage_employees? if @invited_user_type == 'Employee'
-    authorize @driving_school, :can_manage_students? if @invited_user_type == 'Student'
+    authorize @driving_school, :can_manage_employees? if @invited_user_type == User::EMPLOYEE
+    authorize @driving_school, :can_manage_students? if @invited_user_type == User::STUDENT
 
     @user_driving_school_relation = CreateInvitationService.new(
       @driving_school,
@@ -45,7 +45,7 @@ class Api::V1::InvitationsController < ApplicationController
   end
 
   def invited_employee_privileges_params
-    if @invited_user_type == 'Employee'
+    if @invited_user_type == User::EMPLOYEE
       params.require(:employee_privilege_set).permit(:can_manage_employees, :can_manage_students, :can_modify_schedules,
                                                      :is_driving)
     end

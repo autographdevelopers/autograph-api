@@ -22,7 +22,7 @@ describe 'POST /api/v1/auth' do
   end
 
   context 'when type is Student' do
-    let(:type) { 'Student' }
+    let(:type) { User::STUDENT }
 
     context 'when params VALID' do
       let(:params) { valid_params }
@@ -163,7 +163,7 @@ describe 'POST /api/v1/auth' do
   end
 
   context 'when type is Employee' do
-    let(:type) { 'Employee' }
+    let(:type) { User::EMPLOYEE }
 
     context 'when params VALID' do
       let(:params) { valid_params }

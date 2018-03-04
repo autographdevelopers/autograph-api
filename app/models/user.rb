@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   TYPES = ['Employee', 'Student'].freeze
+  EMPLOYEE = 'Employee'.freeze
+  STUDENT = 'Student'.freeze
 
   # == Extensions =============================================================
   devise :database_authenticatable, :registerable,
