@@ -9,7 +9,7 @@ FactoryBot.define do
     phone_number FFaker::PhoneNumber.phone_number
     time_zone "+01:00"
     avatar FFaker::Avatar.image
-    type 'Student'
+    type User::STUDENT
     confirmed_at DateTime.now
   end
 end

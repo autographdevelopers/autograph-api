@@ -50,7 +50,7 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
       let(:driving_school_id) { driving_school.id }
 
       context 'when current_user is inviting EMPLOYEE' do
-        let(:invited_user_type) { 'Employee' }
+        let(:invited_user_type) { User::EMPLOYEE }
 
         context 'when current_user has privilege to invite other employees' do
           let(:can_manage_employees) { true }
@@ -176,7 +176,7 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
       end
 
       context 'when current_user is inviting STUDENT' do
-        let(:invited_user_type) { 'Student' }
+        let(:invited_user_type) { User::STUDENT }
 
         context 'when current_user has privilege to invite other students' do
           let(:can_manage_students) { true }
