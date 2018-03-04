@@ -1,6 +1,6 @@
 class Api::V1::DrivingSchoolsController < ApplicationController
   before_action :verify_current_user_to_be_employee, except: [:index, :show]
-  before_action :set_driving_school, only: [:confirm_registration, :update, :show]
+  before_action :set_driving_school, only: [:confirm_registration, :update, :show, :activate]
 
   def index
     @driving_schools = build_results(policy_scope(DrivingSchool))
@@ -35,6 +35,17 @@ class Api::V1::DrivingSchoolsController < ApplicationController
       @employee_driving_school = @current_user.employee_driving_schools.find_by(driving_school: @driving_school)
     elsif current_user.student?
       @student_driving_school = @current_user.student_driving_schools.find_by(driving_school: @driving_school)
+    end
+  end
+
+  def activate
+    authorize @driving_school
+
+    if params[:verification_code] == @driving_school.verification_code
+      @driving_school.activate!
+      render @driving_school
+    else
+      render json: { error: 'Provided verification code is invalid' }, status: :forbidden
     end
   end
 
