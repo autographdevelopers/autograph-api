@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180223085234) do
+ActiveRecord::Schema.define(version: 20180303171057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20180223085234) do
     t.decimal "longitude", precision: 9, scale: 6
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "time_zone"
     t.index ["name"], name: "index_driving_schools_on_name"
   end
 
@@ -109,10 +110,12 @@ ActiveRecord::Schema.define(version: 20180223085234) do
 
   create_table "schedules", force: :cascade do |t|
     t.integer "repetition_period_in_weeks", default: 12, null: false
-    t.json "slots_template", default: {}, null: false
+    t.json "current_template", default: {"monday"=>[], "tuesday"=>[], "wednesday"=>[], "thursday"=>[], "friday"=>[], "saturday"=>[], "sunday"=>[]}, null: false
     t.bigint "employee_driving_school_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "new_template", default: {"monday"=>[], "tuesday"=>[], "wednesday"=>[], "thursday"=>[], "friday"=>[], "saturday"=>[], "sunday"=>[]}, null: false
+    t.date "new_template_binding_from"
     t.index ["employee_driving_school_id"], name: "index_schedules_on_employee_driving_school_id"
   end
 
