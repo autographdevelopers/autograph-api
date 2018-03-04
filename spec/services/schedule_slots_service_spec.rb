@@ -46,22 +46,22 @@ describe ScheduleSlotsService do
 
               it 'creates proper slots' do
                 expect(employee_driving_school.slots.pluck(:start_time)).to match_array(
-                                                                              [
-                                                                                date_times_range.call(start_date_time: '2018-02-05 10:00 +01:00', end_date_time: '2018-02-05 15:30 +01:00'),# Monday
-                                                                                date_times_range.call(start_date_time: '2018-02-06 08:00 +01:00', end_date_time: '2018-02-06 15:30 +01:00'),# Tuesday
-                                                                                date_times_range.call(start_date_time: '2018-02-07 08:00 +01:00', end_date_time: '2018-02-07 15:30 +01:00'),# Wednesday
-                                                                                date_times_range.call(start_date_time: '2018-02-08 08:00 +01:00', end_date_time: '2018-02-08 15:30 +01:00'),# Thursday
-                                                                                date_times_range.call(start_date_time: '2018-02-09 08:00 +01:00', end_date_time: '2018-02-09 15:30 +01:00'),# Friday
-                                                                                date_times_range.call(start_date_time: '2018-02-10 08:00 +01:00', end_date_time: '2018-02-10 09:30 +01:00'),# Saturday
-                                                                                date_times_range.call(start_date_time: '2018-02-12 08:00 +01:00', end_date_time: '2018-02-12 15:30 +01:00'),# Monday
-                                                                                date_times_range.call(start_date_time: '2018-02-13 08:00 +01:00', end_date_time: '2018-02-13 15:30 +01:00'),# Tuesday
-                                                                                date_times_range.call(start_date_time: '2018-02-14 08:00 +01:00', end_date_time: '2018-02-14 15:30 +01:00'),# Wednesday
-                                                                                date_times_range.call(start_date_time: '2018-02-15 08:00 +01:00', end_date_time: '2018-02-15 15:30 +01:00'),# Thursday
-                                                                                date_times_range.call(start_date_time: '2018-02-16 08:00 +01:00', end_date_time: '2018-02-16 15:30 +01:00'),# Friday
-                                                                                date_times_range.call(start_date_time: '2018-02-17 08:00 +01:00', end_date_time: '2018-02-17 09:30 +01:00'),# Saturday
-                                                                                date_times_range.call(start_date_time: '2018-02-19 08:00 +01:00', end_date_time: '2018-02-19 15:30 +01:00') # Monday
-                                                                              ].flatten
-                                                                            )
+                  [
+                    date_times_range.call(start_date_time: '2018-02-05 10:00 +01:00', end_date_time: '2018-02-05 15:30 +01:00'),# Monday
+                    date_times_range.call(start_date_time: '2018-02-06 08:00 +01:00', end_date_time: '2018-02-06 15:30 +01:00'),# Tuesday
+                    date_times_range.call(start_date_time: '2018-02-07 08:00 +01:00', end_date_time: '2018-02-07 15:30 +01:00'),# Wednesday
+                    date_times_range.call(start_date_time: '2018-02-08 08:00 +01:00', end_date_time: '2018-02-08 15:30 +01:00'),# Thursday
+                    date_times_range.call(start_date_time: '2018-02-09 08:00 +01:00', end_date_time: '2018-02-09 15:30 +01:00'),# Friday
+                    date_times_range.call(start_date_time: '2018-02-10 08:00 +01:00', end_date_time: '2018-02-10 09:30 +01:00'),# Saturday
+                    date_times_range.call(start_date_time: '2018-02-12 08:00 +01:00', end_date_time: '2018-02-12 15:30 +01:00'),# Monday
+                    date_times_range.call(start_date_time: '2018-02-13 08:00 +01:00', end_date_time: '2018-02-13 15:30 +01:00'),# Tuesday
+                    date_times_range.call(start_date_time: '2018-02-14 08:00 +01:00', end_date_time: '2018-02-14 15:30 +01:00'),# Wednesday
+                    date_times_range.call(start_date_time: '2018-02-15 08:00 +01:00', end_date_time: '2018-02-15 15:30 +01:00'),# Thursday
+                    date_times_range.call(start_date_time: '2018-02-16 08:00 +01:00', end_date_time: '2018-02-16 15:30 +01:00'),# Friday
+                    date_times_range.call(start_date_time: '2018-02-17 08:00 +01:00', end_date_time: '2018-02-17 09:30 +01:00'),# Saturday
+                    date_times_range.call(start_date_time: '2018-02-19 08:00 +01:00', end_date_time: '2018-02-19 15:30 +01:00') # Monday
+                  ].flatten
+                )
               end
             end
 
@@ -73,23 +73,23 @@ describe ScheduleSlotsService do
 
               it 'creates and leaves already booked slots' do
                 expect(employee_driving_school.slots.pluck(:start_time)).to match_array(
-                                                                              [
-                                                                                date_times_range.call(start_date_time: '2018-02-05 10:00 +01:00', end_date_time: '2018-02-05 15:30 +01:00'),# Monday
-                                                                                date_times_range.call(start_date_time: '2018-02-06 08:00 +01:00', end_date_time: '2018-02-06 15:30 +01:00'),# Tuesday
-                                                                                slot_2.start_time, # Tuesday
-                                                                                date_times_range.call(start_date_time: '2018-02-07 08:00 +01:00', end_date_time: '2018-02-07 15:30 +01:00'),# Wednesday
-                                                                                date_times_range.call(start_date_time: '2018-02-08 08:00 +01:00', end_date_time: '2018-02-08 15:30 +01:00'),# Thursday
-                                                                                date_times_range.call(start_date_time: '2018-02-09 08:00 +01:00', end_date_time: '2018-02-09 15:30 +01:00'),# Friday
-                                                                                date_times_range.call(start_date_time: '2018-02-10 08:00 +01:00', end_date_time: '2018-02-10 09:30 +01:00'),# Saturday
-                                                                                date_times_range.call(start_date_time: '2018-02-12 08:00 +01:00', end_date_time: '2018-02-12 15:30 +01:00'),# Monday
-                                                                                date_times_range.call(start_date_time: '2018-02-13 08:00 +01:00', end_date_time: '2018-02-13 15:30 +01:00'),# Tuesday
-                                                                                date_times_range.call(start_date_time: '2018-02-14 08:00 +01:00', end_date_time: '2018-02-14 15:30 +01:00'),# Wednesday
-                                                                                date_times_range.call(start_date_time: '2018-02-15 08:00 +01:00', end_date_time: '2018-02-15 15:30 +01:00'),# Thursday
-                                                                                date_times_range.call(start_date_time: '2018-02-16 08:00 +01:00', end_date_time: '2018-02-16 15:30 +01:00'),# Friday
-                                                                                date_times_range.call(start_date_time: '2018-02-17 08:00 +01:00', end_date_time: '2018-02-17 09:30 +01:00'),# Saturday
-                                                                                date_times_range.call(start_date_time: '2018-02-19 08:00 +01:00', end_date_time: '2018-02-19 15:30 +01:00') # Monday
-                                                                              ].flatten
-                                                                            )
+                  [
+                    date_times_range.call(start_date_time: '2018-02-05 10:00 +01:00', end_date_time: '2018-02-05 15:30 +01:00'),# Monday
+                    date_times_range.call(start_date_time: '2018-02-06 08:00 +01:00', end_date_time: '2018-02-06 15:30 +01:00'),# Tuesday
+                    slot_2.start_time, # Tuesday
+                    date_times_range.call(start_date_time: '2018-02-07 08:00 +01:00', end_date_time: '2018-02-07 15:30 +01:00'),# Wednesday
+                    date_times_range.call(start_date_time: '2018-02-08 08:00 +01:00', end_date_time: '2018-02-08 15:30 +01:00'),# Thursday
+                    date_times_range.call(start_date_time: '2018-02-09 08:00 +01:00', end_date_time: '2018-02-09 15:30 +01:00'),# Friday
+                    date_times_range.call(start_date_time: '2018-02-10 08:00 +01:00', end_date_time: '2018-02-10 09:30 +01:00'),# Saturday
+                    date_times_range.call(start_date_time: '2018-02-12 08:00 +01:00', end_date_time: '2018-02-12 15:30 +01:00'),# Monday
+                    date_times_range.call(start_date_time: '2018-02-13 08:00 +01:00', end_date_time: '2018-02-13 15:30 +01:00'),# Tuesday
+                    date_times_range.call(start_date_time: '2018-02-14 08:00 +01:00', end_date_time: '2018-02-14 15:30 +01:00'),# Wednesday
+                    date_times_range.call(start_date_time: '2018-02-15 08:00 +01:00', end_date_time: '2018-02-15 15:30 +01:00'),# Thursday
+                    date_times_range.call(start_date_time: '2018-02-16 08:00 +01:00', end_date_time: '2018-02-16 15:30 +01:00'),# Friday
+                    date_times_range.call(start_date_time: '2018-02-17 08:00 +01:00', end_date_time: '2018-02-17 09:30 +01:00'),# Saturday
+                    date_times_range.call(start_date_time: '2018-02-19 08:00 +01:00', end_date_time: '2018-02-19 15:30 +01:00') # Monday
+                  ].flatten
+                )
               end
 
               it 'does not override already booked slots' do
@@ -133,19 +133,19 @@ describe ScheduleSlotsService do
 
               it 'creates proper slots' do
                 expect(employee_driving_school.slots.pluck(:start_time)).to match_array(
-                                                                              [
-                                                                                date_times_range.call(start_date_time: '2018-02-05 10:00 +01:00', end_date_time: '2018-02-05 15:30 +01:00'),# Monday
-                                                                                date_times_range.call(start_date_time: '2018-02-06 08:00 +01:00', end_date_time: '2018-02-06 15:30 +01:00'),# Tuesday
-                                                                                date_times_range.call(start_date_time: '2018-02-07 08:00 +01:00', end_date_time: '2018-02-07 15:30 +01:00'),# Wednesday
-                                                                                date_times_range.call(start_date_time: '2018-02-08 08:00 +01:00', end_date_time: '2018-02-08 15:30 +01:00'),# Thursday
-                                                                                date_times_range.call(start_date_time: '2018-02-09 08:00 +01:00', end_date_time: '2018-02-09 15:30 +01:00'),# Friday
-                                                                                date_times_range.call(start_date_time: '2018-02-10 08:00 +01:00', end_date_time: '2018-02-10 09:30 +01:00'),# Saturday
-                                                                                date_times_range.call(start_date_time: '2018-02-12 16:00 +01:00', end_date_time: '2018-02-12 23:30 +01:00'),# Monday
-                                                                                date_times_range.call(start_date_time: '2018-02-13 16:00 +01:00', end_date_time: '2018-02-13 23:30 +01:00'),# Tuesday
-                                                                                date_times_range.call(start_date_time: '2018-02-14 16:00 +01:00', end_date_time: '2018-02-14 23:30 +01:00'),# Wednesday
-                                                                                date_times_range.call(start_date_time: '2018-02-19 16:00 +01:00', end_date_time: '2018-02-19 23:30 +01:00') # Monday
-                                                                              ].flatten
-                                                                            )
+                  [
+                    date_times_range.call(start_date_time: '2018-02-05 10:00 +01:00', end_date_time: '2018-02-05 15:30 +01:00'),# Monday
+                    date_times_range.call(start_date_time: '2018-02-06 08:00 +01:00', end_date_time: '2018-02-06 15:30 +01:00'),# Tuesday
+                    date_times_range.call(start_date_time: '2018-02-07 08:00 +01:00', end_date_time: '2018-02-07 15:30 +01:00'),# Wednesday
+                    date_times_range.call(start_date_time: '2018-02-08 08:00 +01:00', end_date_time: '2018-02-08 15:30 +01:00'),# Thursday
+                    date_times_range.call(start_date_time: '2018-02-09 08:00 +01:00', end_date_time: '2018-02-09 15:30 +01:00'),# Friday
+                    date_times_range.call(start_date_time: '2018-02-10 08:00 +01:00', end_date_time: '2018-02-10 09:30 +01:00'),# Saturday
+                    date_times_range.call(start_date_time: '2018-02-12 16:00 +01:00', end_date_time: '2018-02-12 23:30 +01:00'),# Monday
+                    date_times_range.call(start_date_time: '2018-02-13 16:00 +01:00', end_date_time: '2018-02-13 23:30 +01:00'),# Tuesday
+                    date_times_range.call(start_date_time: '2018-02-14 16:00 +01:00', end_date_time: '2018-02-14 23:30 +01:00'),# Wednesday
+                    date_times_range.call(start_date_time: '2018-02-19 16:00 +01:00', end_date_time: '2018-02-19 23:30 +01:00') # Monday
+                  ].flatten
+                )
               end
             end
 
@@ -157,20 +157,20 @@ describe ScheduleSlotsService do
 
               it 'creates proper slots' do
                 expect(employee_driving_school.slots.pluck(:start_time)).to match_array(
-                                                                              [
-                                                                                date_times_range.call(start_date_time: '2018-02-05 10:00 +01:00', end_date_time: '2018-02-05 15:30 +01:00'),# Monday
-                                                                                date_times_range.call(start_date_time: '2018-02-06 08:00 +01:00', end_date_time: '2018-02-06 15:30 +01:00'),# Tuesday
-                                                                                slot_2.start_time, # Tuesday
-                                                                                date_times_range.call(start_date_time: '2018-02-07 08:00 +01:00', end_date_time: '2018-02-07 15:30 +01:00'),# Wednesday
-                                                                                date_times_range.call(start_date_time: '2018-02-08 08:00 +01:00', end_date_time: '2018-02-08 15:30 +01:00'),# Thursday
-                                                                                date_times_range.call(start_date_time: '2018-02-09 08:00 +01:00', end_date_time: '2018-02-09 15:30 +01:00'),# Friday
-                                                                                date_times_range.call(start_date_time: '2018-02-10 08:00 +01:00', end_date_time: '2018-02-10 09:30 +01:00'),# Saturday
-                                                                                date_times_range.call(start_date_time: '2018-02-12 16:00 +01:00', end_date_time: '2018-02-12 23:30 +01:00'),# Monday
-                                                                                date_times_range.call(start_date_time: '2018-02-13 16:00 +01:00', end_date_time: '2018-02-13 23:30 +01:00'),# Tuesday
-                                                                                date_times_range.call(start_date_time: '2018-02-14 16:00 +01:00', end_date_time: '2018-02-14 23:30 +01:00'),# Wednesday
-                                                                                date_times_range.call(start_date_time: '2018-02-19 16:00 +01:00', end_date_time: '2018-02-19 23:30 +01:00') # Monday
-                                                                              ].flatten
-                                                                            )
+                  [
+                    date_times_range.call(start_date_time: '2018-02-05 10:00 +01:00', end_date_time: '2018-02-05 15:30 +01:00'),# Monday
+                    date_times_range.call(start_date_time: '2018-02-06 08:00 +01:00', end_date_time: '2018-02-06 15:30 +01:00'),# Tuesday
+                    slot_2.start_time, # Tuesday
+                    date_times_range.call(start_date_time: '2018-02-07 08:00 +01:00', end_date_time: '2018-02-07 15:30 +01:00'),# Wednesday
+                    date_times_range.call(start_date_time: '2018-02-08 08:00 +01:00', end_date_time: '2018-02-08 15:30 +01:00'),# Thursday
+                    date_times_range.call(start_date_time: '2018-02-09 08:00 +01:00', end_date_time: '2018-02-09 15:30 +01:00'),# Friday
+                    date_times_range.call(start_date_time: '2018-02-10 08:00 +01:00', end_date_time: '2018-02-10 09:30 +01:00'),# Saturday
+                    date_times_range.call(start_date_time: '2018-02-12 16:00 +01:00', end_date_time: '2018-02-12 23:30 +01:00'),# Monday
+                    date_times_range.call(start_date_time: '2018-02-13 16:00 +01:00', end_date_time: '2018-02-13 23:30 +01:00'),# Tuesday
+                    date_times_range.call(start_date_time: '2018-02-14 16:00 +01:00', end_date_time: '2018-02-14 23:30 +01:00'),# Wednesday
+                    date_times_range.call(start_date_time: '2018-02-19 16:00 +01:00', end_date_time: '2018-02-19 23:30 +01:00') # Monday
+                  ].flatten
+                )
               end
 
               it 'does not override already booked slots' do
@@ -210,18 +210,18 @@ describe ScheduleSlotsService do
 
               it 'creates proper slots' do
                 expect(employee_driving_school.slots.pluck(:start_time)).to match_array(
-                                                                              [
-                                                                                date_times_range.call(start_date_time: '2018-08-08 11:30 +02:00', end_date_time: '2018-08-08 11:30 +02:00'),# Wednesday
-                                                                                date_times_range.call(start_date_time: '2018-08-09 08:00 +02:00', end_date_time: '2018-08-09 15:30 +02:00'),# Thursday
-                                                                                date_times_range.call(start_date_time: '2018-08-11 16:00 +02:00', end_date_time: '2018-08-11 23:30 +02:00'),# Saturday
-                                                                                date_times_range.call(start_date_time: '2018-08-12 00:00 +02:00', end_date_time: '2018-08-12 00:30 +02:00'),# Sunday
-                                                                                date_times_range.call(start_date_time: '2018-08-13 00:00 +02:00', end_date_time: '2018-08-13 05:00 +02:00'),# Monday
-                                                                                date_times_range.call(start_date_time: '2018-08-13 15:00 +02:00', end_date_time: '2018-08-13 23:30 +02:00'),# Monday
-                                                                                date_times_range.call(start_date_time: '2018-08-14 08:00 +02:00', end_date_time: '2018-08-14 15:30 +02:00'),# Tuesday
-                                                                                date_times_range.call(start_date_time: '2018-08-15 02:30 +02:00', end_date_time: '2018-08-15 07:30 +02:00'),# Wednesday
-                                                                                date_times_range.call(start_date_time: '2018-08-15 10:00 +02:00', end_date_time: '2018-08-15 11:30 +02:00'),# Wednesday
-                                                                              ].flatten
-                                                                            )
+                  [
+                    date_times_range.call(start_date_time: '2018-08-08 11:30 +02:00', end_date_time: '2018-08-08 11:30 +02:00'),# Wednesday
+                    date_times_range.call(start_date_time: '2018-08-09 08:00 +02:00', end_date_time: '2018-08-09 15:30 +02:00'),# Thursday
+                    date_times_range.call(start_date_time: '2018-08-11 16:00 +02:00', end_date_time: '2018-08-11 23:30 +02:00'),# Saturday
+                    date_times_range.call(start_date_time: '2018-08-12 00:00 +02:00', end_date_time: '2018-08-12 00:30 +02:00'),# Sunday
+                    date_times_range.call(start_date_time: '2018-08-13 00:00 +02:00', end_date_time: '2018-08-13 05:00 +02:00'),# Monday
+                    date_times_range.call(start_date_time: '2018-08-13 15:00 +02:00', end_date_time: '2018-08-13 23:30 +02:00'),# Monday
+                    date_times_range.call(start_date_time: '2018-08-14 08:00 +02:00', end_date_time: '2018-08-14 15:30 +02:00'),# Tuesday
+                    date_times_range.call(start_date_time: '2018-08-15 02:30 +02:00', end_date_time: '2018-08-15 07:30 +02:00'),# Wednesday
+                    date_times_range.call(start_date_time: '2018-08-15 10:00 +02:00', end_date_time: '2018-08-15 11:30 +02:00'),# Wednesday
+                  ].flatten
+                )
               end
             end
 
@@ -233,19 +233,19 @@ describe ScheduleSlotsService do
 
               it 'creates and leaves already booked slots' do
                 expect(employee_driving_school.slots.pluck(:start_time)).to match_array(
-                                                                              [
-                                                                                date_times_range.call(start_date_time: '2018-08-08 11:30 +02:00', end_date_time: '2018-08-08 11:30 +02:00'),# Wednesday
-                                                                                date_times_range.call(start_date_time: '2018-08-09 08:00 +02:00', end_date_time: '2018-08-09 15:30 +02:00'),# Thursday
-                                                                                slot_2.start_time, # Thursday
-                                                                                date_times_range.call(start_date_time: '2018-08-11 16:00 +02:00', end_date_time: '2018-08-11 23:30 +02:00'),# Saturday
-                                                                                date_times_range.call(start_date_time: '2018-08-12 00:00 +02:00', end_date_time: '2018-08-12 00:30 +02:00'),# Sunday
-                                                                                date_times_range.call(start_date_time: '2018-08-13 00:00 +02:00', end_date_time: '2018-08-13 05:00 +02:00'),# Monday
-                                                                                date_times_range.call(start_date_time: '2018-08-13 15:00 +02:00', end_date_time: '2018-08-13 23:30 +02:00'),# Monday
-                                                                                date_times_range.call(start_date_time: '2018-08-14 08:00 +02:00', end_date_time: '2018-08-14 15:30 +02:00'),# Tuesday
-                                                                                date_times_range.call(start_date_time: '2018-08-15 02:30 +02:00', end_date_time: '2018-08-15 07:30 +02:00'),# Wednesday
-                                                                                date_times_range.call(start_date_time: '2018-08-15 10:00 +02:00', end_date_time: '2018-08-15 11:30 +02:00'),# Wednesday
-                                                                              ].flatten
-                                                                            )
+                  [
+                    date_times_range.call(start_date_time: '2018-08-08 11:30 +02:00', end_date_time: '2018-08-08 11:30 +02:00'),# Wednesday
+                    date_times_range.call(start_date_time: '2018-08-09 08:00 +02:00', end_date_time: '2018-08-09 15:30 +02:00'),# Thursday
+                    slot_2.start_time, # Thursday
+                    date_times_range.call(start_date_time: '2018-08-11 16:00 +02:00', end_date_time: '2018-08-11 23:30 +02:00'),# Saturday
+                    date_times_range.call(start_date_time: '2018-08-12 00:00 +02:00', end_date_time: '2018-08-12 00:30 +02:00'),# Sunday
+                    date_times_range.call(start_date_time: '2018-08-13 00:00 +02:00', end_date_time: '2018-08-13 05:00 +02:00'),# Monday
+                    date_times_range.call(start_date_time: '2018-08-13 15:00 +02:00', end_date_time: '2018-08-13 23:30 +02:00'),# Monday
+                    date_times_range.call(start_date_time: '2018-08-14 08:00 +02:00', end_date_time: '2018-08-14 15:30 +02:00'),# Tuesday
+                    date_times_range.call(start_date_time: '2018-08-15 02:30 +02:00', end_date_time: '2018-08-15 07:30 +02:00'),# Wednesday
+                    date_times_range.call(start_date_time: '2018-08-15 10:00 +02:00', end_date_time: '2018-08-15 11:30 +02:00'),# Wednesday
+                  ].flatten
+                )
               end
 
               it 'does not override already booked slots' do
@@ -289,14 +289,14 @@ describe ScheduleSlotsService do
 
               it 'creates proper slots' do
                 expect(employee_driving_school.slots.pluck(:start_time)).to match_array(
-                                                                              [
-                                                                                date_times_range.call(start_date_time: '2018-08-08 11:30 +02:00', end_date_time: '2018-08-08 11:30 +02:00'),# Wednesday
-                                                                                date_times_range.call(start_date_time: '2018-08-09 08:00 +02:00', end_date_time: '2018-08-09 15:30 +02:00'),# Thursday
-                                                                                date_times_range.call(start_date_time: '2018-08-11 16:00 +02:00', end_date_time: '2018-08-11 23:30 +02:00'),# Saturday
-                                                                                date_times_range.call(start_date_time: '2018-08-13 08:00 +02:00', end_date_time: '2018-08-13 15:30 +02:00'),# Monday
-                                                                                date_times_range.call(start_date_time: '2018-08-14 08:00 +02:00', end_date_time: '2018-08-14 15:30 +02:00'),# Tuesday
-                                                                              ].flatten
-                                                                            )
+                  [
+                    date_times_range.call(start_date_time: '2018-08-08 11:30 +02:00', end_date_time: '2018-08-08 11:30 +02:00'),# Wednesday
+                    date_times_range.call(start_date_time: '2018-08-09 08:00 +02:00', end_date_time: '2018-08-09 15:30 +02:00'),# Thursday
+                    date_times_range.call(start_date_time: '2018-08-11 16:00 +02:00', end_date_time: '2018-08-11 23:30 +02:00'),# Saturday
+                    date_times_range.call(start_date_time: '2018-08-13 08:00 +02:00', end_date_time: '2018-08-13 15:30 +02:00'),# Monday
+                    date_times_range.call(start_date_time: '2018-08-14 08:00 +02:00', end_date_time: '2018-08-14 15:30 +02:00'),# Tuesday
+                  ].flatten
+                )
               end
             end
 
@@ -308,15 +308,15 @@ describe ScheduleSlotsService do
 
               it 'creates and leaves already booked slots' do
                 expect(employee_driving_school.slots.pluck(:start_time)).to match_array(
-                                                                              [
-                                                                                date_times_range.call(start_date_time: '2018-08-08 11:30 +02:00', end_date_time: '2018-08-08 11:30 +02:00'),# Wednesday
-                                                                                date_times_range.call(start_date_time: '2018-08-09 08:00 +02:00', end_date_time: '2018-08-09 15:30 +02:00'),# Thursday
-                                                                                slot_2.start_time,
-                                                                                date_times_range.call(start_date_time: '2018-08-11 16:00 +02:00', end_date_time: '2018-08-11 23:30 +02:00'),# Saturday
-                                                                                date_times_range.call(start_date_time: '2018-08-13 08:00 +02:00', end_date_time: '2018-08-13 15:30 +02:00'),# Monday
-                                                                                date_times_range.call(start_date_time: '2018-08-14 08:00 +02:00', end_date_time: '2018-08-14 15:30 +02:00'),# Tuesday
-                                                                              ].flatten
-                                                                            )
+                  [
+                    date_times_range.call(start_date_time: '2018-08-08 11:30 +02:00', end_date_time: '2018-08-08 11:30 +02:00'),# Wednesday
+                    date_times_range.call(start_date_time: '2018-08-09 08:00 +02:00', end_date_time: '2018-08-09 15:30 +02:00'),# Thursday
+                    slot_2.start_time,
+                    date_times_range.call(start_date_time: '2018-08-11 16:00 +02:00', end_date_time: '2018-08-11 23:30 +02:00'),# Saturday
+                    date_times_range.call(start_date_time: '2018-08-13 08:00 +02:00', end_date_time: '2018-08-13 15:30 +02:00'),# Monday
+                    date_times_range.call(start_date_time: '2018-08-14 08:00 +02:00', end_date_time: '2018-08-14 15:30 +02:00'),# Tuesday
+                  ].flatten
+                )
               end
 
               it 'does not override already booked slots' do
@@ -348,16 +348,16 @@ describe ScheduleSlotsService do
 
           it 'creates proper slots' do
             expect(employee_driving_school.slots.pluck(:start_time)).to match_array(
-                                                                          [
-                                                                            date_times_range.call(start_date_time: '2018-03-23 00:00 +01:00', end_date_time: '2018-03-23 07:30 +01:00'),# Thursday
-                                                                            date_times_range.call(start_date_time: '2018-03-24 00:00 +01:00', end_date_time: '2018-03-24 07:30 +01:00'),# Friday
-                                                                            date_times_range.call(start_date_time: '2018-03-25 00:00 +01:00', end_date_time: '2018-03-25 07:30 +02:00'),# Saturday
-                                                                            date_times_range.call(start_date_time: '2018-03-26 00:00 +02:00', end_date_time: '2018-03-26 07:30 +02:00'),# Sunday
-                                                                            date_times_range.call(start_date_time: '2018-03-27 00:00 +02:00', end_date_time: '2018-03-27 07:30 +02:00'),# Monday
-                                                                            date_times_range.call(start_date_time: '2018-03-28 00:00 +02:00', end_date_time: '2018-03-28 07:30 +02:00'),# Tuesday
-                                                                            date_times_range.call(start_date_time: '2018-03-29 00:00 +02:00', end_date_time: '2018-03-29 07:30 +02:00'),# Wednesday
-                                                                          ].flatten
-                                                                        )
+              [
+                date_times_range.call(start_date_time: '2018-03-23 00:00 +01:00', end_date_time: '2018-03-23 07:30 +01:00'),# Thursday
+                date_times_range.call(start_date_time: '2018-03-24 00:00 +01:00', end_date_time: '2018-03-24 07:30 +01:00'),# Friday
+                date_times_range.call(start_date_time: '2018-03-25 00:00 +01:00', end_date_time: '2018-03-25 07:30 +02:00'),# Saturday
+                date_times_range.call(start_date_time: '2018-03-26 00:00 +02:00', end_date_time: '2018-03-26 07:30 +02:00'),# Sunday
+                date_times_range.call(start_date_time: '2018-03-27 00:00 +02:00', end_date_time: '2018-03-27 07:30 +02:00'),# Monday
+                date_times_range.call(start_date_time: '2018-03-28 00:00 +02:00', end_date_time: '2018-03-28 07:30 +02:00'),# Tuesday
+                date_times_range.call(start_date_time: '2018-03-29 00:00 +02:00', end_date_time: '2018-03-29 07:30 +02:00'),# Wednesday
+              ].flatten
+            )
           end
         end
 
@@ -383,16 +383,16 @@ describe ScheduleSlotsService do
 
           it 'creates proper slots' do
             expect(employee_driving_school.slots.pluck(:start_time)).to match_array(
-                                                                          [
-                                                                            date_times_range.call(start_date_time: '2018-10-26 00:30 +02:00', end_date_time: '2018-10-26 07:30 +02:00'),# Friday
-                                                                            date_times_range.call(start_date_time: '2018-10-27 00:00 +02:00', end_date_time: '2018-10-27 07:30 +02:00'),# Saturday
-                                                                            date_times_range.call(start_date_time: '2018-10-28 00:00 +02:00', end_date_time: '2018-10-28 07:30 +01:00'),# Sunday
-                                                                            date_times_range.call(start_date_time: '2018-10-29 00:00 +01:00', end_date_time: '2018-10-29 07:30 +01:00'),# Monday
-                                                                            date_times_range.call(start_date_time: '2018-10-30 00:00 +01:00', end_date_time: '2018-10-30 07:30 +01:00'),# Tuesday
-                                                                            date_times_range.call(start_date_time: '2018-10-31 00:00 +01:00', end_date_time: '2018-10-31 07:30 +01:00'),# Wednesday
-                                                                            date_times_range.call(start_date_time: '2018-11-01 00:00 +01:00', end_date_time: '2018-11-01 07:30 +01:00'),# Thursday
-                                                                          ].flatten
-                                                                        )
+              [
+                date_times_range.call(start_date_time: '2018-10-26 00:30 +02:00', end_date_time: '2018-10-26 07:30 +02:00'),# Friday
+                date_times_range.call(start_date_time: '2018-10-27 00:00 +02:00', end_date_time: '2018-10-27 07:30 +02:00'),# Saturday
+                date_times_range.call(start_date_time: '2018-10-28 00:00 +02:00', end_date_time: '2018-10-28 07:30 +01:00'),# Sunday
+                date_times_range.call(start_date_time: '2018-10-29 00:00 +01:00', end_date_time: '2018-10-29 07:30 +01:00'),# Monday
+                date_times_range.call(start_date_time: '2018-10-30 00:00 +01:00', end_date_time: '2018-10-30 07:30 +01:00'),# Tuesday
+                date_times_range.call(start_date_time: '2018-10-31 00:00 +01:00', end_date_time: '2018-10-31 07:30 +01:00'),# Wednesday
+                date_times_range.call(start_date_time: '2018-11-01 00:00 +01:00', end_date_time: '2018-11-01 07:30 +01:00'),# Thursday
+              ].flatten
+            )
           end
         end
       end
@@ -428,15 +428,15 @@ describe ScheduleSlotsService do
 
               it 'creates proper slots' do
                 expect(employee_driving_school.slots.pluck(:start_time)).to match_array(
-                                                                              [
-                                                                                date_times_range.call(start_date_time: '2018-05-28 09:30 +02:00', end_date_time: '2018-05-28 15:30 +02:00'),# Monday
-                                                                                date_times_range.call(start_date_time: '2018-05-29 08:00 +02:00', end_date_time: '2018-05-29 15:30 +02:00'),# Tuesday
-                                                                                date_times_range.call(start_date_time: '2018-05-30 08:00 +02:00', end_date_time: '2018-05-30 15:30 +02:00'),# Wednesday
-                                                                                # Holidays on thursday
-                                                                                date_times_range.call(start_date_time: '2018-06-01 08:00 +02:00', end_date_time: '2018-06-01 15:30 +02:00'),# Friday
-                                                                                date_times_range.call(start_date_time: '2018-06-04 08:00 +02:00', end_date_time: '2018-06-04 15:30 +02:00'),# Monday
-                                                                              ].flatten
-                                                                            )
+                  [
+                    date_times_range.call(start_date_time: '2018-05-28 09:30 +02:00', end_date_time: '2018-05-28 15:30 +02:00'),# Monday
+                    date_times_range.call(start_date_time: '2018-05-29 08:00 +02:00', end_date_time: '2018-05-29 15:30 +02:00'),# Tuesday
+                    date_times_range.call(start_date_time: '2018-05-30 08:00 +02:00', end_date_time: '2018-05-30 15:30 +02:00'),# Wednesday
+                    # Holidays on thursday
+                    date_times_range.call(start_date_time: '2018-06-01 08:00 +02:00', end_date_time: '2018-06-01 15:30 +02:00'),# Friday
+                    date_times_range.call(start_date_time: '2018-06-04 08:00 +02:00', end_date_time: '2018-06-04 15:30 +02:00'),# Monday
+                  ].flatten
+                )
               end
             end
 
@@ -448,16 +448,16 @@ describe ScheduleSlotsService do
 
               it 'creates and leaves already booked slots' do
                 expect(employee_driving_school.slots.pluck(:start_time)).to match_array(
-                                                                              [
-                                                                                date_times_range.call(start_date_time: '2018-05-28 09:30 +02:00', end_date_time: '2018-05-28 15:30 +02:00'),# Monday
-                                                                                date_times_range.call(start_date_time: '2018-05-29 08:00 +02:00', end_date_time: '2018-05-29 15:30 +02:00'),# Tuesday
-                                                                                slot_2.start_time, # Tuesday
-                                                                                date_times_range.call(start_date_time: '2018-05-30 08:00 +02:00', end_date_time: '2018-05-30 15:30 +02:00'),# Wednesday
-                                                                                # Holidays on thursday
-                                                                                date_times_range.call(start_date_time: '2018-06-01 08:00 +02:00', end_date_time: '2018-06-01 15:30 +02:00'),# Friday
-                                                                                date_times_range.call(start_date_time: '2018-06-04 08:00 +02:00', end_date_time: '2018-06-04 15:30 +02:00'),# Monday
-                                                                              ].flatten
-                                                                            )
+                  [
+                    date_times_range.call(start_date_time: '2018-05-28 09:30 +02:00', end_date_time: '2018-05-28 15:30 +02:00'),# Monday
+                    date_times_range.call(start_date_time: '2018-05-29 08:00 +02:00', end_date_time: '2018-05-29 15:30 +02:00'),# Tuesday
+                    slot_2.start_time, # Tuesday
+                    date_times_range.call(start_date_time: '2018-05-30 08:00 +02:00', end_date_time: '2018-05-30 15:30 +02:00'),# Wednesday
+                    # Holidays on thursday
+                    date_times_range.call(start_date_time: '2018-06-01 08:00 +02:00', end_date_time: '2018-06-01 15:30 +02:00'),# Friday
+                    date_times_range.call(start_date_time: '2018-06-04 08:00 +02:00', end_date_time: '2018-06-04 15:30 +02:00'),# Monday
+                  ].flatten
+                )
               end
 
               it 'does not override already booked slots' do
