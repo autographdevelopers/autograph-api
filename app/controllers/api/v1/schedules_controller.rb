@@ -3,7 +3,7 @@ class Api::V1::SchedulesController < ApplicationController
   before_action :set_driving_school
   before_action :set_employee_driving_school
   before_action :set_schedule
-  before_action :sanitize_slots_ids
+  before_action :sanitize_slots_ids, only: [:update]
 
   def update
     authorize @schedule
@@ -12,6 +12,12 @@ class Api::V1::SchedulesController < ApplicationController
       @schedule.update!(schedule_params)
       ScheduleSlotsService.new(@schedule).call
     end
+
+    render @schedule
+  end
+
+  def show
+    authorize @schedule
 
     render @schedule
   end
