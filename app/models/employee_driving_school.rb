@@ -17,6 +17,9 @@ class EmployeeDrivingSchool < ApplicationRecord
   # == Validations ============================================================
   validates :status, presence: true
 
+  # == Callbacks ==============================================================
+  after_create :create_schedule
+
   # == State Machine ==========================================================
   aasm column: :status, enum: true do
     state :pending, initial: true

@@ -13,7 +13,7 @@ class Api::V1::SchedulesController < ApplicationController
       ScheduleSlotsService.new(@schedule).call
     end
 
-    render @schedule, status: :ok
+    render @schedule
   end
 
   private
@@ -52,7 +52,7 @@ class Api::V1::SchedulesController < ApplicationController
   end
 
   def set_schedule
-    @schedule = @employee_driving_school.schedule || @employee_driving_school.build_schedule
+    @schedule = @employee_driving_school.schedule
   end
 
   def sanitize_slots_ids

@@ -4,7 +4,7 @@ module ScheduleConstants
   extend ActiveSupport::Concern
 
   included do
-    MIN_SCHEDULE_REPETITION_PERIOD = 1
+    MIN_SCHEDULE_REPETITION_PERIOD = 0
     MAX_SCHEDULE_REPETITION_PERIOD = 26
     WEEKDAYS = %w(monday tuesday wednesday thursday friday saturday sunday)
     SLOT_START_TIMES = {
