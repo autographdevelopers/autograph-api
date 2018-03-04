@@ -13,7 +13,7 @@ describe CreateInvitationService do
         let!(:invited_user_params) { invited_user.attributes.symbolize_keys.slice(:name, :surname, :email) }
 
         context 'when invited user is EMPLOYEE' do
-          let(:invited_user_type) { 'Employee' }
+          let(:invited_user_type) { User::EMPLOYEE }
 
           it 'creates EmployeeDrivingSchool record' do
             expect{ subject.call }.to change{ EmployeeDrivingSchool.count }.by 1
@@ -59,7 +59,7 @@ describe CreateInvitationService do
         end
 
         context 'when invited user is STUDENT' do
-          let(:invited_user_type) { 'Student' }
+          let(:invited_user_type) { User::STUDENT }
 
           it 'creates StudentDrivingSchool record' do
             expect{ subject.call }.to change{ StudentDrivingSchool.count }.by 1
@@ -83,7 +83,7 @@ describe CreateInvitationService do
         let!(:invited_user_params) { attributes_for(:user, type: invited_user_type).slice(:name, :surname, :email) }
 
         context 'when invited user is of EMPLOYEE type' do
-          let(:invited_user_type) { 'Employee' }
+          let(:invited_user_type) { User::EMPLOYEE }
 
           it 'creates EmployeeDrivingSchool record' do
             expect{ subject.call }.to change{ EmployeeDrivingSchool.count }.by 1
@@ -125,7 +125,7 @@ describe CreateInvitationService do
         end
 
         context 'when invited user is of STUDENT type' do
-          let(:invited_user_type) { 'Student' }
+          let(:invited_user_type) { User::STUDENT }
 
           it 'creates StudentDrivingSchool record' do
             expect{ subject.call }.to change{ StudentDrivingSchool.count }.by 1
@@ -146,7 +146,7 @@ describe CreateInvitationService do
       let(:invited_user) { create(:user) }
 
       it 'raises error when invited_user exists and his type does NOT match invited_user_type param' do
-        invited_user_type = invited_user.type == 'Employee' ? 'Student' : 'Employee'
+        invited_user_type = invited_user.type == User::EMPLOYEE ? User::STUDENT : User::EMPLOYEE
         invited_user_params = invited_user.attributes.symbolize_keys.slice(:name, :surname, :email)
 
         expect{
@@ -155,7 +155,7 @@ describe CreateInvitationService do
       end
 
       it 'raises error when invited_user does NOT exist and email is NOT passed' do
-        invited_user_type = ['Employee', 'Student'].sample
+        invited_user_type = User::TYPES.sample
         invited_user_params = attributes_for(:user).symbolize_keys.slice(:name, :surname)
 
         expect{

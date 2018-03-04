@@ -9,6 +9,7 @@ class StudentDrivingSchool < ApplicationRecord
   belongs_to :driving_school
   has_one :invitation, as: :invitable
   has_many :driving_courses
+  has_many :driving_lessons
 
   # == Validations ============================================================
   validates :status, presence: true
