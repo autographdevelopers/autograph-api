@@ -1,16 +1,18 @@
-describe 'PUT /api/v1/driving_schools/driving_school_id/confirm_registration' do
+describe 'PUT /api/v1/driving_schools/:driving_school_id/activate' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
   let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school) }
   let!(:employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, employee: employee, driving_school: driving_school) }
-  let(:driving_school) { create(:driving_school, status: :built) }
+  let(:driving_school) { create(:driving_school, status: :pending) }
 
   let(:response_keys) { %w(
     id name phone_numbers emails website_link additional_information city street country profile_picture zip_code status
   ) }
 
+  let(:params) { { verification_code: driving_school.verification_code } }
+
   before do
-    put "/api/v1/driving_schools/#{driving_school_id}/confirm_registration", headers: current_user.create_new_auth_token
+    put "/api/v1/driving_schools/#{driving_school_id}/activate", headers: current_user.create_new_auth_token, params: params
   end
 
   context 'when current_user is EMPLOYEE' do
@@ -22,18 +24,18 @@ describe 'PUT /api/v1/driving_schools/driving_school_id/confirm_registration' do
       context 'when current_user is owner of driving_school' do
         let(:is_owner) { true }
 
-        context 'when driving_school fulfilled registration requirements' do
-          let(:driving_school) { create(:driving_school, :with_schedule_settings_set, status: :built) }
-
-          it 'set status of driving_school to pending' do
+        context 'when provided verification code is valid' do
+          it 'set status of driving_school to active' do
             driving_school.reload
-            expect(driving_school.status).to eq 'pending'
+            expect(driving_school.status).to eq 'active'
           end
         end
 
-        context 'when driving_school did NOT fulfill registration requirements' do
-          it 'returns 400 http status code' do
-            expect(response.status).to eq 400
+        context 'when provided verification code is valid' do
+          let(:params) { { verification_code: 'invalid_code' } }
+
+          it 'returns 403 http status code' do
+            expect(response.status).to eq 403
           end
         end
       end

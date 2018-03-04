@@ -27,6 +27,10 @@ class DrivingSchool < ApplicationRecord
     event :confirm_registration do
       transitions from: :built, to: :pending, guard: [:has_owner?, :has_schedule_settings_set?]
     end
+
+    event :activate do
+      transitions from: :pending, to: :active
+    end
   end
 
   # == Instance Methods =======================================================

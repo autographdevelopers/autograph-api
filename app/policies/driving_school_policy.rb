@@ -1,5 +1,5 @@
 class DrivingSchoolPolicy < ApplicationPolicy
-  allow :confirm_registration?, :owner?, :update?, if: -> { owner_of_driving_school?(record.id) }
+  allow :confirm_registration?, :owner?, :update?, :activate?, if: -> { owner_of_driving_school?(record.id) }
   allow :can_manage_employees?, if: -> { owner_of_driving_school?(record.id) || can_manage_employees_in_driving_school?(record.id) }
   allow :can_manage_students?, if: -> { owner_of_driving_school?(record.id) || can_manage_students_in_driving_school?(record.id)  }
 

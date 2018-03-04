@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :driving_schools, only: [:index, :create, :update, :show] do
         member do
           put :confirm_registration
+          put :activate
         end
         resources :invitations, only: [:create] do
           collection do
