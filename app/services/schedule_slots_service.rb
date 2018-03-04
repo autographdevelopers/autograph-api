@@ -1,6 +1,4 @@
 class ScheduleSlotsService
-  WEEKDAYS = { monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 0 }
-
   attr_reader :employee_driving_school, :schedule, :driving_school
 
   def initialize(schedule)
@@ -60,8 +58,8 @@ class ScheduleSlotsService
   def extract_date_times(dates_range, schedule_template)
     date_times = []
 
-    WEEKDAYS.each do |weekday, weekday_index|
-      slot_start_times_ids = schedule_template[weekday.to_s]
+    ScheduleConstants::WEEKDAYS.each do |weekday, weekday_index|
+      slot_start_times_ids = schedule_template[weekday]
       next unless slot_start_times_ids.present?
 
       dates = dates_range.to_a.select { |day| day.wday == weekday_index }

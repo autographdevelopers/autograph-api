@@ -46,7 +46,7 @@ class Schedule < ApplicationRecord
   private
 
   def template_contains_valid_weekdays?(template)
-    WEEKDAYS.sort == template.keys.sort
+    WEEKDAYS.keys.sort == template.keys.sort
   end
 
   def template_contains_valid_slot_start_times_ids?(template)

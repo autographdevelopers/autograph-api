@@ -6,7 +6,7 @@ module ScheduleConstants
   included do
     MIN_SCHEDULE_REPETITION_PERIOD = 0
     MAX_SCHEDULE_REPETITION_PERIOD = 26
-    WEEKDAYS = %w(monday tuesday wednesday thursday friday saturday sunday)
+    WEEKDAYS = { 'monday' => 1, 'tuesday' => 2, 'wednesday' => 3, 'thursday' => 4, 'friday' => 5, 'saturday' => 6, 'sunday' => 0 }
     SLOT_START_TIMES = {
       0 =>  '00:00:00',
       1 =>  '00:30:00',
