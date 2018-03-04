@@ -1,12 +1,11 @@
 # Schedule keeps general information about employee schedule
 # Basing on this model actual Slots are created
-# slots_template example:
+# new_template and current_template example:
 # {
 #   monday: [1, 2, 3, 4, 5],
 #   tuesday: [1, 2, 3, 4, 5],
-#   wednesday: [11, 12, 13, 46, 47],
-#   monday: [1, 2, 3, 4, 5],
-#   monday: [1, 2, 3, 4, 5],
+#   ...
+#   sunday: [1, 3, 5]
 # }
 # Numbers in arrays are mapped to hours, while creating
 # actual slots
