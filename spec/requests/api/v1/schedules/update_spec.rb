@@ -56,38 +56,90 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
         let(:is_owner) { true }
 
         context 'when params are VALID' do
-          it 'returns 200 http status code' do
-            expect(response.status).to eq 200
-          end
-
-          it 'updates Schedule record' do
-            schedule = accessed_employee_driving_school.schedule.reload
-            expect(schedule.attributes).to include(
-                                             'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
-                                             'new_template_binding_from' => params[:schedule][:new_template_binding_from],
-                                             'current_template' => params[:schedule][:current_template],
-                                             'new_template' => params[:schedule][:new_template]
-                                           )
-          end
-
-          it 'schedules slots' do
-            expect(accessed_employee_driving_school.slots).not_to be_empty
-          end
-
-          context 'response body contains proper' do
-            subject { json_response }
-
-            it 'keys' do
-              expect(subject.keys).to match_array response_keys
+          context 'when all params sent' do
+            it 'returns 200 http status code' do
+              expect(response.status).to eq 200
             end
 
-            it 'attributes' do
-              expect(subject).to include(
-                                   'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
-                                   'new_template_binding_from' => params[:schedule][:new_template_binding_from].strftime('%Y-%m-%d') ,
-                                   'current_template' => params[:schedule][:current_template],
-                                   'new_template' => params[:schedule][:new_template]
-                                 )
+            it 'updates Schedule record' do
+              schedule = accessed_employee_driving_school.schedule.reload
+              expect(schedule.attributes).to include(
+                                               'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
+                                               'new_template_binding_from' => params[:schedule][:new_template_binding_from],
+                                               'current_template' => params[:schedule][:current_template],
+                                               'new_template' => params[:schedule][:new_template]
+                                             )
+            end
+
+            it 'schedules slots' do
+              expect(accessed_employee_driving_school.slots).not_to be_empty
+            end
+
+            context 'response body contains proper' do
+              subject { json_response }
+
+              it 'keys' do
+                expect(subject.keys).to match_array response_keys
+              end
+
+              it 'attributes' do
+                expect(subject).to include(
+                                     'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
+                                     'new_template_binding_from' => params[:schedule][:new_template_binding_from].strftime('%Y-%m-%d') ,
+                                     'current_template' => params[:schedule][:current_template],
+                                     'new_template' => params[:schedule][:new_template]
+                                   )
+              end
+            end
+          end
+
+          context 'when only part of params sent' do
+            let(:params) do
+              {
+                schedule: {
+                  repetition_period_in_weeks: 1,
+                  current_template: {
+                    'monday' => (16..31).to_a,
+                    'tuesday' => (16..31).to_a,
+                    'wednesday' => (32..47).to_a,
+                    'thursday' => (16..31).to_a,
+                    'friday' => (16..31).to_a,
+                    'saturday' => (0..15).to_a,
+                    'sunday' => []
+                  }
+                }
+              }
+            end
+
+            it 'returns 200 http status code' do
+              expect(response.status).to eq 200
+            end
+
+            it 'updates Schedule record' do
+              schedule = accessed_employee_driving_school.schedule.reload
+              expect(schedule.attributes).to include(
+                                               'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
+                                               'current_template' => params[:schedule][:current_template],
+                                             )
+            end
+
+            it 'schedules slots' do
+              expect(accessed_employee_driving_school.slots).not_to be_empty
+            end
+
+            context 'response body contains proper' do
+              subject { json_response }
+
+              it 'keys' do
+                expect(subject.keys).to match_array response_keys
+              end
+
+              it 'attributes' do
+                expect(subject).to include(
+                                     'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
+                                     'current_template' => params[:schedule][:current_template],
+                                   )
+              end
             end
           end
         end
@@ -142,38 +194,90 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
         let(:can_manage_employees) { true }
 
         context 'when params are VALID' do
-          it 'returns 200 http status code' do
-            expect(response.status).to eq 200
-          end
-
-          it 'updates Schedule record' do
-            schedule = accessed_employee_driving_school.schedule.reload
-            expect(schedule.attributes).to include(
-                                             'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
-                                             'new_template_binding_from' => params[:schedule][:new_template_binding_from],
-                                             'current_template' => params[:schedule][:current_template],
-                                             'new_template' => params[:schedule][:new_template]
-                                           )
-          end
-
-          it 'schedules slots' do
-            expect(accessed_employee_driving_school.slots).not_to be_empty
-          end
-
-          context 'response body contains proper' do
-            subject { json_response }
-
-            it 'keys' do
-              expect(subject.keys).to match_array response_keys
+          context 'when all params sent' do
+            it 'returns 200 http status code' do
+              expect(response.status).to eq 200
             end
 
-            it 'attributes' do
-              expect(subject).to include(
-                                   'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
-                                   'new_template_binding_from' => params[:schedule][:new_template_binding_from].strftime('%Y-%m-%d') ,
-                                   'current_template' => params[:schedule][:current_template],
-                                   'new_template' => params[:schedule][:new_template]
-                                 )
+            it 'updates Schedule record' do
+              schedule = accessed_employee_driving_school.schedule.reload
+              expect(schedule.attributes).to include(
+                                               'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
+                                               'new_template_binding_from' => params[:schedule][:new_template_binding_from],
+                                               'current_template' => params[:schedule][:current_template],
+                                               'new_template' => params[:schedule][:new_template]
+                                             )
+            end
+
+            it 'schedules slots' do
+              expect(accessed_employee_driving_school.slots).not_to be_empty
+            end
+
+            context 'response body contains proper' do
+              subject { json_response }
+
+              it 'keys' do
+                expect(subject.keys).to match_array response_keys
+              end
+
+              it 'attributes' do
+                expect(subject).to include(
+                                     'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
+                                     'new_template_binding_from' => params[:schedule][:new_template_binding_from].strftime('%Y-%m-%d') ,
+                                     'current_template' => params[:schedule][:current_template],
+                                     'new_template' => params[:schedule][:new_template]
+                                   )
+              end
+            end
+          end
+
+          context 'when only part of params sent' do
+            let(:params) do
+              {
+                schedule: {
+                  repetition_period_in_weeks: 1,
+                  current_template: {
+                    'monday' => (16..31).to_a,
+                    'tuesday' => (16..31).to_a,
+                    'wednesday' => (32..47).to_a,
+                    'thursday' => (16..31).to_a,
+                    'friday' => (16..31).to_a,
+                    'saturday' => (0..15).to_a,
+                    'sunday' => []
+                  }
+                }
+              }
+            end
+
+            it 'returns 200 http status code' do
+              expect(response.status).to eq 200
+            end
+
+            it 'updates Schedule record' do
+              schedule = accessed_employee_driving_school.schedule.reload
+              expect(schedule.attributes).to include(
+                                               'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
+                                               'current_template' => params[:schedule][:current_template],
+                                             )
+            end
+
+            it 'schedules slots' do
+              expect(accessed_employee_driving_school.slots).not_to be_empty
+            end
+
+            context 'response body contains proper' do
+              subject { json_response }
+
+              it 'keys' do
+                expect(subject.keys).to match_array response_keys
+              end
+
+              it 'attributes' do
+                expect(subject).to include(
+                                     'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
+                                     'current_template' => params[:schedule][:current_template],
+                                   )
+              end
             end
           end
         end

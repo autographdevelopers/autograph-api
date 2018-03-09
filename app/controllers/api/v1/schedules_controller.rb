@@ -63,8 +63,9 @@ class Api::V1::SchedulesController < ApplicationController
 
   def sanitize_slots_ids
     [:current_template, :new_template].each do |template|
+      next if schedule_params[template].blank?
       params[:schedule][template] = schedule_params[template].transform_values do |slots_ids|
-        slots_ids.reject { |id| id.empty? }.map { |id| id.to_i }
+        slots_ids.reject { |id| id.blank? }.map { |id| id.to_i }
       end
     end
   end
