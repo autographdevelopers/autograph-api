@@ -23,7 +23,7 @@ Rails.application.routes.draw do
           resource :schedule, only: [:update, :show]
         end
         resource :employee_notifications_settings, only: [:update, :show]
-        resource :schedule_settings_set, only: [:update, :show]
+        resource :schedule_settings, only: [:update, :show]
         resources :schedule_boundaries, only: [:create, :index]
       end
     end

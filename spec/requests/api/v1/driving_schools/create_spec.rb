@@ -53,8 +53,8 @@ describe 'POST /api/v1/driving_schools' do
         expect(EmployeePrivileges.count).to eq 1
       end
 
-      it 'creates ScheduleSettingsSet record' do
-        expect(ScheduleSettingsSet.count).to eq 1
+      it 'creates ScheduleSettings record' do
+        expect(ScheduleSettings.count).to eq 1
       end
 
       it 'created DrivingSchool record has proper attributes' do
@@ -93,8 +93,8 @@ describe 'POST /api/v1/driving_schools' do
                                                         )
       end
 
-      it 'created ScheduleSettingsSet record has proper attributes' do
-        expect(ScheduleSettingsSet.last.attributes).to include(
+      it 'created ScheduleSettings record has proper attributes' do
+        expect(ScheduleSettings.last.attributes).to include(
                                                           'driving_school_id' => DrivingSchool.last.id,
                                                           'holidays_enrollment_enabled' => false,
                                                           'last_minute_booking_enabled' => false

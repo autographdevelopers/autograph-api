@@ -23,7 +23,7 @@ describe 'PUT /api/v1/driving_schools/driving_school_id/confirm_registration' do
         let(:is_owner) { true }
 
         context 'when driving_school fulfilled registration requirements' do
-          let(:driving_school) { create(:driving_school, :with_schedule_settings_set, status: :built) }
+          let(:driving_school) { create(:driving_school, :with_schedule_settings, status: :built) }
 
           it 'set status of driving_school to pending' do
             driving_school.reload

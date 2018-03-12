@@ -15,7 +15,7 @@ describe ScheduleSlotsService do
       before { employee_driving_school.driving_school.update(time_zone: 'Poland') }
 
       context 'when holidays_enrollment_enabled set to true' do
-        before { employee_driving_school.driving_school.create_schedule_settings_set(holidays_enrollment_enabled: true) }
+        before { employee_driving_school.driving_school.create_schedule_settings(holidays_enrollment_enabled: true) }
 
         # winter time +01:00
         context 'when schedule is set on 2018-02-05(monday) 09:47:12' do
@@ -398,7 +398,7 @@ describe ScheduleSlotsService do
       end
 
       context 'when holidays_enrollment_enabled set to false' do
-        before { employee_driving_school.driving_school.create_schedule_settings_set(holidays_enrollment_enabled: false) }
+        before { employee_driving_school.driving_school.create_schedule_settings(holidays_enrollment_enabled: false) }
 
         context 'when schedule is set on 2018-05-28(monday) 09:22:36' do
           before { travel_to Time.new(2018, 05, 28, 9, 22, 36, '+02:00') }

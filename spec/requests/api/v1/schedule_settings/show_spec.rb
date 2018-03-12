@@ -1,15 +1,15 @@
-describe 'GET /api/v1/driving_schools/:driving_school_id/schedule_settings_set' do
+describe 'GET /api/v1/driving_schools/:driving_school_id/schedule_settings' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
   let!(:employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, employee: employee, driving_school: driving_school) }
-  let(:driving_school) { create(:driving_school, :with_schedule_settings_set) }
+  let(:driving_school) { create(:driving_school, :with_schedule_settings) }
 
   let(:is_owner) { false }
 
   let(:response_keys) { %w(id holidays_enrollment_enabled last_minute_booking_enabled) }
 
   before do
-    get "/api/v1/driving_schools/#{driving_school_id}/schedule_settings_set", headers: current_user.create_new_auth_token
+    get "/api/v1/driving_schools/#{driving_school_id}/schedule_settings", headers: current_user.create_new_auth_token
   end
 
   context 'when current_user is EMPLOYEE' do
@@ -33,10 +33,10 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/schedule_settings_set' 
           end
 
           it 'attributes' do
-            sss = driving_school.schedule_settings_set
+            ss = driving_school.schedule_settings
             expect(subject).to include(
-                                 'holidays_enrollment_enabled' => sss.holidays_enrollment_enabled,
-                                 'last_minute_booking_enabled' => sss.last_minute_booking_enabled
+                                 'holidays_enrollment_enabled' => ss.holidays_enrollment_enabled,
+                                 'last_minute_booking_enabled' => ss.last_minute_booking_enabled
                                )
           end
         end

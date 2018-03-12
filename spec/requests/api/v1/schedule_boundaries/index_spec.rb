@@ -3,7 +3,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/schedule_boundaries' do
   let(:employee) { create(:employee) }
   let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school) }
   let!(:employee_driving_school) { create(:employee_driving_school, employee: employee, driving_school: driving_school) }
-  let(:driving_school) { create(:driving_school, :with_schedule_settings_set) }
+  let(:driving_school) { create(:driving_school, :with_schedule_settings) }
 
   let!(:schedule_boundaries) { create_list(:schedule_boundary, 2, driving_school: driving_school) }
 

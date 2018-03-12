@@ -17,7 +17,7 @@ class CreateDrivingSchoolService
         is_owner: true
       )
       EmployeeNotificationsSettings.create!(employee_driving_school: employee_driving_school)
-      ScheduleSettingsSet.create!(
+      ScheduleSettings.create!(
         driving_school: driving_school,
         holidays_enrollment_enabled: false,
         last_minute_booking_enabled: false

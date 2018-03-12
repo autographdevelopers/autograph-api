@@ -15,9 +15,9 @@ FactoryBot.define do
     longitude FFaker::Geolocation.lng
   end
 
-  trait :with_schedule_settings_set do
+  trait :with_schedule_settings do
     after(:create) do |driving_school|
-      create(:schedule_settings_set, driving_school: driving_school)
+      create(:schedule_settings, driving_school: driving_school)
     end
   end
 

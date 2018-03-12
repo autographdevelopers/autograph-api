@@ -35,7 +35,7 @@ class ScheduleSlotsService
       dates_ranges << []
     end
 
-    unless driving_school.schedule_settings_set.holidays_enrollment_enabled?
+    unless driving_school.schedule_settings.holidays_enrollment_enabled?
       dates_ranges.map! do |dates_range|
         dates_range.select { |date| Holidays.on(date, driving_school.country_code.to_sym).empty? }
       end
