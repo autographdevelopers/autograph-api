@@ -96,11 +96,11 @@ describe 'GET /api/v1/driving_schools/:id' do
                                       'relation_status' => employee_driving_school.status,
                                       'privilege_set' => {
                                         'id' => employee_driving_school.id,
-                                        'can_manage_employees' => employee_driving_school.employee_privilege_set.can_manage_employees,
-                                        'can_manage_students' => employee_driving_school.employee_privilege_set.can_manage_students,
-                                        'can_modify_schedules' => employee_driving_school.employee_privilege_set.can_modify_schedules,
-                                        'is_driving' => employee_driving_school.employee_privilege_set.is_driving,
-                                        'is_owner' => employee_driving_school.employee_privilege_set.is_owner,
+                                        'can_manage_employees' => employee_driving_school.employee_privileges.can_manage_employees,
+                                        'can_manage_students' => employee_driving_school.employee_privileges.can_manage_students,
+                                        'can_modify_schedules' => employee_driving_school.employee_privileges.can_modify_schedules,
+                                        'is_driving' => employee_driving_school.employee_privileges.is_driving,
+                                        'is_owner' => employee_driving_school.employee_privileges.is_owner,
                                       }
                                     })
       end

@@ -5,7 +5,7 @@ describe CreateInvitationService do
   context '#call' do
     subject { CreateInvitationService.new(driving_school, invited_user_type, invited_user_params, invited_user_privileges_params) }
 
-    let(:invited_user_privileges_params) { attributes_for(:employee_privilege_set) }
+    let(:invited_user_privileges_params) { attributes_for(:employee_privileges) }
 
     context 'when params are VALID' do
       context 'when invited user already exists' do
@@ -19,8 +19,8 @@ describe CreateInvitationService do
             expect{ subject.call }.to change{ EmployeeDrivingSchool.count }.by 1
           end
 
-          it 'creates EmployeePrivilegeSet record' do
-            expect{ subject.call }.to change{ EmployeePrivilegeSet.count }.by 1
+          it 'creates EmployeePrivilege record' do
+            expect{ subject.call }.to change{ EmployeePrivileges.count }.by 1
           end
 
           it 'creates EmployeeNotificationsSettings' do
@@ -35,9 +35,9 @@ describe CreateInvitationService do
                                                              )
           end
 
-          it 'creates proper EmployeePrivilegeSet record' do
+          it 'creates proper EmployeePrivileges record' do
             subject.call
-            expect(EmployeePrivilegeSet.last.attributes).to include(
+            expect(EmployeePrivileges.last.attributes).to include(
                                                               'employee_driving_school_id' => EmployeeDrivingSchool.last.id,
                                                               'is_owner' => false
                                                             )
@@ -89,8 +89,8 @@ describe CreateInvitationService do
             expect{ subject.call }.to change{ EmployeeDrivingSchool.count }.by 1
           end
 
-          it 'creates EmployeePrivilegeSet record' do
-            expect{ subject.call }.to change{ EmployeePrivilegeSet.count }.by 1
+          it 'creates EmployeePrivileges record' do
+            expect{ subject.call }.to change{ EmployeePrivileges.count }.by 1
           end
 
           it 'creates EmployeeNotificationsSettings' do
@@ -105,9 +105,9 @@ describe CreateInvitationService do
                                                              )
           end
 
-          it 'creates proper EmployeePrivilegeSet record' do
+          it 'creates proper EmployeePrivileges record' do
             subject.call
-            expect(EmployeePrivilegeSet.last.attributes).to include(
+            expect(EmployeePrivileges.last.attributes).to include(
                                                               'employee_driving_school_id' => EmployeeDrivingSchool.last.id,
                                                               'is_owner' => false
                                                             )

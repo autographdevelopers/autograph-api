@@ -1,4 +1,4 @@
-class EmployeePrivilegeSet < ApplicationRecord
+class EmployeePrivileges < ApplicationRecord
   # == Relations ==============================================================
   belongs_to :employee_driving_school
 

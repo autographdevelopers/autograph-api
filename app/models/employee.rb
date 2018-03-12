@@ -11,11 +11,11 @@ class Employee < User
 
   # == Instance Methods =======================================================
   def can_manage_students?(driving_school)
-    self.employee_driving_schools.find_by(driving_school: driving_school).employee_privilege_set.can_manage_students?
+    self.employee_driving_schools.find_by(driving_school: driving_school).employee_privileges.can_manage_students?
   end
 
   def is_owner?(driving_school)
-    self.employee_driving_schools.find_by(driving_school: driving_school).employee_privilege_set.is_owner?
+    self.employee_driving_schools.find_by(driving_school: driving_school).employee_privileges.is_owner?
   end
 
   private

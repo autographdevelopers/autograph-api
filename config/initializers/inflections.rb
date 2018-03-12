@@ -1,5 +1,7 @@
 ActiveSupport::Inflector.inflections do |inflect|
-  inflect.uncountable %w(employee_notifications_settings)
+  inflect.uncountable %w[
+    employee_notifications_settings employee_privileges
+  ]
 end
 # Be sure to restart your server when you modify this file.
 

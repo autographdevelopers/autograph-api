@@ -42,7 +42,7 @@ class Api::V1::InvitationsController < ApplicationController
 
   def invited_employee_privileges_params
     if @invited_user_type == User::EMPLOYEE
-      params.require(:employee_privilege_set).permit(
+      params.require(:employee_privileges).permit(
         :can_manage_employees,
         :can_manage_students,
         :can_modify_schedules,

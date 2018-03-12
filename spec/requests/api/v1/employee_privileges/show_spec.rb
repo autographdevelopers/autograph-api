@@ -1,4 +1,4 @@
-describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/employee_privilege_set' do
+describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/employee_privileges' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
   let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school) }
@@ -15,7 +15,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
   let(:can_manage_employees) { false }
 
   before do
-    get "/api/v1/driving_schools/#{driving_school.id}/employees/#{accessed_employee.id}/employee_privilege_set",
+    get "/api/v1/driving_schools/#{driving_school.id}/employees/#{accessed_employee.id}/employee_privileges",
         headers: current_user.create_new_auth_token
   end
 
@@ -37,12 +37,12 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
         end
 
         it 'attributes' do
-          eps = accessed_employee_driving_school.employee_privilege_set
+          ep = accessed_employee_driving_school.employee_privileges
           expect(subject).to include(
-                               'can_manage_employees' => eps.can_manage_employees,
-                               'can_manage_students' => eps.can_manage_students,
-                               'can_modify_schedules' => eps.can_modify_schedules,
-                               'is_driving' => eps.is_driving
+                               'can_manage_employees' => ep.can_manage_employees,
+                               'can_manage_students' => ep.can_manage_students,
+                               'can_modify_schedules' => ep.can_modify_schedules,
+                               'is_driving' => ep.is_driving
                              )
         end
       end
@@ -63,12 +63,12 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
         end
 
         it 'attributes' do
-          eps = accessed_employee_driving_school.employee_privilege_set
+          ep = accessed_employee_driving_school.employee_privileges
           expect(subject).to include(
-                               'can_manage_employees' => eps.can_manage_employees,
-                               'can_manage_students' => eps.can_manage_students,
-                               'can_modify_schedules' => eps.can_modify_schedules,
-                               'is_driving' => eps.is_driving
+                               'can_manage_employees' => ep.can_manage_employees,
+                               'can_manage_students' => ep.can_manage_students,
+                               'can_modify_schedules' => ep.can_modify_schedules,
+                               'is_driving' => ep.is_driving
                              )
         end
       end

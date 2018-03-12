@@ -12,7 +12,7 @@ FactoryBot.define do
     end
 
     after(:create) do |employee_driving_school, evaluator|
-      create(:employee_privilege_set,
+      create(:employee_privileges,
              employee_driving_school: employee_driving_school,
              is_owner: evaluator.is_owner,
              can_manage_employees: evaluator.can_manage_employees,

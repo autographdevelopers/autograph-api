@@ -1,4 +1,4 @@
-describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/employee_privilege_set' do
+describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/employee_privileges' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
   let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school) }
@@ -16,7 +16,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
   let(:params) do
     {
-      employee_privilege_set: {
+      employee_privileges: {
         can_manage_employees: false,
         can_manage_students: true,
         can_modify_schedules: true,
@@ -26,7 +26,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
   end
 
   before do
-    put "/api/v1/driving_schools/#{driving_school.id}/employees/#{accessed_employee.id}/employee_privilege_set",
+    put "/api/v1/driving_schools/#{driving_school.id}/employees/#{accessed_employee.id}/employee_privileges",
         headers: current_user.create_new_auth_token, params: params
   end
 
@@ -41,13 +41,13 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
           expect(response.status).to eq 200
         end
 
-        it 'updates EmployeePrivilegeSet record' do
-          employee_privilege_set = accessed_employee_driving_school.employee_privilege_set.reload
-          expect(employee_privilege_set.attributes).to include(
-                                                         'can_manage_employees' => params[:employee_privilege_set][:can_manage_employees],
-                                                         'can_manage_students' => params[:employee_privilege_set][:can_manage_students],
-                                                         'can_modify_schedules' => params[:employee_privilege_set][:can_modify_schedules],
-                                                         'is_driving' => params[:employee_privilege_set][:is_driving]
+        it 'updates EmployeePrivileges record' do
+          employee_privileges = accessed_employee_driving_school.employee_privileges.reload
+          expect(employee_privileges.attributes).to include(
+                                                         'can_manage_employees' => params[:employee_privileges][:can_manage_employees],
+                                                         'can_manage_students' => params[:employee_privileges][:can_manage_students],
+                                                         'can_modify_schedules' => params[:employee_privileges][:can_modify_schedules],
+                                                         'is_driving' => params[:employee_privileges][:is_driving]
                                                        )
         end
 
@@ -60,10 +60,10 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
           it 'attributes' do
             expect(subject).to include(
-                                 'can_manage_employees' => params[:employee_privilege_set][:can_manage_employees],
-                                 'can_manage_students' => params[:employee_privilege_set][:can_manage_students],
-                                 'can_modify_schedules' => params[:employee_privilege_set][:can_modify_schedules],
-                                 'is_driving' => params[:employee_privilege_set][:is_driving]
+                                 'can_manage_employees' => params[:employee_privileges][:can_manage_employees],
+                                 'can_manage_students' => params[:employee_privileges][:can_manage_students],
+                                 'can_modify_schedules' => params[:employee_privileges][:can_modify_schedules],
+                                 'is_driving' => params[:employee_privileges][:is_driving]
                                )
           end
         end
@@ -73,7 +73,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
         context 'all fields blank' do
           let(:params) do
             {
-              employee_privilege_set: {
+              employee_privileges: {
                 can_manage_employees: '',
                 can_manage_students: '',
                 can_modify_schedules: '',
@@ -106,13 +106,13 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
           expect(response.status).to eq 200
         end
 
-        it 'updates EmployeePrivilegeSet record' do
-          employee_privilege_set = accessed_employee_driving_school.employee_privilege_set.reload
-          expect(employee_privilege_set.attributes).to include(
-                                                         'can_manage_employees' => params[:employee_privilege_set][:can_manage_employees],
-                                                         'can_manage_students' => params[:employee_privilege_set][:can_manage_students],
-                                                         'can_modify_schedules' => params[:employee_privilege_set][:can_modify_schedules],
-                                                         'is_driving' => params[:employee_privilege_set][:is_driving]
+        it 'updates EmployeePrivilege record' do
+          employee_privileges = accessed_employee_driving_school.employee_privileges.reload
+          expect(employee_privileges.attributes).to include(
+                                                         'can_manage_employees' => params[:employee_privileges][:can_manage_employees],
+                                                         'can_manage_students' => params[:employee_privileges][:can_manage_students],
+                                                         'can_modify_schedules' => params[:employee_privileges][:can_modify_schedules],
+                                                         'is_driving' => params[:employee_privileges][:is_driving]
                                                        )
         end
 
@@ -125,10 +125,10 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
           it 'attributes' do
             expect(subject).to include(
-                                 'can_manage_employees' => params[:employee_privilege_set][:can_manage_employees],
-                                 'can_manage_students' => params[:employee_privilege_set][:can_manage_students],
-                                 'can_modify_schedules' => params[:employee_privilege_set][:can_modify_schedules],
-                                 'is_driving' => params[:employee_privilege_set][:is_driving]
+                                 'can_manage_employees' => params[:employee_privileges][:can_manage_employees],
+                                 'can_manage_students' => params[:employee_privileges][:can_manage_students],
+                                 'can_modify_schedules' => params[:employee_privileges][:can_modify_schedules],
+                                 'is_driving' => params[:employee_privileges][:is_driving]
                                )
           end
         end
@@ -138,7 +138,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
         context 'all fields blank' do
           let(:params) do
             {
-              employee_privilege_set: {
+              employee_privileges: {
                 can_manage_employees: '',
                 can_manage_students: '',
                 can_modify_schedules: '',

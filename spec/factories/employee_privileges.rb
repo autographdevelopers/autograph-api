@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :employee_privilege_set do
+  factory :employee_privileges do
     employee_driving_school
     can_manage_employees false
     can_manage_students false

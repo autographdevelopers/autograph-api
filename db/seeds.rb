@@ -8,7 +8,7 @@ DrivingSchool.statuses.keys.each do |status|
                       driving_school: FactoryBot.create(:driving_school, :with_schedule_settings_set, :with_schedule_boundaries, status: status),
                       employee: employee,
                       status: e_status)
-    eds.employee_privilege_set.update(can_manage_employees: true, can_manage_students: true, can_modify_schedules: true, is_driving: true)
+    eds.employee_privileges.update(can_manage_employees: true, can_manage_students: true, can_modify_schedules: true, is_driving: true)
     FactoryBot.create(:employee_driving_school,
                       driving_school: FactoryBot.create(:driving_school, :with_schedule_settings_set, :with_schedule_boundaries, status: status),
                       employee: owner,
@@ -34,7 +34,7 @@ end
 DrivingSchool.active.each do |driving_school|
   5.times do |i|
     eds = FactoryBot.create(:employee_driving_school, driving_school: driving_school, status: :active)
-    eds.employee_privilege_set.update(
+    eds.employee_privileges.update(
       can_manage_employees: i == 0,
       can_manage_students: i == 1,
       can_modify_schedules: i == 2,

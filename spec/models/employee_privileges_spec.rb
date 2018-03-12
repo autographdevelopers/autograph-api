@@ -1,4 +1,4 @@
-describe EmployeePrivilegeSet do
+describe EmployeePrivileges do
   context 'relations' do
     it { should belong_to(:employee_driving_school) }
   end

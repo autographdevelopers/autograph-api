@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180312164226) do
+ActiveRecord::Schema.define(version: 20180312170658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20180312164226) do
     t.index ["employee_driving_school_id"], name: "index_employee_notification_settings_on_employee_driving_school"
   end
 
-  create_table "employee_privilege_sets", force: :cascade do |t|
+  create_table "employee_privileges", force: :cascade do |t|
     t.bigint "employee_driving_school_id", null: false
     t.boolean "can_manage_employees", default: false, null: false
     t.boolean "can_manage_students", default: false, null: false
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 20180312164226) do
     t.boolean "is_owner", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["employee_driving_school_id"], name: "index_employee_privilege_sets_on_employee_driving_school_id"
+    t.index ["employee_driving_school_id"], name: "index_employee_privileges_on_employee_driving_school_id"
   end
 
   create_table "invitations", force: :cascade do |t|

@@ -8,7 +8,7 @@ class CreateDrivingSchoolService
     DrivingSchool.transaction do
       driving_school = DrivingSchool.create!(params)
       employee_driving_school = EmployeeDrivingSchool.create!(employee: user, driving_school: driving_school)
-      EmployeePrivilegeSet.create!(
+      EmployeePrivileges.create!(
         employee_driving_school: employee_driving_school,
         can_manage_employees: true,
         can_manage_students: true,

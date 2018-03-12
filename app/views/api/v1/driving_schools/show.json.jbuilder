@@ -3,7 +3,7 @@ json.relation_status user_driving_school.status
 
 if @current_user.employee?
   json.privilege_set do
-    json.partial! 'api/v1/employee_privilege_sets/employee_privilege_set',
-                  employee_privilege_set: user_driving_school.employee_privilege_set
+    json.partial! 'api/v1/employee_privileges/employee_privileges',
+                  employee_privileges: user_driving_school.employee_privileges
   end
 end

@@ -30,7 +30,7 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
         surname: 'McKenzee',
         email: email
       },
-      employee_privilege_set: {
+      employee_privileges: {
         can_manage_employees: true,
         can_manage_students: false,
         can_modify_schedules: false,
@@ -69,8 +69,8 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
               expect{ subject.call }.to change{ EmployeeDrivingSchool.count }.by 1
             end
 
-            it 'creates EmployeePrivilegeSet record' do
-              expect{ subject.call }.to change{ EmployeePrivilegeSet.count }.by 1
+            it 'creates EmployeePrivileges record' do
+              expect{ subject.call }.to change{ EmployeePrivileges.count }.by 1
             end
 
             it 'creates EmployeeNotificationsSettings' do
@@ -85,9 +85,9 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
                                                                )
             end
 
-            it 'creates proper EmployeePrivilegeSet record' do
+            it 'creates proper EmployeePrivileges record' do
               subject.call
-              expect(EmployeePrivilegeSet.last.attributes).to include(
+              expect(EmployeePrivileges.last.attributes).to include(
                                                                 'employee_driving_school_id' => EmployeeDrivingSchool.last.id,
                                                                 'is_owner' => false
                                                               )
@@ -113,8 +113,8 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
               expect{ subject.call }.to change{ EmployeeDrivingSchool.count }.by 1
             end
 
-            it 'creates EmployeePrivilegeSet record' do
-              expect{ subject.call }.to change{ EmployeePrivilegeSet.count }.by 1
+            it 'creates EmployeePrivileges record' do
+              expect{ subject.call }.to change{ EmployeePrivileges.count }.by 1
             end
 
             it 'creates EmployeeNotificationsSettings' do
@@ -133,9 +133,9 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
                                                                )
             end
 
-            it 'creates proper EmployeePrivilegeSet record' do
+            it 'creates proper EmployeePrivileges record' do
               subject.call
-              expect(EmployeePrivilegeSet.last.attributes).to include(
+              expect(EmployeePrivileges.last.attributes).to include(
                                                                 'employee_driving_school_id' => EmployeeDrivingSchool.last.id,
                                                                 'is_owner' => false
                                                               )
