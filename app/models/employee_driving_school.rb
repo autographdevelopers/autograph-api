@@ -15,8 +15,8 @@ class EmployeeDrivingSchool < ApplicationRecord
   has_many :slots
 
   # == Scopes =================================================================
-  scope :eligible_for_change, -> {
-    where(status: :active, driving_schools: { status: [:active] })
+  scope :active_with_active_driving_school, -> {
+    where(status: :active, driving_schools: { status: :active })
       .includes(:driving_school)
   }
 

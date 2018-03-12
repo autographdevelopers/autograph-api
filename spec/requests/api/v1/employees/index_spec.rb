@@ -1,10 +1,10 @@
 describe 'GET /api/v1/driving_schools/:driving_school_id/employees' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
-  let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school) }
+  let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school, status: :active) }
   let!(:employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, can_manage_employees: can_manage_employees,
-                                          employee: employee, driving_school: driving_school, status: :active) }
-  let(:driving_school) { create(:driving_school) }
+                                          employee: employee, driving_school: driving_school, status: :active, is_driving: true) }
+  let(:driving_school) { create(:driving_school, status: :active) }
 
   let(:is_owner) { false }
   let(:can_manage_employees) { false }
@@ -44,7 +44,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees' do
         end
 
         it 'returns proper records' do
-          expect(json_response.pluck('id')).to match_array [employee.id, archived_employee.id, pending_employee.id, invitation.id]
+          expect(json_response.pluck('id')).to match_array [employee.id, pending_employee.id, invitation.id]
         end
 
         it 'response contains employee attributes' do
@@ -69,7 +69,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees' do
         end
 
         it 'returns proper records' do
-          expect(json_response.pluck('id')).to match_array [employee.id, archived_employee.id, pending_employee.id, invitation.id]
+          expect(json_response.pluck('id')).to match_array [employee.id, pending_employee.id, invitation.id]
         end
 
         it 'response contains employee attributes' do
