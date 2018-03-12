@@ -1,4 +1,4 @@
-describe 'PUT /api/v1/driving_schools/:driving_school_id/employee_notifications_settings_set' do
+describe 'PUT /api/v1/driving_schools/:driving_school_id/employee_notifications_settings' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
   let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school) }
@@ -9,7 +9,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employee_notifications_
 
   let(:valid_params) do
     {
-      employee_notifications_settings_set: {
+      employee_notifications_settings: {
         push_notifications_enabled: true,
         weekly_emails_reports_enabled: true,
         monthly_emails_reports_enabled: false
@@ -18,7 +18,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employee_notifications_
   end
 
   before do
-    put "/api/v1/driving_schools/#{driving_school_id}/employee_notifications_settings_set",
+    put "/api/v1/driving_schools/#{driving_school_id}/employee_notifications_settings",
         headers: current_user.create_new_auth_token, params: params
   end
 
@@ -35,10 +35,10 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employee_notifications_
           expect(response.status).to eq 200
         end
 
-        it 'updates EmployeeNotificationsSettingsSet record' do
-          employee_notifications_settings_set = employee_driving_school.employee_notifications_settings_set
-          employee_notifications_settings_set.reload
-          expect(employee_notifications_settings_set.attributes).to include(
+        it 'updates EmployeeNotificationsSettings record' do
+          employee_notifications_settings = employee_driving_school.employee_notifications_settings
+          employee_notifications_settings.reload
+          expect(employee_notifications_settings.attributes).to include(
                                                                       'push_notifications_enabled' => true,
                                                                       'weekly_emails_reports_enabled' => true,
                                                                       'monthly_emails_reports_enabled' => false
@@ -66,7 +66,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employee_notifications_
         context 'all fields blank' do
           let(:params) do
             {
-              employee_notifications_settings_set: {
+              employee_notifications_settings: {
                 push_notifications_enabled: '',
                 weekly_emails_reports_enabled: '',
                 monthly_emails_reports_enabled: ''

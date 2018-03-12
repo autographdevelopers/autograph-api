@@ -19,7 +19,7 @@ class CreateInvitationService
       if invited_user_type == User::EMPLOYEE
         employee_driving_school = EmployeeDrivingSchool.create!(employee: invited_user, driving_school: driving_school)
         employee_driving_school.create_employee_privilege_set!(invited_user_privileges_params)
-        employee_driving_school.create_employee_notifications_settings_set!
+        employee_driving_school.create_employee_notifications_settings!
         employee_driving_school.create_invitation!(invited_user_params) unless invited_user
         user_driving_school_relation = employee_driving_school
       elsif invited_user_type == User::STUDENT

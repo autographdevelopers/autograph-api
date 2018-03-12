@@ -19,7 +19,7 @@ FactoryBot.define do
              can_manage_students: evaluator.can_manage_students,
              is_driving: evaluator.is_driving
       )
-      create(:employee_notifications_settings_set, employee_driving_school: employee_driving_school)
+      create(:employee_notifications_settings, employee_driving_school: employee_driving_school)
     end
   end
 end

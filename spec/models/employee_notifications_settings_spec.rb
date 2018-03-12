@@ -1,4 +1,4 @@
-describe EmployeeNotificationsSettingsSet do
+describe EmployeeNotificationsSettings do
   context 'relations' do
     it { should belong_to(:employee_driving_school) }
   end

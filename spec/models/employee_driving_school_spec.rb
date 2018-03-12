@@ -7,7 +7,7 @@ describe EmployeeDrivingSchool do
     it { should belong_to(:driving_school) }
     it { should belong_to(:employee) }
     it { should have_one(:employee_privilege_set) }
-    it { should have_one(:employee_notifications_settings_set) }
+    it { should have_one(:employee_notifications_settings) }
     it { should have_one(:invitation) }
     it { should have_one(:schedule) }
     it { should have_many(:driving_lessons) }

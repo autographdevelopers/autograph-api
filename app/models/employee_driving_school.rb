@@ -8,7 +8,7 @@ class EmployeeDrivingSchool < ApplicationRecord
   belongs_to :employee, optional: true
   belongs_to :driving_school
   has_one :employee_privilege_set
-  has_one :employee_notifications_settings_set
+  has_one :employee_notifications_settings
   has_one :invitation, as: :invitable
   has_one :schedule
   has_many :driving_lessons

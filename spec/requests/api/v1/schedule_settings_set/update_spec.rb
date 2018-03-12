@@ -36,7 +36,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings_set' 
             expect(response.status).to eq 200
           end
 
-          it 'updates EmployeeNotificationsSettingsSet record' do
+          it 'updates EmployeeNotificationsSettings record' do
             schedule_settings_set = driving_school.schedule_settings_set.reload
             expect(schedule_settings_set.attributes).to include(
                                                           'holidays_enrollment_enabled' => true,

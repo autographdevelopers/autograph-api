@@ -73,8 +73,8 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
               expect{ subject.call }.to change{ EmployeePrivilegeSet.count }.by 1
             end
 
-            it 'creates EmployeeNotificationsSettingsSet' do
-              expect{ subject.call }.to change{ EmployeeNotificationsSettingsSet.count }.by 1
+            it 'creates EmployeeNotificationsSettings' do
+              expect{ subject.call }.to change{ EmployeeNotificationsSettings.count }.by 1
             end
 
             it 'creates proper EmployeeDrivingSchool record' do
@@ -93,9 +93,9 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
                                                               )
             end
 
-            it 'creates proper EmployeeNotificationsSettingsSet' do
+            it 'creates proper EmployeeNotificationsSettings' do
               subject.call
-              expect(EmployeeNotificationsSettingsSet.last.attributes).to include(
+              expect(EmployeeNotificationsSettings.last.attributes).to include(
                                                                             'push_notifications_enabled' => false,
                                                                             'weekly_emails_reports_enabled' => false,
                                                                             'monthly_emails_reports_enabled' => false,
@@ -117,8 +117,8 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
               expect{ subject.call }.to change{ EmployeePrivilegeSet.count }.by 1
             end
 
-            it 'creates EmployeeNotificationsSettingsSet' do
-              expect{ subject.call }.to change{ EmployeeNotificationsSettingsSet.count }.by 1
+            it 'creates EmployeeNotificationsSettings' do
+              expect{ subject.call }.to change{ EmployeeNotificationsSettings.count }.by 1
             end
 
             it 'creates Invitation' do
@@ -141,9 +141,9 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
                                                               )
             end
 
-            it 'creates proper EmployeeNotificationsSettingsSet' do
+            it 'creates proper EmployeeNotificationsSettings' do
               subject.call
-              expect(EmployeeNotificationsSettingsSet.last.attributes).to include(
+              expect(EmployeeNotificationsSettings.last.attributes).to include(
                                                                             'push_notifications_enabled' => false,
                                                                             'weekly_emails_reports_enabled' => false,
                                                                             'monthly_emails_reports_enabled' => false,

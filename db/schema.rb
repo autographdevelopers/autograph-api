@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180304142906) do
+ActiveRecord::Schema.define(version: 20180312164226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20180304142906) do
     t.datetime "updated_at", null: false
     t.index ["student_driving_school_id"], name: "index_driving_courses_on_student_driving_school_id"
   end
-  
+
   create_table "driving_lessons", force: :cascade do |t|
     t.datetime "start_time", null: false
     t.bigint "student_driving_school_id", null: false
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20180304142906) do
     t.index ["employee_id"], name: "index_employee_driving_schools_on_employee_id"
   end
 
-  create_table "employee_notifications_settings_sets", force: :cascade do |t|
+  create_table "employee_notifications_settings", force: :cascade do |t|
     t.boolean "push_notifications_enabled", default: false, null: false
     t.boolean "weekly_emails_reports_enabled", default: false, null: false
     t.boolean "monthly_emails_reports_enabled", default: false, null: false
