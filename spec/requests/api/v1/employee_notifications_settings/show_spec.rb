@@ -1,8 +1,12 @@
 describe 'GET /api/v1/driving_schools/:driving_school_id/employee_notifications_settings' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
-  let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school) }
-  let!(:employee_driving_school) { create(:employee_driving_school, employee: employee, driving_school: driving_school) }
+  let!(:student_driving_school) {
+    create(:student_driving_school, student: student, driving_school: driving_school)
+  }
+  let!(:employee_driving_school) {
+    create(:employee_driving_school, employee: employee, driving_school: driving_school, is_owner: true)
+  }
   let(:driving_school) { create(:driving_school) }
 
   let(:response_keys) { %w(id push_notifications_enabled weekly_emails_reports_enabled monthly_emails_reports_enabled) }

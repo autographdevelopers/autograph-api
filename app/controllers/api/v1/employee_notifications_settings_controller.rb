@@ -3,14 +3,18 @@ class Api::V1::EmployeeNotificationsSettingsController < ApplicationController
   before_action :set_employee_notifications_settings, only: [:update, :show]
 
   def update
+    authorize @employee_notifications_settings
+
     if @employee_notifications_settings.update(employee_notifications_settings_params)
-      render @employee_notifications_settings, status: :ok
+      render @employee_notifications_settings
     else
       render json: @employee_notifications_settings.errors, status: :unprocessable_entity
     end
   end
 
   def show
+    authorize @employee_notifications_settings
+
     render @employee_notifications_settings
   end
 
