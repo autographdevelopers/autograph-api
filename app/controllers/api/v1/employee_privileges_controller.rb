@@ -8,7 +8,7 @@ class Api::V1::EmployeePrivilegesController < ApplicationController
     authorize @employee_privileges
 
     if @employee_privileges.update(employee_privileges_params)
-      render @employee_privileges, status: :ok
+      render @employee_privileges
     else
       render json: @employee_privileges.errors, status: :unprocessable_entity
     end
@@ -23,15 +23,22 @@ class Api::V1::EmployeePrivilegesController < ApplicationController
   private
 
   def employee_privileges_params
-    params.require(:employee_privileges).permit(:can_manage_employees, :can_manage_students, :can_modify_schedules, :is_driving)
+    params.require(:employee_privileges).permit(
+      :can_manage_employees,
+      :can_manage_students,
+      :can_modify_schedules,
+      :is_driving
+    )
   end
 
   def set_driving_school
-    @driving_school = current_user.driving_schools.find(params[:driving_school_id])
+    @driving_school = current_user.driving_schools
+                        .find(params[:driving_school_id])
   end
 
   def set_employee_driving_school
-    @employee_driving_school = @driving_school.employee_driving_schools.find_by!(employee_id: params[:employee_id])
+    @employee_driving_school = @driving_school.employee_driving_schools
+                                 .find_by!(employee_id: params[:employee_id])
   end
 
   def set_employee_privileges
