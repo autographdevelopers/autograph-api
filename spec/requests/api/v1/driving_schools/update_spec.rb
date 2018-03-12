@@ -6,7 +6,8 @@ describe 'PUT /api/v1/driving_schools/:id' do
   let(:driving_school) { create(:driving_school) }
   let(:is_owner) { false }
   let(:response_keys) { %w(
-    id name phone_numbers emails website_link additional_information city street country profile_picture zip_code status
+    id name phone_numbers emails website_link additional_information city street
+    country profile_picture zip_code status relation_status privilege_set
   ) }
   let(:params) do
     {

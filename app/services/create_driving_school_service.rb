@@ -23,7 +23,7 @@ class CreateDrivingSchoolService
         last_minute_booking_enabled: false
       )
 
-      driving_school
+      employee_driving_school
     end
   end
 

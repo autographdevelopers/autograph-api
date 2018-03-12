@@ -19,19 +19,11 @@ class User < ActiveRecord::Base
 
   # == Instance Methods =======================================================
   def employee?
-    self.is_a? Employee
+    is_a? Employee
   end
 
   def student?
-    self.is_a? Student
-  end
-
-  def get_relation(driving_school_id)
-    if self.employee?
-      self.employee_driving_schools.find_by!(driving_school_id: driving_school_id)
-    elsif self.student?
-      self.student_driving_schools.find_by!(driving_school_id: driving_school_id)
-    end
+    is_a? Student
   end
 
   private

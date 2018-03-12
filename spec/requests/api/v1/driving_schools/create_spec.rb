@@ -3,7 +3,8 @@ describe 'POST /api/v1/driving_schools' do
   let(:employee) { create(:employee) }
 
   let(:response_keys) { %w(
-    id name phone_numbers emails website_link additional_information city street country profile_picture zip_code status
+    id name phone_numbers emails website_link additional_information city street
+    country profile_picture zip_code status relation_status privilege_set
   ) }
 
   before do

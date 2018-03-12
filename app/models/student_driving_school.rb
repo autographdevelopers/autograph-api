@@ -11,6 +11,17 @@ class StudentDrivingSchool < ApplicationRecord
   has_many :driving_courses
   has_many :driving_lessons
 
+  # == Scopes =================================================================
+  scope :eligible_for_change, -> {
+    where(status: :active, driving_schools: { status: [:active] })
+      .includes(:driving_school)
+  }
+
+  scope :eligible_for_viewing, -> {
+    where(status: [:active, :pending], driving_schools: { status: [:active] })
+      .includes(:driving_school)
+  }
+
   # == Validations ============================================================
   validates :status, presence: true
 

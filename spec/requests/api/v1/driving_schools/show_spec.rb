@@ -2,9 +2,9 @@ describe 'GET /api/v1/driving_schools/:id' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
 
-  let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school) }
-  let!(:employee_driving_school) { create(:employee_driving_school, employee: employee, driving_school: driving_school) }
-  let(:driving_school) { create(:driving_school) }
+  let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school, status: :active) }
+  let!(:employee_driving_school) { create(:employee_driving_school, employee: employee, driving_school: driving_school, status: :active) }
+  let(:driving_school) { create(:driving_school, status: :active) }
 
   let(:response_keys) { %w(
     id name phone_numbers emails website_link additional_information city street country profile_picture zip_code status
@@ -26,7 +26,7 @@ describe 'GET /api/v1/driving_schools/:id' do
 
       it 'returned records contain proper keys' do
         expect(json_response.keys).to match_array %w(id name phone_numbers emails website_link additional_information
-                                                         city street country profile_picture status student_driving_school_status
+                                                         city street country profile_picture status relation_status
                                                          zip_code)
       end
 
@@ -44,7 +44,7 @@ describe 'GET /api/v1/driving_schools/:id' do
                                       'profile_picture' => driving_school.profile_picture,
                                       'status' => driving_school.status,
                                       'zip_code' => driving_school.zip_code,
-                                      'student_driving_school_status' => student_driving_school.status
+                                      'relation_status' => student_driving_school.status
                                     })
       end
     end
@@ -71,7 +71,7 @@ describe 'GET /api/v1/driving_schools/:id' do
       it 'returned records contain proper keys' do
         expect(json_response.keys).to match_array %w(id name phone_numbers emails website_link additional_information
                                                          city street country profile_picture zip_code status
-                                                         employee_driving_school_status privilege_set)
+                                                         relation_status privilege_set)
       end
 
       it 'returned records contain proper keys for privilege_set' do
@@ -93,7 +93,7 @@ describe 'GET /api/v1/driving_schools/:id' do
                                       'profile_picture' => driving_school.profile_picture,
                                       'status' => driving_school.status,
                                       'zip_code' => driving_school.zip_code,
-                                      'employee_driving_school_status' => employee_driving_school.status,
+                                      'relation_status' => employee_driving_school.status,
                                       'privilege_set' => {
                                         'id' => employee_driving_school.id,
                                         'can_manage_employees' => employee_driving_school.employee_privilege_set.can_manage_employees,

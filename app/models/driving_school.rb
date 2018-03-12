@@ -37,6 +37,10 @@ class DrivingSchool < ApplicationRecord
 
   # == Instance Methods =======================================================
 
+  def verification_code_valid?(verification_code)
+    self.verification_code == verification_code
+  end
+
   private
 
   def has_owner?

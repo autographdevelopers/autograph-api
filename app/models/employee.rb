@@ -3,6 +3,9 @@ class Employee < User
   has_many :employee_driving_schools
   has_many :driving_schools, through: :employee_driving_schools
 
+  # == Aliases ================================================================
+  alias_attribute :user_driving_schools, :employee_driving_schools
+
   # == Callbacks ==============================================================
   after_create :find_pending_invitation_and_relate_user_to_driving_school
 
