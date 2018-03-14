@@ -52,10 +52,14 @@ class Api::V1::InvitationsController < ApplicationController
   end
 
   def set_driving_school
-    @driving_school = current_user.driving_schools.find(params[:driving_school_id])
+    @driving_school = current_user.driving_schools.find(
+      params[:driving_school_id]
+    )
   end
 
   def set_user_driving_school
-    @user_driving_school = current_user.user_driving_schools.find_by!(driving_school_id: params[:driving_school_id])
+    @user_driving_school = current_user.user_driving_schools.find_by!(
+      driving_school_id: params[:driving_school_id]
+    )
   end
 end
