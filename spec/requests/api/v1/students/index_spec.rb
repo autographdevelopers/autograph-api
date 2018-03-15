@@ -3,8 +3,8 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students' do
   let(:employee) { create(:employee) }
   let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school, status: :active) }
   let!(:employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, can_manage_students: can_manage_students,
-                                          employee: employee, driving_school: driving_school) }
-  let(:driving_school) { create(:driving_school) }
+                                          employee: employee, driving_school: driving_school, status: :active) }
+  let(:driving_school) { create(:driving_school, status: :active) }
 
   let(:invitation_student_driving_school) { create(:student_driving_school, student: nil, driving_school: driving_school, status: :pending) }
   let!(:invitation) { create(:invitation, invitable: invitation_student_driving_school) }

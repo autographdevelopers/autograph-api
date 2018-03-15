@@ -13,6 +13,7 @@ class EmployeeDrivingSchool < ApplicationRecord
   has_one :schedule
   has_many :driving_lessons
   has_many :slots
+  has_many :student_driving_schools, through: :driving_lessons
 
   # == Scopes =================================================================
   scope :active_with_active_driving_school, -> {
