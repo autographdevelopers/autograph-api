@@ -2,7 +2,7 @@ describe 'PUT /api/v1/driving_schools/:id' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
   let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school) }
-  let!(:employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, employee: employee, driving_school: driving_school) }
+  let!(:employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, employee: employee, driving_school: driving_school, status: :active) }
   let(:driving_school) { create(:driving_school) }
   let(:is_owner) { false }
   let(:response_keys) { %w(

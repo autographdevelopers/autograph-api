@@ -45,15 +45,15 @@ class Api::V1::DrivingSchoolsController < ApplicationController
     render :show, locals: { user_driving_school: @employee_driving_school }
   end
 
-  def activate
-    authorize @employee_driving_school, :is_owner?
+  # def activate
+  #   authorize @employee_driving_school, :is_owner?
 
-    if @driving_school.verification_code_valid?(params[:verification_code]) && @driving_school.activate!
-      render :show, locals: { user_driving_school: @employee_driving_school }
-    else
-      render json: { error: 'Provided verification code is invalid' }, status: :forbidden
-    end
-  end
+  #   if @driving_school.verification_code_valid?(params[:verification_code]) && @driving_school.activate!
+  #     render :show, locals: { user_driving_school: @employee_driving_school }
+  #   else
+  #     render json: { error: 'Provided verification code is invalid' }, status: :forbidden
+  #   end
+  # end
 
   private
 
@@ -75,7 +75,8 @@ class Api::V1::DrivingSchoolsController < ApplicationController
 
   def set_employee_driving_school
     @employee_driving_school = current_user.employee_driving_schools
-                                 .find_by!(driving_school_id: params[:id])
+                                           .active
+                                           .find_by!(driving_school_id: params[:id])
   end
 
   def set_driving_school

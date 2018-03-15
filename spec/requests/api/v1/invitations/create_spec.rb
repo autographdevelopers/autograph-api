@@ -1,8 +1,10 @@
 describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
-  let(:driving_school) { create(:driving_school) }
+  let(:driving_school) { create(:driving_school, status: :active) }
 
   let(:student) { create(:student) }
-  let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school) }
+  let!(:student_driving_school) {
+    create(:student_driving_school, student: student, driving_school: driving_school, status: :active)
+  }
 
   let(:employee) { create(:employee) }
   let!(:employee_driving_school) {
@@ -12,7 +14,8 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
       driving_school: driving_school,
       is_owner: is_owner,
       can_manage_employees: can_manage_employees,
-      can_manage_students: can_manage_students
+      can_manage_students: can_manage_students,
+      status: :active
     )
   }
 

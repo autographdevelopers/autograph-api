@@ -1,14 +1,16 @@
 describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/schedule' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
-  let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school) }
-  let!(:employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, employee: employee,
-                                          can_manage_employees: can_manage_employees, driving_school: driving_school) }
-  let(:driving_school) { create(:driving_school, :with_schedule_settings) }
+  let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school, status: :active) }
+  let!(:employee_driving_school) {
+    create(:employee_driving_school, is_owner: is_owner, employee: employee,
+           can_manage_employees: can_manage_employees, driving_school: driving_school, status: :active)
+  }
+  let(:driving_school) { create(:driving_school, :with_schedule_settings, status: :active) }
 
   let(:accessed_employee) { create(:employee) }
   let!(:accessed_employee_driving_school) { create(:employee_driving_school, employee: accessed_employee,
-                                                   driving_school: driving_school, is_driving: is_driving) }
+                                                   driving_school: driving_school, is_driving: is_driving, status: :active) }
 
   let(:response_keys) { %w(id repetition_period_in_weeks new_template_binding_from current_template new_template) }
 

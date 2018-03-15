@@ -1,6 +1,6 @@
 class Api::V1::InvitationsController < ApplicationController
   before_action :verify_current_user_to_be_employee, only: [:create]
-  before_action :set_driving_school, onyl: [:create]
+  before_action :set_driving_school, only: [:create]
   before_action :set_invited_user_type, only: [:create]
   before_action :set_user_driving_school, onyl: [:accept, :reject]
 
@@ -52,9 +52,10 @@ class Api::V1::InvitationsController < ApplicationController
   end
 
   def set_driving_school
-    @driving_school = current_user.driving_schools.find(
-      params[:driving_school_id]
-    )
+    @driving_school = current_user.employee_driving_schools
+                                  .active_with_active_driving_school
+                                  .find_by!(driving_school_id: params[:driving_school_id])
+                                  .driving_school
   end
 
   def set_user_driving_school

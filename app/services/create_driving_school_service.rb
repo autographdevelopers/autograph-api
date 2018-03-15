@@ -7,7 +7,9 @@ class CreateDrivingSchoolService
   def call
     DrivingSchool.transaction do
       driving_school = DrivingSchool.create!(params)
-      employee_driving_school = EmployeeDrivingSchool.create!(employee: user, driving_school: driving_school)
+      employee_driving_school = EmployeeDrivingSchool.create!(
+        employee: user, driving_school: driving_school
+      )
       EmployeePrivileges.create!(
         employee_driving_school: employee_driving_school,
         can_manage_employees: true,
@@ -16,7 +18,9 @@ class CreateDrivingSchoolService
         is_driving: false,
         is_owner: true
       )
-      EmployeeNotificationsSettings.create!(employee_driving_school: employee_driving_school)
+      EmployeeNotificationsSettings.create!(
+        employee_driving_school: employee_driving_school
+      )
       ScheduleSettings.create!(
         driving_school: driving_school,
         holidays_enrollment_enabled: false,

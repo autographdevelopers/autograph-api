@@ -1,4 +1,4 @@
-describe 'PUT /api/v1/driving_schools/:driving_school_id/activate' do
+xdescribe 'PUT /api/v1/driving_schools/:driving_school_id/activate' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
   let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school) }
