@@ -40,7 +40,7 @@ class Api::V1::EmployeePrivilegesController < ApplicationController
 
   def set_employee_driving_school
     @employee_driving_school = @driving_school.employee_driving_schools
-                                 .find_by!(employee_id: params[:employee_id])
+                                              .find_by!(employee_id: params[:employee_id])
   end
 
   def set_employee_privileges
