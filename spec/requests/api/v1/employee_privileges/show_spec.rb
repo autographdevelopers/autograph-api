@@ -1,21 +1,37 @@
 describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/employee_privileges' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
-  let!(:student_driving_school) {
-    create(:student_driving_school, student: student, driving_school: driving_school, status: :active)
-  }
-  let!(:employee_driving_school) {
-    create(:employee_driving_school, is_owner: is_owner, employee: employee,
-           can_manage_employees: can_manage_employees, driving_school: driving_school, status: :active)
-  }
+
+  let!(:student_driving_school) do
+    create(:student_driving_school,
+           student: student,
+           driving_school: driving_school,
+           status: :active)
+  end
+  let!(:employee_driving_school) do
+    create(:employee_driving_school,
+           is_owner: is_owner,
+           employee: employee,
+           can_manage_employees: can_manage_employees,
+           driving_school: driving_school,
+           status: :active)
+  end
   let(:driving_school) { create(:driving_school, status: :active) }
 
   let(:accessed_employee) { create(:employee) }
-  let!(:accessed_employee_driving_school) {
-    create(:employee_driving_school, employee: accessed_employee, driving_school: driving_school, status: :active)
-  }
+  let!(:accessed_employee_driving_school) do
+    create(:employee_driving_school,
+           employee: accessed_employee,
+           driving_school: driving_school,
+           status: :active)
+  end
 
-  let(:response_keys) { %w(id can_manage_employees can_manage_students can_modify_schedules is_driving is_owner) }
+  let(:response_keys) do
+    %w[
+      id can_manage_employees can_manage_students can_modify_schedules
+      is_driving is_owner
+    ]
+  end
 
   let(:is_owner) { false }
   let(:can_manage_employees) { false }
@@ -45,11 +61,11 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
         it 'attributes' do
           ep = accessed_employee_driving_school.employee_privileges
           expect(subject).to include(
-                               'can_manage_employees' => ep.can_manage_employees,
-                               'can_manage_students' => ep.can_manage_students,
-                               'can_modify_schedules' => ep.can_modify_schedules,
-                               'is_driving' => ep.is_driving
-                             )
+            'can_manage_employees' => ep.can_manage_employees,
+            'can_manage_students' => ep.can_manage_students,
+            'can_modify_schedules' => ep.can_modify_schedules,
+            'is_driving' => ep.is_driving
+          )
         end
       end
     end
@@ -71,11 +87,11 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
         it 'attributes' do
           ep = accessed_employee_driving_school.employee_privileges
           expect(subject).to include(
-                               'can_manage_employees' => ep.can_manage_employees,
-                               'can_manage_students' => ep.can_manage_students,
-                               'can_modify_schedules' => ep.can_modify_schedules,
-                               'is_driving' => ep.is_driving
-                             )
+            'can_manage_employees' => ep.can_manage_employees,
+            'can_manage_students' => ep.can_manage_students,
+            'can_modify_schedules' => ep.can_modify_schedules,
+            'is_driving' => ep.is_driving
+          )
         end
       end
     end
@@ -95,4 +111,3 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
     end
   end
 end
-

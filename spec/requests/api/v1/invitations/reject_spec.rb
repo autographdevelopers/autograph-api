@@ -3,13 +3,24 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/invitations/reject' do
   let(:driving_school_id) { driving_school.id }
 
   let(:student) { create(:student) }
-  let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school, status: status) }
+  let!(:student_driving_school) do
+    create(:student_driving_school,
+           student: student,
+           driving_school: driving_school,
+           status: status)
+  end
 
   let(:employee) { create(:employee) }
-  let!(:employee_driving_school) { create(:employee_driving_school, employee: employee, driving_school: driving_school, status: status) }
+  let!(:employee_driving_school) do
+    create(:employee_driving_school,
+           employee: employee,
+           driving_school: driving_school,
+           status: status)
+  end
 
   before do
-    put "/api/v1/driving_schools/#{driving_school_id}/invitations/reject", headers: current_user.create_new_auth_token
+    put "/api/v1/driving_schools/#{driving_school_id}/invitations/reject",
+      headers: current_user.create_new_auth_token
   end
 
   context 'when current_user is EMPLOYEE' do

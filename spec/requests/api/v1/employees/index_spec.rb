@@ -1,29 +1,60 @@
 describe 'GET /api/v1/driving_schools/:driving_school_id/employees' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
-  let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school, status: :active) }
-  let!(:employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, can_manage_employees: can_manage_employees,
-                                          employee: employee, driving_school: driving_school, status: :active, is_driving: true) }
+
+  let!(:student_driving_school) do
+    create(:student_driving_school,
+           student: student,
+           driving_school: driving_school,
+           status: :active)
+  end
+  let!(:employee_driving_school) do
+    create(:employee_driving_school,
+           is_owner: is_owner,
+           can_manage_employees: can_manage_employees,
+           employee: employee,
+           driving_school: driving_school,
+           status: :active,
+           is_driving: true)
+  end
+
   let(:driving_school) { create(:driving_school, status: :active) }
 
   let(:is_owner) { false }
   let(:can_manage_employees) { false }
 
   let(:archived_employee) { create(:employee) }
-  let!(:archived_employee_driving_school) { create(:employee_driving_school, employee: archived_employee,
-                                                   driving_school: driving_school, status: :archived) }
+  let!(:archived_employee_driving_school) do
+    create(:employee_driving_school,
+           employee: archived_employee,
+           driving_school: driving_school,
+           status: :archived)
+  end
 
   let(:pending_employee) { create(:employee) }
-  let!(:pending_employee_driving_school) { create(:employee_driving_school, employee: pending_employee,
-                                                  driving_school: driving_school, status: :pending) }
+  let!(:pending_employee_driving_school) do
+    create(:employee_driving_school,
+           employee: pending_employee,
+           driving_school: driving_school,
+           status: :pending)
+  end
 
-  let(:invitation_employee_driving_school) { create(:employee_driving_school, employee: nil, driving_school: driving_school, status: :pending) }
-  let!(:invitation) { create(:invitation, invitable: invitation_employee_driving_school) }
+  let!(:invitation) do
+    create(:invitation,
+           invitable: invitation_employee_driving_school)
+  end
+  let(:invitation_employee_driving_school) do
+    create(:employee_driving_school,
+           employee: nil,
+           driving_school: driving_school,
+           status: :pending)
+  end
 
-  let(:response_keys) { %w(id email name surname status type) }
+  let(:response_keys) { %w[id email name surname status type] }
 
   before do
-    get "/api/v1/driving_schools/#{driving_school_id}/employees", headers: current_user.create_new_auth_token
+    get "/api/v1/driving_schools/#{driving_school_id}/employees",
+        headers: current_user.create_new_auth_token
   end
 
   context 'when current_user is EMPLOYEE' do
@@ -48,12 +79,12 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees' do
         end
 
         it 'response contains employee attributes' do
-          expect(json_response.find { |i| i['id'] == employee.id }).to include({
-                                                                            'id' => employee.id,
-                                                                            'email' => employee.email,
-                                                                            'name' => employee.name,
-                                                                            'surname' => employee.surname,
-                                                                          })
+          expect(json_response.find { |i| i['id'] == employee.id }).to include(
+            'id' => employee.id,
+            'email' => employee.email,
+            'name' => employee.name,
+            'surname' => employee.surname
+          )
         end
       end
 
@@ -73,12 +104,12 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees' do
         end
 
         it 'response contains employee attributes' do
-          expect(json_response.find { |i| i['id'] == employee.id }).to include({
-                                                                            'id' => employee.id,
-                                                                            'email' => employee.email,
-                                                                            'name' => employee.name,
-                                                                            'surname' => employee.surname,
-                                                                          })
+          expect(json_response.find { |i| i['id'] == employee.id }).to include(
+            'id' => employee.id,
+            'email' => employee.email,
+            'name' => employee.name,
+            'surname' => employee.surname
+          )
         end
       end
 
@@ -107,12 +138,12 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees' do
     end
 
     it 'response contains employee attributes' do
-      expect(json_response.first).to include({
-                                          'id' => employee.id,
-                                          'email' => employee.email,
-                                          'name' => employee.name,
-                                          'surname' => employee.surname,
-                                        })
+      expect(json_response.first).to include(
+        'id' => employee.id,
+        'email' => employee.email,
+        'name' => employee.name,
+        'surname' => employee.surname
+      )
     end
   end
 end

@@ -2,21 +2,24 @@ describe 'POST /api/v1/driving_schools' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
 
-  let(:response_keys) { %w(
-    id name phone_numbers emails website_link additional_information city street
-    country profile_picture zip_code status relation_status privilege_set
-  ) }
+  let(:response_keys) do
+    %w[
+      id name phone_numbers emails website_link additional_information city street
+      country profile_picture zip_code status relation_status privilege_set
+    ]
+  end
 
   before do
-    post '/api/v1/driving_schools', headers: current_user.create_new_auth_token, params: params
+    post '/api/v1/driving_schools', headers: current_user.create_new_auth_token,
+                                    params: params
   end
 
   let(:valid_params) do
     {
       driving_school: {
         name: 'Szkoła Łoś',
-        phone_numbers: ['345234532', '234111444'],
-        emails: ['szkolalos@gmail.com', 'szkolaloskontakt@gmail.com'],
+        phone_numbers: %w[345234532 234111444],
+        emails: %w[szkolalos@gmail.com szkolaloskontakt@gmail.com],
         website_link: 'szkolalos.pl',
         additional_information: 'Lorem Ipsum',
         city: 'Lodz',
@@ -59,46 +62,55 @@ describe 'POST /api/v1/driving_schools' do
 
       it 'created DrivingSchool record has proper attributes' do
         expect(DrivingSchool.last.attributes).to include(
-                                                   'name' => params[:driving_school][:name],
-                                                   'phone_numbers' => params[:driving_school][:phone_numbers],
-                                                   'emails' => params[:driving_school][:emails],
-                                                   'website_link' => params[:driving_school][:website_link],
-                                                   'additional_information' => params[:driving_school][:additional_information],
-                                                   'city' => params[:driving_school][:city],
-                                                   'zip_code' => params[:driving_school][:zip_code],
-                                                   'street' => params[:driving_school][:street],
-                                                   'country' => params[:driving_school][:country],
-                                                   'profile_picture' => params[:driving_school][:profile_picture],
-                                                   'latitude' => params[:driving_school][:latitude],
-                                                   'longitude' => params[:driving_school][:longitude],
-                                                   'status' => 'built'
-                                                 )
+          'name' => params[:driving_school][:name],
+          'phone_numbers' => params[:driving_school][:phone_numbers],
+          'emails' => params[:driving_school][:emails],
+          'website_link' => params[:driving_school][:website_link],
+          'additional_information' => params[:driving_school][:additional_information],
+          'city' => params[:driving_school][:city],
+          'zip_code' => params[:driving_school][:zip_code],
+          'street' => params[:driving_school][:street],
+          'country' => params[:driving_school][:country],
+          'profile_picture' => params[:driving_school][:profile_picture],
+          'latitude' => params[:driving_school][:latitude],
+          'longitude' => params[:driving_school][:longitude],
+          'status' => 'built'
+        )
       end
 
       it 'created EmployeeDrivingSchool record has proper attributes' do
         expect(EmployeeDrivingSchool.last.attributes).to include(
-                                                           'employee_id' => current_user.id,
-                                                           'driving_school_id' => DrivingSchool.last.id
-                                                         )
+          'employee_id' => current_user.id,
+          'driving_school_id' => DrivingSchool.last.id
+        )
       end
 
       it 'created EmployeePrivileges record has proper attributes' do
         expect(EmployeePrivileges.last.attributes).to include(
-                                                          'employee_driving_school_id' => EmployeeDrivingSchool.last.id,
-                                                          'can_manage_employees' => true,
-                                                          'can_manage_students' => true,
-                                                          'can_modify_schedules' => true,
-                                                          'is_driving' => false,
-                                                          'is_owner' => true
-                                                        )
+          'employee_driving_school_id' => EmployeeDrivingSchool.last.id,
+          'can_manage_employees' => true,
+          'can_manage_students' => true,
+          'can_modify_schedules' => true,
+          'is_driving' => false,
+          'is_owner' => true
+        )
       end
 
       it 'created ScheduleSettings record has proper attributes' do
         expect(ScheduleSettings.last.attributes).to include(
-                                                          'driving_school_id' => DrivingSchool.last.id,
-                                                          'holidays_enrollment_enabled' => false,
-                                                          'last_minute_booking_enabled' => false
-                                                        )
+          'driving_school_id' => DrivingSchool.last.id,
+          'holidays_enrollment_enabled' => false,
+          'last_minute_booking_enabled' => false,
+          'valid_time_frames' => {
+            'monday' => ScheduleSettings::SLOT_START_TIMES.keys,
+            'tuesday' => ScheduleSettings::SLOT_START_TIMES.keys,
+            'wednesday' => ScheduleSettings::SLOT_START_TIMES.keys,
+            'thursday' => ScheduleSettings::SLOT_START_TIMES.keys,
+            'friday' => ScheduleSettings::SLOT_START_TIMES.keys,
+            'saturday' => ScheduleSettings::SLOT_START_TIMES.keys,
+            'sunday' => ScheduleSettings::SLOT_START_TIMES.keys
+          }
+        )
       end
 
       context 'response body contains proper' do
@@ -110,18 +122,18 @@ describe 'POST /api/v1/driving_schools' do
 
         it 'attributes' do
           expect(subject).to include(
-                               'name' => params[:driving_school][:name],
-                               'phone_numbers' => params[:driving_school][:phone_numbers],
-                               'emails' => params[:driving_school][:emails],
-                               'website_link' => params[:driving_school][:website_link],
-                               'additional_information' => params[:driving_school][:additional_information],
-                               'city' => params[:driving_school][:city],
-                               'zip_code' => params[:driving_school][:zip_code],
-                               'street' => params[:driving_school][:street],
-                               'country' => params[:driving_school][:country],
-                               'profile_picture' => params[:driving_school][:profile_picture],
-                               'status' => 'built'
-                             )
+            'name' => params[:driving_school][:name],
+            'phone_numbers' => params[:driving_school][:phone_numbers],
+            'emails' => params[:driving_school][:emails],
+            'website_link' => params[:driving_school][:website_link],
+            'additional_information' => params[:driving_school][:additional_information],
+            'city' => params[:driving_school][:city],
+            'zip_code' => params[:driving_school][:zip_code],
+            'street' => params[:driving_school][:street],
+            'country' => params[:driving_school][:country],
+            'profile_picture' => params[:driving_school][:profile_picture],
+            'status' => 'built'
+          )
         end
       end
     end
@@ -154,13 +166,13 @@ describe 'POST /api/v1/driving_schools' do
 
         it 'response contains proper error messages' do
           expect(json_response).to include(
-                                     'name' => ["can't be blank"],
-                                     'phone_numbers' => ["can't be blank"],
-                                     'emails' => ["can't be blank"],
-                                     'city' => ["can't be blank"],
-                                     'zip_code' => ["can't be blank"],
-                                     'country' => ["can't be blank"]
-                                   )
+            'name' => ["can't be blank"],
+            'phone_numbers' => ["can't be blank"],
+            'emails' => ["can't be blank"],
+            'city' => ["can't be blank"],
+            'zip_code' => ["can't be blank"],
+            'country' => ["can't be blank"]
+          )
         end
       end
     end

@@ -1,15 +1,27 @@
 describe 'PUT /api/v1/driving_schools/:driving_school_id/employee_notifications_settings' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
-  let!(:student_driving_school) {
-    create(:student_driving_school, student: student, driving_school: driving_school)
-  }
-  let!(:employee_driving_school) {
-    create(:employee_driving_school, employee: employee, driving_school: driving_school, is_owner: true)
-  }
+
+  let!(:student_driving_school) do
+    create(:student_driving_school,
+           student: student,
+           driving_school: driving_school)
+  end
+  let!(:employee_driving_school) do
+    create(:employee_driving_school,
+           employee: employee,
+           driving_school: driving_school,
+           is_owner: true)
+  end
+
   let(:driving_school) { create(:driving_school) }
 
-  let(:response_keys) { %w(id push_notifications_enabled weekly_emails_reports_enabled monthly_emails_reports_enabled) }
+  let(:response_keys) do
+    %w[
+      id push_notifications_enabled weekly_emails_reports_enabled
+      monthly_emails_reports_enabled
+    ]
+  end
 
   let(:valid_params) do
     {
@@ -43,10 +55,10 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employee_notifications_
           employee_notifications_settings = employee_driving_school.employee_notifications_settings
           employee_notifications_settings.reload
           expect(employee_notifications_settings.attributes).to include(
-                                                                  'push_notifications_enabled' => true,
-                                                                  'weekly_emails_reports_enabled' => true,
-                                                                  'monthly_emails_reports_enabled' => false
-                                                                )
+            'push_notifications_enabled' => true,
+            'weekly_emails_reports_enabled' => true,
+            'monthly_emails_reports_enabled' => false
+          )
         end
 
         context 'response body contains proper' do
@@ -58,10 +70,10 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employee_notifications_
 
           it 'attributes' do
             expect(subject).to include(
-                                 'push_notifications_enabled' => true,
-                                 'weekly_emails_reports_enabled' => true,
-                                 'monthly_emails_reports_enabled' => false
-                               )
+              'push_notifications_enabled' => true,
+              'weekly_emails_reports_enabled' => true,
+              'monthly_emails_reports_enabled' => false
+            )
           end
         end
       end
@@ -84,10 +96,10 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employee_notifications_
 
           it 'response contains proper error messages' do
             expect(json_response).to include(
-                                       'push_notifications_enabled' => ['is not included in the list'],
-                                       'weekly_emails_reports_enabled' => ['is not included in the list'],
-                                       'monthly_emails_reports_enabled' => ['is not included in the list'],
-                                     )
+              'push_notifications_enabled' => ['is not included in the list'],
+              'weekly_emails_reports_enabled' => ['is not included in the list'],
+              'monthly_emails_reports_enabled' => ['is not included in the list']
+            )
           end
         end
       end

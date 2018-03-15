@@ -1,18 +1,41 @@
 describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/schedule' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
-  let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school, status: :active) }
-  let!(:employee_driving_school) {
-    create(:employee_driving_school, is_owner: is_owner, employee: employee,
-           can_manage_employees: can_manage_employees, driving_school: driving_school, status: :active)
-  }
-  let(:driving_school) { create(:driving_school, :with_schedule_settings, status: :active) }
+
+  let!(:student_driving_school) do
+    create(:student_driving_school,
+           student: student,
+           driving_school: driving_school,
+           status: :active)
+  end
+  let!(:employee_driving_school) do
+    create(:employee_driving_school,
+           is_owner: is_owner,
+           employee: employee,
+           can_manage_employees: can_manage_employees,
+           driving_school: driving_school,
+           status: :active)
+  end
+
+  let(:driving_school) do
+    create(:driving_school,
+           :with_schedule_settings,
+           status: :active)
+  end
 
   let(:accessed_employee) { create(:employee) }
-  let!(:accessed_employee_driving_school) { create(:employee_driving_school, employee: accessed_employee,
-                                                   driving_school: driving_school, is_driving: is_driving, status: :active) }
+  let!(:accessed_employee_driving_school) do
+    create(:employee_driving_school,
+           employee: accessed_employee,
+           driving_school: driving_school,
+           is_driving: is_driving,
+           status: :active)
+  end
 
-  let(:response_keys) { %w(id repetition_period_in_weeks new_template_binding_from current_template new_template) }
+  let(:response_keys) do
+    %w[id repetition_period_in_weeks new_template_binding_from
+       current_template new_template]
+  end
 
   let(:is_owner) { false }
   let(:can_manage_employees) { false }
@@ -20,7 +43,8 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
   before do
     accessed_employee_driving_school.schedule.update!(attributes_for(:schedule))
-    get "/api/v1/driving_schools/#{driving_school.id}/employees/#{accessed_employee.id}/schedule", headers: current_user.create_new_auth_token
+    get "/api/v1/driving_schools/#{driving_school.id}/employees/#{accessed_employee.id}/schedule",
+        headers: current_user.create_new_auth_token
   end
 
   context 'when current_user is EMPLOYEE' do
@@ -45,11 +69,11 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
             it 'attributes' do
               schedule = accessed_employee_driving_school.schedule
               expect(subject).to include(
-                                   'repetition_period_in_weeks' => schedule.repetition_period_in_weeks,
-                                   'new_template_binding_from' => schedule.new_template_binding_from.strftime('%Y-%m-%d'),
-                                   'current_template' => schedule.current_template,
-                                   'new_template' => schedule.new_template
-                                 )
+                'repetition_period_in_weeks' => schedule.repetition_period_in_weeks,
+                'new_template_binding_from' => schedule.new_template_binding_from.strftime('%Y-%m-%d'),
+                'current_template' => schedule.current_template,
+                'new_template' => schedule.new_template
+              )
             end
           end
         end
@@ -73,11 +97,11 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
             it 'attributes' do
               schedule = accessed_employee_driving_school.schedule
               expect(subject).to include(
-                                   'repetition_period_in_weeks' => schedule.repetition_period_in_weeks,
-                                   'new_template_binding_from' => schedule.new_template_binding_from.strftime('%Y-%m-%d'),
-                                   'current_template' => schedule.current_template,
-                                   'new_template' => schedule.new_template
-                                 )
+                'repetition_period_in_weeks' => schedule.repetition_period_in_weeks,
+                'new_template_binding_from' => schedule.new_template_binding_from.strftime('%Y-%m-%d'),
+                'current_template' => schedule.current_template,
+                'new_template' => schedule.new_template
+              )
             end
           end
         end

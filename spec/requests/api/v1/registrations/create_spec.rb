@@ -1,7 +1,9 @@
 describe 'POST /api/v1/auth' do
-  let(:response_keys) { %w(
-    id email name surname gender birth_date type time_zone
-  ) }
+  let(:response_keys) do
+    %w[
+      id email name surname gender birth_date type time_zone
+    ]
+  end
 
   let(:valid_params) do
     {

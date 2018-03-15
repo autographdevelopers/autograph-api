@@ -1,10 +1,22 @@
 describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
-  let!(:employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, employee: employee, driving_school: driving_school) }
+
+  let!(:employee_driving_school) do
+    create(:employee_driving_school,
+           is_owner: is_owner,
+           employee: employee,
+           driving_school: driving_school)
+  end
+
   let(:driving_school) { create(:driving_school, :with_schedule_settings) }
 
-  let(:response_keys) { %w(id holidays_enrollment_enabled last_minute_booking_enabled valid_time_frames) }
+  let(:response_keys) do
+    %w[
+      id holidays_enrollment_enabled last_minute_booking_enabled
+      valid_time_frames
+    ]
+  end
 
   let(:valid_params) do
     {
@@ -48,9 +60,9 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings' do
           it 'updates EmployeeNotificationsSettings record' do
             schedule_settings = driving_school.schedule_settings.reload
             expect(schedule_settings.attributes).to include(
-                                                          'holidays_enrollment_enabled' => true,
-                                                          'last_minute_booking_enabled' => false
-                                                        )
+              'holidays_enrollment_enabled' => true,
+              'last_minute_booking_enabled' => false
+            )
           end
 
           context 'response body contains proper' do
@@ -62,9 +74,9 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings' do
 
             it 'attributes' do
               expect(subject).to include(
-                                   'holidays_enrollment_enabled' => true,
-                                   'last_minute_booking_enabled' => false
-                                 )
+                'holidays_enrollment_enabled' => true,
+                'last_minute_booking_enabled' => false
+              )
             end
           end
         end
@@ -86,9 +98,9 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings' do
 
             it 'response contains proper error messages' do
               expect(json_response).to include(
-                                         'holidays_enrollment_enabled' => ['is not included in the list'],
-                                         'last_minute_booking_enabled' => ['is not included in the list']
-                                       )
+                'holidays_enrollment_enabled' => ['is not included in the list'],
+                'last_minute_booking_enabled' => ['is not included in the list']
+              )
             end
           end
         end

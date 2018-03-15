@@ -1,19 +1,38 @@
 describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/employee_privileges' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
-  let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school, status: :active) }
-  let!(:employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, employee: employee,
-                                          can_manage_employees: can_manage_employees, driving_school: driving_school,
-                                          status: :active)
-  }
+
+  let!(:student_driving_school) do
+    create(:student_driving_school,
+           student: student,
+           driving_school: driving_school,
+           status: :active)
+  end
+  let!(:employee_driving_school) do
+    create(:employee_driving_school,
+           is_owner: is_owner,
+           employee: employee,
+           can_manage_employees: can_manage_employees,
+           driving_school: driving_school,
+           status: :active)
+  end
+
   let(:driving_school) { create(:driving_school, status: :active) }
 
   let(:accessed_employee) { create(:employee) }
-  let!(:accessed_employee_driving_school) {
-    create(:employee_driving_school, employee: accessed_employee, driving_school: driving_school, status: :active)
-  }
+  let!(:accessed_employee_driving_school) do
+    create(:employee_driving_school,
+           employee: accessed_employee,
+           driving_school: driving_school,
+           status: :active)
+  end
 
-  let(:response_keys) { %w(id can_manage_employees can_manage_students can_modify_schedules is_driving is_owner) }
+  let(:response_keys) do
+    %w[
+      id can_manage_employees can_manage_students can_modify_schedules
+      is_driving is_owner
+    ]
+  end
 
   let(:is_owner) { false }
   let(:can_manage_employees) { false }
@@ -31,7 +50,8 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
   before do
     put "/api/v1/driving_schools/#{driving_school.id}/employees/#{accessed_employee.id}/employee_privileges",
-        headers: current_user.create_new_auth_token, params: params
+        headers: current_user.create_new_auth_token,
+        params: params
   end
 
   context 'when current_user is EMPLOYEE' do
@@ -48,11 +68,11 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
         it 'updates EmployeePrivileges record' do
           employee_privileges = accessed_employee_driving_school.employee_privileges.reload
           expect(employee_privileges.attributes).to include(
-                                                         'can_manage_employees' => params[:employee_privileges][:can_manage_employees],
-                                                         'can_manage_students' => params[:employee_privileges][:can_manage_students],
-                                                         'can_modify_schedules' => params[:employee_privileges][:can_modify_schedules],
-                                                         'is_driving' => params[:employee_privileges][:is_driving]
-                                                       )
+            'can_manage_employees' => params[:employee_privileges][:can_manage_employees],
+            'can_manage_students' => params[:employee_privileges][:can_manage_students],
+            'can_modify_schedules' => params[:employee_privileges][:can_modify_schedules],
+            'is_driving' => params[:employee_privileges][:is_driving]
+          )
         end
 
         context 'response body contains proper' do
@@ -64,11 +84,11 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
           it 'attributes' do
             expect(subject).to include(
-                                 'can_manage_employees' => params[:employee_privileges][:can_manage_employees],
-                                 'can_manage_students' => params[:employee_privileges][:can_manage_students],
-                                 'can_modify_schedules' => params[:employee_privileges][:can_modify_schedules],
-                                 'is_driving' => params[:employee_privileges][:is_driving]
-                               )
+              'can_manage_employees' => params[:employee_privileges][:can_manage_employees],
+              'can_manage_students' => params[:employee_privileges][:can_manage_students],
+              'can_modify_schedules' => params[:employee_privileges][:can_modify_schedules],
+              'is_driving' => params[:employee_privileges][:is_driving]
+            )
           end
         end
       end
@@ -92,11 +112,11 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
           it 'response contains proper error messages' do
             expect(json_response).to include(
-                                       'can_manage_employees' => ['is not included in the list'],
-                                       'can_manage_students' => ['is not included in the list'],
-                                       'can_modify_schedules' => ['is not included in the list'],
-                                       'is_driving' => ['is not included in the list']
-                                     )
+              'can_manage_employees' => ['is not included in the list'],
+              'can_manage_students' => ['is not included in the list'],
+              'can_modify_schedules' => ['is not included in the list'],
+              'is_driving' => ['is not included in the list']
+            )
           end
         end
       end
@@ -113,11 +133,11 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
         it 'updates EmployeePrivilege record' do
           employee_privileges = accessed_employee_driving_school.employee_privileges.reload
           expect(employee_privileges.attributes).to include(
-                                                         'can_manage_employees' => params[:employee_privileges][:can_manage_employees],
-                                                         'can_manage_students' => params[:employee_privileges][:can_manage_students],
-                                                         'can_modify_schedules' => params[:employee_privileges][:can_modify_schedules],
-                                                         'is_driving' => params[:employee_privileges][:is_driving]
-                                                       )
+            'can_manage_employees' => params[:employee_privileges][:can_manage_employees],
+            'can_manage_students' => params[:employee_privileges][:can_manage_students],
+            'can_modify_schedules' => params[:employee_privileges][:can_modify_schedules],
+            'is_driving' => params[:employee_privileges][:is_driving]
+          )
         end
 
         context 'response body contains proper' do
@@ -129,11 +149,11 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
           it 'attributes' do
             expect(subject).to include(
-                                 'can_manage_employees' => params[:employee_privileges][:can_manage_employees],
-                                 'can_manage_students' => params[:employee_privileges][:can_manage_students],
-                                 'can_modify_schedules' => params[:employee_privileges][:can_modify_schedules],
-                                 'is_driving' => params[:employee_privileges][:is_driving]
-                               )
+              'can_manage_employees' => params[:employee_privileges][:can_manage_employees],
+              'can_manage_students' => params[:employee_privileges][:can_manage_students],
+              'can_modify_schedules' => params[:employee_privileges][:can_modify_schedules],
+              'is_driving' => params[:employee_privileges][:is_driving]
+            )
           end
         end
       end
@@ -157,11 +177,11 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
           it 'response contains proper error messages' do
             expect(json_response).to include(
-                                       'can_manage_employees' => ['is not included in the list'],
-                                       'can_manage_students' => ['is not included in the list'],
-                                       'can_modify_schedules' => ['is not included in the list'],
-                                       'is_driving' => ['is not included in the list']
-                                     )
+              'can_manage_employees' => ['is not included in the list'],
+              'can_manage_students' => ['is not included in the list'],
+              'can_modify_schedules' => ['is not included in the list'],
+              'is_driving' => ['is not included in the list']
+            )
           end
         end
       end
