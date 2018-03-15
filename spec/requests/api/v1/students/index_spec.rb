@@ -27,6 +27,12 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students' do
            status: :pending)
   end
 
+  let!(:driving_lesson) do
+    create(:driving_lesson,
+           student_driving_school: student_driving_school,
+           employee_driving_school: employee_driving_school)
+  end
+
   let(:is_owner) { false }
   let(:can_manage_students) { false }
 
@@ -94,25 +100,50 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students' do
       end
 
       context 'when employee can NOT manage students and is NOT an owner' do
-        it 'returns 200 http status code' do
-          expect(response.status).to eq 200
+        context 'when employee had driving lesson with students' do
+          it 'returns 200 http status code' do
+            expect(response.status).to eq 200
+          end
+
+          it 'returned records contain proper keys' do
+            expect(json_response.first.keys).to match_array response_keys
+          end
+
+          it 'returns proper records' do
+            expect(json_response.pluck('id')).to match_array [student.id]
+          end
+
+          it 'response contains student attributes' do
+            expect(json_response.first).to include(
+              'id' => student.id,
+              'email' => student.email,
+              'name' => student.name,
+              'surname' => student.surname
+            )
+          end
         end
 
-        it 'returned records contain proper keys' do
-          expect(json_response.first.keys).to match_array response_keys
-        end
+        context 'when employee had driving lesson with students' do
+          it 'returns 200 http status code' do
+            expect(response.status).to eq 200
+          end
 
-        it 'returns proper records' do
-          expect(json_response.pluck('id')).to match_array [student.id]
-        end
+          it 'returned records contain proper keys' do
+            expect(json_response.first.keys).to match_array response_keys
+          end
 
-        it 'response contains student attributes' do
-          expect(json_response.first).to include(
-            'id' => student.id,
-            'email' => student.email,
-            'name' => student.name,
-            'surname' => student.surname
-          )
+          it 'returns proper records' do
+            expect(json_response.pluck('id')).to match_array [student.id]
+          end
+
+          it 'response contains student attributes' do
+            expect(json_response.first).to include(
+              'id' => student.id,
+              'email' => student.email,
+              'name' => student.name,
+              'surname' => student.surname
+            )
+          end
         end
       end
     end

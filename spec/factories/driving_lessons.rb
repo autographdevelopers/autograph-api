@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :driving_lesson do
-    start_time "2018-02-23 09:26:46"
+    start_time 7.days.from_now
     student_driving_school
     employee_driving_school
   end
