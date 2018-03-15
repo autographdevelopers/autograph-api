@@ -8,7 +8,6 @@ describe DrivingSchool do
     it { should have_many(:employees).through(:employee_driving_schools) }
     it { should have_many(:student_driving_schools) }
     it { should have_many(:students).through(:student_driving_schools) }
-    it { should have_many(:schedule_boundaries) }
     it { should have_one(:schedule_settings) }
   end
 

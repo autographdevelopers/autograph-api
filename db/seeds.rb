@@ -5,12 +5,12 @@ owner = FactoryBot.create(:employee, email: 'owner@gmail.com', password: 'passwo
 DrivingSchool.statuses.keys.each do |status|
   EmployeeDrivingSchool.statuses.keys.each do |e_status|
     eds = FactoryBot.create(:employee_driving_school,
-                      driving_school: FactoryBot.create(:driving_school, :with_schedule_settings, :with_schedule_boundaries, status: status),
+                      driving_school: FactoryBot.create(:driving_school, :with_schedule_settings, status: status),
                       employee: employee,
                       status: e_status)
     eds.employee_privileges.update(can_manage_employees: true, can_manage_students: true, can_modify_schedules: true, is_driving: true)
     FactoryBot.create(:employee_driving_school,
-                      driving_school: FactoryBot.create(:driving_school, :with_schedule_settings, :with_schedule_boundaries, status: status),
+                      driving_school: FactoryBot.create(:driving_school, status: status),
                       employee: owner,
                       status: e_status,
                       is_owner: true)
@@ -18,14 +18,14 @@ DrivingSchool.statuses.keys.each do |status|
 
   StudentDrivingSchool.statuses.keys.each do |s_status|
     FactoryBot.create(:student_driving_school,
-                      driving_school: FactoryBot.create(:driving_school, :with_schedule_settings, :with_schedule_boundaries, status: status),
+                      driving_school: FactoryBot.create(:driving_school, :with_schedule_settings, status: status),
                       student: student,
                       status: s_status)
   end
 end
 
 5.times do
-  driving_school = FactoryBot.create(:driving_school, :with_schedule_settings, :with_schedule_boundaries, status: :active)
+  driving_school = FactoryBot.create(:driving_school, :with_schedule_settings, status: :active)
   FactoryBot.create(:employee_driving_school, driving_school: driving_school, employee: employee, status: :pending)
   FactoryBot.create(:employee_driving_school, driving_school: driving_school, employee: owner, status: :pending)
   FactoryBot.create(:student_driving_school, driving_school: driving_school, student: student, status: :pending)

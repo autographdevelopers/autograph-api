@@ -20,12 +20,4 @@ FactoryBot.define do
       create(:schedule_settings, driving_school: driving_school)
     end
   end
-
-  trait :with_schedule_boundaries do
-    after(:create) do |driving_school|
-      ScheduleBoundary.weekdays.keys.each do |weekday|
-        create(:schedule_boundary, driving_school: driving_school, weekday: weekday)
-      end
-    end
-  end
 end

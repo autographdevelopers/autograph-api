@@ -4,13 +4,22 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings' do
   let!(:employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, employee: employee, driving_school: driving_school) }
   let(:driving_school) { create(:driving_school, :with_schedule_settings) }
 
-  let(:response_keys) { %w(id holidays_enrollment_enabled last_minute_booking_enabled) }
+  let(:response_keys) { %w(id holidays_enrollment_enabled last_minute_booking_enabled valid_time_frames) }
 
   let(:valid_params) do
     {
       schedule_settings: {
         holidays_enrollment_enabled: true,
-        last_minute_booking_enabled: false
+        last_minute_booking_enabled: false,
+        valid_time_frames: {
+          'monday' => (16..31).to_a,
+          'tuesday' => (16..31).to_a,
+          'wednesday' => (32..47).to_a,
+          'thursday' => (16..31).to_a,
+          'friday' => (16..31).to_a,
+          'saturday' => (0..15).to_a,
+          'sunday' => []
+        }
       }
     }
   end

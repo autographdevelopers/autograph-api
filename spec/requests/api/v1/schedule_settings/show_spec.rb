@@ -6,7 +6,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/schedule_settings' do
 
   let(:is_owner) { false }
 
-  let(:response_keys) { %w(id holidays_enrollment_enabled last_minute_booking_enabled) }
+  let(:response_keys) { %w(id holidays_enrollment_enabled last_minute_booking_enabled valid_time_frames) }
 
   before do
     get "/api/v1/driving_schools/#{driving_school_id}/schedule_settings", headers: current_user.create_new_auth_token
