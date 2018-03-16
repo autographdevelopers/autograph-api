@@ -1,20 +1,26 @@
 describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
-  let(:driving_school) { create(:driving_school) }
+  let(:driving_school) { create(:driving_school, status: :active) }
 
   let(:student) { create(:student) }
-  let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school) }
+  let!(:student_driving_school) do
+    create(:student_driving_school,
+           student: student,
+           driving_school: driving_school,
+           status: :active)
+  end
 
   let(:employee) { create(:employee) }
-  let!(:employee_driving_school) {
+  let!(:employee_driving_school) do
     create(
       :employee_driving_school,
       employee: employee,
       driving_school: driving_school,
       is_owner: is_owner,
       can_manage_employees: can_manage_employees,
-      can_manage_students: can_manage_students
+      can_manage_students: can_manage_students,
+      status: :active
     )
-  }
+  end
 
   let(:is_owner) { false }
   let(:can_manage_employees) { false }
@@ -30,7 +36,7 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
         surname: 'McKenzee',
         email: email
       },
-      employee_privilege_set: {
+      employee_privileges: {
         can_manage_employees: true,
         can_manage_students: false,
         can_modify_schedules: false,
@@ -66,100 +72,100 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
             end
 
             it 'creates EmployeeDrivingSchool record' do
-              expect{ subject.call }.to change{ EmployeeDrivingSchool.count }.by 1
+              expect { subject.call }.to change { EmployeeDrivingSchool.count }.by 1
             end
 
-            it 'creates EmployeePrivilegeSet record' do
-              expect{ subject.call }.to change{ EmployeePrivilegeSet.count }.by 1
+            it 'creates EmployeePrivileges record' do
+              expect { subject.call }.to change { EmployeePrivileges.count }.by 1
             end
 
-            it 'creates EmployeeNotificationsSettingsSet' do
-              expect{ subject.call }.to change{ EmployeeNotificationsSettingsSet.count }.by 1
+            it 'creates EmployeeNotificationsSettings' do
+              expect { subject.call }.to change { EmployeeNotificationsSettings.count }.by 1
             end
 
             it 'creates proper EmployeeDrivingSchool record' do
               subject.call
               expect(EmployeeDrivingSchool.last.attributes).to include(
-                                                                 'employee_id' => invited_user.id,
-                                                                 'driving_school_id' => driving_school.id
-                                                               )
+                'employee_id' => invited_user.id,
+                'driving_school_id' => driving_school.id
+              )
             end
 
-            it 'creates proper EmployeePrivilegeSet record' do
+            it 'creates proper EmployeePrivileges record' do
               subject.call
-              expect(EmployeePrivilegeSet.last.attributes).to include(
-                                                                'employee_driving_school_id' => EmployeeDrivingSchool.last.id,
-                                                                'is_owner' => false
-                                                              )
+              expect(EmployeePrivileges.last.attributes).to include(
+                'employee_driving_school_id' => EmployeeDrivingSchool.last.id,
+                'is_owner' => false
+              )
             end
 
-            it 'creates proper EmployeeNotificationsSettingsSet' do
+            it 'creates proper EmployeeNotificationsSettings' do
               subject.call
-              expect(EmployeeNotificationsSettingsSet.last.attributes).to include(
-                                                                            'push_notifications_enabled' => false,
-                                                                            'weekly_emails_reports_enabled' => false,
-                                                                            'monthly_emails_reports_enabled' => false,
-                                                                            'employee_driving_school_id' => EmployeeDrivingSchool.last.id
-                                                                          )
+              expect(EmployeeNotificationsSettings.last.attributes).to include(
+                'push_notifications_enabled' => false,
+                'weekly_emails_reports_enabled' => false,
+                'monthly_emails_reports_enabled' => false,
+                'employee_driving_school_id' => EmployeeDrivingSchool.last.id
+              )
             end
 
             it 'sends email about driving school requesting for cooperation' do
-              expect{ subject.call }.to change { ActionMailer::Base.deliveries.count }.by(1)
+              expect { subject.call }.to change { ActionMailer::Base.deliveries.count }.by(1)
             end
           end
 
           context 'when invited user does NOT exist' do
             it 'creates EmployeeDrivingSchool record' do
-              expect{ subject.call }.to change{ EmployeeDrivingSchool.count }.by 1
+              expect { subject.call }.to change { EmployeeDrivingSchool.count }.by 1
             end
 
-            it 'creates EmployeePrivilegeSet record' do
-              expect{ subject.call }.to change{ EmployeePrivilegeSet.count }.by 1
+            it 'creates EmployeePrivileges record' do
+              expect { subject.call }.to change { EmployeePrivileges.count }.by 1
             end
 
-            it 'creates EmployeeNotificationsSettingsSet' do
-              expect{ subject.call }.to change{ EmployeeNotificationsSettingsSet.count }.by 1
+            it 'creates EmployeeNotificationsSettings' do
+              expect { subject.call }.to change { EmployeeNotificationsSettings.count }.by 1
             end
 
             it 'creates Invitation' do
-              expect{ subject.call }.to change{ Invitation.count }.by 1
+              expect { subject.call }.to change { Invitation.count }.by 1
             end
 
             it 'creates proper EmployeeDrivingSchool record' do
               subject.call
               expect(EmployeeDrivingSchool.last.attributes).to include(
-                                                                 'employee_id' => nil,
-                                                                 'driving_school_id' => driving_school.id
-                                                               )
+                'employee_id' => nil,
+                'driving_school_id' => driving_school.id
+              )
             end
 
-            it 'creates proper EmployeePrivilegeSet record' do
+            it 'creates proper EmployeePrivileges record' do
               subject.call
-              expect(EmployeePrivilegeSet.last.attributes).to include(
-                                                                'employee_driving_school_id' => EmployeeDrivingSchool.last.id,
-                                                                'is_owner' => false
-                                                              )
+              expect(EmployeePrivileges.last.attributes).to include(
+                'employee_driving_school_id' => EmployeeDrivingSchool.last.id,
+                'is_owner' => false
+              )
             end
 
-            it 'creates proper EmployeeNotificationsSettingsSet' do
+            it 'creates proper EmployeeNotificationsSettings' do
               subject.call
-              expect(EmployeeNotificationsSettingsSet.last.attributes).to include(
-                                                                            'push_notifications_enabled' => false,
-                                                                            'weekly_emails_reports_enabled' => false,
-                                                                            'monthly_emails_reports_enabled' => false,
-                                                                            'employee_driving_school_id' => EmployeeDrivingSchool.last.id
-                                                                          )
+              expect(EmployeeNotificationsSettings.last.attributes).to include(
+                'push_notifications_enabled' => false,
+                'weekly_emails_reports_enabled' => false,
+                'monthly_emails_reports_enabled' => false,
+                'employee_driving_school_id' => EmployeeDrivingSchool.last.id
+              )
             end
 
             it 'creates proper Invitation record' do
               subject.call
               expect(Invitation.last.attributes).to include(
-                                           'email' => params[:user][:email],
-                                           'name' => params[:user][:name],
-                                           'surname' => params[:user][:surname],
-                                           'invitable_type' => 'EmployeeDrivingSchool',
-                                           'invitable_id' => EmployeeDrivingSchool.last.id
-                                         )
+                'email' => params[:user][:email],
+                'name' => params[:user][:name],
+                'surname' => params[:user][:surname],
+                'invitable_type' => 'EmployeeDrivingSchool',
+                'invitable_id' => EmployeeDrivingSchool.last.id
+              )
             end
           end
         end
@@ -186,48 +192,48 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
             let(:email) { invited_user.email }
 
             it 'creates StudentDrivingSchool record' do
-              expect{ subject.call }.to change{ StudentDrivingSchool.count }.by 1
+              expect { subject.call }.to change { StudentDrivingSchool.count }.by 1
             end
 
             it 'creates proper StudentDrivingSchool record' do
               subject.call
               expect(StudentDrivingSchool.last.attributes).to include(
-                                                                'student_id' => invited_user.id,
-                                                                'driving_school_id' => driving_school.id
-                                                              )
+                'student_id' => invited_user.id,
+                'driving_school_id' => driving_school.id
+              )
             end
 
             it 'sends email about driving school requesting for cooperation' do
-              expect{ subject.call }.to change { ActionMailer::Base.deliveries.count }.by(1)
+              expect { subject.call }.to change { ActionMailer::Base.deliveries.count }.by(1)
             end
           end
 
           context 'when invited user does NOT exist' do
             it 'creates Invitation' do
-              expect{ subject.call }.to change{ Invitation.count }.by 1
+              expect { subject.call }.to change { Invitation.count }.by 1
             end
 
             it 'creates StudentDrivingSchool record' do
-              expect{ subject.call }.to change{ StudentDrivingSchool.count }.by 1
+              expect { subject.call }.to change { StudentDrivingSchool.count }.by 1
             end
 
             it 'creates proper StudentDrivingSchool record' do
               subject.call
               expect(StudentDrivingSchool.last.attributes).to include(
-                                                                'student_id' => nil,
-                                                                'driving_school_id' => driving_school.id
-                                                              )
+                'student_id' => nil,
+                'driving_school_id' => driving_school.id
+              )
             end
 
             it 'creates proper Invitation record' do
               subject.call
               expect(Invitation.last.attributes).to include(
-                                                      'email' => params[:user][:email],
-                                                      'name' => params[:user][:name],
-                                                      'surname' => params[:user][:surname],
-                                                      'invitable_type' => 'StudentDrivingSchool',
-                                                      'invitable_id' => StudentDrivingSchool.last.id
-                                                    )
+                'email' => params[:user][:email],
+                'name' => params[:user][:name],
+                'surname' => params[:user][:surname],
+                'invitable_type' => 'StudentDrivingSchool',
+                'invitable_id' => StudentDrivingSchool.last.id
+              )
             end
           end
         end

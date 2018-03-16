@@ -1,16 +1,32 @@
 describe 'PUT /api/v1/driving_schools/driving_school_id/confirm_registration' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
-  let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school) }
-  let!(:employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, employee: employee, driving_school: driving_school) }
+
+  let!(:student_driving_school) {
+    create(:student_driving_school,
+           student: student,
+           driving_school: driving_school)
+  }
+  let!(:employee_driving_school) {
+    create(:employee_driving_school,
+           is_owner: is_owner,
+           employee: employee,
+           driving_school: driving_school,
+           status: :active)
+  }
+
   let(:driving_school) { create(:driving_school, status: :built) }
 
-  let(:response_keys) { %w(
-    id name phone_numbers emails website_link additional_information city street country profile_picture zip_code status
-  ) }
+  let(:response_keys) {
+    %w[
+      id name phone_numbers emails website_link additional_information
+      city street country profile_picture zip_code status
+    ]
+  }
 
   before do
-    put "/api/v1/driving_schools/#{driving_school_id}/confirm_registration", headers: current_user.create_new_auth_token
+    put "/api/v1/driving_schools/#{driving_school_id}/confirm_registration",
+        headers: current_user.create_new_auth_token
   end
 
   context 'when current_user is EMPLOYEE' do
@@ -23,7 +39,7 @@ describe 'PUT /api/v1/driving_schools/driving_school_id/confirm_registration' do
         let(:is_owner) { true }
 
         context 'when driving_school fulfilled registration requirements' do
-          let(:driving_school) { create(:driving_school, :with_schedule_settings_set, status: :built) }
+          let(:driving_school) { create(:driving_school, :with_schedule_settings, status: :built) }
 
           it 'set status of driving_school to pending' do
             driving_school.reload

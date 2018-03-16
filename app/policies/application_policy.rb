@@ -19,7 +19,7 @@ class ApplicationPolicy
   end
 
   def is_driving?(employee_driving_school)
-    employee_driving_school.employee_privilege_set.is_driving?
+    employee_driving_school.employee_privileges.is_driving?
   end
 
   def employee?
@@ -41,6 +41,6 @@ class ApplicationPolicy
   private
 
   def get_employee_privileges(driving_school_id)
-    EmployeeDrivingSchool.find_by(employee_id: user.id, driving_school_id: driving_school_id).employee_privilege_set
+    EmployeeDrivingSchool.find_by(employee_id: user.id, driving_school_id: driving_school_id).employee_privileges
   end
 end

@@ -10,7 +10,7 @@ class Api::V1::SchedulesController < ApplicationController
 
     Slot.transaction do
       @schedule.update!(schedule_params)
-      ScheduleSlotsService.new(@schedule).call
+      Slots::RescheduleAllService.new(@schedule).call
     end
 
     render @schedule
@@ -50,7 +50,10 @@ class Api::V1::SchedulesController < ApplicationController
   end
 
   def set_driving_school
-    @driving_school = current_user.driving_schools.find(params[:driving_school_id])
+    @driving_school = current_user.employee_driving_schools
+                                  .active_with_active_driving_school
+                                  .find_by!(driving_school_id: params[:driving_school_id])
+                                  .driving_school
   end
 
   def set_employee_driving_school

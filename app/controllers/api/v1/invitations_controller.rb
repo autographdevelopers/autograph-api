@@ -1,14 +1,14 @@
 class Api::V1::InvitationsController < ApplicationController
   before_action :verify_current_user_to_be_employee, only: [:create]
-  before_action :set_driving_school, onyl: [:create]
+  before_action :set_driving_school, only: [:create]
   before_action :set_invited_user_type, only: [:create]
-  before_action :set_driving_school_relation, onyl: [:accept, :reject]
+  before_action :set_user_driving_school, onyl: [:accept, :reject]
 
   def create
     authorize @driving_school, :can_manage_employees? if @invited_user_type == User::EMPLOYEE
     authorize @driving_school, :can_manage_students? if @invited_user_type == User::STUDENT
 
-    @user_driving_school_relation = CreateInvitationService.new(
+    @user_driving_school_relation = Invitations::CreateService.new(
       @driving_school,
       @invited_user_type,
       invited_user_params,
@@ -19,19 +19,15 @@ class Api::V1::InvitationsController < ApplicationController
   end
 
   def accept
-    @driving_school_relation.activate!
+    @user_driving_school.activate!
 
-    if current_user.employee?
-      @employee_driving_school = @driving_school_relation
-    elsif current_user.student?
-      @student_driving_school = @driving_school_relation
-    end
-
-    render 'api/v1/driving_schools/show'
+    render 'api/v1/driving_schools/show', locals: {
+      user_driving_school: @user_driving_school
+    }
   end
 
   def reject
-    @driving_school_relation.reject!
+    @user_driving_school.reject!
   end
 
   private
@@ -46,16 +42,25 @@ class Api::V1::InvitationsController < ApplicationController
 
   def invited_employee_privileges_params
     if @invited_user_type == User::EMPLOYEE
-      params.require(:employee_privilege_set).permit(:can_manage_employees, :can_manage_students, :can_modify_schedules,
-                                                     :is_driving)
+      params.require(:employee_privileges).permit(
+        :can_manage_employees,
+        :can_manage_students,
+        :can_modify_schedules,
+        :is_driving
+      )
     end
   end
 
   def set_driving_school
-    @driving_school = current_user.driving_schools.find(params[:driving_school_id])
+    @driving_school = current_user.employee_driving_schools
+                                  .active_with_active_driving_school
+                                  .find_by!(driving_school_id: params[:driving_school_id])
+                                  .driving_school
   end
 
-  def set_driving_school_relation
-    @driving_school_relation = current_user.get_relation(params[:driving_school_id])
+  def set_user_driving_school
+    @user_driving_school = current_user.user_driving_schools.find_by!(
+      driving_school_id: params[:driving_school_id]
+    )
   end
 end

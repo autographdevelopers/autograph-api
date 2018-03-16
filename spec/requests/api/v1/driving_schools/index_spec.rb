@@ -53,34 +53,31 @@ describe 'GET /api/v1/driving_schools' do
     end
 
     it 'returned records contain proper keys' do
-      expect(json_response.first.keys).to match_array %w(id name phone_numbers emails website_link additional_information
-                                                         city street country profile_picture status student_driving_school_status
-                                                         zip_code)
+      expect(json_response.first.keys).to match_array %w[id name phone_numbers emails website_link additional_information
+                                                         city street country profile_picture status relation_status
+                                                         zip_code]
     end
 
     it 'returns proper records' do
-      expect(json_response.pluck('id')).to match_array [
-                                                         driving_school_1.id, driving_school_2.id, driving_school_3.id,
-                                                         driving_school_5.id, driving_school_6.id, driving_school_7.id
-                                                       ]
+      expect(json_response.pluck('id')).to match_array [driving_school_2.id, driving_school_6.id]
     end
 
     it 'response contains driving school attributes' do
-      expect(json_response.first).to eq({
-                                          'id' => driving_school_1.id,
-                                          'name' => driving_school_1.name,
-                                          'phone_numbers' => driving_school_1.phone_numbers,
-                                          'emails' => driving_school_1.emails,
-                                          'website_link' => driving_school_1.website_link,
-                                          'additional_information' => driving_school_1.additional_information,
-                                          'city' => driving_school_1.city,
-                                          'street' => driving_school_1.street,
-                                          'country' => driving_school_1.country,
-                                          'profile_picture' => driving_school_1.profile_picture,
-                                          'status' => driving_school_1.status,
-                                          'zip_code' => driving_school_1.zip_code,
-                                          'student_driving_school_status' => employee_driving_school_1.status
-                                        })
+      expect(json_response.first).to eq(
+        'id' => driving_school_2.id,
+        'name' => driving_school_2.name,
+        'phone_numbers' => driving_school_2.phone_numbers,
+        'emails' => driving_school_2.emails,
+        'website_link' => driving_school_2.website_link,
+        'additional_information' => driving_school_2.additional_information,
+        'city' => driving_school_2.city,
+        'street' => driving_school_2.street,
+        'country' => driving_school_2.country,
+        'profile_picture' => driving_school_2.profile_picture,
+        'status' => driving_school_2.status,
+        'zip_code' => driving_school_2.zip_code,
+        'relation_status' => student_driving_school_2.status
+      )
     end
   end
 
@@ -92,47 +89,47 @@ describe 'GET /api/v1/driving_schools' do
     end
 
     it 'returned records contain proper keys' do
-      expect(json_response.first.keys).to match_array %w(id name phone_numbers emails website_link additional_information
+      expect(json_response.first.keys).to match_array %w[id name phone_numbers emails website_link additional_information
                                                          city street country profile_picture zip_code status
-                                                         employee_driving_school_status privilege_set)
+                                                         relation_status privileges]
     end
 
     it 'returned records contain proper keys for privilege_set' do
-      expect(json_response.first['privilege_set'].keys).to match_array %w(id can_manage_employees can_manage_students
-                                                                          can_modify_schedules is_driving is_owner)
+      expect(json_response.first['privileges'].keys).to match_array %w[id can_manage_employees can_manage_students
+                                                                          can_modify_schedules is_driving is_owner]
     end
 
     it 'returns proper records' do
       expect(json_response.pluck('id')).to match_array [
-                                                         driving_school_1.id, driving_school_2.id, driving_school_3.id,
-                                                         driving_school_5.id, driving_school_6.id, driving_school_7.id
-                                                       ]
+        driving_school_1.id, driving_school_2.id,
+        driving_school_5.id, driving_school_6.id
+      ]
     end
 
     it 'response contains driving school attributes' do
-      expect(json_response.first).to eq({
-                                          'id' => driving_school_1.id,
-                                          'name' => driving_school_1.name,
-                                          'phone_numbers' => driving_school_1.phone_numbers,
-                                          'emails' => driving_school_1.emails,
-                                          'website_link' => driving_school_1.website_link,
-                                          'additional_information' => driving_school_1.additional_information,
-                                          'city' => driving_school_1.city,
-                                          'street' => driving_school_1.street,
-                                          'country' => driving_school_1.country,
-                                          'profile_picture' => driving_school_1.profile_picture,
-                                          'status' => driving_school_1.status,
-                                          'zip_code' => driving_school_1.zip_code,
-                                          'employee_driving_school_status' => employee_driving_school_1.status,
-                                          'privilege_set' => {
-                                            'id' => employee_driving_school_1.id,
-                                            'can_manage_employees' => employee_driving_school_1.employee_privilege_set.can_manage_employees,
-                                            'can_manage_students' => employee_driving_school_1.employee_privilege_set.can_manage_students,
-                                            'can_modify_schedules' => employee_driving_school_1.employee_privilege_set.can_modify_schedules,
-                                            'is_driving' => employee_driving_school_1.employee_privilege_set.is_driving,
-                                            'is_owner' => employee_driving_school_1.employee_privilege_set.is_owner,
-                                          }
-                                        })
+      expect(json_response.first).to eq(
+        'id' => driving_school_1.id,
+        'name' => driving_school_1.name,
+        'phone_numbers' => driving_school_1.phone_numbers,
+        'emails' => driving_school_1.emails,
+        'website_link' => driving_school_1.website_link,
+        'additional_information' => driving_school_1.additional_information,
+        'city' => driving_school_1.city,
+        'street' => driving_school_1.street,
+        'country' => driving_school_1.country,
+        'profile_picture' => driving_school_1.profile_picture,
+        'status' => driving_school_1.status,
+        'zip_code' => driving_school_1.zip_code,
+        'relation_status' => employee_driving_school_1.status,
+        'privileges' => {
+          'id' => employee_driving_school_1.id,
+          'can_manage_employees' => employee_driving_school_1.employee_privileges.can_manage_employees,
+          'can_manage_students' => employee_driving_school_1.employee_privileges.can_manage_students,
+          'can_modify_schedules' => employee_driving_school_1.employee_privileges.can_modify_schedules,
+          'is_driving' => employee_driving_school_1.employee_privileges.is_driving,
+          'is_owner' => employee_driving_school_1.employee_privileges.is_owner
+        }
+      )
     end
   end
 end

@@ -8,8 +8,7 @@ describe DrivingSchool do
     it { should have_many(:employees).through(:employee_driving_schools) }
     it { should have_many(:student_driving_schools) }
     it { should have_many(:students).through(:student_driving_schools) }
-    it { should have_many(:schedule_boundaries) }
-    it { should have_one(:schedule_settings_set) }
+    it { should have_one(:schedule_settings) }
   end
 
   context 'validations' do
@@ -28,7 +27,7 @@ describe DrivingSchool do
 
     it 'can transit from built to pending when requirements fulfilled' do
       create(:employee_driving_school, is_owner: true, employee: employee, driving_school: driving_school)
-      create(:schedule_settings_set, driving_school: driving_school)
+      create(:schedule_settings, driving_school: driving_school)
       expect(driving_school).to transition_from(:built).to(:pending).on_event(:confirm_registration)
     end
 

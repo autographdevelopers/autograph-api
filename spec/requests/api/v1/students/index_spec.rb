@@ -1,21 +1,46 @@
 describe 'GET /api/v1/driving_schools/:driving_school_id/students' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
-  let!(:student_driving_school) { create(:student_driving_school, student: student, driving_school: driving_school, status: :active) }
-  let!(:employee_driving_school) { create(:employee_driving_school, is_owner: is_owner, can_manage_students: can_manage_students,
-                                          employee: employee, driving_school: driving_school) }
-  let(:driving_school) { create(:driving_school) }
 
-  let(:invitation_student_driving_school) { create(:student_driving_school, student: nil, driving_school: driving_school, status: :pending) }
+  let!(:student_driving_school) do
+    create(:student_driving_school,
+           student: student,
+           driving_school: driving_school,
+           status: :active)
+  end
+  let!(:employee_driving_school) do
+    create(:employee_driving_school,
+           is_owner: is_owner,
+           can_manage_students: can_manage_students,
+           employee: employee,
+           driving_school: driving_school,
+           status: :active)
+  end
+
+  let(:driving_school) { create(:driving_school, status: :active) }
+
   let!(:invitation) { create(:invitation, invitable: invitation_student_driving_school) }
+  let(:invitation_student_driving_school) do
+    create(:student_driving_school,
+           student: nil,
+           driving_school: driving_school,
+           status: :pending)
+  end
+
+  let!(:driving_lesson) do
+    create(:driving_lesson,
+           student_driving_school: student_driving_school,
+           employee_driving_school: employee_driving_school)
+  end
 
   let(:is_owner) { false }
   let(:can_manage_students) { false }
 
-  let(:response_keys) { %w(id email name surname status type) }
+  let(:response_keys) { %w[id email name surname status type] }
 
   before do
-    get "/api/v1/driving_schools/#{driving_school_id}/students", headers: current_user.create_new_auth_token
+    get "/api/v1/driving_schools/#{driving_school_id}/students",
+        headers: current_user.create_new_auth_token
   end
 
   context 'when current_user is EMPLOYEE' do
@@ -40,12 +65,12 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students' do
         end
 
         it 'response contains student attributes' do
-          expect(json_response.first).to include({
-                                              'id' => student.id,
-                                              'email' => student.email,
-                                              'name' => student.name,
-                                              'surname' => student.surname,
-                                            })
+          expect(json_response.first).to include(
+            'id' => student.id,
+            'email' => student.email,
+            'name' => student.name,
+            'surname' => student.surname
+          )
         end
       end
 
@@ -65,35 +90,60 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students' do
         end
 
         it 'response contains student attributes' do
-          expect(json_response.first).to include({
-                                              'id' => student.id,
-                                              'email' => student.email,
-                                              'name' => student.name,
-                                              'surname' => student.surname,
-                                            })
+          expect(json_response.first).to include(
+            'id' => student.id,
+            'email' => student.email,
+            'name' => student.name,
+            'surname' => student.surname
+          )
         end
       end
 
       context 'when employee can NOT manage students and is NOT an owner' do
-        it 'returns 200 http status code' do
-          expect(response.status).to eq 200
+        context 'when employee had driving lesson with students' do
+          it 'returns 200 http status code' do
+            expect(response.status).to eq 200
+          end
+
+          it 'returned records contain proper keys' do
+            expect(json_response.first.keys).to match_array response_keys
+          end
+
+          it 'returns proper records' do
+            expect(json_response.pluck('id')).to match_array [student.id]
+          end
+
+          it 'response contains student attributes' do
+            expect(json_response.first).to include(
+              'id' => student.id,
+              'email' => student.email,
+              'name' => student.name,
+              'surname' => student.surname
+            )
+          end
         end
 
-        it 'returned records contain proper keys' do
-          expect(json_response.first.keys).to match_array response_keys
-        end
+        context 'when employee had driving lesson with students' do
+          it 'returns 200 http status code' do
+            expect(response.status).to eq 200
+          end
 
-        it 'returns proper records' do
-          expect(json_response.pluck('id')).to match_array [student.id]
-        end
+          it 'returned records contain proper keys' do
+            expect(json_response.first.keys).to match_array response_keys
+          end
 
-        it 'response contains student attributes' do
-          expect(json_response.first).to include({
-                                              'id' => student.id,
-                                              'email' => student.email,
-                                              'name' => student.name,
-                                              'surname' => student.surname,
-                                            })
+          it 'returns proper records' do
+            expect(json_response.pluck('id')).to match_array [student.id]
+          end
+
+          it 'response contains student attributes' do
+            expect(json_response.first).to include(
+              'id' => student.id,
+              'email' => student.email,
+              'name' => student.name,
+              'surname' => student.surname
+            )
+          end
         end
       end
     end
