@@ -1,5 +1,7 @@
-describe ScheduleSlotsService do
+describe Slots::RescheduleAllService do
   include ActiveSupport::Testing::TimeHelpers
+
+  before(:all) { travel_to Time.new(2018, 3, 16, 0, 0, 0, '+02:00') }
 
   context '#call' do
     let(:date_times_range) do
@@ -8,7 +10,7 @@ describe ScheduleSlotsService do
       }
     end
 
-    subject { ScheduleSlotsService.new(schedule) }
+    subject { Slots::RescheduleAllService.new(schedule) }
     let(:employee_driving_school) { schedule.employee_driving_school }
 
     context "when driving school has time zone set to 'Poland'" do

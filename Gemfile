@@ -47,3 +47,6 @@ gem 'aasm'
 gem 'timezone'
 gem 'bulk_insert'
 gem 'holidays'
+
+gem 'sidekiq'
+gem 'sidekiq-cron'
