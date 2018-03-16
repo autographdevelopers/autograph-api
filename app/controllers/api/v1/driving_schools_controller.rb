@@ -17,7 +17,7 @@ class Api::V1::DrivingSchoolsController < ApplicationController
   end
 
   def create
-    @employee_driving_school = CreateDrivingSchoolService.new(
+    @employee_driving_school = DrivingSchools::CreateService.new(
       current_user,
       driving_school_params
     ).call

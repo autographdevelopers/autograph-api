@@ -1,4 +1,4 @@
-class CreateDrivingSchoolService
+class DrivingSchools::CreateService
   def initialize(user, driving_school_params)
     @user = user
     @params = driving_school_params

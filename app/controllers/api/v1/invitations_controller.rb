@@ -8,7 +8,7 @@ class Api::V1::InvitationsController < ApplicationController
     authorize @driving_school, :can_manage_employees? if @invited_user_type == User::EMPLOYEE
     authorize @driving_school, :can_manage_students? if @invited_user_type == User::STUDENT
 
-    @user_driving_school_relation = CreateInvitationService.new(
+    @user_driving_school_relation = Invitations::CreateService.new(
       @driving_school,
       @invited_user_type,
       invited_user_params,

@@ -1,4 +1,4 @@
-class CreateInvitationService
+class Invitations::CreateService
   def initialize(driving_school, invited_user_type, invited_user_params, invited_user_privileges_params)
     @driving_school = driving_school
     @invited_user_type = invited_user_type
@@ -43,7 +43,7 @@ class CreateInvitationService
   private
 
   attr_reader :driving_school, :invited_user_type, :invited_user_params,
-              :invited_user_privileges_params, :invited_user
+    :invited_user_privileges_params, :invited_user
 
   def validate_invited_user_type
     raise ActiveRecord::SubclassNotFound unless User::TYPES.include?(invited_user_type)

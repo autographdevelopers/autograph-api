@@ -1,4 +1,4 @@
-describe CreateInvitationService do
+describe Invitations::CreateService do
   let(:driving_school) { create(:driving_school) }
 
   let!(:employee_driving_school) do
@@ -9,7 +9,7 @@ describe CreateInvitationService do
 
   context '#call' do
     subject do
-      CreateInvitationService.new(
+      Invitations::CreateService.new(
         driving_school,
         invited_user_type,
         invited_user_params,
@@ -165,7 +165,7 @@ describe CreateInvitationService do
         invited_user_params = invited_user.attributes.symbolize_keys.slice(:name, :surname, :email)
 
         expect do
-          CreateInvitationService.new(driving_school, invited_user_type, invited_user_params, invited_user_privileges_params).call
+          Invitations::CreateService.new(driving_school, invited_user_type, invited_user_params, invited_user_privileges_params).call
         end.to raise_error(ArgumentError, 'Invited user already exists but with different role.')
       end
 
@@ -174,7 +174,7 @@ describe CreateInvitationService do
         invited_user_params = attributes_for(:user).symbolize_keys.slice(:name, :surname)
 
         expect do
-          CreateInvitationService.new(driving_school, invited_user_type, invited_user_params, invited_user_privileges_params).call
+          Invitations::CreateService.new(driving_school, invited_user_type, invited_user_params, invited_user_privileges_params).call
         end.to raise_error ActiveRecord::RecordInvalid
       end
 
@@ -183,7 +183,7 @@ describe CreateInvitationService do
         invited_user_params = invited_user.attributes.symbolize_keys.slice(:name, :surname)
 
         expect do
-          CreateInvitationService.new(driving_school, invited_user_type, invited_user_params, invited_user_privileges_params).call
+          Invitations::CreateService.new(driving_school, invited_user_type, invited_user_params, invited_user_privileges_params).call
         end.to raise_error ActiveRecord::RecordInvalid
       end
 
@@ -192,7 +192,7 @@ describe CreateInvitationService do
         invited_user_params = invited_user.attributes.symbolize_keys.slice(:name, :surname, :email)
 
         expect do
-          CreateInvitationService.new(nil, invited_user_type, invited_user_params, invited_user_privileges_params).call
+          Invitations::CreateService.new(nil, invited_user_type, invited_user_params, invited_user_privileges_params).call
         end.to raise_error ActiveRecord::RecordInvalid
       end
 
@@ -200,7 +200,7 @@ describe CreateInvitationService do
         invited_user_params = invited_user.attributes.symbolize_keys.slice(:name, :surname, :email)
 
         expect do
-          CreateInvitationService.new(driving_school, 'InvalidType', invited_user_params, invited_user_privileges_params).call
+          Invitations::CreateService.new(driving_school, 'InvalidType', invited_user_params, invited_user_privileges_params).call
         end.to raise_error ActiveRecord::SubclassNotFound
       end
     end
