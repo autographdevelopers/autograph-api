@@ -85,12 +85,12 @@ describe 'GET /api/v1/driving_schools/:id' do
       it 'returned records contain proper keys' do
         expect(json_response.keys).to match_array %w[id name phone_numbers emails website_link additional_information
                                                      city street country profile_picture zip_code status
-                                                     relation_status privilege_set]
+                                                     relation_status privileges]
       end
 
       it 'returned records contain proper keys for privilege_set' do
-        expect(json_response['privilege_set'].keys).to match_array %w[id can_manage_employees can_manage_students
-                                                                      can_modify_schedules is_driving is_owner]
+        expect(json_response['privileges'].keys).to match_array %w[id can_manage_employees can_manage_students
+                                                                   can_modify_schedules is_driving is_owner]
       end
 
       it 'response contains driving school attributes' do
@@ -108,7 +108,7 @@ describe 'GET /api/v1/driving_schools/:id' do
           'status' => driving_school.status,
           'zip_code' => driving_school.zip_code,
           'relation_status' => employee_driving_school.status,
-          'privilege_set' => {
+          'privileges' => {
             'id' => employee_driving_school.id,
             'can_manage_employees' => employee_driving_school.employee_privileges.can_manage_employees,
             'can_manage_students' => employee_driving_school.employee_privileges.can_manage_students,

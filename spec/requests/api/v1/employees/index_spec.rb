@@ -50,7 +50,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees' do
            status: :pending)
   end
 
-  let(:response_keys) { %w[id email name surname status type] }
+  let(:response_keys) { %w[id email name surname status type privileges] }
 
   before do
     get "/api/v1/driving_schools/#{driving_school_id}/employees",
@@ -130,6 +130,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees' do
     end
 
     it 'returned records contain proper keys' do
+      response_keys.delete('privileges')
       expect(json_response.first.keys).to match_array response_keys
     end
 

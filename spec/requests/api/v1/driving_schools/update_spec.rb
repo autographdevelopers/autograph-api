@@ -21,7 +21,7 @@ describe 'PUT /api/v1/driving_schools/:id' do
   let(:response_keys) do
     %w[
       id name phone_numbers emails website_link additional_information city street
-      country profile_picture zip_code status relation_status privilege_set
+      country profile_picture zip_code status relation_status privileges
     ]
   end
 
