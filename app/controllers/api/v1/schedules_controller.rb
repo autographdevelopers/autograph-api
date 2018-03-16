@@ -10,7 +10,7 @@ class Api::V1::SchedulesController < ApplicationController
 
     Slot.transaction do
       @schedule.update!(schedule_params)
-      Slots::RescheduleAllService.new(@schedule).call
+      Slots::RescheduleAllService.new(@schedule).call if @schedule.changed?
     end
 
     render @schedule

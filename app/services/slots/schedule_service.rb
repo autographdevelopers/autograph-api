@@ -41,7 +41,7 @@ module Slots
     def use_new_template?
       return false unless new_template_binding_from.present?
 
-      last_day_of_possible_booking >= new_template_binding_from
+      date >= new_template_binding_from
     end
 
     def weekday_name

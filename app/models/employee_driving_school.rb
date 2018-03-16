@@ -23,7 +23,7 @@ class EmployeeDrivingSchool < ApplicationRecord
 
   scope :eligible_for_viewing, -> {
     where(status: [:active, :pending], driving_schools: { status: [:active, :pending] })
-      .includes(:driving_school)
+      .includes(:driving_school, :employee_privileges)
   }
 
   # == Validations ============================================================
