@@ -1,6 +1,6 @@
 class Api::V1::InvitationsController < ApplicationController
-  before_action :verify_current_user_to_be_employee, only: [:create]
-  before_action :set_driving_school, only: [:create]
+  before_action :verify_current_user_to_be_employee, only: [:create, :destroy]
+  before_action :set_driving_school, only: [:create, :destroy]
   before_action :set_invited_user_type, only: [:create]
   before_action :set_user_driving_school, onyl: [:accept, :reject]
 
@@ -28,6 +28,24 @@ class Api::V1::InvitationsController < ApplicationController
 
   def reject
     @user_driving_school.reject!
+  end
+
+  def destroy
+    user_driving_school = nil
+
+    if params[:type] == User::EMPLOYEE
+      authorize @driving_school, :can_manage_employees?
+
+      user_driving_school = @driving_school.employee_driving_schools
+                                           .find_by!(employee_id: params[:user_id])
+    elsif params[:type] == User::STUDENT
+      authorize @driving_school, :can_manage_students?
+
+      user_driving_school = @driving_school.student_driving_schools
+                                           .find_by!(student_id: params[:user_id])
+    end
+
+    user_driving_school.archive!
   end
 
   private

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
           collection do
             put :accept
             put :reject
+            delete :destroy
           end
         end
         resources :students, only: [:index]

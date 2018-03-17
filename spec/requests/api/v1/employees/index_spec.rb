@@ -50,7 +50,9 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees' do
            status: :pending)
   end
 
-  let(:response_keys) { %w[id email name surname status type privileges] }
+  let(:response_keys) do
+    %w[id email name surname status type privileges phone_number invitation_sent_at]
+  end
 
   before do
     get "/api/v1/driving_schools/#{driving_school_id}/employees",

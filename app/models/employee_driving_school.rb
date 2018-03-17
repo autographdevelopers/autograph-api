@@ -44,5 +44,9 @@ class EmployeeDrivingSchool < ApplicationRecord
     event :reject do
       transitions from: :pending, to: :rejected
     end
+
+    event :archive do
+      transitions to: :archived
+    end
   end
 end
