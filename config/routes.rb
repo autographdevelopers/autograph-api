@@ -18,7 +18,9 @@ Rails.application.routes.draw do
             delete :destroy
           end
         end
-        resources :students, only: [:index]
+        resources :students, only: [:index] do
+          resource :driving_course, only: [:show, :update]
+        end
         resources :employees, only: [:index] do
           resource :employee_privileges, only: [:update, :show]
           resource :schedule, only: [:update, :show]
