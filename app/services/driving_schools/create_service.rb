@@ -8,7 +8,7 @@ class DrivingSchools::CreateService
     DrivingSchool.transaction do
       driving_school = DrivingSchool.create!(params)
       employee_driving_school = EmployeeDrivingSchool.create!(
-        employee: user, driving_school: driving_school
+        employee: user, driving_school: driving_school, status: :active
       )
       EmployeePrivileges.create!(
         employee_driving_school: employee_driving_school,
