@@ -11,7 +11,7 @@ class Api::V1::DrivingLessonsController < ApplicationController
   end
 
   def cancel
-    # authorize @driving_lesson
+    authorize @driving_lesson
 
     DrivingLessons::CancelService.new(current_user, @driving_lesson).call
 
@@ -28,7 +28,7 @@ class Api::V1::DrivingLessonsController < ApplicationController
   end
 
   def set_driving_lesson
-    @driving_lesson = DrivingLesson.by_driving_school(@driving_school.id)
+    @driving_lesson = DrivingLesson.where(driving_school_id: @driving_school.id)
                                    .upcoming
                                    .find(params[:id])
   end

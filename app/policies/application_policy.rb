@@ -18,6 +18,10 @@ class ApplicationPolicy
     get_employee_privileges(driving_school_id).can_manage_students?
   end
 
+  def can_modify_schedules_in_driving_school?(driving_school_id)
+    get_employee_privileges(driving_school_id).can_modify_schedules?
+  end
+
   def is_driving?(employee_driving_school)
     employee_driving_school.employee_privileges.is_driving?
   end
