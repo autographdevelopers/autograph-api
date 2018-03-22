@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314194356) do
+ActiveRecord::Schema.define(version: 20180318094233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20180314194356) do
     t.integer "category_type", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "booked_hours", default: 0, null: false
+    t.integer "used_hours", default: 0, null: false
     t.index ["student_driving_school_id"], name: "index_driving_courses_on_student_driving_school_id"
   end
 
