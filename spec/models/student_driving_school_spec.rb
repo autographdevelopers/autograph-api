@@ -7,8 +7,7 @@ describe StudentDrivingSchool do
     it { should belong_to(:driving_school) }
     it { should belong_to(:student) }
     it { should have_one(:invitation) }
-    it { should have_many(:driving_courses) }
-    it { should have_many(:driving_lessons) }
+    it { should have_one(:driving_course) }
   end
 
   context 'validations' do

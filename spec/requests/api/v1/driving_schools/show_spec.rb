@@ -20,7 +20,7 @@ describe 'GET /api/v1/driving_schools/:id' do
   let(:response_keys) do
     %w[
       id name phone_numbers emails website_link additional_information city
-      street country profile_picture zip_code status
+      street country profile_picture zip_code status latitude longitude
     ]
   end
 
@@ -41,7 +41,7 @@ describe 'GET /api/v1/driving_schools/:id' do
       it 'returned records contain proper keys' do
         expect(json_response.keys).to match_array %w[id name phone_numbers emails website_link additional_information
                                                      city street country profile_picture status relation_status
-                                                     zip_code]
+                                                     zip_code latitude longitude]
       end
 
       it 'response contains driving school attributes' do
@@ -58,7 +58,9 @@ describe 'GET /api/v1/driving_schools/:id' do
           'profile_picture' => driving_school.profile_picture,
           'status' => driving_school.status,
           'zip_code' => driving_school.zip_code,
-          'relation_status' => student_driving_school.status
+          'relation_status' => student_driving_school.status,
+          'latitude' => driving_school.latitude.to_s,
+          'longitude' => driving_school.longitude.to_s
         )
       end
     end
@@ -85,7 +87,7 @@ describe 'GET /api/v1/driving_schools/:id' do
       it 'returned records contain proper keys' do
         expect(json_response.keys).to match_array %w[id name phone_numbers emails website_link additional_information
                                                      city street country profile_picture zip_code status
-                                                     relation_status privileges]
+                                                     relation_status privileges latitude longitude]
       end
 
       it 'returned records contain proper keys for privilege_set' do
@@ -107,6 +109,8 @@ describe 'GET /api/v1/driving_schools/:id' do
           'profile_picture' => driving_school.profile_picture,
           'status' => driving_school.status,
           'zip_code' => driving_school.zip_code,
+          'latitude' => driving_school.latitude.to_s,
+          'longitude' => driving_school.longitude.to_s,
           'relation_status' => employee_driving_school.status,
           'privileges' => {
             'id' => employee_driving_school.id,

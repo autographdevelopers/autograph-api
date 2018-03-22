@@ -3,8 +3,9 @@ class DrivingLesson < ApplicationRecord
   include AASM
 
   # == Relations ==============================================================
-  belongs_to :student_driving_school
-  belongs_to :employee_driving_school
+  belongs_to :student
+  belongs_to :employee
+  belongs_to :driving_school
   has_many :slots
 
   # == Enumerators ============================================================
