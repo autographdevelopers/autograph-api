@@ -18,6 +18,11 @@ Rails.application.routes.draw do
             delete :destroy
           end
         end
+        resources :driving_lessons, only: [:index] do
+          member do
+            put :cancel
+          end
+        end
         resources :students, only: [:index] do
           resource :driving_course, only: [:show, :update]
         end

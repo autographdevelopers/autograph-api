@@ -11,6 +11,9 @@ class StudentDrivingSchool < ApplicationRecord
   has_one :driving_course
   has_many :driving_lessons
 
+  # == Callbacks ==============================================================
+  after_create :create_driving_course
+
   # == Scopes =================================================================
   scope :active_with_active_driving_school, -> {
     where(status: :active, driving_schools: { status: :active })
