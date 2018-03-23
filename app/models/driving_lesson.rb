@@ -16,6 +16,8 @@ class DrivingLesson < ApplicationRecord
 
   # == Scopes =================================================================
   scope :upcoming, -> { where('driving_lessons.start_time > ?', Time.now) }
+  scope :student_id, ->(value) { where(student_id: value) }
+  scope :employee_id, ->(value) { where(employee_id: value) }
 
   # == State Machine ==========================================================
   aasm column: :status, enum: true do

@@ -2,11 +2,12 @@ class Api::V1::DrivingLessonsController < ApplicationController
   before_action :set_driving_school
   before_action :set_driving_lesson, only: [:cancel]
 
+  has_scope :student_id
+  has_scope :employee_id
+
   def index
-    @driving_lessons = DrivingLesson.where(
-      employee_id: employee_id,
-      student_id: student_id,
-      driving_school_id: @driving_school.id
+    @driving_lessons = apply_scopes(
+      policy_scope(@driving_school.driving_lessons)
     ).active.upcoming.includes(:slots)
   end
 
@@ -31,13 +32,5 @@ class Api::V1::DrivingLessonsController < ApplicationController
     @driving_lesson = DrivingLesson.where(driving_school_id: @driving_school.id)
                                    .upcoming
                                    .find(params[:id])
-  end
-
-  def employee_id
-    current_user.employee? ? params[:employee_id] : nil
-  end
-
-  def student_id
-    current_user.employee? ? params[:student_id] : current_user.id
   end
 end
