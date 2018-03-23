@@ -31,21 +31,14 @@ class Api::V1::InvitationsController < ApplicationController
   end
 
   def destroy
-    user_driving_school = nil
+    authorize @driving_school, :can_manage_employees? if params[:type] == User::EMPLOYEE
+    authorize @driving_school, :can_manage_students? if params[:type] == User::STUDENT
 
-    if params[:type] == User::EMPLOYEE
-      authorize @driving_school, :can_manage_employees?
-
-      user_driving_school = @driving_school.employee_driving_schools
-                                           .find_by!(employee_id: params[:user_id])
-    elsif params[:type] == User::STUDENT
-      authorize @driving_school, :can_manage_students?
-
-      user_driving_school = @driving_school.student_driving_schools
-                                           .find_by!(student_id: params[:user_id])
-    end
-
-    user_driving_school.archive!
+    Invitations::DestroyService.new(
+      invitation_id: params[:user_id],
+      invited_user_type: params[:type],
+      driving_school: @driving_school
+    ).call
   end
 
   private
