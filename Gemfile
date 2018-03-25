@@ -50,3 +50,4 @@ gem 'holidays'
 
 gem 'sidekiq'
 gem 'sidekiq-cron'
+gem 'has_scope'

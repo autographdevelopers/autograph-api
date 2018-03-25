@@ -10,4 +10,7 @@ class Slot < ApplicationRecord
   scope :booked,    -> { where.not(driving_lesson: nil) }
   scope :available, -> { where(driving_lesson: nil) }
   scope :future,    -> { where('start_time > ?', Time.now) }
+  scope :by_start_time, ->(from, to) {
+    where("start_time >= ? AND start_time <= ?", from, to)
+  }
 end

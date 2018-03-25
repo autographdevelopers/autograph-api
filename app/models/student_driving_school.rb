@@ -9,7 +9,9 @@ class StudentDrivingSchool < ApplicationRecord
   belongs_to :driving_school
   has_one :invitation, as: :invitable
   has_one :driving_course
-  has_many :driving_lessons
+
+  # == Callbacks ==============================================================
+  after_create :create_driving_course
 
   # == Scopes =================================================================
   scope :active_with_active_driving_school, -> {

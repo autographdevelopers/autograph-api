@@ -1,7 +1,8 @@
 describe DrivingLesson do
   context 'relations' do
-    it { should belong_to(:employee_driving_school) }
-    it { should belong_to(:student_driving_school) }
+    it { should belong_to(:driving_school) }
+    it { should belong_to(:employee) }
+    it { should belong_to(:student) }
     it { should have_many(:slots) }
   end
 

@@ -18,6 +18,10 @@ class ApplicationPolicy
     get_employee_privileges(driving_school_id).can_manage_students?
   end
 
+  def can_modify_schedules_in_driving_school?(driving_school_id)
+    get_employee_privileges(driving_school_id).can_modify_schedules?
+  end
+
   def is_driving?(employee_driving_school)
     employee_driving_school.employee_privileges.is_driving?
   end
@@ -35,6 +39,23 @@ class ApplicationPolicy
       define_method(action) do
         instance_exec(&options[:if])
       end
+    end
+  end
+
+  def scope
+    Pundit.policy_scope!(user, record.class)
+  end
+
+  class Scope
+    attr_reader :user, :scope
+
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+
+    def resolve
+      scope
     end
   end
 

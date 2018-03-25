@@ -9,6 +9,7 @@ describe DrivingSchool do
     it { should have_many(:student_driving_schools) }
     it { should have_many(:students).through(:student_driving_schools) }
     it { should have_one(:schedule_settings) }
+    it { should have_many(:driving_lessons) }
   end
 
   context 'validations' do

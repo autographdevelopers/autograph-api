@@ -10,7 +10,7 @@ DrivingSchool.statuses.keys.each do |status|
                       status: e_status)
     eds.employee_privileges.update(can_manage_employees: true, can_manage_students: true, can_modify_schedules: true, is_driving: true)
     FactoryBot.create(:employee_driving_school,
-                      driving_school: FactoryBot.create(:driving_school, status: status),
+                      driving_school: FactoryBot.create(:driving_school, :with_schedule_settings,  status: status),
                       employee: owner,
                       status: e_status,
                       is_owner: true)
@@ -41,13 +41,23 @@ DrivingSchool.active.each do |driving_school|
       is_driving: i == 3,
       is_owner: i == 4
     )
-    FactoryBot.create(:student_driving_school, driving_school: driving_school, status: :active)
+    sds = FactoryBot.create(:student_driving_school, driving_school: driving_school, status: :active)
 
     FactoryBot.create(:employee_driving_school, driving_school: driving_school, status: :archived)
     FactoryBot.create(:student_driving_school, driving_school: driving_school, status: :archived)
 
     FactoryBot.create(:employee_driving_school, driving_school: driving_school, status: :pending)
     FactoryBot.create(:student_driving_school, driving_school: driving_school, status: :pending)
+
+    if i == 3
+      3.times do |i|
+        FactoryBot.create(:driving_lesson,
+                          driving_school: driving_school,
+                          employee: eds.employee,
+                          student: sds.student,
+                          start_time: i.days.from_now)
+      end
+    end
   end
 end
 

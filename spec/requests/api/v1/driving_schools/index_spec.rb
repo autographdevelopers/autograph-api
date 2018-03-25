@@ -55,7 +55,7 @@ describe 'GET /api/v1/driving_schools' do
     it 'returned records contain proper keys' do
       expect(json_response.first.keys).to match_array %w[id name phone_numbers emails website_link additional_information
                                                          city street country profile_picture status relation_status
-                                                         zip_code]
+                                                         zip_code latitude longitude]
     end
 
     it 'returns proper records' do
@@ -76,6 +76,8 @@ describe 'GET /api/v1/driving_schools' do
         'profile_picture' => driving_school_2.profile_picture,
         'status' => driving_school_2.status,
         'zip_code' => driving_school_2.zip_code,
+        'latitude' => driving_school_2.latitude.to_s,
+        'longitude' => driving_school_2.longitude.to_s,
         'relation_status' => student_driving_school_2.status
       )
     end
@@ -91,7 +93,7 @@ describe 'GET /api/v1/driving_schools' do
     it 'returned records contain proper keys' do
       expect(json_response.first.keys).to match_array %w[id name phone_numbers emails website_link additional_information
                                                          city street country profile_picture zip_code status
-                                                         relation_status privileges]
+                                                         relation_status privileges latitude longitude]
     end
 
     it 'returned records contain proper keys for privilege_set' do
@@ -120,6 +122,8 @@ describe 'GET /api/v1/driving_schools' do
         'profile_picture' => driving_school_1.profile_picture,
         'status' => driving_school_1.status,
         'zip_code' => driving_school_1.zip_code,
+        'latitude' => driving_school_1.latitude.to_s,
+        'longitude' => driving_school_1.longitude.to_s,
         'relation_status' => employee_driving_school_1.status,
         'privileges' => {
           'id' => employee_driving_school_1.id,

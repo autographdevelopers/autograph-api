@@ -20,8 +20,9 @@ describe 'PUT /api/v1/driving_schools/:id' do
   let(:is_owner) { false }
   let(:response_keys) do
     %w[
-      id name phone_numbers emails website_link additional_information city street
-      country profile_picture zip_code status relation_status privileges
+      id name phone_numbers emails website_link additional_information city
+      street country profile_picture zip_code status relation_status privileges
+      latitude longitude
     ]
   end
 
@@ -99,6 +100,8 @@ describe 'PUT /api/v1/driving_schools/:id' do
                 'street' => params[:driving_school][:street],
                 'country' => params[:driving_school][:country],
                 'profile_picture' => params[:driving_school][:profile_picture],
+                'latitude' => params[:driving_school][:latitude].to_s,
+                'longitude' => params[:driving_school][:longitude].to_s,
                 'status' => driving_school.status
               )
             end
