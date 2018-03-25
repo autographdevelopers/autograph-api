@@ -3,7 +3,11 @@ if @user_driving_school_relation.is_a? EmployeeDrivingSchool
     employee: @user_driving_school_relation.employee || @user_driving_school_relation.invitation,
     employee_driving_school: @user_driving_school_relation
   }
-elsif  @user_driving_school_relation.is_a? StudentDrivingSchool
+  json.privileges do
+    json.partial! 'api/v1/employee_privileges/employee_privileges',
+                  employee_privileges: @user_driving_school_relation.employee_privileges
+  end
+elsif @user_driving_school_relation.is_a? StudentDrivingSchool
   json.partial! 'api/v1/students/student', locals: {
     student: @user_driving_school_relation.student || @user_driving_school_relation.invitation,
     student_driving_school: @user_driving_school_relation
