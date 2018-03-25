@@ -32,6 +32,6 @@ class DrivingLesson < ApplicationRecord
   private
 
   def start_time_in_future?
-    start_time >= Time.now
+    start_time > Time.now
   end
 end
