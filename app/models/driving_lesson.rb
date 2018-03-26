@@ -16,6 +16,7 @@ class DrivingLesson < ApplicationRecord
 
   # == Scopes =================================================================
   scope :upcoming, -> { where('driving_lessons.start_time > ?', Time.now) }
+  scope :past, -> { where('driving_lessons.start_time < ?', Time.now) }
   scope :student_id, ->(value) { where(student_id: value) }
   scope :employee_id, ->(value) { where(employee_id: value) }
   scope :driving_lessons_ids, ->(value) { where(id: value) }

@@ -8,11 +8,15 @@ class Api::V1::DrivingLessonsController < ApplicationController
   has_scope :student_id
   has_scope :employee_id
   has_scope :driving_lessons_ids, type: :array
+  has_scope :active, type: :boolean
+  has_scope :canceled, type: :boolean
+  has_scope :upcoming, type: :boolean
+  has_scope :past, type: :boolean
 
   def index
     @driving_lessons = apply_scopes(
       policy_scope(@driving_school.driving_lessons)
-    ).active.upcoming.includes(:slots)
+    ).includes(:slots)
   end
 
   def cancel

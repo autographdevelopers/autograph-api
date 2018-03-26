@@ -36,14 +36,9 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
            start_time: 3.day.from_now)
   end
 
-  let(:params) do
-    {
-      by_start_time: {
-        from: 2.day.from_now,
-        to: 3.day.from_now
-      }
-    }
-  end
+  let(:params) { {} }
+
+  let(:response_keys) { %w[employee_id id start_time driving_lesson_id] }
 
   before do
     get api_v1_driving_school_employee_slots_path(driving_school.id, employee.id),
@@ -51,9 +46,71 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
         params: params
   end
 
-  let(:current_user) { student }
+  context 'when current_user is EMPLOYEE' do
+    let(:current_user) { employee }
 
-  it 'sdfsda' do
-    p json_response
+    it 'returned records contain proper keys' do
+      expect(json_response.first.keys).to match_array response_keys
+    end
+
+    it 'response contains driving lesson attributes' do
+      expect(json_response.find { |i| i['id'] == slot_1.id }).to include(
+        'id' => slot_1.id,
+        'employee_id' => slot_1.employee_driving_school.employee_id,
+        # 'start_time' => slot_1.start_time,
+        'driving_lesson_id' => slot_1.driving_lesson_id
+      )
+    end
+
+    context 'with by_start_time param' do
+      let(:params) do
+        {
+          by_start_time: {
+            from: 1.day.from_now - 1.hour,
+            to: 2.day.from_now + 1.hour
+          }
+        }
+      end
+
+      it 'returns proper records' do
+        expect(json_response.pluck('id')).to match_array [
+          slot_1.id, slot_2.id
+        ]
+      end
+    end
+  end
+
+  context 'when current_user is STUDENT' do
+    let(:current_user) { student }
+
+    it 'returned records contain proper keys' do
+      expect(json_response.first.keys).to match_array response_keys
+    end
+
+    it 'response contains driving lesson attributes' do
+      expect(json_response.find { |i| i['id'] == slot_1.id }).to include(
+        'id' => slot_1.id,
+        'employee_id' => slot_1.employee_driving_school.employee_id,
+        # 'start_time' => slot_1.start_time,
+        'driving_lesson_id' => slot_1.driving_lesson_id
+      )
+    end
+
+    context 'with by_start_time param' do
+      let(:params) do
+        {
+          by_start_time: {
+            from: 1.day.from_now - 1.hour,
+            to: 2.day.from_now + 1.hour
+          }
+        }
+      end
+
+      it 'returns proper records' do
+        expect(json_response.pluck('id')).to match_array [
+          slot_1.id, slot_2.id
+        ]
+      end
+    end
   end
 end
