@@ -18,7 +18,7 @@ Rails.application.routes.draw do
             delete :destroy
           end
         end
-        resources :driving_lessons, only: [:index] do
+        resources :driving_lessons, only: [:index, :create] do
           member do
             put :cancel
           end

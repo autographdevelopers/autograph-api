@@ -1,9 +1,13 @@
 class Api::V1::DrivingLessonsController < ApplicationController
   before_action :set_driving_school
   before_action :set_driving_lesson, only: [:cancel]
+  before_action :set_employee_driving_school, only: [:create]
+  before_action :set_student, only: [:create]
+  before_action :set_slots, only: [:create]
 
   has_scope :student_id
   has_scope :employee_id
+  has_scope :driving_lessons_ids, type: :array
 
   def index
     @driving_lessons = apply_scopes(
@@ -19,6 +23,20 @@ class Api::V1::DrivingLessonsController < ApplicationController
     render @driving_lesson
   end
 
+  def create
+    @driving_lesson = DrivingLessons::BuildService.new(
+      current_user, @employee_driving_school.employee, @student, @driving_school, @slots
+    ).call
+
+    authorize @driving_lesson
+
+    if @driving_lesson.save
+      render :create, status: :created
+    else
+      render json: @driving_lesson.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_driving_school
@@ -32,5 +50,24 @@ class Api::V1::DrivingLessonsController < ApplicationController
     @driving_lesson = DrivingLesson.where(driving_school_id: @driving_school.id)
                                    .upcoming
                                    .find(params[:id])
+  end
+
+  def set_employee_driving_school
+    @employee_driving_school = @driving_school.employee_driving_schools
+                                              .active
+                                              .find_by!(employee_id: params[:employee_id])
+  end
+
+  def set_student
+    @student = @driving_school.student_driving_schools
+                              .active
+                              .find_by!(student_id: params[:student_id])
+                              .student
+  end
+
+  def set_slots
+    @slots = @employee_driving_school.slots
+                                     .available
+                                     .find(params[:slot_ids])
   end
 end

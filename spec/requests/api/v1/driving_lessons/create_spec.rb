@@ -1,0 +1,140 @@
+describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
+  let(:student) { create(:student) }
+  let(:employee) { create(:employee) }
+
+  let(:driving_school) { create(:driving_school, status: :active) }
+
+  let!(:employee_driving_school) do
+    create(:employee_driving_school,
+           employee: employee,
+           driving_school: driving_school,
+           is_owner: is_owner,
+           can_modify_schedules: can_modify_schedules,
+           status: :active)
+  end
+
+  let(:is_owner) { false }
+  let(:can_modify_schedules) { false }
+
+  let!(:student_driving_school) do
+    create(:student_driving_school,
+           student: student,
+           driving_school: driving_school,
+           status: :active)
+  end
+
+  let!(:slot_1) do
+    create(:slot,
+           employee_driving_school: employee_driving_school,
+           start_time: DateTime.new(2050, 2, 3, 12, 30, 0))
+  end
+
+  let!(:slot_2) do
+    create(:slot,
+           employee_driving_school: employee_driving_school,
+           start_time: DateTime.new(2050, 2, 3, 12, 0, 0))
+  end
+
+  let!(:slot_3) do
+    create(:slot,
+           employee_driving_school: employee_driving_school,
+           start_time: DateTime.new(2050, 2, 3, 13, 0, 0))
+  end
+
+  let(:params) do
+    {
+      employee_id: employee.id,
+      student_id: student.id,
+      slot_ids: [slot_1.id, slot_2.id, slot_3.id]
+    }
+  end
+
+  let(:response_keys) { %w[employee student slots id start_time] }
+
+  before do
+    post "/api/v1/driving_schools/#{driving_school.id}/driving_lessons",
+         headers: current_user.create_new_auth_token,
+         params: params
+  end
+
+  context 'when current_user is EMPLOYEE' do
+    let(:current_user) { employee }
+
+    context 'when current_user is owner od driving school' do
+      let(:is_owner) { true }
+
+      context 'when params VALID' do
+        it 'returns 201 http status code' do
+          expect(response.status).to eq 201
+        end
+
+        it 'creates DrivingLesson record' do
+          expect(DrivingLesson.count).to eq 1
+        end
+
+        it 'created DrivingLesson record has proper attributes' do
+          expect(DrivingLesson.last.attributes).to include(
+            'start_time' => slot_2.start_time,
+            'driving_school_id' => driving_school.id,
+            'employee_id' => employee.id,
+            'status' => 'active',
+            'student_id' => student.id
+          )
+        end
+
+        it 'assigns Slots to driving lesson' do
+          expect(DrivingLesson.last.slots.pluck(:id)).to match_array(
+            [slot_1.id, slot_2.id, slot_3.id]
+          )
+        end
+
+        context 'response body contains proper' do
+          subject { json_response }
+
+          it 'keys' do
+            expect(subject.keys).to match_array response_keys
+          end
+
+          it 'attributes' do
+            expect(subject).to include(
+              'start_time' => slot_2.start_time,
+              'employee' => {
+                'id' => employee.id,
+                'name' => employee.name,
+                'surname' => employee.surname
+              },
+              'student' => {
+                'id' => student.id,
+                'name' => student.name,
+                'surname' => student.surname
+              }
+            )
+          end
+
+          it 'slots attributes' do
+            expect(subject['slots']).to match_array([
+              { 'id' => slot_1.id, 'start_time' => slot_1.start_time, 'driving_lesson_id' => DrivingLesson.last.id },
+              { 'id' => slot_2.id, 'start_time' => slot_2.start_time, 'driving_lesson_id' => DrivingLesson.last.id },
+              { 'id' => slot_3.id, 'start_time' => slot_3.start_time, 'driving_lesson_id' => DrivingLesson.last.id }
+            ])
+          end
+        end
+      end
+
+      context 'when params INVALID' do
+
+      end
+    end
+
+    context 'when current_user can modify schedules' do
+      let(:can_modify_schedules) { true }
+    end
+
+    context 'when current_user is regular' do
+    end
+  end
+
+  context 'when current_user is STUDENT' do
+    let(:current_user) { student }
+  end
+end
