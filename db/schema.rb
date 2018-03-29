@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180322151355) do
+ActiveRecord::Schema.define(version: 20180329093423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,8 @@ ActiveRecord::Schema.define(version: 20180322151355) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "driving_lesson_id"
+    t.datetime "release_at"
+    t.integer "locking_user_id"
     t.index ["driving_lesson_id"], name: "index_slots_on_driving_lesson_id"
     t.index ["employee_driving_school_id"], name: "index_slots_on_employee_driving_school_id"
   end
@@ -189,5 +191,6 @@ ActiveRecord::Schema.define(version: 20180322151355) do
   add_foreign_key "schedules", "employee_driving_schools"
   add_foreign_key "slots", "driving_lessons"
   add_foreign_key "slots", "employee_driving_schools"
+  add_foreign_key "slots", "users", column: "locking_user_id"
   add_foreign_key "student_driving_schools", "users", column: "student_id"
 end

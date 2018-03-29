@@ -1,0 +1,3 @@
+describe BroadcastChangedSlotJob do
+  
+end

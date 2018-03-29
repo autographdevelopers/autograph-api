@@ -49,7 +49,7 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
     }
   end
 
-  let(:response_keys) { %w[employee student slots id start_time] }
+  let(:response_keys) { %w[employee student slots id start_time status] }
 
   before do
     post "/api/v1/driving_schools/#{driving_school.id}/driving_lessons",
@@ -113,9 +113,30 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
 
           it 'slots attributes' do
             expect(subject['slots']).to match_array([
-              { 'id' => slot_1.id, 'start_time' => slot_1.start_time, 'driving_lesson_id' => DrivingLesson.last.id },
-              { 'id' => slot_2.id, 'start_time' => slot_2.start_time, 'driving_lesson_id' => DrivingLesson.last.id },
-              { 'id' => slot_3.id, 'start_time' => slot_3.start_time, 'driving_lesson_id' => DrivingLesson.last.id }
+              {
+                'id' => slot_1.id,
+                'start_time' => slot_1.start_time,
+                'driving_lesson_id' => DrivingLesson.last.id,
+                'release_at' => slot_1.release_at,
+                'locking_user_id' => slot_1.locking_user_id,
+                'employee_id' => employee.id
+              },
+              {
+                'id' => slot_2.id,
+                'start_time' => slot_2.start_time,
+                'driving_lesson_id' => DrivingLesson.last.id,
+                'release_at' => slot_2.release_at,
+                'locking_user_id' => slot_2.locking_user_id,
+                'employee_id' => employee.id
+              },
+              {
+                'id' => slot_3.id,
+                'start_time' => slot_3.start_time,
+                'driving_lesson_id' => DrivingLesson.last.id,
+                'release_at' => slot_3.release_at,
+                'locking_user_id' => slot_3.locking_user_id,
+                'employee_id' => employee.id
+              }
             ])
           end
         end
@@ -220,9 +241,30 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
 
           it 'slots attributes' do
             expect(subject['slots']).to match_array([
-              { 'id' => slot_1.id, 'start_time' => slot_1.start_time, 'driving_lesson_id' => DrivingLesson.last.id },
-              { 'id' => slot_2.id, 'start_time' => slot_2.start_time, 'driving_lesson_id' => DrivingLesson.last.id },
-              { 'id' => slot_3.id, 'start_time' => slot_3.start_time, 'driving_lesson_id' => DrivingLesson.last.id }
+              {
+                'id' => slot_1.id,
+                'start_time' => slot_1.start_time,
+                'driving_lesson_id' => DrivingLesson.last.id,
+                'release_at' => slot_1.release_at,
+                'locking_user_id' => slot_1.locking_user_id,
+                'employee_id' => employee.id
+              },
+              {
+                'id' => slot_2.id,
+                'start_time' => slot_2.start_time,
+                'driving_lesson_id' => DrivingLesson.last.id,
+                'release_at' => slot_2.release_at,
+                'locking_user_id' => slot_2.locking_user_id,
+                'employee_id' => employee.id
+              },
+              {
+                'id' => slot_3.id,
+                'start_time' => slot_3.start_time,
+                'driving_lesson_id' => DrivingLesson.last.id,
+                'release_at' => slot_3.release_at,
+                'locking_user_id' => slot_3.locking_user_id,
+                'employee_id' => employee.id
+              }
             ])
           end
         end
@@ -335,9 +377,30 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
 
           it 'slots attributes' do
             expect(subject['slots']).to match_array([
-              { 'id' => slot_1.id, 'start_time' => slot_1.start_time, 'driving_lesson_id' => DrivingLesson.last.id },
-              { 'id' => slot_2.id, 'start_time' => slot_2.start_time, 'driving_lesson_id' => DrivingLesson.last.id },
-              { 'id' => slot_3.id, 'start_time' => slot_3.start_time, 'driving_lesson_id' => DrivingLesson.last.id }
+              {
+                'id' => slot_1.id,
+                'start_time' => slot_1.start_time,
+                'driving_lesson_id' => DrivingLesson.last.id,
+                'release_at' => slot_1.release_at,
+                'locking_user_id' => slot_1.locking_user_id,
+                'employee_id' => employee.id
+              },
+              {
+                'id' => slot_2.id,
+                'start_time' => slot_2.start_time,
+                'driving_lesson_id' => DrivingLesson.last.id,
+                'release_at' => slot_2.release_at,
+                'locking_user_id' => slot_2.locking_user_id,
+                'employee_id' => employee.id
+              },
+              {
+                'id' => slot_3.id,
+                'start_time' => slot_3.start_time,
+                'driving_lesson_id' => DrivingLesson.last.id,
+                'release_at' => slot_3.release_at,
+                'locking_user_id' => slot_3.locking_user_id,
+                'employee_id' => employee.id
+              }
             ])
           end
         end

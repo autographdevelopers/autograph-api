@@ -76,7 +76,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/driving_lessons' do
 
   let(:params) { {} }
 
-  let(:response_keys) { %w[employee student slots id start_time] }
+  let(:response_keys) { %w[employee student slots id start_time status] }
 
   before do
     get "/api/v1/driving_schools/#{driving_school.id}/driving_lessons",

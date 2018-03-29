@@ -35,7 +35,9 @@ class Api::V1::DrivingLessonsController < ApplicationController
     authorize @driving_lesson
 
     if @driving_lesson.save
-      render :create, status: :created
+      render :create, locals: {
+        driving_lesson: @driving_lesson
+      }, status: :created
     else
       render json: @driving_lesson.errors, status: :unprocessable_entity
     end

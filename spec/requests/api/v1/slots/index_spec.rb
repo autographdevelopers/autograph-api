@@ -38,7 +38,11 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
   let(:params) { {} }
 
-  let(:response_keys) { %w[employee_id id start_time driving_lesson_id] }
+  let(:response_keys) do
+    %w[
+      id start_time driving_lesson_id release_at locking_user_id employee_id
+    ]
+  end
 
   before do
     get api_v1_driving_school_employee_slots_path(driving_school.id, employee.id),
