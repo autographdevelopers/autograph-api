@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  namespace :api, defaults: {format: :json} do
+  namespace :api, defaults: { format: :json } do
     namespace :v1 do
       mount_devise_token_auth_for 'User', at: 'auth', controllers: {
         registrations: 'api/v1/users',
@@ -34,6 +34,8 @@ Rails.application.routes.draw do
         resource :employee_notifications_settings, only: [:update, :show]
         resource :schedule_settings, only: [:update, :show]
       end
+
+      mount ActionCable.server, at: '/cable'
     end
   end
 end
