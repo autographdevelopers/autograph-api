@@ -8,7 +8,7 @@ class BroadcastChangedSlotJob < ApplicationJob
       build_channel_string(slot.employee_driving_school_id),
       type: 'SLOT_CHANGED',
       slot: ApplicationController.renderer.render(
-        template: 'api/v1/slots/slot.json',
+        partial: 'api/v1/slots/slot.json',
         locals: { slot: slot }
       )
     )

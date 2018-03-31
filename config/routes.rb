@@ -29,8 +29,8 @@ Rails.application.routes.draw do
         resources :employees, only: [:index] do
           resource :employee_privileges, only: [:update, :show]
           resource :schedule, only: [:update, :show]
-          resources :slots, only: [:index]
         end
+        resources :slots, only: [:index]
         resource :employee_notifications_settings, only: [:update, :show]
         resource :schedule_settings, only: [:update, :show]
       end

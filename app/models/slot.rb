@@ -10,14 +10,15 @@ class Slot < ApplicationRecord
   validates :start_time, presence: true
 
   # == Scopes =================================================================
-  scope :booked,    -> { where.not(driving_lesson: nil) }
-  scope :available, -> { where(driving_lesson: nil) }
-  scope :future,    -> { where('start_time > ?', Time.now) }
-  scope :unlocked,  -> { where.not('release_at > ?', Time.now) }
-  scope :locked,    -> { where('release_at > ?', Time.now) }
+  scope :booked,        -> { where.not(driving_lesson: nil) }
+  scope :available,     -> { where(driving_lesson: nil) }
+  scope :future,        -> { where('start_time > ?', Time.now) }
+  scope :unlocked,      -> { where.not('release_at > ?', Time.now) }
+  scope :locked,        -> { where('release_at > ?', Time.now) }
   scope :by_start_time, ->(from, to) {
     where("start_time >= ? AND start_time <= ?", from, to)
   }
+  scope :employee_id, ->(value) { where(employee_driving_schools: { employee_id: value }) }
 
   # == Instance Methods =======================================================
   def lock_during_booking(user)
