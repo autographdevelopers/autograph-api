@@ -37,6 +37,6 @@ class DrivingLessons::BuildService
   end
 
   def earliest_slot_start_time
-    slots.min_by { |s| s.start_time }.start_time
+    slots.min_by(&:start_time).start_time
   end
 end
