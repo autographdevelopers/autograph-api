@@ -8,9 +8,11 @@ class BroadcastChangedDrivingLessonJob < ApplicationJob
       ActionCable.server.broadcast(
         channel,
         type: 'DRIVING_LESSON_CHANGED',
-        driving_lesson: ApplicationController.renderer.render(
-          template: 'api/v1/driving_lessons/create.json',
-          locals: { driving_lesson: driving_lesson }
+        driving_lesson: JSON.parse(
+          ApplicationController.renderer.render(
+            template: 'api/v1/driving_lessons/create.json',
+            locals: { driving_lesson: driving_lesson }
+          )
         )
       )
     end

@@ -17,7 +17,7 @@ describe BroadcastChangedSlotJob do
       expect(server).to receive(:broadcast).with(
         "slots_#{employee_driving_school.id}",
         hash_including(
-          type: 'SLOT_CHANGED', slot: kind_of(String)
+          type: 'SLOT_CHANGED', slot: kind_of(Hash)
         )
       )
     end
