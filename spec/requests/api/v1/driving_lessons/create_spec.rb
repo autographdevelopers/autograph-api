@@ -119,7 +119,8 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
                 'driving_lesson_id' => DrivingLesson.last.id,
                 'release_at' => slot_1.release_at,
                 'locking_user_id' => slot_1.locking_user_id,
-                'employee_id' => employee.id
+                'employee_id' => employee.id,
+                'driving_school_id' => driving_school.id
               },
               {
                 'id' => slot_2.id,
@@ -127,7 +128,8 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
                 'driving_lesson_id' => DrivingLesson.last.id,
                 'release_at' => slot_2.release_at,
                 'locking_user_id' => slot_2.locking_user_id,
-                'employee_id' => employee.id
+                'employee_id' => employee.id,
+                'driving_school_id' => driving_school.id
               },
               {
                 'id' => slot_3.id,
@@ -135,7 +137,8 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
                 'driving_lesson_id' => DrivingLesson.last.id,
                 'release_at' => slot_3.release_at,
                 'locking_user_id' => slot_3.locking_user_id,
-                'employee_id' => employee.id
+                'employee_id' => employee.id,
+                'driving_school_id' => driving_school.id
               }
             ])
           end
@@ -247,7 +250,8 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
                 'driving_lesson_id' => DrivingLesson.last.id,
                 'release_at' => slot_1.release_at,
                 'locking_user_id' => slot_1.locking_user_id,
-                'employee_id' => employee.id
+                'employee_id' => employee.id,
+                'driving_school_id' => driving_school.id
               },
               {
                 'id' => slot_2.id,
@@ -255,7 +259,8 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
                 'driving_lesson_id' => DrivingLesson.last.id,
                 'release_at' => slot_2.release_at,
                 'locking_user_id' => slot_2.locking_user_id,
-                'employee_id' => employee.id
+                'employee_id' => employee.id,
+                'driving_school_id' => driving_school.id
               },
               {
                 'id' => slot_3.id,
@@ -263,7 +268,8 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
                 'driving_lesson_id' => DrivingLesson.last.id,
                 'release_at' => slot_3.release_at,
                 'locking_user_id' => slot_3.locking_user_id,
-                'employee_id' => employee.id
+                'employee_id' => employee.id,
+                'driving_school_id' => driving_school.id
               }
             ])
           end
@@ -383,7 +389,8 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
                 'driving_lesson_id' => DrivingLesson.last.id,
                 'release_at' => slot_1.release_at,
                 'locking_user_id' => slot_1.locking_user_id,
-                'employee_id' => employee.id
+                'employee_id' => employee.id,
+                'driving_school_id' => driving_school.id
               },
               {
                 'id' => slot_2.id,
@@ -391,7 +398,8 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
                 'driving_lesson_id' => DrivingLesson.last.id,
                 'release_at' => slot_2.release_at,
                 'locking_user_id' => slot_2.locking_user_id,
-                'employee_id' => employee.id
+                'employee_id' => employee.id,
+                'driving_school_id' => driving_school.id
               },
               {
                 'id' => slot_3.id,
@@ -399,7 +407,8 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
                 'driving_lesson_id' => DrivingLesson.last.id,
                 'release_at' => slot_3.release_at,
                 'locking_user_id' => slot_3.locking_user_id,
-                'employee_id' => employee.id
+                'employee_id' => employee.id,
+                'driving_school_id' => driving_school.id
               }
             ])
           end

@@ -49,6 +49,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/slots' do
   let(:response_keys) do
     %w[
       id start_time driving_lesson_id release_at locking_user_id employee_id
+      driving_school_id
     ]
   end
 
