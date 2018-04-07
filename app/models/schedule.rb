@@ -15,6 +15,7 @@ class Schedule < ApplicationRecord
 
   # == Relations ==============================================================
   belongs_to :employee_driving_school
+  has_many :activities, as: :target
 
   # == Validations ============================================================
   validates :current_template, :new_template, :repetition_period_in_weeks, presence: true

@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180407114740) do
+ActiveRecord::Schema.define(version: 20180407162515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.bigint "driving_school_id"
+    t.string "target_type"
+    t.bigint "target_id"
+    t.bigint "user_id"
+    t.integer "activity_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["driving_school_id"], name: "index_activities_on_driving_school_id"
+    t.index ["target_type", "target_id"], name: "index_activities_on_target_type_and_target_id"
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
 
   create_table "driving_courses", force: :cascade do |t|
     t.bigint "student_driving_school_id"
@@ -148,6 +161,16 @@ ActiveRecord::Schema.define(version: 20180407114740) do
     t.index ["student_id"], name: "index_student_driving_schools_on_student_id"
   end
 
+  create_table "user_activities", force: :cascade do |t|
+    t.bigint "activity_id"
+    t.bigint "user_id"
+    t.boolean "read", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_user_activities_on_activity_id"
+    t.index ["user_id"], name: "index_user_activities_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -184,6 +207,8 @@ ActiveRecord::Schema.define(version: 20180407114740) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "activities", "driving_schools"
+  add_foreign_key "activities", "users"
   add_foreign_key "driving_courses", "student_driving_schools"
   add_foreign_key "driving_lessons", "driving_schools"
   add_foreign_key "driving_lessons", "users", column: "employee_id"
@@ -194,4 +219,6 @@ ActiveRecord::Schema.define(version: 20180407114740) do
   add_foreign_key "slots", "employee_driving_schools"
   add_foreign_key "slots", "users", column: "locking_user_id"
   add_foreign_key "student_driving_schools", "users", column: "student_id"
+  add_foreign_key "user_activities", "activities"
+  add_foreign_key "user_activities", "users"
 end
