@@ -8,6 +8,7 @@ module ErrorsHandlers
     rescue_from ActiveRecord::RecordNotFound,   with: :record_not_found
     rescue_from ActiveRecord::RecordInvalid,    with: :record_invalid
     rescue_from AASM::InvalidTransition,        with: :bad_request
+    rescue_from ActionController::BadRequest,   with: :bad_request
     rescue_from ArgumentError,                  with: :argument_error
 
     private

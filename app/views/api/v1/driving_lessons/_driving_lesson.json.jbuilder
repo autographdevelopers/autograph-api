@@ -1,1 +1,1 @@
-json.extract! driving_lesson, :id, :start_time
+json.extract! driving_lesson, :id, :start_time, :status

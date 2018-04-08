@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
   EMPLOYEE = 'Employee'.freeze
   STUDENT = 'Student'.freeze
 
+  # == Relations ==============================================================
+  has_many :locked_slots, class_name: 'Slot', foreign_key: 'locking_user_id'
+
   # == Extensions =============================================================
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,

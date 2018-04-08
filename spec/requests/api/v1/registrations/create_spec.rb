@@ -109,7 +109,7 @@ describe 'POST /api/v1/auth' do
         end
 
         it 'response contains email error messages' do
-          expect(json_response['email']).to eq ["can't be blank", 'is not an email']
+          expect(json_response['email']).to eq ["can't be blank"]
         end
 
         it 'response contains name error message' do
@@ -250,7 +250,7 @@ describe 'POST /api/v1/auth' do
         end
 
         it 'response contains email error messages' do
-          expect(json_response['email']).to eq ["can't be blank", 'is not an email']
+          expect(json_response['email']).to eq ["can't be blank"]
         end
 
         it 'response contains name error message' do

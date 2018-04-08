@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  namespace :api, defaults: {format: :json} do
+  namespace :api, defaults: { format: :json } do
     namespace :v1 do
       mount_devise_token_auth_for 'User', at: 'auth', controllers: {
         registrations: 'api/v1/users',
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
             delete :destroy
           end
         end
-        resources :driving_lessons, only: [:index] do
+        resources :driving_lessons, only: [:index, :create] do
           member do
             put :cancel
           end
@@ -29,11 +29,13 @@ Rails.application.routes.draw do
         resources :employees, only: [:index] do
           resource :employee_privileges, only: [:update, :show]
           resource :schedule, only: [:update, :show]
-          resources :slots, only: [:index]
         end
+        resources :slots, only: [:index]
         resource :employee_notifications_settings, only: [:update, :show]
         resource :schedule_settings, only: [:update, :show]
       end
+
+      mount ActionCable.server, at: '/cable'
     end
   end
 end
