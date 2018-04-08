@@ -23,6 +23,7 @@ class Api::V1::DrivingLessonsController < ApplicationController
     authorize @driving_lesson
 
     DrivingLessons::CancelService.new(current_user, @driving_lesson).call
+    create_activity
 
     render @driving_lesson
   end
@@ -35,6 +36,7 @@ class Api::V1::DrivingLessonsController < ApplicationController
     authorize @driving_lesson
 
     if @driving_lesson.save
+      create_activity
       render :create, locals: {
         driving_lesson: @driving_lesson
       }, status: :created
@@ -75,5 +77,23 @@ class Api::V1::DrivingLessonsController < ApplicationController
     @slots = @employee_driving_school.slots
                                      .available
                                      .find(params[:slot_ids])
+  end
+
+  def create_activity
+    Activity.create(
+      user: current_user,
+      driving_school: @driving_school,
+      activity_type: determine_activity_type,
+      target: @driving_lesson
+    )
+  end
+
+  def determine_activity_type
+    suffix = {
+      'create' => 'scheduled',
+      'cancel' => 'canceled'
+    }[action_name]
+
+    "driving_lesson_#{suffix}".to_sym
   end
 end

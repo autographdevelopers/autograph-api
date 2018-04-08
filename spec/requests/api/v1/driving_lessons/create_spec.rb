@@ -72,6 +72,10 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
           expect(DrivingLesson.count).to eq 1
         end
 
+        it 'creates Activity record' do
+          expect(Activity.count).to eq 1
+        end
+
         it 'created DrivingLesson record has proper attributes' do
           expect(DrivingLesson.last.attributes).to include(
             'start_time' => slot_2.start_time,
@@ -85,6 +89,16 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
         it 'assigns Slots to driving lesson' do
           expect(DrivingLesson.last.slots.pluck(:id)).to match_array(
             [slot_1.id, slot_2.id, slot_3.id]
+          )
+        end
+
+        it 'creates proper Activity record' do
+          expect(Activity.last.attributes).to include(
+            'target_id' => DrivingLesson.last.id,
+            'target_type' => 'DrivingLesson',
+            'activity_type' => 'driving_lesson_scheduled',
+            'user_id' => current_user.id,
+            'driving_school_id' => driving_school.id,
           )
         end
 
@@ -203,6 +217,10 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
           expect(DrivingLesson.count).to eq 1
         end
 
+        it 'creates Activity record' do
+          expect(Activity.count).to eq 1
+        end
+
         it 'created DrivingLesson record has proper attributes' do
           expect(DrivingLesson.last.attributes).to include(
             'start_time' => slot_2.start_time,
@@ -216,6 +234,16 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
         it 'assigns Slots to driving lesson' do
           expect(DrivingLesson.last.slots.pluck(:id)).to match_array(
             [slot_1.id, slot_2.id, slot_3.id]
+          )
+        end
+
+        it 'creates proper Activity record' do
+          expect(Activity.last.attributes).to include(
+            'target_id' => DrivingLesson.last.id,
+            'target_type' => 'DrivingLesson',
+            'activity_type' => 'driving_lesson_scheduled',
+            'user_id' => current_user.id,
+            'driving_school_id' => driving_school.id,
           )
         end
 
@@ -342,6 +370,10 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
           expect(DrivingLesson.count).to eq 1
         end
 
+        it 'creates Activity record' do
+          expect(Activity.count).to eq 1
+        end
+
         it 'created DrivingLesson record has proper attributes' do
           expect(DrivingLesson.last.attributes).to include(
             'start_time' => slot_2.start_time,
@@ -355,6 +387,16 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
         it 'assigns Slots to driving lesson' do
           expect(DrivingLesson.last.slots.pluck(:id)).to match_array(
             [slot_1.id, slot_2.id, slot_3.id]
+          )
+        end
+
+        it 'creates proper Activity record' do
+          expect(Activity.last.attributes).to include(
+            'target_id' => DrivingLesson.last.id,
+            'target_type' => 'DrivingLesson',
+            'activity_type' => 'driving_lesson_scheduled',
+            'user_id' => current_user.id,
+            'driving_school_id' => driving_school.id,
           )
         end
 
