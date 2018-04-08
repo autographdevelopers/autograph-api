@@ -13,7 +13,8 @@ class Activity < ApplicationRecord
     employee_invitation_sent: 4,
     employee_invitation_withdrawn: 5,
     employee_invitation_accepted: 6,
-    employee_invitation_rejected: 7
+    employee_invitation_rejected: 7,
+    driving_course_changed: 8
   }
 
   # == Callbacks ==============================================================

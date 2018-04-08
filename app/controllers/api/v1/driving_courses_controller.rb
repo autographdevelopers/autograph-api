@@ -13,6 +13,7 @@ class Api::V1::DrivingCoursesController < ApplicationController
     authorize @driving_school, :can_manage_students?
 
     if @driving_course.update(driving_course_params)
+      create_activity
       render @driving_course
     else
       render json: @driving_course.errors, status: :unprocessable_entity
@@ -39,5 +40,14 @@ class Api::V1::DrivingCoursesController < ApplicationController
                                      .active
                                      .find_by!(student_id: params[:student_id])
                                      .driving_course
+  end
+
+  def create_activity
+    Activity.create(
+      user: current_user,
+      driving_school: @driving_school,
+      activity_type: :driving_course_changed,
+      target: @driving_course
+    )
   end
 end
