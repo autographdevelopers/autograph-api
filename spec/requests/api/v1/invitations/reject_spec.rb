@@ -33,6 +33,20 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/invitations/reject' do
         expect(response.status).to eq 204
       end
 
+      it 'creates Activity record' do
+        expect(Activity.count).to eq 1
+      end
+
+      it 'creates proper Activity record' do
+        expect(Activity.last.attributes).to include(
+          'target_id' => employee_driving_school.id,
+          'target_type' => 'EmployeeDrivingSchool',
+          'activity_type' => 'employee_invitation_rejected',
+          'user_id' => current_user.id,
+          'driving_school_id' => driving_school.id,
+        )
+      end
+
       it 'changes relation status from pending to rejected' do
         employee_driving_school.reload
         expect(employee_driving_school.status).to eq 'rejected'
@@ -65,6 +79,20 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/invitations/reject' do
 
       it 'returns 204 http status code' do
         expect(response.status).to eq 204
+      end
+
+      it 'creates Activity record' do
+        expect(Activity.count).to eq 1
+      end
+
+      it 'creates proper Activity record' do
+        expect(Activity.last.attributes).to include(
+          'target_id' => student_driving_school.id,
+          'target_type' => 'StudentDrivingSchool',
+          'activity_type' => 'student_invitation_rejected',
+          'user_id' => current_user.id,
+          'driving_school_id' => driving_school.id,
+        )
       end
 
       it 'changes relation status from pending to rejected' do

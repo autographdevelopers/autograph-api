@@ -33,6 +33,20 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/invitations/accept' do
         expect(response.status).to eq 200
       end
 
+      it 'creates Activity record' do
+        expect(Activity.count).to eq 1
+      end
+
+      it 'creates proper Activity record' do
+        expect(Activity.last.attributes).to include(
+          'target_id' => employee_driving_school.id,
+          'target_type' => 'EmployeeDrivingSchool',
+          'activity_type' => 'employee_invitation_accepted',
+          'user_id' => current_user.id,
+          'driving_school_id' => driving_school_id,
+        )
+      end
+
       it 'changes relation status from pending to active' do
         employee_driving_school.reload
         expect(employee_driving_school.status).to eq 'active'
@@ -65,6 +79,20 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/invitations/accept' do
 
       it 'returns 200 http status code' do
         expect(response.status).to eq 200
+      end
+
+      it 'creates Activity record' do
+        expect(Activity.count).to eq 1
+      end
+
+      it 'creates proper Activity record' do
+        expect(Activity.last.attributes).to include(
+          'target_id' => student_driving_school.id,
+          'target_type' => 'StudentDrivingSchool',
+          'activity_type' => 'student_invitation_accepted',
+          'user_id' => current_user.id,
+          'driving_school_id' => driving_school_id,
+        )
       end
 
       it 'changes relation status from pending to active' do
