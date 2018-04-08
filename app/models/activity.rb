@@ -3,6 +3,8 @@ class Activity < ApplicationRecord
   belongs_to :driving_school
   belongs_to :target, polymorphic: true
   belongs_to :user
+  has_many :user_activities
+  has_many :notifiable_users, through: :user_activities, source: :user
 
   # == Enumerators ============================================================
   enum activity_type: {
@@ -24,6 +26,6 @@ class Activity < ApplicationRecord
   after_create :notify_about_activity
 
   def notify_about_activity
-    # Schedule Job
+    BroadcastActivityJob.perform_later(id)
   end
 end

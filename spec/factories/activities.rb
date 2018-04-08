@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :activity do
-    driving_school nil
+    driving_school
     target nil
-    user nil
+    user
     activity_type 1
   end
 end
