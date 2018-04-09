@@ -29,7 +29,7 @@ class Api::V1::DrivingLessonsController < ApplicationController
 
   def create
     @driving_lesson = DrivingLessons::BuildService.new(
-      current_user, @employee_driving_school.employee, @student, @driving_school, @slots
+      current_user, @employee_driving_school, @student, @driving_school, @slots
     ).call
 
     authorize @driving_lesson

@@ -2,7 +2,9 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
 
-  let(:driving_school) { create(:driving_school, status: :active) }
+  let(:driving_school) do
+    create(:driving_school, :with_schedule_settings, status: :active)
+  end
 
   let!(:employee_driving_school) do
     create(:employee_driving_school,

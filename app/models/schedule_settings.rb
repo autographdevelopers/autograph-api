@@ -5,9 +5,14 @@ class ScheduleSettings < ApplicationRecord
   belongs_to :driving_school
 
   # == Validations ============================================================
-  validates :valid_time_frames, presence: true
+  validates :valid_time_frames, :minimum_slots_count_per_driving_lesson,
+            :maximum_slots_count_per_driving_lesson, presence: true
+  validates :minimum_slots_count_per_driving_lesson, :maximum_slots_count_per_driving_lesson,
+            numericality: { only_integer: true, greater_than: 0 }
+  validates :minimum_slots_count_per_driving_lesson, numericality:
+            { less_than_or_equal_to: :maximum_slots_count_per_driving_lesson }
   validates :holidays_enrollment_enabled, :last_minute_booking_enabled,
-            inclusion: { in: [true, false] }
+            :can_student_book_driving_lesson, inclusion: { in: [true, false] }
   validate :valid_time_frames_format
 
   def valid_time_frames_format

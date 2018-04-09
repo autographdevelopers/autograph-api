@@ -12,5 +12,8 @@ FactoryBot.define do
       sunday: ScheduleSettings::SLOT_START_TIMES.keys,
     } }
     driving_school
+    minimum_slots_count_per_driving_lesson 1
+    maximum_slots_count_per_driving_lesson 8
+    can_student_book_driving_lesson true
   end
 end
