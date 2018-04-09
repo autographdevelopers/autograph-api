@@ -3,15 +3,17 @@ class BroadcastActivityJob < ApplicationJob
 
   def perform(id)
     activity = Activity.find(id)
+    return unless activity.driving_school.active?
 
     activity.notifiable_users = notifiable_users(activity)
+    Activities::SendPushNotificationService.new(activity).call
   end
 
   private
 
   def notifiable_users(activity)
-    (driving_school_employees(activity).to_a.map { |i| i.employee.becomes(User)} + activity_related_users(activity).map { |u| u.becomes(User)})
-      .uniq { |user| user.id }
+    (driving_school_employees(activity).to_a.map(&:employee) + activity_related_users(activity))
+      .uniq(&:id).map { |u| u.becomes(User) }
   end
 
   def activity_related_users(activity)

@@ -63,6 +63,7 @@ describe BroadcastActivityJob do
   end
 
   context '#perform' do
+    before { allow(OneSignal::Notification).to receive(:create) }
     subject { BroadcastActivityJob.perform_now(activity.id) }
 
     context 'when activity type is student_invitation_sent' do
@@ -268,6 +269,27 @@ describe BroadcastActivityJob do
         expect(activity.notifiable_users.pluck(:id)).to match_array [
           employee_1.id, employee_5.id, student.id, employee_4.id
         ]
+      end
+    end
+
+    context 'when successfully assigns users to Activity' do
+      let(:activity_type) { :driving_lesson_scheduled }
+      let(:user) { employee_5 }
+      let(:target) do
+        create(:driving_lesson,
+               student: student,
+               employee: employee_4,
+               driving_school: driving_school,
+               status: :active)
+      end
+
+      it 'triggers Activities::SendPushNotificationService' do
+        instance = double
+        expect(Activities::SendPushNotificationService).to receive(:new).with(activity)
+                                                                        .and_return(instance)
+        expect(instance).to receive(:call)
+
+        BroadcastActivityJob.perform_now(activity.id)
       end
     end
   end

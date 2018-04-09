@@ -3,64 +3,52 @@ class Activities::SendPushNotificationService
 
   NOTIFICATIONS_MAP = {
     student_invitation_sent: {
-      subject: 'Test',
-      subtitle: 'Test',
-      headings: 'Test'
+      headings: 'student_invitation_sent',
+      contents: 'student_invitation_sent'
     },
     student_invitation_withdrawn: {
-      subject: 'Test',
-      subtitle: 'Test',
-      headings: 'Test'
+      headings: 'student_invitation_withdrawn',
+      contents: 'student_invitation_withdrawn'
     },
     student_invitation_accepted: {
-      subject: 'Test',
-      subtitle: 'Test',
-      headings: 'Test'
+      headings: 'student_invitation_accepted',
+      contents: 'student_invitation_accepted'
     },
     student_invitation_rejected: {
-      subject: 'Test',
-      subtitle: 'Test',
-      headings: 'Test'
+      headings: 'student_invitation_rejected',
+      contents: 'student_invitation_rejected'
     },
     employee_invitation_sent: {
-      subject: 'Test',
-      subtitle: 'Test',
-      headings: 'Test'
+      headings: 'employee_invitation_sent',
+      contents: 'employee_invitation_sent'
     },
     employee_invitation_withdrawn: {
-      subject: 'Test',
-      subtitle: 'Test',
-      headings: 'Test'
+      headings: 'employee_invitation_withdrawn',
+      contents: 'employee_invitation_withdrawn'
     },
     employee_invitation_accepted: {
-      subject: 'Test',
-      subtitle: 'Test',
-      headings: 'Test'
+      headings: 'employee_invitation_accepted',
+      contents: 'employee_invitation_accepted'
     },
     employee_invitation_rejected: {
-      subject: 'Test',
-      subtitle: 'Test',
-      headings: 'Test'
+      headings: 'employee_invitation_rejected',
+      contents: 'employee_invitation_rejected'
     },
     driving_course_changed: {
-      subject: 'Test',
-      subtitle: 'Test',
-      headings: 'Test'
+      headings: 'driving_course_changed',
+      contents: 'driving_course_changed'
     },
     schedule_changed: {
-      subject: 'Test',
-      subtitle: 'Test',
-      headings: 'Test'
+      headings: 'schedule_changed',
+      contents: 'schedule_changed'
     },
     driving_lesson_canceled: {
-      subject: 'Test',
-      subtitle: 'Test',
-      headings: 'Test'
+      headings: 'driving_lesson_canceled',
+      contents: 'driving_lesson_canceled'
     },
     driving_lesson_scheduled: {
-      subject: 'Test',
-      subtitle: 'Test',
-      headings: 'Test'
+      headings: 'driving_lesson_scheduled',
+      contents: 'driving_lesson_scheduled'
     }
   }.freeze
 
@@ -69,10 +57,23 @@ class Activities::SendPushNotificationService
   end
 
   def call
+    details = NOTIFICATIONS_MAP[activity.activity_type.to_sym]
 
+    OneSignal::Notification.create(
+      params: {
+        app_id: Rails.application.secrets.one_signal_app_id,
+        include_player_ids: player_ids,
+        headings: { 'pl' => details[:headings] },
+        contents: { 'pl' => details[:contents] }
+      }
+    )
   end
 
   private
 
-
+  def player_ids
+    activity.notifiable_users.to_a.delete_if { |u| u.id == activity.user.id }
+                             .pluck(:player_id)
+                             .compact
+  end
 end
