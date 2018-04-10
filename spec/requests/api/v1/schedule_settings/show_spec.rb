@@ -18,6 +18,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/schedule_settings' do
       id holidays_enrollment_enabled last_minute_booking_enabled
       valid_time_frames minimum_slots_count_per_driving_lesson
       maximum_slots_count_per_driving_lesson can_student_book_driving_lesson
+      booking_advance_period_in_weeks
     ]
   end
 
@@ -53,7 +54,8 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/schedule_settings' do
               'last_minute_booking_enabled' => ss.last_minute_booking_enabled,
               'minimum_slots_count_per_driving_lesson' => ss.minimum_slots_count_per_driving_lesson,
               'maximum_slots_count_per_driving_lesson' => ss.maximum_slots_count_per_driving_lesson,
-              'can_student_book_driving_lesson' => ss.can_student_book_driving_lesson
+              'can_student_book_driving_lesson' => ss.can_student_book_driving_lesson,
+              'booking_advance_period_in_weeks' => ss.booking_advance_period_in_weeks
             )
           end
         end

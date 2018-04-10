@@ -22,7 +22,8 @@ describe Slots::ScheduleService do
         before do
           employee_driving_school.driving_school
                                  .create_schedule_settings(
-                                   holidays_enrollment_enabled: true
+                                   holidays_enrollment_enabled: true,
+                                   booking_advance_period_in_weeks: 1
                                  )
         end
 
@@ -33,7 +34,6 @@ describe Slots::ScheduleService do
           context 'new_template_binding_from is set to 2018-04-09' do
             let(:schedule) do
               create(:schedule,
-                     repetition_period_in_weeks: 1,
                      new_template_binding_from: Date.new(2018, 4, 9),
                      current_template: {
                        monday: (16..31).to_a,
@@ -96,7 +96,8 @@ describe Slots::ScheduleService do
         before do
           employee_driving_school.driving_school
             .create_schedule_settings(
-              holidays_enrollment_enabled: false
+              holidays_enrollment_enabled: false,
+              booking_advance_period_in_weeks: 1
             )
         end
 
@@ -107,7 +108,6 @@ describe Slots::ScheduleService do
           context 'new_template_binding_from is set to nil' do
             let(:schedule) do
               create(:schedule,
-                     repetition_period_in_weeks: 1,
                      new_template_binding_from: nil,
                      current_template: {
                        monday: (16..31).to_a,

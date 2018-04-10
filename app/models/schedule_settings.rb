@@ -4,13 +4,19 @@ class ScheduleSettings < ApplicationRecord
   # == Relations ==============================================================
   belongs_to :driving_school
 
+  # == Callbacks ==============================================================
+  before_save :update_schedules, if: :will_save_change_to_booking_advance_period_in_weeks?
+
   # == Validations ============================================================
   validates :valid_time_frames, :minimum_slots_count_per_driving_lesson,
-            :maximum_slots_count_per_driving_lesson, presence: true
+            :maximum_slots_count_per_driving_lesson, :booking_advance_period_in_weeks,
+            presence: true
+  validates :booking_advance_period_in_weeks, inclusion: MIN_SCHEDULE_REPETITION_PERIOD..MAX_SCHEDULE_REPETITION_PERIOD
   validates :minimum_slots_count_per_driving_lesson, :maximum_slots_count_per_driving_lesson,
             numericality: { only_integer: true, greater_than: 0 }
-  validates :minimum_slots_count_per_driving_lesson, numericality:
-            { less_than_or_equal_to: :maximum_slots_count_per_driving_lesson }
+  validates :minimum_slots_count_per_driving_lesson,
+            numericality: { less_than_or_equal_to: :maximum_slots_count_per_driving_lesson },
+            if: -> { maximum_slots_count_per_driving_lesson.present? }
   validates :holidays_enrollment_enabled, :last_minute_booking_enabled,
             :can_student_book_driving_lesson, inclusion: { in: [true, false] }
   validate :valid_time_frames_format
@@ -35,5 +41,18 @@ class ScheduleSettings < ApplicationRecord
     end
 
     true
+  end
+
+  def update_schedules
+    employee_driving_schools = driving_school.employee_driving_schools
+                                             .active
+                                             .where(employee_privileges: { is_driving: true })
+                                             .includes(:employee_privileges, :schedule)
+
+    employee_driving_schools.each do |employee_driving_school|
+      Slots::RescheduleAllService.new(
+        employee_driving_school.schedule
+      ).call
+    end
   end
 end

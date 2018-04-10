@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409104309) do
+ActiveRecord::Schema.define(version: 20180410082950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,11 +114,11 @@ ActiveRecord::Schema.define(version: 20180409104309) do
     t.integer "minimum_slots_count_per_driving_lesson", default: 1
     t.integer "maximum_slots_count_per_driving_lesson", default: 8
     t.boolean "can_student_book_driving_lesson", default: true
+    t.integer "booking_advance_period_in_weeks", default: 0, null: false
     t.index ["driving_school_id"], name: "index_schedule_settings_on_driving_school_id"
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.integer "repetition_period_in_weeks", default: 0, null: false
     t.json "current_template", default: {"monday"=>[], "tuesday"=>[], "wednesday"=>[], "thursday"=>[], "friday"=>[], "saturday"=>[], "sunday"=>[]}, null: false
     t.json "new_template", default: {"monday"=>[], "tuesday"=>[], "wednesday"=>[], "thursday"=>[], "friday"=>[], "saturday"=>[], "sunday"=>[]}, null: false
     t.date "new_template_binding_from"

@@ -33,8 +33,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
   end
 
   let(:response_keys) do
-    %w[id repetition_period_in_weeks new_template_binding_from
-       current_template new_template]
+    %w[id new_template_binding_from current_template new_template]
   end
 
   let(:is_owner) { false }
@@ -69,7 +68,6 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
             it 'attributes' do
               schedule = accessed_employee_driving_school.schedule
               expect(subject).to include(
-                'repetition_period_in_weeks' => schedule.repetition_period_in_weeks,
                 'new_template_binding_from' => schedule.new_template_binding_from.strftime('%Y-%m-%d'),
                 'current_template' => schedule.current_template,
                 'new_template' => schedule.new_template
@@ -97,7 +95,6 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
             it 'attributes' do
               schedule = accessed_employee_driving_school.schedule
               expect(subject).to include(
-                'repetition_period_in_weeks' => schedule.repetition_period_in_weeks,
                 'new_template_binding_from' => schedule.new_template_binding_from.strftime('%Y-%m-%d'),
                 'current_template' => schedule.current_template,
                 'new_template' => schedule.new_template

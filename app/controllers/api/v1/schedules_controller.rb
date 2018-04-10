@@ -26,7 +26,6 @@ class Api::V1::SchedulesController < ApplicationController
 
   def schedule_params
     params.require(:schedule).permit(
-      :repetition_period_in_weeks,
       :new_template_binding_from,
       current_template: {
         monday: [],
@@ -57,7 +56,8 @@ class Api::V1::SchedulesController < ApplicationController
   end
 
   def set_employee_driving_school
-    @employee_driving_school = @driving_school.employee_driving_schools.find_by!(employee_id: params[:employee_id])
+    @employee_driving_school = @driving_school.employee_driving_schools
+                                              .find_by!(employee_id: params[:employee_id])
   end
 
   def set_schedule

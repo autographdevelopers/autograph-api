@@ -28,6 +28,7 @@ class Api::V1::ScheduleSettingsController < ApplicationController
       :minimum_slots_count_per_driving_lesson,
       :maximum_slots_count_per_driving_lesson,
       :can_student_book_driving_lesson,
+      :booking_advance_period_in_weeks,
       valid_time_frames: {
         monday: [],
         tuesday: [],

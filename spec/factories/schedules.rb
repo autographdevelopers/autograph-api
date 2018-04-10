@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :schedule do
-    repetition_period_in_weeks 4
     new_template_binding_from 1.week.from_now.to_date
     current_template { {
       monday: (16..31).to_a,

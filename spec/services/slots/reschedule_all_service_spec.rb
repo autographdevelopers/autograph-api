@@ -17,16 +17,22 @@ describe Slots::RescheduleAllService do
       before { employee_driving_school.driving_school.update(time_zone: 'Poland') }
 
       context 'when holidays_enrollment_enabled set to true' do
-        before { employee_driving_school.driving_school.create_schedule_settings(holidays_enrollment_enabled: true) }
+        before do
+          employee_driving_school.driving_school
+                                 .create_schedule_settings(
+                                   holidays_enrollment_enabled: true,
+                                   booking_advance_period_in_weeks: booking_advance_period_in_weeks
+                                 )
+        end
 
         # winter time +01:00
         context 'when schedule is set on 2018-02-05(monday) 09:47:12' do
           before { travel_to Time.new(2018, 2, 5, 9, 47, 12, '+01:00') }
 
           context 'when current_template is set and new_template_binding_from is set to past' do
+            let(:booking_advance_period_in_weeks) { 2 }
             let(:schedule) do
               create(:schedule,
-                     repetition_period_in_weeks: 2,
                      new_template_binding_from: 1.year.from_now,
                      current_template: {
                        monday: (16..31).to_a,
@@ -102,9 +108,9 @@ describe Slots::RescheduleAllService do
           end
 
           context 'when current_template is set and new_template_binding_from is set and new_template is set' do
+            let(:booking_advance_period_in_weeks) { 2 }
             let(:schedule) do
               create(:schedule,
-                     repetition_period_in_weeks: 2,
                      new_template_binding_from: Date.new(2018, 2, 12),
                      current_template: {
                        monday: (16..31).to_a,
@@ -188,9 +194,9 @@ describe Slots::RescheduleAllService do
           before { travel_to Time.new(2018, 8, 8, 11, 12, 45, '+02:00') }
 
           context 'when current_template is set and new_template_binding_from is set to past' do
+            let(:booking_advance_period_in_weeks) { 1 }
             let(:schedule) do
               create(:schedule,
-                     repetition_period_in_weeks: 1,
                      new_template_binding_from: nil,
                      current_template: {
                        monday: (0..10).to_a + (30..47).to_a,
@@ -258,9 +264,9 @@ describe Slots::RescheduleAllService do
           end
 
           context 'when current_template is set and new_template_binding_from is set and new_template is set' do
+            let(:booking_advance_period_in_weeks) { 1 }
             let(:schedule) do
               create(:schedule,
-                     repetition_period_in_weeks: 1,
                      new_template_binding_from: Date.new(2018, 8, 12),
                      current_template: {
                        monday: (0..10).to_a + (30..47).to_a,
@@ -400,15 +406,21 @@ describe Slots::RescheduleAllService do
       end
 
       context 'when holidays_enrollment_enabled set to false' do
-        before { employee_driving_school.driving_school.create_schedule_settings(holidays_enrollment_enabled: false) }
+        before do
+          employee_driving_school.driving_school
+                                  .create_schedule_settings(
+                                    holidays_enrollment_enabled: false,
+                                    booking_advance_period_in_weeks: booking_advance_period_in_weeks
+                                  )
+        end
 
         context 'when schedule is set on 2018-05-28(monday) 09:22:36' do
           before { travel_to Time.new(2018, 05, 28, 9, 22, 36, '+02:00') }
 
           context 'when current_template is set and new_template_binding_from is set to past' do
+            let(:booking_advance_period_in_weeks) { 1 }
             let(:schedule) do
               create(:schedule,
-                     repetition_period_in_weeks: 1,
                      new_template_binding_from: 1.year.from_now,
                      current_template: {
                        monday: (16..31).to_a,
@@ -470,9 +482,9 @@ describe Slots::RescheduleAllService do
           end
 
           context 'when current_template is set and new_template_binding_from is set and new_template is set' do
+            let(:booking_advance_period_in_weeks) { 1 }
             let(:schedule) do
               create(:schedule,
-                     repetition_period_in_weeks: 1,
                      new_template_binding_from: Date.new(2018, 5, 31),
                      current_template: {
                        monday: (16..31).to_a,
