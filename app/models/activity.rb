@@ -22,6 +22,12 @@ class Activity < ApplicationRecord
     driving_lesson_scheduled: 11
   }
 
+  # == Scopes =================================================================
+  scope :maker_id, ->(value) { where(user_id: value) }
+  scope :related_user_id, ->(value) do
+    includes(:user_activities).where(user_activities: { user_id: value })
+  end
+
   # == Callbacks ==============================================================
   after_create :notify_about_activity
 
