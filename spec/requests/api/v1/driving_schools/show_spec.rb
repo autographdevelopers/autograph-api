@@ -21,6 +21,7 @@ describe 'GET /api/v1/driving_schools/:id' do
     %w[
       id name phone_numbers emails website_link additional_information city
       street country profile_picture zip_code status latitude longitude
+      time_zone
     ]
   end
 
@@ -41,11 +42,11 @@ describe 'GET /api/v1/driving_schools/:id' do
       it 'returned records contain proper keys' do
         expect(json_response.keys).to match_array %w[id name phone_numbers emails website_link additional_information
                                                      city street country profile_picture status relation_status
-                                                     zip_code latitude longitude]
+                                                     zip_code latitude longitude time_zone]
       end
 
       it 'response contains driving school attributes' do
-        expect(json_response).to eq(
+        expect(json_response).to include(
           'id' => driving_school.id,
           'name' => driving_school.name,
           'phone_numbers' => driving_school.phone_numbers,
@@ -87,7 +88,7 @@ describe 'GET /api/v1/driving_schools/:id' do
       it 'returned records contain proper keys' do
         expect(json_response.keys).to match_array %w[id name phone_numbers emails website_link additional_information
                                                      city street country profile_picture zip_code status
-                                                     relation_status privileges latitude longitude]
+                                                     relation_status privileges latitude longitude time_zone]
       end
 
       it 'returned records contain proper keys for privilege_set' do
@@ -96,7 +97,7 @@ describe 'GET /api/v1/driving_schools/:id' do
       end
 
       it 'response contains driving school attributes' do
-        expect(json_response).to eq(
+        expect(json_response).to include(
           'id' => driving_school.id,
           'name' => driving_school.name,
           'phone_numbers' => driving_school.phone_numbers,

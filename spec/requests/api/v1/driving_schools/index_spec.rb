@@ -55,7 +55,7 @@ describe 'GET /api/v1/driving_schools' do
     it 'returned records contain proper keys' do
       expect(json_response.first.keys).to match_array %w[id name phone_numbers emails website_link additional_information
                                                          city street country profile_picture status relation_status
-                                                         zip_code latitude longitude]
+                                                         zip_code latitude longitude time_zone]
     end
 
     it 'returns proper records' do
@@ -63,7 +63,7 @@ describe 'GET /api/v1/driving_schools' do
     end
 
     it 'response contains driving school attributes' do
-      expect(json_response.first).to eq(
+      expect(json_response.first).to include(
         'id' => driving_school_2.id,
         'name' => driving_school_2.name,
         'phone_numbers' => driving_school_2.phone_numbers,
@@ -93,7 +93,7 @@ describe 'GET /api/v1/driving_schools' do
     it 'returned records contain proper keys' do
       expect(json_response.first.keys).to match_array %w[id name phone_numbers emails website_link additional_information
                                                          city street country profile_picture zip_code status
-                                                         relation_status privileges latitude longitude]
+                                                         relation_status privileges latitude longitude time_zone]
     end
 
     it 'returned records contain proper keys for privilege_set' do
@@ -109,7 +109,7 @@ describe 'GET /api/v1/driving_schools' do
     end
 
     it 'response contains driving school attributes' do
-      expect(json_response.first).to eq(
+      expect(json_response.first).to include(
         'id' => driving_school_1.id,
         'name' => driving_school_1.name,
         'phone_numbers' => driving_school_1.phone_numbers,

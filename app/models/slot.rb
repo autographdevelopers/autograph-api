@@ -22,7 +22,7 @@ class Slot < ApplicationRecord
 
   # == Instance Methods =======================================================
   def lock_during_booking(user)
-    release_at = user.locked_slots.future.minimum('release_at') || BOOKING_LOCK_PERIOD.from_now
+    release_at = user.locked_slots.locked.minimum('release_at') || BOOKING_LOCK_PERIOD.from_now
     update(release_at: release_at, locking_user: user)
     BroadcastChangedSlotJob.perform_later(id)
   end
