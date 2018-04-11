@@ -215,7 +215,7 @@ DEPENDENCIES
   rspec-rails
   shoulda-matchers
   sidekiq
-  sidekiq-cron
+  sidekiq-cron (~> 0.6.3)
   spring
   spring-watcher-listen (~> 2.0.0)
   timezone
