@@ -49,7 +49,7 @@ gem 'bulk_insert'
 gem 'holidays'
 
 gem 'sidekiq'
-gem 'sidekiq-cron'
 gem 'has_scope'
+gem 'sidekiq-cron', '~> 0.6.3'
 gem 'one_signal'
 gem 'kaminari'

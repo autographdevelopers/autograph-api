@@ -1,0 +1,5 @@
+schedule_slots_worker:
+  cron: '1 0 * * * Poland'
+  class: 'ScheduleSlotsJob'
+  queue: default
+  args: ['Poland']

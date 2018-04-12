@@ -2,8 +2,6 @@ class ScheduleSlotsJob < ApplicationJob
   queue_as :default
 
   def perform(time_zone)
-    last_day_of_possible_booking = last_day_of_possible_booking
-
     employee_driving_schools = EmployeeDrivingSchool.active_with_active_driving_school
                                                     .where(driving_schools: { time_zone: time_zone })
                                                     .where(employee_privileges: { is_driving: true })
@@ -12,7 +10,7 @@ class ScheduleSlotsJob < ApplicationJob
     employee_driving_schools.each do |employee_driving_school|
       schedule = employee_driving_school.schedule
 
-      next if last_update_date_today?(employee_driving_school.schedule)
+      next if last_update_date_today?(schedule)
 
       Slots::ScheduleService.new(
         schedule, last_day_of_possible_booking(schedule, time_zone)

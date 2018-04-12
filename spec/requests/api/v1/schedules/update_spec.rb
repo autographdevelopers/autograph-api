@@ -33,7 +33,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
   let(:response_keys) do
     %w[
-      id repetition_period_in_weeks new_template_binding_from current_template
+      id new_template_binding_from current_template
       new_template
     ]
   end
@@ -45,7 +45,6 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
   let(:params) do
     {
       schedule: {
-        repetition_period_in_weeks: 4,
         new_template_binding_from: 2.weeks.from_now.to_date,
         current_template: {
           'monday' => (16..31).to_a,
@@ -90,7 +89,6 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
             it 'updates Schedule record' do
               schedule = accessed_employee_driving_school.schedule.reload
               expect(schedule.attributes).to include(
-                'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
                 'new_template_binding_from' => params[:schedule][:new_template_binding_from],
                 'current_template' => params[:schedule][:current_template],
                 'new_template' => params[:schedule][:new_template]
@@ -124,7 +122,6 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
               it 'attributes' do
                 expect(subject).to include(
-                  'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
                   'new_template_binding_from' => params[:schedule][:new_template_binding_from].strftime('%Y-%m-%d'),
                   'current_template' => params[:schedule][:current_template],
                   'new_template' => params[:schedule][:new_template]
@@ -137,7 +134,6 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
             let(:params) do
               {
                 schedule: {
-                  repetition_period_in_weeks: 1,
                   current_template: {
                     'monday' => (16..31).to_a,
                     'tuesday' => (16..31).to_a,
@@ -158,7 +154,6 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
             it 'updates Schedule record' do
               schedule = accessed_employee_driving_school.schedule.reload
               expect(schedule.attributes).to include(
-                'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
                 'current_template' => params[:schedule][:current_template]
               )
             end
@@ -190,7 +185,6 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
               it 'attributes' do
                 expect(subject).to include(
-                  'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
                   'current_template' => params[:schedule][:current_template]
                 )
               end
@@ -200,11 +194,10 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
         context 'when params are INVALID' do
           context 'when given INVALID weekdays for templates, INVALID slots ids for weekdays,' \
-                'new_template_binding_from is set to past and repetition_period_in_weeks is out of 0 to 26' do
+                'new_template_binding_from is set to past' do
             let(:params) do
               {
                 schedule: {
-                  repetition_period_in_weeks: -1,
                   new_template_binding_from: 2.weeks.ago.to_date,
                   current_template: {
                     'monday' => (16..31).to_a,
@@ -234,7 +227,6 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
             it 'response contains proper error messages' do
               expect(json_response).to include(
-                'repetition_period_in_weeks' => ['is not included in the list'],
                 'new_template_binding_from' => ['must be in the future'],
                 'current_template' => ['has invalid weekday(s)'],
                 'new_template' => ['has invalid slot_start_times_id(s)']
@@ -256,7 +248,6 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
             it 'updates Schedule record' do
               schedule = accessed_employee_driving_school.schedule.reload
               expect(schedule.attributes).to include(
-                'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
                 'new_template_binding_from' => params[:schedule][:new_template_binding_from],
                 'current_template' => params[:schedule][:current_template],
                 'new_template' => params[:schedule][:new_template]
@@ -290,7 +281,6 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
               it 'attributes' do
                 expect(subject).to include(
-                  'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
                   'new_template_binding_from' => params[:schedule][:new_template_binding_from].strftime('%Y-%m-%d'),
                   'current_template' => params[:schedule][:current_template],
                   'new_template' => params[:schedule][:new_template]
@@ -303,7 +293,6 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
             let(:params) do
               {
                 schedule: {
-                  repetition_period_in_weeks: 1,
                   current_template: {
                     'monday' => (16..31).to_a,
                     'tuesday' => (16..31).to_a,
@@ -324,7 +313,6 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
             it 'updates Schedule record' do
               schedule = accessed_employee_driving_school.schedule.reload
               expect(schedule.attributes).to include(
-                'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
                 'current_template' => params[:schedule][:current_template]
               )
             end
@@ -356,7 +344,6 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
               it 'attributes' do
                 expect(subject).to include(
-                  'repetition_period_in_weeks' => params[:schedule][:repetition_period_in_weeks],
                   'current_template' => params[:schedule][:current_template]
                 )
               end
@@ -366,11 +353,10 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
         context 'when params are INVALID' do
           context 'when given INVALID weekdays for templates, INVALID slots ids for weekdays,' \
-                'new_template_binding_from is set to past and repetition_period_in_weeks is out of 0 to 26' do
+                'new_template_binding_from is set to past' do
             let(:params) do
               {
                 schedule: {
-                  repetition_period_in_weeks: -1,
                   new_template_binding_from: 2.weeks.ago.to_date,
                   current_template: {
                     'monday' => (16..31).to_a,
@@ -400,7 +386,6 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
 
             it 'response contains proper error messages' do
               expect(json_response).to include(
-                'repetition_period_in_weeks' => ['is not included in the list'],
                 'new_template_binding_from' => ['must be in the future'],
                 'current_template' => ['has invalid weekday(s)'],
                 'new_template' => ['has invalid slot_start_times_id(s)']

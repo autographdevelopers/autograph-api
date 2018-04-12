@@ -56,7 +56,9 @@ module Slots
 
       def last_day_of_possible_booking
         driving_school_time_zone.utc_to_local(
-          schedule.repetition_period_in_weeks.to_i.weeks.from_now
+          driving_school.schedule_settings
+                        .booking_advance_period_in_weeks
+                        .to_i.weeks.from_now
         ).to_date
       end
 

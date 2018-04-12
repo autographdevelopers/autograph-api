@@ -12,7 +12,8 @@ class Slot < ApplicationRecord
   # == Scopes =================================================================
   scope :booked,        -> { where.not(driving_lesson: nil) }
   scope :available,     -> { where(driving_lesson: nil) }
-  scope :future,        -> { where('start_time > ?', Time.now) }
+  scope :future,        -> { where('slots.start_time > ?', Time.now) }
+  scope :past,          -> { where('slots.start_time < ?', Time.now) }
   scope :unlocked,      -> { where('release_at < ? OR release_at IS NULL', Time.now) }
   scope :locked,        -> { where('release_at > ?', Time.now) }
   scope :by_start_time, ->(from, to) {

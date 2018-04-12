@@ -16,7 +16,9 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/schedule_settings' do
   let(:response_keys) do
     %w[
       id holidays_enrollment_enabled last_minute_booking_enabled
-      valid_time_frames
+      valid_time_frames minimum_slots_count_per_driving_lesson
+      maximum_slots_count_per_driving_lesson can_student_book_driving_lesson
+      booking_advance_period_in_weeks
     ]
   end
 
@@ -49,7 +51,11 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/schedule_settings' do
             ss = driving_school.schedule_settings
             expect(subject).to include(
               'holidays_enrollment_enabled' => ss.holidays_enrollment_enabled,
-              'last_minute_booking_enabled' => ss.last_minute_booking_enabled
+              'last_minute_booking_enabled' => ss.last_minute_booking_enabled,
+              'minimum_slots_count_per_driving_lesson' => ss.minimum_slots_count_per_driving_lesson,
+              'maximum_slots_count_per_driving_lesson' => ss.maximum_slots_count_per_driving_lesson,
+              'can_student_book_driving_lesson' => ss.can_student_book_driving_lesson,
+              'booking_advance_period_in_weeks' => ss.booking_advance_period_in_weeks
             )
           end
         end

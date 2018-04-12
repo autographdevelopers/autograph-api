@@ -6,10 +6,6 @@ describe Schedule do
   context 'validations' do
     it { should validate_presence_of(:current_template) }
     it { should validate_presence_of(:new_template) }
-    it { should validate_presence_of(:repetition_period_in_weeks) }
-    it { should validate_inclusion_of(:repetition_period_in_weeks).in_range(
-      Schedule::MIN_SCHEDULE_REPETITION_PERIOD..Schedule::MAX_SCHEDULE_REPETITION_PERIOD
-    ) }
 
     context '#current_template_format' do
       subject { build(:schedule, current_template: template) }

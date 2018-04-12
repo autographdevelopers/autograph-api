@@ -14,7 +14,9 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings' do
   let(:response_keys) do
     %w[
       id holidays_enrollment_enabled last_minute_booking_enabled
-      valid_time_frames
+      valid_time_frames minimum_slots_count_per_driving_lesson
+      maximum_slots_count_per_driving_lesson can_student_book_driving_lesson
+      booking_advance_period_in_weeks
     ]
   end
 
@@ -23,6 +25,10 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings' do
       schedule_settings: {
         holidays_enrollment_enabled: true,
         last_minute_booking_enabled: false,
+        minimum_slots_count_per_driving_lesson: 1,
+        maximum_slots_count_per_driving_lesson: 4,
+        booking_advance_period_in_weeks: 12,
+        can_student_book_driving_lesson: false,
         valid_time_frames: {
           'monday' => (16..31).to_a,
           'tuesday' => (16..31).to_a,
@@ -61,7 +67,11 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings' do
             schedule_settings = driving_school.schedule_settings.reload
             expect(schedule_settings.attributes).to include(
               'holidays_enrollment_enabled' => true,
-              'last_minute_booking_enabled' => false
+              'last_minute_booking_enabled' => false,
+              'minimum_slots_count_per_driving_lesson' => 1,
+              'maximum_slots_count_per_driving_lesson' => 4,
+              'can_student_book_driving_lesson' => false,
+              'booking_advance_period_in_weeks' => 12
             )
           end
 
@@ -75,7 +85,11 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings' do
             it 'attributes' do
               expect(subject).to include(
                 'holidays_enrollment_enabled' => true,
-                'last_minute_booking_enabled' => false
+                'last_minute_booking_enabled' => false,
+                'minimum_slots_count_per_driving_lesson' => 1,
+                'maximum_slots_count_per_driving_lesson' => 4,
+                'can_student_book_driving_lesson' => false,
+                'booking_advance_period_in_weeks' => 12
               )
             end
           end
@@ -87,7 +101,11 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings' do
               {
                 schedule_settings: {
                   holidays_enrollment_enabled: '',
-                  last_minute_booking_enabled: ''
+                  last_minute_booking_enabled: '',
+                  minimum_slots_count_per_driving_lesson: '',
+                  maximum_slots_count_per_driving_lesson: '',
+                  can_student_book_driving_lesson: '',
+                  booking_advance_period_in_weeks: ''
                 }
               }
             end
@@ -99,7 +117,11 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/schedule_settings' do
             it 'response contains proper error messages' do
               expect(json_response).to include(
                 'holidays_enrollment_enabled' => ['is not included in the list'],
-                'last_minute_booking_enabled' => ['is not included in the list']
+                'last_minute_booking_enabled' => ['is not included in the list'],
+                'can_student_book_driving_lesson' => ['is not included in the list'],
+                'minimum_slots_count_per_driving_lesson' =>  ["can't be blank", 'is not a number'],
+                'maximum_slots_count_per_driving_lesson' => ["can't be blank", 'is not a number'],
+                'booking_advance_period_in_weeks' => ["can't be blank", 'is not included in the list']
               )
             end
           end
