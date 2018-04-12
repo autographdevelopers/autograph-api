@@ -95,8 +95,8 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/driving_lessons' do
     end
 
     it 'sets fetched UserActivities read to true' do
-      user_activities = UserActivity.where(user_id: current_user.id)
-      expect(user_activities.pluck(:read)).to all(be true)
+      notifiable_user_activities = NotifiableUserActivity.where(user_id: current_user.id)
+      expect(notifiable_user_activities.pluck(:read)).to all(be true)
     end
   end
 
@@ -125,8 +125,8 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/driving_lessons' do
     end
 
     it 'sets fetched UserActivities read to true' do
-      user_activities = UserActivity.where(user_id: current_user.id)
-      expect(user_activities.pluck(:read)).to all(be true)
+      notifiable_user_activities = NotifiableUserActivity.where(user_id: current_user.id)
+      expect(notifiable_user_activities.pluck(:read)).to all(be true)
     end
   end
 end

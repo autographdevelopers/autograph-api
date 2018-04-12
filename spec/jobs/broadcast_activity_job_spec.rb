@@ -75,11 +75,16 @@ describe BroadcastActivityJob do
                status: :pending)
       end
 
-      it 'relates Activity with proper users' do
+      it 'notifies proper users about Activity' do
         subject
         expect(activity.notifiable_users.pluck(:id)).to match_array [
           employee_1.id, employee_3.id
         ]
+      end
+
+      it 'relates proper users with Activity' do
+        subject
+        expect(activity.related_users.pluck(:id)).to match_array [user.id]
       end
     end
 
@@ -92,11 +97,16 @@ describe BroadcastActivityJob do
                status: :archived)
       end
 
-      it 'relates Activity with proper users' do
+      it 'notifies proper users about Activity' do
         subject
         expect(activity.notifiable_users.pluck(:id)).to match_array [
           employee_1.id, employee_3.id
         ]
+      end
+
+      it 'relates proper users with Activity' do
+        subject
+        expect(activity.related_users.pluck(:id)).to match_array [user.id]
       end
     end
 
@@ -109,11 +119,16 @@ describe BroadcastActivityJob do
                status: :rejected)
       end
 
-      it 'relates Activity with proper users' do
+      it 'notifies proper users about Activity' do
         subject
         expect(activity.notifiable_users.pluck(:id)).to match_array [
-          employee_1.id, employee_3.id
+          employee_1.id, employee_3.id, user.id
         ]
+      end
+
+      it 'relates proper users with Activity' do
+        subject
+        expect(activity.related_users.pluck(:id)).to match_array [user.id]
       end
     end
 
@@ -126,11 +141,16 @@ describe BroadcastActivityJob do
                status: :active)
       end
 
-      it 'relates Activity with proper users' do
+      it 'notifies proper users about Activity' do
         subject
         expect(activity.notifiable_users.pluck(:id)).to match_array [
           employee_1.id, employee_3.id
         ]
+      end
+
+      it 'relates proper users with Activity' do
+        subject
+        expect(activity.related_users.pluck(:id)).to be_empty
       end
     end
 
@@ -143,11 +163,16 @@ describe BroadcastActivityJob do
                status: :pending)
       end
 
-      it 'relates Activity with proper users' do
+      it 'notifies proper users about Activity' do
         subject
         expect(activity.notifiable_users.pluck(:id)).to match_array [
           employee_1.id, employee_2.id
         ]
+      end
+
+      it 'relates proper users with Activity' do
+        subject
+        expect(activity.related_users.pluck(:id)).to match_array [user.id]
       end
     end
 
@@ -160,11 +185,16 @@ describe BroadcastActivityJob do
                status: :archived)
       end
 
-      it 'relates Activity with proper users' do
+      it 'notifies proper users about Activity' do
         subject
         expect(activity.notifiable_users.pluck(:id)).to match_array [
           employee_1.id, employee_2.id
         ]
+      end
+
+      it 'relates proper users with Activity' do
+        subject
+        expect(activity.related_users.pluck(:id)).to match_array [user.id]
       end
     end
 
@@ -177,11 +207,16 @@ describe BroadcastActivityJob do
                status: :active)
       end
 
-      it 'relates Activity with proper users' do
+      it 'notifies proper users about Activity' do
         subject
         expect(activity.notifiable_users.pluck(:id)).to match_array [
-          employee_1.id, employee_2.id
+          employee_1.id, employee_2.id, user.id
         ]
+      end
+
+      it 'relates proper users with Activity' do
+        subject
+        expect(activity.related_users.pluck(:id)).to match_array [user.id]
       end
     end
 
@@ -194,11 +229,16 @@ describe BroadcastActivityJob do
                status: :rejected)
       end
 
-      it 'relates Activity with proper users' do
+      it 'notifies proper users about Activity' do
         subject
         expect(activity.notifiable_users.pluck(:id)).to match_array [
           employee_1.id, employee_2.id
         ]
+      end
+
+      it 'relates proper users with Activity' do
+        subject
+        expect(activity.related_users.pluck(:id)).to match_array []
       end
     end
 
@@ -210,11 +250,18 @@ describe BroadcastActivityJob do
                student_driving_school: student_driving_school)
       end
 
-      it 'relates Activity with proper users' do
+      it 'notifies proper users about Activity' do
         subject
         expect(activity.notifiable_users.pluck(:id)).to match_array [
           employee_1.id, employee_5.id, student.id
         ]
+      end
+
+      it 'relates proper users with Activity' do
+        subject
+        expect(activity.related_users.pluck(:id)).to match_array [
+          employee_5, student_driving_school.student
+        ].pluck(:id)
       end
     end
 
@@ -226,11 +273,18 @@ describe BroadcastActivityJob do
                employee_driving_school: employee_driving_school_4)
       end
 
-      it 'relates Activity with proper users' do
+      it 'notifies proper users about Activity' do
         subject
         expect(activity.notifiable_users.pluck(:id)).to match_array [
           employee_1.id, employee_5.id, employee_4.id
         ]
+      end
+
+      it 'relates proper users with Activity' do
+        subject
+        expect(activity.related_users.pluck(:id)).to match_array [
+          employee_5, employee_driving_school_4.employee
+        ].pluck(:id)
       end
     end
 
@@ -245,11 +299,18 @@ describe BroadcastActivityJob do
                status: :canceled)
       end
 
-      it 'relates Activity with proper users' do
+      it 'notifies proper users about Activity' do
         subject
         expect(activity.notifiable_users.pluck(:id)).to match_array [
           employee_1.id, employee_5.id, student.id, employee_4.id
         ]
+      end
+
+      it 'relates proper users with Activity' do
+        subject
+        expect(activity.related_users.pluck(:id)).to match_array [
+          employee_5, student, employee_4
+        ].pluck(:id)
       end
     end
 
@@ -264,11 +325,18 @@ describe BroadcastActivityJob do
                status: :active)
       end
 
-      it 'relates Activity with proper users' do
+      it 'notifies proper users about Activity' do
         subject
         expect(activity.notifiable_users.pluck(:id)).to match_array [
           employee_1.id, employee_5.id, student.id, employee_4.id
         ]
+      end
+
+      it 'relates proper users with Activity' do
+        subject
+        expect(activity.related_users.pluck(:id)).to match_array [
+          student, employee_4, employee_5
+        ].pluck(:id)
       end
     end
 

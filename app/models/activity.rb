@@ -3,8 +3,15 @@ class Activity < ApplicationRecord
   belongs_to :driving_school
   belongs_to :target, polymorphic: true
   belongs_to :user
-  has_many :user_activities
-  has_many :notifiable_users, through: :user_activities, source: :user
+  has_many :notifiable_user_activities
+  has_many :notifiable_users,
+           through: :notifiable_user_activities,
+           source: :user
+
+  has_many :related_user_activities
+  has_many :related_users,
+           through: :related_user_activities,
+           source: :user
 
   # == Enumerators ============================================================
   enum activity_type: {
@@ -23,9 +30,8 @@ class Activity < ApplicationRecord
   }
 
   # == Scopes =================================================================
-  scope :maker_id, ->(value) { where(user_id: value) }
-  scope :related_user_id, ->(value) do
-    includes(:user_activities).where(user_activities: { user_id: value })
+  scope :related_to_user, ->(value) do
+    includes(:related_user_activities).where(related_user_activities: { user_id: value })
   end
 
   # == Callbacks ==============================================================

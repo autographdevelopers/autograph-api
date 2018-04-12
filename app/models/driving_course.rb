@@ -4,7 +4,6 @@ class DrivingCourse < ApplicationRecord
 
   # == Relations ==============================================================
   belongs_to :student_driving_school
-  has_many :activities, as: :target
 
   # == Validations ============================================================
   validates :available_hours, :booked_hours, :used_hours, :category_type,

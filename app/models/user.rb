@@ -5,8 +5,15 @@ class User < ActiveRecord::Base
 
   # == Relations ==============================================================
   has_many :locked_slots, class_name: 'Slot', foreign_key: 'locking_user_id'
-  has_many :user_activities
-  has_many :activities, through: :user_activities
+  has_many :notifiable_user_activities
+  has_many :notifiable_activities,
+           through: :notifiable_user_activities,
+           source: :activity
+
+  has_many :related_user_activities
+  has_many :related_activities,
+           through: :related_user_activities,
+           source: :activity
 
   # == Extensions =============================================================
   devise :database_authenticatable, :registerable,

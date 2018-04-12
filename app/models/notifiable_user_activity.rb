@@ -1,4 +1,4 @@
-class UserActivity < ApplicationRecord
+class NotifiableUserActivity < ApplicationRecord
   # == Relations ==============================================================
   belongs_to :activity
   belongs_to :user

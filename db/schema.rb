@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180408145135) do
+ActiveRecord::Schema.define(version: 20180412084533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,23 @@ ActiveRecord::Schema.define(version: 20180408145135) do
     t.index ["invitable_type", "invitable_id"], name: "index_invitations_on_invitable_type_and_invitable_id"
   end
 
+  create_table "notifiable_user_activities", force: :cascade do |t|
+    t.bigint "activity_id"
+    t.bigint "user_id"
+    t.boolean "read", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_notifiable_user_activities_on_activity_id"
+    t.index ["user_id"], name: "index_notifiable_user_activities_on_user_id"
+  end
+
+  create_table "related_user_activities", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "activity_id"
+    t.index ["activity_id"], name: "index_related_user_activities_on_activity_id"
+    t.index ["user_id"], name: "index_related_user_activities_on_user_id"
+  end
+
   create_table "schedule_settings", force: :cascade do |t|
     t.boolean "holidays_enrollment_enabled", default: false, null: false
     t.boolean "last_minute_booking_enabled", default: false, null: false
@@ -159,16 +176,6 @@ ActiveRecord::Schema.define(version: 20180408145135) do
     t.datetime "updated_at", null: false
     t.index ["driving_school_id"], name: "index_student_driving_schools_on_driving_school_id"
     t.index ["student_id"], name: "index_student_driving_schools_on_student_id"
-  end
-
-  create_table "user_activities", force: :cascade do |t|
-    t.bigint "activity_id"
-    t.bigint "user_id"
-    t.boolean "read", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["activity_id"], name: "index_user_activities_on_activity_id"
-    t.index ["user_id"], name: "index_user_activities_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -215,11 +222,13 @@ ActiveRecord::Schema.define(version: 20180408145135) do
   add_foreign_key "driving_lessons", "users", column: "employee_id"
   add_foreign_key "driving_lessons", "users", column: "student_id"
   add_foreign_key "employee_driving_schools", "users", column: "employee_id"
+  add_foreign_key "notifiable_user_activities", "activities"
+  add_foreign_key "notifiable_user_activities", "users"
+  add_foreign_key "related_user_activities", "activities"
+  add_foreign_key "related_user_activities", "users"
   add_foreign_key "schedules", "employee_driving_schools"
   add_foreign_key "slots", "driving_lessons"
   add_foreign_key "slots", "employee_driving_schools"
   add_foreign_key "slots", "users", column: "locking_user_id"
   add_foreign_key "student_driving_schools", "users", column: "student_id"
-  add_foreign_key "user_activities", "activities"
-  add_foreign_key "user_activities", "users"
 end

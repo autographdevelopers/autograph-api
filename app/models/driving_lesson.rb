@@ -7,7 +7,6 @@ class DrivingLesson < ApplicationRecord
   belongs_to :employee
   belongs_to :driving_school
   has_many :slots
-  has_many :activities, as: :target
 
   # == Enumerators ============================================================
   enum status: { active: 0, canceled: 1 }

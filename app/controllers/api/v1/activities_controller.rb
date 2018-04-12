@@ -3,21 +3,20 @@ class Api::V1::ActivitiesController < ApplicationController
   before_action :set_driving_school
   after_action :set_as_read, only: :my_activities
 
-  has_scope :related_user_id
-  has_scope :maker_id
-
   def my_activities
-    @user_activities = current_user.user_activities
-                                   .includes(:activity)
-                                   .where(activities: { driving_school_id: @driving_school.id })
-                                   .order('activities.created_at DESC')
-                                   .page(params[:page])
+    @notifiable_user_activities = current_user.notifiable_user_activities
+                                              .includes(:activity)
+                                              .where(activities: { driving_school_id: @driving_school.id })
+                                              .order('activities.created_at DESC')
+                                              .page(params[:page])
   end
 
+  # Add authorization
   def index
-    @activities = apply_scopes(@driving_school.activities)
-                    .order('activities.created_at DESC')
-                    .page(params[:page])
+    @activities = @driving_school.activities
+                                 .related_to_user(related_user_id)
+                                 .order('activities.created_at DESC')
+                                 .page(params[:page])
   end
 
   private
@@ -29,8 +28,14 @@ class Api::V1::ActivitiesController < ApplicationController
                                   .driving_school
   end
 
+  def related_user_id
+    params.require(:related_user_id)
+  end
+
+  # Reason for using `pluck(:id)`
+  # https://github.com/rails/rails/issues/30148
   def set_as_read
-    UserActivity.where(id: @user_activities.pluck(:id))
-                .update_all(read: true)
+    NotifiableUserActivity.where(id: @notifiable_user_activities.pluck(:id))
+                          .update_all(read: true)
   end
 end

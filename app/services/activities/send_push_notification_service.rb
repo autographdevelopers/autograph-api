@@ -72,7 +72,8 @@ class Activities::SendPushNotificationService
   private
 
   def player_ids
-    activity.notifiable_users.to_a.delete_if { |u| u.id == activity.user.id }
+    activity.notifiable_users.to_a
+                             .delete_if { |u| u.id == activity.user.id }
                              .pluck(:player_id)
                              .compact
   end

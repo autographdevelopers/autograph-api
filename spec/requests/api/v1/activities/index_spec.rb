@@ -1,35 +1,19 @@
 describe 'GET /api/v1/driving_schools/:driving_school_id/driving_lessons' do
-  let(:student_1) { create(:student) }
-  let(:student_2) { create(:student) }
-  let(:employee_1) { create(:employee) }
-  let(:employee_2) { create(:employee) }
+  let(:student) { create(:student) }
+  let(:employee) { create(:employee) }
 
   let(:driving_school) { create(:driving_school, status: :active) }
 
-  let!(:employee_driving_school_1) do
+  let!(:employee_driving_school) do
     create(:employee_driving_school,
-           employee: employee_1,
+           employee: employee,
            driving_school: driving_school,
            status: :active)
   end
 
-  let!(:student_driving_school_1) do
+  let!(:student_driving_school) do
     create(:student_driving_school,
-           student: student_1,
-           driving_school: driving_school,
-           status: :active)
-  end
-
-  let!(:employee_driving_school_2) do
-    create(:employee_driving_school,
-           employee: employee_2,
-           driving_school: driving_school,
-           status: :active)
-  end
-
-  let!(:student_driving_school_2) do
-    create(:student_driving_school,
-           student: student_2,
+           student: student,
            driving_school: driving_school,
            status: :active)
   end
@@ -38,7 +22,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/driving_lessons' do
     create(:activity,
            driving_school: driving_school,
            target: create(:driving_lesson),
-           user: student_1,
+           user: student,
            activity_type: :driving_lesson_scheduled)
   end
 
@@ -46,7 +30,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/driving_lessons' do
     create(:activity,
            driving_school: driving_school,
            target: create(:driving_lesson),
-           user: employee_1,
+           user: employee,
            activity_type: :driving_lesson_scheduled)
   end
 
@@ -54,31 +38,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/driving_lessons' do
     create(:activity,
            driving_school: driving_school,
            target: create(:driving_lesson),
-           user: student_2,
-           activity_type: :driving_lesson_scheduled)
-  end
-
-  let(:activity_4) do
-    create(:activity,
-           driving_school: driving_school,
-           target: create(:driving_lesson),
-           user: employee_2,
-           activity_type: :driving_lesson_scheduled)
-  end
-
-  let(:activity_5) do
-    create(:activity,
-           driving_school: driving_school,
-           target: create(:driving_lesson),
-           user: employee_1,
-           activity_type: :driving_lesson_scheduled)
-  end
-
-  let(:activity_6) do
-    create(:activity,
-           driving_school: driving_school,
-           target: create(:driving_lesson),
-           user: employee_2,
+           user: employee,
            activity_type: :driving_lesson_scheduled)
   end
 
@@ -92,12 +52,9 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/driving_lessons' do
   end
 
   before do
-    activity_1.notifiable_users = [student_1, employee_1, student_2, employee_2]
-    activity_2.notifiable_users = [student_1, employee_1, student_2]
-    activity_3.notifiable_users = [student_1, employee_1]
-    activity_4.notifiable_users = [student_1]
-    activity_5.notifiable_users = [employee_1, employee_2]
-    activity_6.notifiable_users = [employee_1, employee_2]
+    activity_1.related_users = [student, employee]
+    activity_2.related_users = [student]
+    activity_3.related_users = [employee]
 
     get "/api/v1/driving_schools/#{driving_school.id}/activities",
         headers: current_user.create_new_auth_token,
@@ -105,51 +62,43 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/driving_lessons' do
   end
 
   context 'when current_user is EMPLOYEE' do
-    let(:current_user) { employee_1 }
-
-    it 'returned records contain proper keys' do
-      expect(json_response.first.keys).to match_array response_keys
-    end
-
-    it 'response contains activity attributes' do
-      expect(json_response.find { |i| i['id'] == activity_1.id }).to include(
-        'driving_school_id' => activity_1.driving_school_id,
-        'target_type' => activity_1.target_type,
-        'target_id' => activity_1.target_id,
-        'user_id' => activity_1.user_id,
-        'activity_type' => activity_1.activity_type,
-      )
-    end
-
-    it 'returns activities related to driving school' do
-      expect(json_response.pluck('id')).to eq [
-        activity_6, activity_5, activity_4, activity_3, activity_2, activity_1
-      ].pluck(:id)
-    end
+    let(:current_user) { employee }
 
     context 'with related_user_id param' do
-      let(:params) { { related_user_id: student_1.id } }
+      let(:params) { { related_user_id: student.id } }
+
+      it 'returned records contain proper keys' do
+        expect(json_response.first.keys).to match_array response_keys
+      end
+
+      it 'response contains activity attributes' do
+        expect(json_response.find { |i| i['id'] == activity_1.id }).to include(
+          'driving_school_id' => activity_1.driving_school_id,
+          'target_type' => activity_1.target_type,
+          'target_id' => activity_1.target_id,
+          'user_id' => activity_1.user_id,
+          'activity_type' => activity_1.activity_type
+        )
+      end
 
       it 'returns proper records' do
         expect(json_response.pluck('id')).to match_array [
-          activity_4, activity_3, activity_2, activity_1
+          activity_2, activity_1
         ].pluck(:id)
       end
     end
 
-    context 'with maker_id param' do
-      let(:params) { { maker_id: employee_2.id } }
+    context 'WITHOUT related_user_id param' do
+      let(:params) { {} }
 
-      it 'returns proper records' do
-        expect(json_response.pluck('id')).to match_array [
-          activity_4, activity_6
-        ].pluck(:id)
+      it 'returns empty collection' do
+        expect(json_response['error']).to eq 'param is missing or the value is empty: related_user_id'
       end
     end
   end
 
   context 'when current_user is STUDENT' do
-    let(:current_user) { student_1 }
+    let(:current_user) { student }
 
     it 'returns 401 http status code' do
       expect(response.status).to eq 401

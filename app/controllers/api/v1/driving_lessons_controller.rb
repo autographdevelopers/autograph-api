@@ -16,7 +16,7 @@ class Api::V1::DrivingLessonsController < ApplicationController
   def index
     @driving_lessons = apply_scopes(
       policy_scope(@driving_school.driving_lessons)
-    ).includes(:slots)
+    ).includes(:employee, :student, slots: :employee_driving_school)
   end
 
   def cancel
