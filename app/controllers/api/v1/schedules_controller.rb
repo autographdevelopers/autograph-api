@@ -11,6 +11,7 @@ class Api::V1::SchedulesController < ApplicationController
     Slot.transaction do
       @schedule.update!(schedule_params)
       Slots::RescheduleAllService.new(@schedule).call
+      create_activity
     end
 
     render @schedule
@@ -71,5 +72,14 @@ class Api::V1::SchedulesController < ApplicationController
         slots_ids.reject { |id| id.blank? }.map { |id| id.to_i }
       end
     end
+  end
+
+  def create_activity
+    Activity.create(
+      user: current_user,
+      driving_school: @driving_school,
+      activity_type: :schedule_changed,
+      target: @schedule
+    )
   end
 end

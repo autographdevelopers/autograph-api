@@ -15,11 +15,14 @@ class Api::V1::InvitationsController < ApplicationController
       invited_employee_privileges_params
     ).call
 
+    create_activity(@user_driving_school_relation)
+
     render :create, status: :created
   end
 
   def accept
     @user_driving_school.activate!
+    create_activity(@user_driving_school)
 
     render 'api/v1/driving_schools/show', locals: {
       user_driving_school: @user_driving_school
@@ -28,17 +31,20 @@ class Api::V1::InvitationsController < ApplicationController
 
   def reject
     @user_driving_school.reject!
+    create_activity(@user_driving_school)
   end
 
   def destroy
     authorize @driving_school, :can_manage_employees? if params[:type] == User::EMPLOYEE
     authorize @driving_school, :can_manage_students? if params[:type] == User::STUDENT
 
-    Invitations::DestroyService.new(
+    user_driving_school = Invitations::DestroyService.new(
       invitation_id: params[:user_id],
       invited_user_type: params[:type],
       driving_school: @driving_school
     ).call
+
+    create_activity(user_driving_school)
   end
 
   private
@@ -73,5 +79,31 @@ class Api::V1::InvitationsController < ApplicationController
     @user_driving_school = current_user.user_driving_schools.find_by!(
       driving_school_id: params[:driving_school_id]
     )
+  end
+
+  def create_activity(target)
+    Activity.create(
+      user: current_user,
+      driving_school: target.driving_school,
+      activity_type: determine_activity_type(target),
+      target: target
+    )
+  end
+
+  def determine_activity_type(target)
+    prefix = if target.is_a? EmployeeDrivingSchool
+               'employee'
+             elsif target.is_a? StudentDrivingSchool
+               'student'
+             end
+
+    suffix = {
+      'create' => 'invitation_sent',
+      'accept' => 'invitation_accepted',
+      'reject' => 'invitation_rejected',
+      'destroy' => 'invitation_withdrawn'
+    }[action_name]
+
+    "#{prefix}_#{suffix}".to_sym
   end
 end

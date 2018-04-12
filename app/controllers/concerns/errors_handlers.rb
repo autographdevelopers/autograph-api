@@ -2,14 +2,15 @@ module ErrorsHandlers
   extend ActiveSupport::Concern
 
   included do
-    rescue_from ActiveRecord::SubclassNotFound, with: :invalid_user_type
-    rescue_from ActionController::RoutingError, with: :routes_not_found
-    rescue_from Pundit::NotAuthorizedError,     with: :not_authorized
-    rescue_from ActiveRecord::RecordNotFound,   with: :record_not_found
-    rescue_from ActiveRecord::RecordInvalid,    with: :record_invalid
-    rescue_from AASM::InvalidTransition,        with: :bad_request
-    rescue_from ActionController::BadRequest,   with: :bad_request
-    rescue_from ArgumentError,                  with: :argument_error
+    rescue_from ActiveRecord::SubclassNotFound,     with: :invalid_user_type
+    rescue_from ActionController::RoutingError,     with: :routes_not_found
+    rescue_from Pundit::NotAuthorizedError,         with: :not_authorized
+    rescue_from ActiveRecord::RecordNotFound,       with: :record_not_found
+    rescue_from ActiveRecord::RecordInvalid,        with: :record_invalid
+    rescue_from AASM::InvalidTransition,            with: :bad_request
+    rescue_from ActionController::BadRequest,       with: :bad_request
+    rescue_from ActionController::ParameterMissing, with: :bad_request
+    rescue_from ArgumentError,                      with: :argument_error
 
     private
 

@@ -21,6 +21,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/activate' do
     %w[
       id name phone_numbers emails website_link additional_information city
       street country profile_picture zip_code status latitude longitude
+      time_zone
     ]
   }
 

@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180410111634) do
+ActiveRecord::Schema.define(version: 20180412084533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.bigint "driving_school_id"
+    t.string "target_type"
+    t.bigint "target_id"
+    t.bigint "user_id"
+    t.integer "activity_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["driving_school_id"], name: "index_activities_on_driving_school_id"
+    t.index ["target_type", "target_id"], name: "index_activities_on_target_type_and_target_id"
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
 
   create_table "driving_courses", force: :cascade do |t|
     t.bigint "student_driving_school_id"
@@ -102,6 +115,23 @@ ActiveRecord::Schema.define(version: 20180410111634) do
     t.index ["invitable_type", "invitable_id"], name: "index_invitations_on_invitable_type_and_invitable_id"
   end
 
+  create_table "notifiable_user_activities", force: :cascade do |t|
+    t.bigint "activity_id"
+    t.bigint "user_id"
+    t.boolean "read", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_notifiable_user_activities_on_activity_id"
+    t.index ["user_id"], name: "index_notifiable_user_activities_on_user_id"
+  end
+
+  create_table "related_user_activities", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "activity_id"
+    t.index ["activity_id"], name: "index_related_user_activities_on_activity_id"
+    t.index ["user_id"], name: "index_related_user_activities_on_user_id"
+  end
+
   create_table "schedule_settings", force: :cascade do |t|
     t.boolean "holidays_enrollment_enabled", default: false, null: false
     t.boolean "last_minute_booking_enabled", default: false, null: false
@@ -179,17 +209,24 @@ ActiveRecord::Schema.define(version: 20180410111634) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "allow_password_change"
+    t.string "player_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "activities", "driving_schools"
+  add_foreign_key "activities", "users"
   add_foreign_key "driving_courses", "student_driving_schools"
   add_foreign_key "driving_lessons", "driving_schools"
   add_foreign_key "driving_lessons", "users", column: "employee_id"
   add_foreign_key "driving_lessons", "users", column: "student_id"
   add_foreign_key "employee_driving_schools", "users", column: "employee_id"
+  add_foreign_key "notifiable_user_activities", "activities"
+  add_foreign_key "notifiable_user_activities", "users"
+  add_foreign_key "related_user_activities", "activities"
+  add_foreign_key "related_user_activities", "users"
   add_foreign_key "schedules", "employee_driving_schools"
   add_foreign_key "slots", "driving_lessons"
   add_foreign_key "slots", "employee_driving_schools"

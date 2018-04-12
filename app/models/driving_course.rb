@@ -25,10 +25,10 @@ class DrivingCourse < ApplicationRecord
 
   def active_slots
     Slot.includes(:driving_lesson)
-      .where(driving_lessons: {
-        driving_school_id: student_driving_school.driving_school_id,
-        student_id: student_driving_school.student_id,
-        status: :active
-      })
+        .where(driving_lessons: {
+          driving_school_id: student_driving_school.driving_school_id,
+          student_id: student_driving_school.student_id,
+          status: :active
+        })
   end
 end

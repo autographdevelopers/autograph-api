@@ -83,6 +83,10 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
               expect { subject.call }.to change { EmployeeNotificationsSettings.count }.by 1
             end
 
+            it 'creates Activity record' do
+              expect { subject.call }.to change { Activity.count }.by 1
+            end
+
             it 'creates proper EmployeeDrivingSchool record' do
               subject.call
               expect(EmployeeDrivingSchool.last.attributes).to include(
@@ -109,6 +113,17 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
               )
             end
 
+            it 'creates proper Activity record' do
+              subject.call
+              expect(Activity.last.attributes).to include(
+                'target_id' => EmployeeDrivingSchool.last.id,
+                'target_type' => 'EmployeeDrivingSchool',
+                'activity_type' => 'employee_invitation_sent',
+                'user_id' => current_user.id,
+                'driving_school_id' => driving_school.id,
+              )
+            end
+
             it 'sends email about driving school requesting for cooperation' do
               expect { subject.call }.to change { ActionMailer::Base.deliveries.count }.by(1)
             end
@@ -129,6 +144,10 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
 
             it 'creates Invitation' do
               expect { subject.call }.to change { Invitation.count }.by 1
+            end
+
+            it 'creates Activity record' do
+              expect { subject.call }.to change { Activity.count }.by 1
             end
 
             it 'creates proper EmployeeDrivingSchool record' do
@@ -167,6 +186,17 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
                 'invitable_id' => EmployeeDrivingSchool.last.id
               )
             end
+
+            it 'creates proper Activity record' do
+              subject.call
+              expect(Activity.last.attributes).to include(
+                'target_id' => EmployeeDrivingSchool.last.id,
+                'target_type' => 'EmployeeDrivingSchool',
+                'activity_type' => 'employee_invitation_sent',
+                'user_id' => current_user.id,
+                'driving_school_id' => driving_school.id,
+              )
+            end
           end
         end
 
@@ -195,11 +225,26 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
               expect { subject.call }.to change { StudentDrivingSchool.count }.by 1
             end
 
+            it 'creates Activity record' do
+              expect { subject.call }.to change { Activity.count }.by 1
+            end
+
             it 'creates proper StudentDrivingSchool record' do
               subject.call
               expect(StudentDrivingSchool.last.attributes).to include(
                 'student_id' => invited_user.id,
                 'driving_school_id' => driving_school.id
+              )
+            end
+
+            it 'creates proper Activity record' do
+              subject.call
+              expect(Activity.last.attributes).to include(
+                'target_id' => StudentDrivingSchool.last.id,
+                'target_type' => 'StudentDrivingSchool',
+                'activity_type' => 'student_invitation_sent',
+                'user_id' => current_user.id,
+                'driving_school_id' => driving_school.id,
               )
             end
 
@@ -209,6 +254,10 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
           end
 
           context 'when invited user does NOT exist' do
+            it 'creates Activity record' do
+              expect { subject.call }.to change { Activity.count }.by 1
+            end
+
             it 'creates Invitation' do
               expect { subject.call }.to change { Invitation.count }.by 1
             end
@@ -233,6 +282,17 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
                 'surname' => params[:user][:surname],
                 'invitable_type' => 'StudentDrivingSchool',
                 'invitable_id' => StudentDrivingSchool.last.id
+              )
+            end
+
+            it 'creates proper Activity record' do
+              subject.call
+              expect(Activity.last.attributes).to include(
+                'target_id' => StudentDrivingSchool.last.id,
+                'target_type' => 'StudentDrivingSchool',
+                'activity_type' => 'student_invitation_sent',
+                'user_id' => current_user.id,
+                'driving_school_id' => driving_school.id,
               )
             end
           end

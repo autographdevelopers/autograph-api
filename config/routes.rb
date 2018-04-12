@@ -7,6 +7,9 @@ Rails.application.routes.draw do
       }
 
       resources :driving_schools, only: [:index, :create, :update, :show] do
+        resources :activities, only: [:index] do
+          get :my_activities, on: :collection
+        end
         member do
           put :confirm_registration
           put :activate

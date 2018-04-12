@@ -95,6 +95,20 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
               )
             end
 
+            it 'creates Activity record' do
+              expect(Activity.count).to eq 1
+            end
+
+            it 'creates proper Activity record' do
+              expect(Activity.last.attributes).to include(
+                'target_id' => accessed_employee_driving_school.schedule.id,
+                'target_type' => 'Schedule',
+                'activity_type' => 'schedule_changed',
+                'user_id' => current_user.id,
+                'driving_school_id' => driving_school.id,
+              )
+            end
+
             it 'schedules slots' do
               expect(accessed_employee_driving_school.slots).not_to be_empty
             end
@@ -141,6 +155,20 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
               schedule = accessed_employee_driving_school.schedule.reload
               expect(schedule.attributes).to include(
                 'current_template' => params[:schedule][:current_template]
+              )
+            end
+
+            it 'creates Activity record' do
+              expect(Activity.count).to eq 1
+            end
+
+            it 'creates proper Activity record' do
+              expect(Activity.last.attributes).to include(
+                'target_id' => accessed_employee_driving_school.schedule.id,
+                'target_type' => 'Schedule',
+                'activity_type' => 'schedule_changed',
+                'user_id' => current_user.id,
+                'driving_school_id' => driving_school.id,
               )
             end
 
@@ -226,6 +254,20 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
               )
             end
 
+            it 'creates Activity record' do
+              expect(Activity.count).to eq 1
+            end
+
+            it 'creates proper Activity record' do
+              expect(Activity.last.attributes).to include(
+                'target_id' => accessed_employee_driving_school.schedule.id,
+                'target_type' => 'Schedule',
+                'activity_type' => 'schedule_changed',
+                'user_id' => current_user.id,
+                'driving_school_id' => driving_school.id,
+              )
+            end
+
             it 'schedules slots' do
               expect(accessed_employee_driving_school.slots).not_to be_empty
             end
@@ -272,6 +314,20 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/employees/:employee_id/
               schedule = accessed_employee_driving_school.schedule.reload
               expect(schedule.attributes).to include(
                 'current_template' => params[:schedule][:current_template]
+              )
+            end
+
+            it 'creates Activity record' do
+              expect(Activity.count).to eq 1
+            end
+
+            it 'creates proper Activity record' do
+              expect(Activity.last.attributes).to include(
+                'target_id' => accessed_employee_driving_school.schedule.id,
+                'target_type' => 'Schedule',
+                'activity_type' => 'schedule_changed',
+                'user_id' => current_user.id,
+                'driving_school_id' => driving_school.id,
               )
             end
 

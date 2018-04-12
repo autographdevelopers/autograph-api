@@ -9,6 +9,7 @@ class Invitations::DestroyService
 
   def call
     user_driving_school.archive!
+    user_driving_school
   end
 
   private
