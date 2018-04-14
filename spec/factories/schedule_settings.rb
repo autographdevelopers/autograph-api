@@ -14,6 +14,7 @@ FactoryBot.define do
     driving_school
     minimum_slots_count_per_driving_lesson 1
     maximum_slots_count_per_driving_lesson 8
+    booking_advance_period_in_weeks 1
     can_student_book_driving_lesson true
   end
 end

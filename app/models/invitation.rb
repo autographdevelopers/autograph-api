@@ -3,5 +3,9 @@ class Invitation < ApplicationRecord
   belongs_to :invitable, polymorphic: true
 
   # == Validations ============================================================
-  validates :email, presence: true
+  validates :email, :name, :surname, presence: true
+
+  def full_name
+    "#{name.capitalize} #{surname.capitalize}"
+  end
 end

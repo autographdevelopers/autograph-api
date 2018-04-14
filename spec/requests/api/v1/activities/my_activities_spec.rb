@@ -55,7 +55,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/driving_lessons' do
   let(:response_keys) do
     %w[
       id driving_school_id target_type target_id user_id activity_type
-      created_at read
+      created_at read message
     ]
   end
 
@@ -84,7 +84,8 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/driving_lessons' do
         'target_id' => activity_1.target_id,
         'user_id' => activity_1.user_id,
         'activity_type' => activity_1.activity_type,
-        'read' => false
+        'read' => false,
+        'message' => kind_of(String)
       )
     end
 
@@ -114,7 +115,8 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/driving_lessons' do
         'target_id' => activity_1.target_id,
         'user_id' => activity_1.user_id,
         'activity_type' => activity_1.activity_type,
-        'read' => false
+        'read' => false,
+        'message' => kind_of(String)
       )
     end
 

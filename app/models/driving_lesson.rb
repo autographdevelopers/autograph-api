@@ -23,6 +23,8 @@ class DrivingLesson < ApplicationRecord
   scope :student_id, ->(value) { where(student_id: value) }
   scope :employee_id, ->(value) { where(employee_id: value) }
   scope :driving_lessons_ids, ->(value) { where(id: value) }
+  scope :from_date_time, ->(value) { where('driving_lessons.start_time > ?', value) }
+  scope :to_date_time, ->(value) { where('driving_lessons.start_time < ?', value) }
 
   # == State Machine ==========================================================
   aasm column: :status, enum: true do
@@ -32,6 +34,13 @@ class DrivingLesson < ApplicationRecord
     event :cancel, after: :broadcast_changed_driving_lesson do
       transitions from: :active, to: :canceled, guard: [:start_time_in_future?]
     end
+  end
+
+  def display_duration
+    local_start_time = Timezone[driving_school.time_zone].utc_to_local(start_time)
+    local_end_time = local_start_time + slots.count * 30.minutes
+
+    "#{local_start_time.to_date} #{local_start_time.to_s(:time)} - #{local_end_time.to_s(:time)}"
   end
 
   private
