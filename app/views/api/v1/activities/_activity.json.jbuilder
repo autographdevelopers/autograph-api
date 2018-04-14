@@ -5,4 +5,5 @@ json.extract! activity,
               :target_id,
               :user_id,
               :activity_type,
+              :message,
               :created_at

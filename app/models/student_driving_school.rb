@@ -44,4 +44,12 @@ class StudentDrivingSchool < ApplicationRecord
       transitions to: :archived
     end
   end
+
+  def student_full_name
+    student&.full_name || invitation.full_name
+  end
+
+  def student_email
+    student&.email || invitation.email
+  end
 end

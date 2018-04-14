@@ -47,4 +47,12 @@ class EmployeeDrivingSchool < ApplicationRecord
       transitions to: :archived
     end
   end
+
+  def employee_full_name
+    employee&.full_name || invitation.full_name
+  end
+
+  def employee_email
+    employee&.email || invitation.email
+  end
 end

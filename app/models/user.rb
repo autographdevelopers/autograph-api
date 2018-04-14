@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
     is_a? Student
   end
 
+  def full_name
+    "#{name.capitalize} #{surname.capitalize}"
+  end
+
   private
 
   #TODO find minimal required age

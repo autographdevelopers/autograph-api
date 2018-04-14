@@ -12,11 +12,14 @@ class Api::V1::DrivingLessonsController < ApplicationController
   has_scope :canceled, type: :boolean
   has_scope :upcoming, type: :boolean
   has_scope :past, type: :boolean
+  has_scope :from_date_time
+  has_scope :to_date_time
 
   def index
     @driving_lessons = apply_scopes(
       policy_scope(@driving_school.driving_lessons)
-    ).includes(:employee, :student, slots: :employee_driving_school)
+    ).includes(:employee, :student, :driving_school,
+               slots: :employee_driving_school)
   end
 
   def cancel

@@ -1,34 +1,3 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
   hello: "Hello world"
   activerecord:
@@ -38,3 +7,29 @@ en:
             attributes:
               birth_date:
                 birth_date_in_future: "can't be in the future"
+  activities:
+    messages:
+      student_invitation_sent:
+        "Student invitation was sent by <b>%{user_full_name}</b> to <b>%{student_full_name}</b> at email address <b>%{student_email}</b>."
+      student_invitation_withdrawn:
+        "Student invitation for <b>%{student_full_name}</b> was withdrawn by <b>%{user_full_name}</b>."
+      student_invitation_accepted:
+        "<b>%{user_full_name}</b> accepted invitation to driving school."
+      student_invitation_rejected:
+        "<b>%{user_full_name}</b> rejected invitation to driving school."
+      employee_invitation_sent:
+        "Employee invitation was sent by <b>%{user_full_name}</b> to <b>%{employee_full_name}</b> at email address <b>%{employee_email}</b>."
+      employee_invitation_withdrawn:
+        "Employee invitation for <b>%{employee_full_name}</b> was withdrawn by <b>%{user_full_name}</b>."
+      employee_invitation_accepted:
+        "<b>%{user_full_name}</b> accepted invitation to driving school."
+      employee_invitation_rejected:
+        "<b>%{user_full_name}</b> rejected invitation to driving school."
+      driving_course_changed:
+        "<b>%{user_full_name}</b> changed number of available hours for <b>%{student_full_name}</b> to <b>%{available_hours}</b>."
+      schedule_changed:
+        "<b>%{user_full_name}</b> changed schedule for <b>%{employee_full_name}</b>."
+      driving_lesson_canceled:
+        "<b>%{user_full_name}</b> canceled driving lesson which was to take place on <b>%{duration}</b> between <b>%{student_full_name}</b> <b>%{employee_full_name}</b>."
+      driving_lesson_scheduled:
+        "<b>%{user_full_name}</b> scheduled driving lesson for <b>%{student_full_name}</b> and <b>%{employee_full_name}</b> on <b>%{duration}</b>."
