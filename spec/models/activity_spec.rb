@@ -312,7 +312,6 @@ describe Activity do
           end
 
           it 'assigns proper message to Activity' do
-            p subject.message
             expect(subject.message).to eq(
               "<b>#{user.full_name}</b> scheduled driving lesson for " \
               "<b>#{target.student.full_name}</b> and <b>#{target.employee.full_name}</b> on <b>#{target.display_duration}</b>."

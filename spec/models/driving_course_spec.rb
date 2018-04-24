@@ -10,7 +10,6 @@ describe DrivingCourse do
   context 'validations' do
     it { should validate_presence_of(:available_hours) }
     it { should validate_presence_of(:category_type) }
-    it { should validate_numericality_of(:available_hours).only_integer }
     it { should validate_numericality_of(:available_hours).is_greater_than_or_equal_to(0) }
   end
 end

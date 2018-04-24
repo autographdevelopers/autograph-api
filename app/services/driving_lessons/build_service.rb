@@ -56,6 +56,8 @@ class DrivingLessons::BuildService
   end
 
   def validate_available_slots_after_lesson(min_slots_count)
+    return if next_slot_blank?
+
     next_available_slots_count = employee_driving_school.slots
                                                         .available
                                                         .where(start_time: range_for_next_lesson(min_slots_count))
@@ -68,10 +70,13 @@ class DrivingLessons::BuildService
   end
 
   def validate_available_slots_before_lesson(min_slots_count)
+    return if previous_slot_blank?
+
     previous_available_slots_count = employee_driving_school.slots
                                                             .available
                                                             .where(start_time: range_for_previous_lesson(min_slots_count))
                                                             .count
+
     unless [0, min_slots_count].include? previous_available_slots_count
       raise ActionController::BadRequest,
             'You should leave enough time for previous lesson to take place.'
@@ -95,6 +100,18 @@ class DrivingLessons::BuildService
   end
 
   def range_for_previous_lesson(slots_count)
-    (earliest_slot_start_time - (slots_count + 1) * 30.minutes)..(earliest_slot_start_time - 30.minutes)
+    (earliest_slot_start_time - slots_count * 30.minutes)..(earliest_slot_start_time - 30.minutes)
+  end
+
+  def next_slot_blank?
+    !employee_driving_school.slots.available.exists?(
+      start_time: latest_slot_start_time + 30.minutes
+    )
+  end
+
+  def previous_slot_blank?
+    !employee_driving_school.slots.available.exists?(
+      start_time: earliest_slot_start_time - 30.minutes
+    )
   end
 end

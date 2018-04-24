@@ -25,6 +25,12 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
            status: :active)
   end
 
+  let!(:driving_course) {
+    create(:driving_course,
+           student_driving_school: student_driving_school,
+           available_hours: 10.0)
+  }
+
   let!(:slot_1) do
     create(:slot,
            employee_driving_school: employee_driving_school,
@@ -92,6 +98,11 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
           expect(DrivingLesson.last.slots.pluck(:id)).to match_array(
             [slot_1.id, slot_2.id, slot_3.id]
           )
+        end
+
+        it 'decrements student available hours count' do
+          driving_course.reload
+          expect(driving_course.available_hours).to eq 8.5
         end
 
         it 'creates proper Activity record' do
@@ -230,6 +241,12 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
             'employee_id' => employee.id,
             'status' => 'active',
             'student_id' => student.id
+          )
+        end
+
+        it 'assigns Slots to driving lesson' do
+          expect(DrivingLesson.last.slots.pluck(:id)).to match_array(
+            [slot_1.id, slot_2.id, slot_3.id]
           )
         end
 
@@ -383,6 +400,12 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
             'employee_id' => employee.id,
             'status' => 'active',
             'student_id' => student.id
+          )
+        end
+
+        it 'assigns Slots to driving lesson' do
+          expect(DrivingLesson.last.slots.pluck(:id)).to match_array(
+            [slot_1.id, slot_2.id, slot_3.id]
           )
         end
 

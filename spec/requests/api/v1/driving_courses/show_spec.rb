@@ -100,7 +100,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
 
       it 'attributes' do
         expect(subject).to include(
-          'available_hours' => driving_course.available_hours,
+          'available_hours' => driving_course.available_hours.to_f.to_s,
           'booked_hours' => 3.0,
           'used_hours' => 2.0,
           'category_type' => driving_course.category_type
@@ -125,7 +125,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
 
       it 'attributes' do
         expect(subject).to include(
-          'available_hours' => driving_course.available_hours,
+          'available_hours' => driving_course.available_hours.to_f.to_s,
           'booked_hours' => 3.0,
           'used_hours' => 2.0,
           'category_type' => driving_course.category_type
