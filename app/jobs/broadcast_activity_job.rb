@@ -7,7 +7,7 @@ class BroadcastActivityJob < ApplicationJob
 
     activity.notifiable_users = notifiable_users(activity)
     activity.related_users = related_users(activity)
-    # Activities::SendPushNotificationService.new(activity).call
+    Activities::SendPushNotificationService.new(activity).call
   end
 
   private

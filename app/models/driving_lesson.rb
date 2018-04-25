@@ -61,17 +61,6 @@ class DrivingLesson < ApplicationRecord
   end
 
   def broadcast_changed_driving_lesson
-    p '##########################'
-    p '##########################'
-    p '##########################'
-    p 'broadcast_changed_driving_lesson'
-    p self.persisted?
-    p self
-    p '##########################'
-    p '##########################'
-    p '##########################'
-    p '##########################'
-    p '##########################'
     BroadcastChangedDrivingLessonJob.perform_later(id)
   end
 end

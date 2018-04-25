@@ -2,22 +2,9 @@ class BroadcastChangedDrivingLessonJob < ApplicationJob
   queue_as :default
 
   def perform(driving_lesson_id)
-    driving_lesson = nil
-    DrivingLesson.uncached do
-      driving_lesson = DrivingLesson.find(driving_lesson_id)
-    end
-    p '##########################'
-    p '##########################'
-    p '##########################'
-    p 'BroadcastChangedDrivingLessonJob'
-    p driving_lesson
-    p '##########################'
-    p '##########################'
-    p '##########################'
-    p '##########################'
-    p '##########################'
+    driving_lesson = DrivingLesson.find(driving_lesson_id)
 
-    employee_driving_school = EmployeeDrivingSchool.find_by(
+    employee_driving_school = EmployeeDrivingSchool.find_by!(
         employee: driving_lesson.employee,
         driving_school: driving_lesson.driving_school
     )
