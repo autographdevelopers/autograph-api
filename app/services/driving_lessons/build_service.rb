@@ -96,7 +96,7 @@ class DrivingLessons::BuildService
   end
 
   def range_for_next_lesson(slots_count)
-    (latest_slot_start_time + 30.minutes)..(latest_slot_start_time + (slots_count + 1) * 30.minutes)
+    (latest_slot_start_time + 30.minutes)..(latest_slot_start_time + slots_count * 30.minutes)
   end
 
   def range_for_previous_lesson(slots_count)

@@ -1,6 +1,10 @@
 describe BroadcastChangedDrivingLessonJob do
   let(:employee_driving_school) { create(:employee_driving_school) }
-  let!(:driving_lesson) { create(:driving_lesson) }
+  let!(:driving_lesson) do
+    create(:driving_lesson,
+           employee: employee_driving_school.employee,
+           driving_school: employee_driving_school.driving_school)
+  end
   let!(:slot_1) do
     create(:slot,
            driving_lesson: driving_lesson,

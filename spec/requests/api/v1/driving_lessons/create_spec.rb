@@ -25,11 +25,11 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
            status: :active)
   end
 
-  let!(:driving_course) {
+  let!(:driving_course) do
     create(:driving_course,
            student_driving_school: student_driving_school,
            available_hours: 10.0)
-  }
+  end
 
   let!(:slot_1) do
     create(:slot,

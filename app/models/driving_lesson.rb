@@ -13,7 +13,7 @@ class DrivingLesson < ApplicationRecord
 
   # == Callbacks ==============================================================
   after_create :decrement_student_driving_hours
-  after_create :broadcast_changed_driving_lesson
+  after_commit :broadcast_changed_driving_lesson
 
   # == Validations ============================================================
   validates :start_time, presence: true
@@ -32,7 +32,7 @@ class DrivingLesson < ApplicationRecord
     state :active, initial: true
     state :active, :canceled
 
-    event :cancel, after: :broadcast_changed_driving_lesson do
+    event :cancel do
       transitions from: :active, to: :canceled, guard: [:start_time_in_future?]
     end
   end
