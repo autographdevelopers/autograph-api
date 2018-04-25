@@ -11,10 +11,8 @@ class Api::V1::StudentsController < ApplicationController
                                                          .where(status: [:pending, :active])
                                                          .includes(:student, :invitation)
                                                          .order('users.surname')
-    # else
-    #   @student_driving_schools = @employee_driving_school.student_driving_schools
-    #                                                      .active
-    #                                                      .includes(:student)
+    else
+      @student_driving_schools = StudentDrivingSchool.none
     end
   end
 
