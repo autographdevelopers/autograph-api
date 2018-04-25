@@ -64,7 +64,7 @@ describe DrivingLessons::BuildService do
       end
     end
 
-    context 'when slots are NOT consecutive' do
+    context 'when slots are consecutive' do
       let!(:slot_1) do
         create(:slot,
                employee_driving_school: employee_driving_school,
@@ -156,6 +156,62 @@ describe DrivingLessons::BuildService do
   end
 
   context '#validate_breaks_between_nearest_lessons' do
+    context 'when there is NO available slot after driving lesson' do
+      let(:slots) { Slot.find([slot_1, slot_2, slot_3, slot_4].pluck(:id)) }
+      let!(:slot_1) do
+        create(:slot,
+               employee_driving_school: employee_driving_school,
+               start_time: DateTime.new(2050, 2, 3, 12, 30, 0))
+      end
+
+      let!(:slot_2) do
+        create(:slot,
+               employee_driving_school: employee_driving_school,
+               start_time: DateTime.new(2050, 2, 3, 13, 0, 0))
+      end
+
+      let!(:slot_3) do
+        create(:slot,
+               employee_driving_school: employee_driving_school,
+               start_time: DateTime.new(2050, 2, 3, 13, 30, 0))
+      end
+
+      let!(:slot_4) do
+        create(:slot,
+               employee_driving_school: employee_driving_school,
+               start_time: DateTime.new(2050, 2, 3, 14, 0, 0))
+      end
+
+      let!(:booked_slot) do
+        create(:slot,
+               :booked,
+               employee_driving_school: employee_driving_school,
+               start_time: DateTime.new(2050, 2, 3, 14, 30, 0))
+      end
+
+      let!(:available_slot_1) do
+        create(:slot,
+               employee_driving_school: employee_driving_school,
+               start_time: DateTime.new(2050, 2, 3, 15, 0, 0))
+      end
+
+      let!(:available_slot_2) do
+        create(:slot,
+               employee_driving_school: employee_driving_school,
+               start_time: DateTime.new(2050, 2, 3, 15, 30, 0))
+      end
+
+      let!(:schedule_settings) do
+        create(:schedule_settings,
+               driving_school: driving_school,
+               minimum_slots_count_per_driving_lesson: 3)
+      end
+
+      it 'does not raise any error' do
+        expect { subject }.not_to raise_error
+      end
+    end
+
     context 'when there will be left two available slots after driving lesson ' \
             'and shortest driving lesson lasts 3 slots' do
       let(:slots) { Slot.find([slot_1, slot_2, slot_3, slot_4].pluck(:id)) }
@@ -180,7 +236,7 @@ describe DrivingLessons::BuildService do
       let!(:slot_4) do
         create(:slot,
                employee_driving_school: employee_driving_school,
-               start_time: DateTime.new(2050, 2, 3, 14, 0o0, 0))
+               start_time: DateTime.new(2050, 2, 3, 14, 0, 0))
       end
 
       let!(:available_slot_1) do
@@ -192,7 +248,7 @@ describe DrivingLessons::BuildService do
       let!(:available_slot_2) do
         create(:slot,
                employee_driving_school: employee_driving_school,
-               start_time: DateTime.new(2050, 2, 3, 15, 0o0, 0))
+               start_time: DateTime.new(2050, 2, 3, 15, 0, 0))
       end
 
       let!(:booked_slot) do
@@ -212,6 +268,45 @@ describe DrivingLessons::BuildService do
         expect { subject }.to raise_error(
           ActionController::BadRequest, 'You should leave enough time for next lesson to take place.'
         )
+      end
+    end
+
+    context 'when there is NO available slot after driving lesson' do
+      let(:slots) { Slot.find([slot_1, slot_2].pluck(:id)) }
+
+      let!(:available_slot) do
+        create(:slot,
+               employee_driving_school: employee_driving_school,
+               start_time: DateTime.new(2050, 2, 3, 11, 30, 0))
+      end
+
+      let!(:booked_slot) do
+        create(:slot,
+               :booked,
+               employee_driving_school: employee_driving_school,
+               start_time: DateTime.new(2050, 2, 3, 12, 0, 0))
+      end
+
+      let!(:slot_1) do
+        create(:slot,
+               employee_driving_school: employee_driving_school,
+               start_time: DateTime.new(2050, 2, 3, 12, 30, 0))
+      end
+
+      let!(:slot_2) do
+        create(:slot,
+               employee_driving_school: employee_driving_school,
+               start_time: DateTime.new(2050, 2, 3, 13, 0, 0))
+      end
+
+      let!(:schedule_settings) do
+        create(:schedule_settings,
+               driving_school: driving_school,
+               minimum_slots_count_per_driving_lesson: 2)
+      end
+
+      it 'does not raise any error' do
+        expect { subject }.not_to raise_error
       end
     end
 
@@ -240,7 +335,6 @@ describe DrivingLessons::BuildService do
                employee_driving_school: employee_driving_school,
                start_time: DateTime.new(2050, 2, 3, 13, 0, 0))
       end
-
 
       let!(:schedule_settings) do
         create(:schedule_settings,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180414101606) do
+ActiveRecord::Schema.define(version: 20180424161307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20180414101606) do
 
   create_table "driving_courses", force: :cascade do |t|
     t.bigint "student_driving_school_id"
-    t.integer "available_hours", default: 0, null: false
+    t.decimal "available_hours", precision: 5, scale: 1, default: "0.0", null: false
     t.integer "category_type", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

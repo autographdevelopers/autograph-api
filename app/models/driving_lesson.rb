@@ -12,6 +12,7 @@ class DrivingLesson < ApplicationRecord
   enum status: { active: 0, canceled: 1 }
 
   # == Callbacks ==============================================================
+  after_create :decrement_student_driving_hours
   after_create :broadcast_changed_driving_lesson
 
   # == Validations ============================================================
@@ -44,6 +45,16 @@ class DrivingLesson < ApplicationRecord
   end
 
   private
+
+  def decrement_student_driving_hours
+    driving_course = StudentDrivingSchool.find_by!(
+      student: student,
+      driving_school: driving_school
+    ).driving_course
+
+    driving_course.available_hours -= slots.count * 0.5
+    driving_course.save!
+  end
 
   def start_time_in_future?
     start_time > Time.now

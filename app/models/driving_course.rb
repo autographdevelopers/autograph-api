@@ -10,8 +10,9 @@ class DrivingCourse < ApplicationRecord
   # == Validations ============================================================
   validates :available_hours, :category_type, presence: true
   validates :available_hours, numericality: {
-    only_integer: true, greater_than_or_equal_to: 0
+    greater_than_or_equal_to: 0
   }
+  validate :validate_available_hours
 
   def used_hours
     active_slots.past.count * SLOTS_TO_HOURS_CONVERSION_RATE
@@ -26,9 +27,15 @@ class DrivingCourse < ApplicationRecord
   def active_slots
     Slot.includes(:driving_lesson)
         .where(driving_lessons: {
-          driving_school_id: student_driving_school.driving_school_id,
-          student_id: student_driving_school.student_id,
-          status: :active
-        })
+                 driving_school_id: student_driving_school.driving_school_id,
+                 student_id: student_driving_school.student_id,
+                 status: :active
+               })
+  end
+
+  def validate_available_hours
+    if available_hours.present? && !(available_hours % SLOTS_TO_HOURS_CONVERSION_RATE).zero?
+      errors.add(:available_hours, 'must be divisible by 0.5')
+    end
   end
 end
