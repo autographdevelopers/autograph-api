@@ -39,7 +39,7 @@ class Activity < ApplicationRecord
 
   # == Callbacks ==============================================================
   before_validation :determine_message, on: :create
-  after_create :notify_about_activity
+  after_commit :notify_about_activity, on: :create
 
   private
 
