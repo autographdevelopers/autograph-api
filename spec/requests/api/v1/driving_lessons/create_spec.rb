@@ -73,6 +73,7 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
 
       context 'when params VALID' do
         it 'returns 201 http status code' do
+          p json_response
           expect(response.status).to eq 201
         end
 

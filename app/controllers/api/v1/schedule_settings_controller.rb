@@ -1,5 +1,5 @@
 class Api::V1::ScheduleSettingsController < ApplicationController
-  before_action :verify_current_user_to_be_employee, only: [:update, :show]
+  before_action :verify_current_user_to_be_employee, only: [:update]
   before_action :set_schedule_settings, only: [:update, :show]
   before_action :sanitize_slots_ids, only: [:update]
 
@@ -14,8 +14,6 @@ class Api::V1::ScheduleSettingsController < ApplicationController
   end
 
   def show
-    authorize @schedule_settings
-
     render @schedule_settings
   end
 
