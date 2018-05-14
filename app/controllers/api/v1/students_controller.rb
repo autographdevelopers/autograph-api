@@ -9,7 +9,7 @@ class Api::V1::StudentsController < ApplicationController
       @student_driving_schools = @employee_driving_school.driving_school
                                                          .student_driving_schools
                                                          .where(status: [:pending, :active])
-                                                         .includes(:student, :invitation)
+                                                         .includes(:student, :invitation, :driving_course)
                                                          .order('users.surname')
     else
       @student_driving_schools = StudentDrivingSchool.none
