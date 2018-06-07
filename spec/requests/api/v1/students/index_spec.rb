@@ -1,4 +1,4 @@
-describe 'GET /api/v1/driving_schools/:driving_school_id/students' do
+xdescribe 'GET /api/v1/driving_schools/:driving_school_id/students' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
 
