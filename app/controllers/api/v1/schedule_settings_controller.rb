@@ -17,7 +17,7 @@ class Api::V1::ScheduleSettingsController < ApplicationController
     render @schedule_settings
   end
 
-  private
+  private 
 
   def schedule_settings_params
     params.require(:schedule_settings).permit(

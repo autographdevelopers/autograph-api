@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180424161307) do
+ActiveRecord::Schema.define(version: 20200326143811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20180424161307) do
 
   create_table "driving_courses", force: :cascade do |t|
     t.bigint "student_driving_school_id"
-    t.decimal "available_hours", precision: 5, scale: 1, default: "0.0", null: false
+    t.decimal "available_hours", default: "10.0", null: false
     t.integer "category_type", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,8 +53,6 @@ ActiveRecord::Schema.define(version: 20180424161307) do
 
   create_table "driving_schools", force: :cascade do |t|
     t.string "name", null: false
-    t.string "phone_numbers", default: [], null: false, array: true
-    t.string "emails", default: [], null: false, array: true
     t.string "website_link"
     t.text "additional_information"
     t.string "city", null: false
@@ -70,6 +68,8 @@ ActiveRecord::Schema.define(version: 20180424161307) do
     t.datetime "updated_at", null: false
     t.string "time_zone", null: false
     t.string "country_code", null: false
+    t.string "email"
+    t.string "phone_number"
     t.index ["name"], name: "index_driving_schools_on_name"
   end
 
@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 20180424161307) do
     t.integer "minimum_slots_count_per_driving_lesson", default: 1
     t.integer "maximum_slots_count_per_driving_lesson", default: 8
     t.boolean "can_student_book_driving_lesson", default: true
-    t.integer "booking_advance_period_in_weeks", default: 0, null: false
+    t.integer "booking_advance_period_in_weeks", default: 10, null: false
     t.index ["driving_school_id"], name: "index_schedule_settings_on_driving_school_id"
   end
 

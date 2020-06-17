@@ -1,3 +1,10 @@
-json.array! @activities do |activity|
-  json.partial! 'activity', activity: activity
+json.results do
+  json.array! @activities do |activity|
+    json.partial! 'activity', activity: activity
+  end
 end
+
+json.pagination do
+  json.is_more !@activities.last_page?
+end
+

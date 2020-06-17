@@ -7,8 +7,14 @@
 # TODO Order employees to return those with whom student had driving lessons
 class Api::V1::EmployeesController < ApplicationController
   before_action :set_driving_school
+  has_scope :employee_ids, type: :array
+  has_scope :active_with_active_driving_school, as: :active, type: :boolean
+  has_scope :pending_with_active_driving_school, as: :pending, type: :boolean
+  has_scope :archived_with_active_driving_school, as: :archived, type: :boolean
+  has_scope :searchTerm
 
   def index
+    # sleep 1
     if current_user.student?
       @employee_driving_schools = @driving_school.employee_driving_schools
                                                  .active
@@ -19,10 +25,17 @@ class Api::V1::EmployeesController < ApplicationController
       authorize @driving_school, :can_manage_employees?
 
       @employee_driving_schools = @driving_school.employee_driving_schools
-                                                 .where(status: [:pending, :active])
                                                  .includes(:employee, :invitation, :employee_privileges)
                                                  .order('users.surname')
     end
+
+    @employee_driving_schools = @employee_driving_schools.page(params[:page]).per(params[:per] || 20)
+
+    @employee_driving_schools = apply_scopes(@employee_driving_schools)
+  end
+
+  def show
+
   end
 
   private

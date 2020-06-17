@@ -1,5 +1,5 @@
 class Slot < ApplicationRecord
-  BOOKING_LOCK_PERIOD = 2.minutes.freeze
+  BOOKING_LOCK_PERIOD = 15.seconds.freeze
 
   # == Relations ==============================================================
   belongs_to :employee_driving_school

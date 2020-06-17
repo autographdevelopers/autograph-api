@@ -36,11 +36,18 @@ class ScheduleSettings < ApplicationRecord
 
   def valid_time_frames_contains_valid_slot_start_times_ids?(valid_time_frames)
     valid_time_frames.each do |_, slot_start_times_ids|
-      return false if (slot_start_times_ids - SLOT_START_TIMES.keys).any?
-      return false if slot_start_times_ids.count != slot_start_times_ids.uniq.count
+      return false if slot_ids_not_unique?(slot_start_times_ids) || slot_ids_not_in_whitelist?(slot_start_times_ids )
     end
 
     true
+  end
+
+  def slot_ids_not_unique?(slot_start_times_ids)
+    slot_start_times_ids.count != slot_start_times_ids.uniq.count
+  end
+
+  def slot_ids_not_in_whitelist?(slot_start_times_ids )
+    (slot_start_times_ids - SLOT_START_TIMES.keys).any?
   end
 
   def update_schedules

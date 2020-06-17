@@ -16,10 +16,11 @@ class Api::V1::DrivingLessonsController < ApplicationController
   has_scope :to_date_time
 
   def index
+    sleep 2
     @driving_lessons = apply_scopes(
       policy_scope(@driving_school.driving_lessons)
     ).includes(:employee, :student, :driving_school,
-               slots: :employee_driving_school)
+               slots: :employee_driving_school).page(params[:page]).per(params[:per] || 20)
   end
 
   def cancel
@@ -32,6 +33,7 @@ class Api::V1::DrivingLessonsController < ApplicationController
   end
 
   def create
+
     @driving_lesson = DrivingLessons::BuildService.new(
       current_user, @employee_driving_school, @student, @driving_school, @slots
     ).call
@@ -44,6 +46,11 @@ class Api::V1::DrivingLessonsController < ApplicationController
         driving_lesson: @driving_lesson
       }, status: :created
     else
+      p "*****"
+      p "*****"
+      p  @driving_lesson.errors
+      p "*****"
+      p "*****"
       render json: @driving_lesson.errors, status: :unprocessable_entity
     end
   end
@@ -64,6 +71,7 @@ class Api::V1::DrivingLessonsController < ApplicationController
   end
 
   def set_employee_driving_school
+    sleep 3
     @employee_driving_school = @driving_school.employee_driving_schools
                                               .active
                                               .find_by!(employee_id: params[:employee_id])

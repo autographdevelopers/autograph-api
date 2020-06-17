@@ -4,11 +4,13 @@ class Api::V1::ActivitiesController < ApplicationController
   after_action :set_as_read, only: :my_activities
 
   def my_activities
+    sleep 2
     @notifiable_user_activities = current_user.notifiable_user_activities
                                               .includes(:activity)
                                               .where(activities: { driving_school_id: @driving_school.id })
                                               .order('activities.created_at DESC')
                                               .page(params[:page])
+                                              .per(params[:per] || 25)
   end
 
   # Add authorization
@@ -16,7 +18,8 @@ class Api::V1::ActivitiesController < ApplicationController
     @activities = @driving_school.activities
                                  .related_to_user(related_user_id)
                                  .order('activities.created_at DESC')
-                                 .page(params[:page])
+                                 .page(params[:page] || 1)
+                                  .per(params[:per] || 25)
   end
 
   private

@@ -6,4 +6,5 @@ json.extract! schedule_settings,
               :maximum_slots_count_per_driving_lesson,
               :can_student_book_driving_lesson,
               :valid_time_frames,
-              :booking_advance_period_in_weeks
+              :booking_advance_period_in_weeks,
+              :driving_school_id

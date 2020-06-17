@@ -4,11 +4,14 @@ class Api::V1::DrivingSchoolsController < ApplicationController
   before_action :set_driving_school, except: [:index, :show, :create]
 
   def index
+    # sleep 2
     @user_driving_schools = current_user.user_driving_schools
                               .eligible_for_viewing
   end
 
   def show
+    # sleep 2
+
     @user_driving_school = current_user.user_driving_schools
                              .eligible_for_viewing
                              .find_by!(driving_school_id: params[:id])
@@ -37,6 +40,11 @@ class Api::V1::DrivingSchoolsController < ApplicationController
     end
   end
 
+  def destroy
+    @driving_school.destroy!
+    head :ok
+  end
+
   def confirm_registration
     authorize @employee_driving_school, :is_owner?
 
@@ -48,10 +56,12 @@ class Api::V1::DrivingSchoolsController < ApplicationController
   def activate
     authorize @employee_driving_school, :is_owner?
 
+    p "HEEEErk"
     if @driving_school.verification_code_valid?(params[:verification_code]) && @driving_school.activate!
       render :show, locals: { user_driving_school: @employee_driving_school }
     else
-      render json: { error: 'Provided verification code is invalid' }, status: :forbidden
+      p @driving_school.errors.full_messages
+      render json: { error: 'Provided verification code is invalid' }, status: :unprocessable_entity
     end
   end
 
@@ -68,15 +78,15 @@ class Api::V1::DrivingSchoolsController < ApplicationController
       :profile_picture,
       :latitude,
       :longitude,
-      phone_numbers: [],
-      emails: []
+      :email,
+      :phone_number,
     )
   end
 
   def set_employee_driving_school
-    @employee_driving_school = current_user.employee_driving_schools
-                                           .active
-                                           .find_by!(driving_school_id: params[:id])
+    @employee_driving_school = current_user.employee_driving_schools.find_by!(driving_school_id: params[:id])
+                                           # .active
+
   end
 
   def set_driving_school

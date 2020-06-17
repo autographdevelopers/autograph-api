@@ -5,6 +5,7 @@ class Api::V1::SlotsController < ApplicationController
   has_scope :employee_id
 
   def index
+    # sleep(7)
     @slots = apply_scopes(
       Slot.includes(:employee_driving_school)
           .where(employee_driving_schools: {

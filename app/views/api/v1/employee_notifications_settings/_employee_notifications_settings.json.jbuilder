@@ -1,2 +1,2 @@
-json.extract! @employee_notifications_settings, :id, :push_notifications_enabled, :weekly_emails_reports_enabled,
-              :monthly_emails_reports_enabled
+json.extract! @employee_notifications_settings, :id, :push_notifications_enabled, :monthly_emails_reports_enabled, :weekly_emails_reports_enabled
+json.driving_school_id @employee_notifications_settings.employee_driving_school.driving_school_id

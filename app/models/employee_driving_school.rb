@@ -16,13 +16,39 @@ class EmployeeDrivingSchool < ApplicationRecord
   # == Scopes =================================================================
   scope :active_with_active_driving_school, -> {
     where(status: :active, driving_schools: { status: :active })
-      .includes(:driving_school)
+        .includes(:driving_school)
   }
 
+  scope :pending_with_active_driving_school, -> {
+    where(status: :pending, driving_schools: { status: :active })
+        .includes(:driving_school)
+  }
+
+  scope :archived_with_active_driving_school, -> {
+    where(status: :archived, driving_schools: { status: :active })
+        .includes(:driving_school)
+  }
+
+  scope :searchTerm, ->(q) do
+    where(%(
+        users.name ILIKE :term
+        OR users.surname ILIKE :term
+        OR users.email ILIKE :term
+        OR invitations.email ILIKE :term
+        OR invitations.name ILIKE :term
+        OR invitations.surname ILIKE :term
+      ), term: "%#{q}%"
+    )
+  end
+
   scope :eligible_for_viewing, -> {
-    where(status: [:active, :pending], driving_schools: { status: [:active, :pending] })
+    where(status: [:active, :pending])
       .includes(:driving_school, :employee_privileges)
   }
+
+  scope :employee_ids, ->(ids) do
+    where(employee_id: ids)
+  end
 
   # == Validations ============================================================
   validates :status, presence: true

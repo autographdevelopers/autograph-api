@@ -21,6 +21,8 @@ class Api::V1::InvitationsController < ApplicationController
   end
 
   def accept
+    # sleep 3
+
     @user_driving_school.activate!
     create_activity(@user_driving_school)
 
@@ -30,6 +32,8 @@ class Api::V1::InvitationsController < ApplicationController
   end
 
   def reject
+    # sleep 3
+
     @user_driving_school.reject!
     create_activity(@user_driving_school)
   end
