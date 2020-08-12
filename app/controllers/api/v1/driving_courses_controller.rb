@@ -36,7 +36,7 @@ class Api::V1::DrivingCoursesController < ApplicationController
   end
 
   def set_driving_course
-    @driving_course = @driving_school.student_driving_schools
+    @driving_course = @driving_school.driving
                                      .active
                                      .find_by!(student_id: params[:student_id])
                                      .driving_course

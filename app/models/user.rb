@@ -15,6 +15,11 @@ class User < ActiveRecord::Base
            through: :related_user_activities,
            source: :activity
 
+  has_one :avatar_placeholder_color,
+          -> { avatar_placeholder },
+          as: :colorable,
+          class_name: 'ColorableColor'.freeze
+
   # == Extensions =============================================================
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

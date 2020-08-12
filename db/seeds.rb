@@ -1,3 +1,40 @@
+IOS_COLORS = [
+  {
+    palette_name: 'ios',
+    hex_val: '5fc9f8',
+    application: :general,
+  },
+  {
+    palette_name: 'ios',
+    hex_val: 'fecb2e',
+    application: :general,
+  },
+  {
+    palette_name: 'ios',
+    hex_val: 'fc3158',
+    application: :general,
+  },
+  {
+    palette_name: 'ios',
+    hex_val: '147EFB',
+    application: :general,
+  },
+  {
+    palette_name: 'ios',
+    hex_val: '53D769',
+    application: :general,
+  },
+  {
+    palette_name: 'ios',
+    hex_val: 'fc3d39',
+    application: :general,
+  }
+].freeze
+
+IOS_COLORS.each do |color|
+  Color.create!(color)
+end
+
 employee = FactoryBot.create(:employee, email: 'employee@gmail.com', password: 'Password1!')
 student = FactoryBot.create(:student, email: 'student@gmail.com', password: 'Password1!')
 owner = FactoryBot.create(:employee, email: 'owner@gmail.com', password: 'Password1!')

@@ -21,6 +21,13 @@ class Invitations::CreateService
         employee_driving_school.create_employee_privileges!(invited_user_privileges_params)
         employee_driving_school.create_employee_notifications_settings!
         employee_driving_school.create_invitation!(invited_user_params) unless invited_user
+        employee_driving_school.create_avatar_placeholder_color!(
+          hex_val: Color.find_rarest_color_in(
+                     model: EmployeeDrivingSchool,
+                     school_id: driving_school.id,
+                     color_application: :avatar_placeholder
+          )
+        )
         user_driving_school = employee_driving_school
       elsif invited_user_type == User::STUDENT
         student_driving_school = StudentDrivingSchool.create!(student: invited_user, driving_school: driving_school)

@@ -22,6 +22,13 @@ FactoryBot.define do
              can_modify_schedules: evaluator.can_modify_schedules
       )
       create(:employee_notifications_settings, employee_driving_school: employee_driving_school)
+      employee_driving_school.create_avatar_placeholder_color!(
+          hex_val: Color.find_rarest_color_in(
+              model: EmployeeDrivingSchool,
+              school_id: employee_driving_school.driving_school_id,
+              color_application: :avatar_placeholder
+          )
+      )
     end
   end
 end

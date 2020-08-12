@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :driving_school do
     name FFaker::Company.name
-    phone_numbers [FFaker::PhoneNumber.phone_number]
-    emails [FFaker::Internet.email]
+    phone_number FFaker::PhoneNumber.phone_number
+    email FFaker::Internet.email
     website_link FFaker::Internet.http_url
     additional_information FFaker::Lorem.paragraph
     city FFaker::Address.city

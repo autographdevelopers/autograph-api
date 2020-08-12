@@ -7,6 +7,8 @@ json.results do
       employee_driving_school: employee_driving_school
     }
 
+
+
     if @current_user.employee?
       json.privileges do
         json.partial! 'api/v1/employee_privileges/employee_privileges',

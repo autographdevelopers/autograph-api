@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200326143811) do
+ActiveRecord::Schema.define(version: 20200803203300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,24 @@ ActiveRecord::Schema.define(version: 20200326143811) do
     t.index ["driving_school_id"], name: "index_activities_on_driving_school_id"
     t.index ["target_type", "target_id"], name: "index_activities_on_target_type_and_target_id"
     t.index ["user_id"], name: "index_activities_on_user_id"
+  end
+
+  create_table "colorable_colors", force: :cascade do |t|
+    t.string "colorable_type"
+    t.bigint "colorable_id"
+    t.string "hex_val", null: false
+    t.integer "application", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["colorable_type", "colorable_id"], name: "index_colorable_colors_on_colorable_type_and_colorable_id"
+  end
+
+  create_table "colors", force: :cascade do |t|
+    t.string "palette_name", null: false
+    t.string "hex_val", null: false
+    t.integer "application", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "driving_courses", force: :cascade do |t|

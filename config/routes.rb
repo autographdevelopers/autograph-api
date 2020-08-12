@@ -6,6 +6,8 @@ Rails.application.routes.draw do
         sessions: 'api/v1/sessions'
       }
 
+      resources :colors, only: :index
+
       resources :driving_schools, only: [:index, :create, :update, :show, :destroy] do
         resources :activities, only: [:index] do
           get :my_activities, on: :collection

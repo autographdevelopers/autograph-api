@@ -8,3 +8,4 @@ json.surname item.surname
 json.type User::STUDENT
 json.status student_driving_school.status
 json.invitation_sent_at student_driving_school.created_at
+json.avatar_placeholder_color student_driving_school.avatar_placeholder_color.hex_val

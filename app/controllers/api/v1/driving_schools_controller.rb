@@ -3,6 +3,7 @@ class Api::V1::DrivingSchoolsController < ApplicationController
   before_action :set_employee_driving_school, except: [:index, :show, :create]
   before_action :set_driving_school, except: [:index, :show, :create]
 
+
   def index
     # sleep 2
     @user_driving_schools = current_user.user_driving_schools
@@ -61,7 +62,7 @@ class Api::V1::DrivingSchoolsController < ApplicationController
       render :show, locals: { user_driving_school: @employee_driving_school }
     else
       p @driving_school.errors.full_messages
-      render json: { error: 'Provided verification code is invalid' }, status: :unprocessable_entity
+      render json: { verification_code: 'Provided verification code is invalid' }, status: :unprocessable_entity
     end
   end
 
