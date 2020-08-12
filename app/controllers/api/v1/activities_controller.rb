@@ -3,14 +3,21 @@ class Api::V1::ActivitiesController < ApplicationController
   before_action :set_driving_school
   after_action :set_as_read, only: :my_activities
 
+  has_scope :with_activity_type, only: :my_activities, type: :array
+  has_scope :with_from_date, only: :my_activities
+  has_scope :with_to_date, only: :my_activities
+
   def my_activities
     sleep 2
     @notifiable_user_activities = current_user.notifiable_user_activities
                                               .includes(:activity)
                                               .where(activities: { driving_school_id: @driving_school.id })
-                                              .order('activities.created_at DESC')
-                                              .page(params[:page])
-                                              .per(params[:per] || 25)
+
+    @notifiable_user_activities = apply_scopes(@notifiable_user_activities)
+    @notifiable_user_activities = @notifiable_user_activities
+                                    .page(params[:page])
+                                    .per(params[:per] || 25)
+                                    .order('activities.created_at DESC')
   end
 
   # Add authorization
