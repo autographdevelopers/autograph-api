@@ -8,7 +8,7 @@ json.student do
 end
 
 json.driving_courses do
-  json.array! @student_school.driving_courses,
-              partial: 'api/v1/driving_courses/driving_course',
-              as: :driving_course
+  json.array! @student_school.course_participations,
+              partial: 'api/v1/course_participations/course_participation',
+              as: :course_participation
 end

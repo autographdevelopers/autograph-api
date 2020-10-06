@@ -48,8 +48,8 @@ class DrivingLesson < ApplicationRecord
   private
 
   def decrement_student_driving_hours
-    self.driving_course.available_hours -= slots.count * 0.5
-    self.driving_course.save!
+    self.course_participation.available_hours -= slots.count * 0.5
+    self.course_participation.save!
   end
 
   def start_time_in_future?

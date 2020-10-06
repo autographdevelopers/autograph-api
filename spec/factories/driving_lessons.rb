@@ -17,7 +17,7 @@ FactoryBot.define do
       ss = StudentDrivingSchool.find_by(student: driving_lesson.student, driving_school: driving_lesson.driving_school) ||
         create(:student_driving_school, student: driving_lesson.student, driving_school: driving_lesson.driving_school)
 
-      driving_lesson.driving_course = ss.driving_courses.first
+      # driving_lesson.driving_course = ss.driving_courses.first
     end
 
     after(:create) do |driving_lesson, evaluator|

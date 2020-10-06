@@ -1,4 +1,4 @@
-describe 'GET /api/v1/driving_schools/:driving_school_id/students/:student_id/driving_courses/:id' do
+describe 'GET /api/v1/driving_schools/:driving_school_id/students/:student_id/course_participation/:id' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
 
@@ -15,7 +15,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
            status: :active)
   end
 
-  let(:driving_course) { student_driving_school.driving_courses.first }
+  let(:driving_course) { student_driving_school.course_participations.first }
 
   let(:driving_school) { create(:driving_school, status: :active) }
 
@@ -80,7 +80,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
   end
 
   before do
-    get "/api/v1/driving_schools/#{driving_school.id}/students/#{student.id}/driving_courses/#{driving_course.id}",
+    get "/api/v1/driving_schools/#{driving_school.id}/students/#{student.id}/course_participation/#{driving_course.id}",
         headers: current_user.create_new_auth_token
   end
 

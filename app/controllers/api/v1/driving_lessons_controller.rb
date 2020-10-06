@@ -40,7 +40,7 @@ class Api::V1::DrivingLessonsController < ApplicationController
       @student,
       @driving_school,
       @slots,
-      @driving_course
+      @course_participation
     ).call
 
     authorize @driving_lesson
@@ -51,11 +51,6 @@ class Api::V1::DrivingLessonsController < ApplicationController
         driving_lesson: @driving_lesson
       }, status: :created
     else
-      p "*****"
-      p "*****"
-      p  @driving_lesson.errors
-      p "*****"
-      p "*****"
       render json: @driving_lesson.errors, status: :unprocessable_entity
     end
   end
@@ -75,12 +70,12 @@ class Api::V1::DrivingLessonsController < ApplicationController
                                    .find(params[:id])
   end
 
-  def set_driving_course
-    @driving_course = @driving_school
+  def set_driving_course_participation
+    @course_participation = @driving_school
                         .student_driving_schools
                         .active
                         .find_by!(student_id: params[:student_id])
-                        .driving_courses.find(params[:driving_course_id])
+                        .course_participations.find(params[:course_participation_id])
   end
 
   def set_employee_driving_school

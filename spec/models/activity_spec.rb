@@ -254,7 +254,7 @@ describe Activity do
           let(:activity_type) { :driving_course_changed }
           let(:user) { employee_5 }
           let(:target) do
-            create(:driving_course,
+            create(:course_participation,
                    student_driving_school: student_driving_school)
           end
 

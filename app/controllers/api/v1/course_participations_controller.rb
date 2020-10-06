@@ -11,7 +11,7 @@ class Api::V1::CourseParticipationsController < ApplicationController
   def show
     authorize @course_participation
 
-    render @driving_course
+    render @course_participation
   end
 
   def update

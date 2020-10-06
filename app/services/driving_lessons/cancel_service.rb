@@ -18,6 +18,6 @@ class DrivingLessons::CancelService
 
   def increment_student_driving_hours
     slots_count = driving_lesson.slots.count
-    driving_lesson.driving_course.increment!(:available_hours, slots_count * 0.5)
+    driving_lesson.course_participation.increment!(:available_hours, slots_count * 0.5)
   end
 end
