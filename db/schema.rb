@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200803203300) do
+ActiveRecord::Schema.define(version: 20201006173000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,13 +47,27 @@ ActiveRecord::Schema.define(version: 20200803203300) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "driving_courses", force: :cascade do |t|
+  create_table "course_participations", force: :cascade do |t|
     t.bigint "student_driving_school_id"
     t.decimal "available_hours", default: "10.0", null: false
-    t.integer "category_type", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["student_driving_school_id"], name: "index_driving_courses_on_student_driving_school_id"
+    t.bigint "course_id", null: false
+    t.index ["course_id"], name: "index_course_participations_on_course_id"
+    t.index ["student_driving_school_id"], name: "index_course_participations_on_student_driving_school_id"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.bigint "label_id"
+    t.bigint "driving_school_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer "course_participations_limit"
+    t.integer "course_participations_count", default: 0, null: false
+    t.index ["driving_school_id"], name: "index_courses_on_driving_school_id"
+    t.index ["label_id"], name: "index_courses_on_label_id"
   end
 
   create_table "driving_lessons", force: :cascade do |t|
@@ -64,6 +78,8 @@ ActiveRecord::Schema.define(version: 20200803203300) do
     t.bigint "student_id", null: false
     t.bigint "employee_id", null: false
     t.bigint "driving_school_id", null: false
+    t.bigint "driving_course_id", null: false
+    t.index ["driving_course_id"], name: "index_driving_lessons_on_driving_course_id"
     t.index ["driving_school_id"], name: "index_driving_lessons_on_driving_school_id"
     t.index ["employee_id"], name: "index_driving_lessons_on_employee_id"
     t.index ["student_id"], name: "index_driving_lessons_on_student_id"
@@ -132,6 +148,25 @@ ActiveRecord::Schema.define(version: 20200803203300) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["invitable_type", "invitable_id"], name: "index_invitations_on_invitable_type_and_invitable_id"
+  end
+
+  create_table "labelable_labels", force: :cascade do |t|
+    t.string "labelable_type"
+    t.bigint "labelable_id"
+    t.bigint "label_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["label_id"], name: "index_labelable_labels_on_label_id"
+    t.index ["labelable_type", "labelable_id"], name: "index_labelable_labels_on_labelable_type_and_labelable_id"
+  end
+
+  create_table "labels", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.integer "purpose", null: false
+    t.boolean "prebuilt", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "notifiable_user_activities", force: :cascade do |t|
@@ -237,11 +272,14 @@ ActiveRecord::Schema.define(version: 20200803203300) do
 
   add_foreign_key "activities", "driving_schools"
   add_foreign_key "activities", "users"
-  add_foreign_key "driving_courses", "student_driving_schools"
+  add_foreign_key "course_participations", "courses"
+  add_foreign_key "course_participations", "student_driving_schools"
+  add_foreign_key "driving_lessons", "course_participations", column: "driving_course_id"
   add_foreign_key "driving_lessons", "driving_schools"
   add_foreign_key "driving_lessons", "users", column: "employee_id"
   add_foreign_key "driving_lessons", "users", column: "student_id"
   add_foreign_key "employee_driving_schools", "users", column: "employee_id"
+  add_foreign_key "labelable_labels", "labels"
   add_foreign_key "notifiable_user_activities", "activities"
   add_foreign_key "notifiable_user_activities", "users"
   add_foreign_key "related_user_activities", "activities"

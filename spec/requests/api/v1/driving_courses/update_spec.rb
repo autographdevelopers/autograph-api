@@ -1,4 +1,4 @@
-describe 'PUT /api/v1/driving_schools/:driving_school_id/students/:student_id/driving_course' do
+describe 'PUT /api/v1/driving_schools/:driving_school_id/students/:student_id/driving_courses/:id' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
 
@@ -17,7 +17,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
            status: :active)
   end
 
-  let(:driving_course) { student_driving_school.driving_course }
+  let(:driving_course) { student_driving_school.driving_courses.first }
 
   let(:driving_school) { create(:driving_school, status: :active) }
 
@@ -39,7 +39,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
   end
 
   before do
-    put "/api/v1/driving_schools/#{driving_school.id}/students/#{student.id}/driving_course",
+    put "/api/v1/driving_schools/#{driving_school.id}/students/#{student.id}/driving_courses/#{driving_course.id}",
         headers: current_user.create_new_auth_token,
         params: params
   end

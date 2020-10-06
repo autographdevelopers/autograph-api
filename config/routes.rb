@@ -7,8 +7,14 @@ Rails.application.routes.draw do
       }
 
       resources :colors, only: :index
+      resources :labels
+      resources :labelable_labels, only: [] do
+        get :prebuilts, on: :collection
+      end
 
       resources :driving_schools, only: [:index, :create, :update, :show, :destroy] do
+        resources :labelable_labels, only: [:index]
+
         resources :activities, only: [:index] do
           get :my_activities, on: :collection
         end
@@ -29,7 +35,7 @@ Rails.application.routes.draw do
           end
         end
         resources :students, only: [:index] do
-          resource :driving_course, only: [:show, :update]
+          resources :course_participations, only: [:show, :update, :index, :create]
         end
         resources :employees, only: [:index] do
           resource :employee_privileges, only: [:update, :show]
@@ -38,6 +44,11 @@ Rails.application.routes.draw do
         resources :slots, only: [:index]
         resource :employee_notifications_settings, only: [:update, :show]
         resource :schedule_settings, only: [:update, :show]
+
+        resources :student_driving_schools,
+                  only: [:show],
+                  constraints: { email: /[^\/]+/ },
+                  param: :email
       end
 
       mount ActionCable.server, at: '/cable'

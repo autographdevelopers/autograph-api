@@ -5,6 +5,8 @@ FactoryBot.define do
     employee
     driving_school
 
+    # driving_course { student.student_driving_schools.find_by(driving_school) }
+
     transient do
       slots_count 0
     end
@@ -12,8 +14,10 @@ FactoryBot.define do
     after(:build) do |driving_lesson|
       EmployeeDrivingSchool.find_by(employee: driving_lesson.employee, driving_school: driving_lesson.driving_school) ||
         create(:employee_driving_school, employee: driving_lesson.employee, driving_school: driving_lesson.driving_school)
-      StudentDrivingSchool.find_by(student: driving_lesson.student, driving_school: driving_lesson.driving_school) ||
+      ss = StudentDrivingSchool.find_by(student: driving_lesson.student, driving_school: driving_lesson.driving_school) ||
         create(:student_driving_school, student: driving_lesson.student, driving_school: driving_lesson.driving_school)
+
+      driving_lesson.driving_course = ss.driving_courses.first
     end
 
     after(:create) do |driving_lesson, evaluator|

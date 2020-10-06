@@ -35,6 +35,10 @@ IOS_COLORS.each do |color|
   Color.create!(color)
 end
 
+%w[A B C D].each do |letter|
+  label = Label.create!(name: "[Prebuilt] Course for category #{letter}", purpose: :course_category, prebuilt: true)
+end
+
 employee = FactoryBot.create(:employee, email: 'employee@gmail.com', password: 'Password1!')
 student = FactoryBot.create(:student, email: 'student@gmail.com', password: 'Password1!')
 owner = FactoryBot.create(:employee, email: 'owner@gmail.com', password: 'Password1!')
@@ -63,6 +67,10 @@ end
 
 5.times do
   driving_school = FactoryBot.create(:driving_school, :with_schedule_settings, status: :active)
+  %w[A B C D].each do |letter|
+    label = Label.create!(name: "Course for category #{letter}", purpose: :course_category)
+    LabelableLabel.create!(labelable: driving_school, label: label)
+  end
   FactoryBot.create(:employee_driving_school, driving_school: driving_school, employee: employee, status: :pending)
   FactoryBot.create(:employee_driving_school, driving_school: driving_school, employee: owner, status: :pending)
   FactoryBot.create(:student_driving_school, driving_school: driving_school, student: student, status: :pending)

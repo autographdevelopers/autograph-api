@@ -9,7 +9,7 @@
 #   allow do
 #     origins 'example.com'
 #
-#     resource '*',
+#     user_driving_schools '*',
 #       headers: :any,
 #       methods: [:get, :post, :put, :patch, :delete, :options, :head]
 #   end

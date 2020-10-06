@@ -1,4 +1,4 @@
-describe 'GET /api/v1/driving_schools/:driving_school_id/students/:student_id/driving_course' do
+describe 'GET /api/v1/driving_schools/:driving_school_id/students/:student_id/driving_courses/:id' do
   let(:student) { create(:student) }
   let(:employee) { create(:employee) }
 
@@ -15,7 +15,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
            status: :active)
   end
 
-  let(:driving_course) { student_driving_school.driving_course }
+  let(:driving_course) { student_driving_school.driving_courses.first }
 
   let(:driving_school) { create(:driving_school, status: :active) }
 
@@ -75,12 +75,12 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
 
   let(:response_keys) do
     %w[
-      id available_hours booked_hours used_hours category_type
+      id available_hours booked_hours used_hours
     ]
   end
 
   before do
-    get "/api/v1/driving_schools/#{driving_school.id}/students/#{student.id}/driving_course",
+    get "/api/v1/driving_schools/#{driving_school.id}/students/#{student.id}/driving_courses/#{driving_course.id}",
         headers: current_user.create_new_auth_token
   end
 
@@ -103,7 +103,6 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
           'available_hours' => driving_course.available_hours.to_f.to_s,
           'booked_hours' => 3.0,
           'used_hours' => 2.0,
-          'category_type' => driving_course.category_type
         )
       end
     end
@@ -128,7 +127,6 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
           'available_hours' => driving_course.available_hours.to_f.to_s,
           'booked_hours' => 3.0,
           'used_hours' => 2.0,
-          'category_type' => driving_course.category_type
         )
       end
     end

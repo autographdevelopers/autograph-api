@@ -13,6 +13,12 @@ class DrivingSchool < ApplicationRecord
   has_one :schedule_settings, dependent: :destroy
   has_many :driving_lessons, dependent: :destroy
   has_many :activities, dependent: :destroy
+  has_many :labelable_labels, as: :labelable
+  has_many :labels, through: :labelable_labels
+  has_many :course_categories,
+           -> { where(labels: { purpose: :course_category}) },
+           through: :labelable_labels,
+           source: :label
 
   # == Validations ============================================================
   validates :name, :phone_number, :email, :city, :street, :zip_code, :country, presence: true
@@ -35,6 +41,9 @@ class DrivingSchool < ApplicationRecord
       transitions from: :pending, to: :active
     end
   end
+
+  # == Nested attributes ==========================================================
+  accepts_nested_attributes_for :labelable_labels, allow_destroy: true
 
   # == Instance Methods =======================================================
 

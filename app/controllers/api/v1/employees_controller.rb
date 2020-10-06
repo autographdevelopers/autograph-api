@@ -34,10 +34,6 @@ class Api::V1::EmployeesController < ApplicationController
     @employee_driving_schools = apply_scopes(@employee_driving_schools)
   end
 
-  def show
-
-  end
-
   private
 
   def set_driving_school

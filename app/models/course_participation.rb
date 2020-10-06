@@ -1,14 +1,12 @@
-class DrivingCourse < ApplicationRecord
+class CourseParticipation < ApplicationRecord
   SLOTS_TO_HOURS_CONVERSION_RATE = 0.5
-
-  # == Enumerators ============================================================
-  enum category_type: { b: 0 }
 
   # == Relations ==============================================================
   belongs_to :student_driving_school
+  belongs_to :course, counter_cache: true
+  has_many :driving_lessons
 
   # == Validations ============================================================
-  validates :available_hours, :category_type, presence: true
   validates :available_hours, numericality: {
     greater_than_or_equal_to: 0
   }

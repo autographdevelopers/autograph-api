@@ -1,5 +1,5 @@
 class DrivingLessons::BuildService
-  def initialize(current_user, employee_driving_school, student, driving_school, slots)
+  def initialize(current_user, employee_driving_school, student, driving_school, slots, driving_course)
     @current_user = current_user
     @employee_driving_school = employee_driving_school
     @employee = employee_driving_school.employee
@@ -7,6 +7,7 @@ class DrivingLessons::BuildService
     @driving_school = driving_school
     @schedule_settings = driving_school.schedule_settings
     @slots = slots
+    @driving_course = driving_course
 
     min_slots_count = schedule_settings.minimum_slots_count_per_driving_lesson
     max_slots_count = schedule_settings.maximum_slots_count_per_driving_lesson
@@ -22,7 +23,8 @@ class DrivingLessons::BuildService
       employee: employee,
       student: student,
       driving_school: driving_school,
-      start_time: earliest_slot_start_time
+      start_time: earliest_slot_start_time,
+      driving_course: driving_course
     )
 
     driving_lesson.slots = slots
@@ -33,7 +35,7 @@ class DrivingLessons::BuildService
   private
 
   attr_accessor :current_user, :employee, :student, :driving_school, :slots,
-                :schedule_settings, :employee_driving_school
+                :schedule_settings, :employee_driving_school, :driving_course
 
   def validate_slots_to_be_consecutive
     slot_start_times = slots.map(&:start_time).sort

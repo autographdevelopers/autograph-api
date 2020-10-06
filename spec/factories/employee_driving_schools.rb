@@ -27,7 +27,7 @@ FactoryBot.define do
               model: EmployeeDrivingSchool,
               school_id: employee_driving_school.driving_school_id,
               color_application: :avatar_placeholder
-          )
+          ) || Color::DEFAULT_AVATAR_PLACEHOLDER_COLOR_HEX
       )
     end
   end

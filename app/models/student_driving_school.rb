@@ -8,47 +8,30 @@ class StudentDrivingSchool < ApplicationRecord
   belongs_to :student, optional: true
   belongs_to :driving_school
   has_one :invitation, as: :invitable
-  has_one :driving_course
+  has_many :course_participations
   has_one :avatar_placeholder_color,
           -> { avatar_placeholder },
           as: :colorable,
           class_name: 'ColorableColor'.freeze
 
   # == Callbacks ==============================================================
-  after_create :create_driving_course
+  # after_create :create_driving_course
+
+  # == Callbacks ==============================================================
+  accepts_nested_attributes_for :course_participations
 
   # == Scopes =================================================================
   scope :active_with_active_driving_school, -> {
-    p "active_with_active_driving_school"
-    p "active_with_active_driving_school"
-    p "active_with_active_driving_school"
-    p "active_with_active_driving_school"
-    p "active_with_active_driving_school"
-    p "active_with_active_driving_school"
-    p "active_with_active_driving_school"
     where(status: :active, driving_schools: { status: :active })
       .includes(:driving_school)
   }
 
   scope :pending_with_active_driving_school, -> {
-    p 'pending_with_active_driving_school'
-    p 'pending_with_active_driving_school'
-    p 'pending_with_active_driving_school'
-    p 'pending_with_active_driving_school'
-    p 'pending_with_active_driving_school'
-    p 'pending_with_active_driving_school'
-    p 'pending_with_active_driving_school'
     where(status: :pending, driving_schools: { status: :active })
         .includes(:driving_school)
   }
 
   scope :archived_with_active_driving_school, -> {
-    p 'archived_with_active_driving_school'
-    p 'archived_with_active_driving_school'
-    p 'archived_with_active_driving_school'
-    p 'archived_with_active_driving_school'
-    p 'archived_with_active_driving_school'
-    p 'archived_with_active_driving_school'
     where(status: :archived, driving_schools: { status: :active })
         .includes(:driving_school)
   }

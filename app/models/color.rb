@@ -12,7 +12,7 @@ class Color < ApplicationRecord
             AND colorable_colors.colorable_id = #{model.table_name}.id
               AND #{model.table_name}.driving_school_id = #{school_id}
         )
-      ).where("#{model.table_name}.driving_school_id = ? OR employee_driving_schools.id IS NULL", school_id)
+      ).where("#{model.table_name}.driving_school_id = ? OR  #{model.table_name}.id IS NULL", school_id)
         .group('colors.hex_val')
           .select("SUM(CASE WHEN colorable_colors.colorable_id IS NOT NULL THEN 1 ELSE 0 END) AS usages_count, colors.hex_val AS hex_val")
           .order('usages_count ASC')

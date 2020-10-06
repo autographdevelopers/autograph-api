@@ -35,7 +35,12 @@ class Api::V1::DrivingLessonsController < ApplicationController
   def create
 
     @driving_lesson = DrivingLessons::BuildService.new(
-      current_user, @employee_driving_school, @student, @driving_school, @slots
+      current_user,
+      @employee_driving_school,
+      @student,
+      @driving_school,
+      @slots,
+      @driving_course
     ).call
 
     authorize @driving_lesson
@@ -68,6 +73,14 @@ class Api::V1::DrivingLessonsController < ApplicationController
     @driving_lesson = DrivingLesson.where(driving_school_id: @driving_school.id)
                                    .upcoming
                                    .find(params[:id])
+  end
+
+  def set_driving_course
+    @driving_course = @driving_school
+                        .student_driving_schools
+                        .active
+                        .find_by!(student_id: params[:student_id])
+                        .driving_courses.find(params[:driving_course_id])
   end
 
   def set_employee_driving_school

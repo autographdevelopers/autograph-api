@@ -81,6 +81,12 @@ class Api::V1::DrivingSchoolsController < ApplicationController
       :longitude,
       :email,
       :phone_number,
+      labelable_labels_attributes: [
+        :id,
+        :label_id,
+        :_destroy,
+        label_attributes: [:id, :name, :description, :purpose]
+      ]
     )
   end
 
