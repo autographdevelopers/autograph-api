@@ -19,6 +19,7 @@ class DrivingSchool < ApplicationRecord
            -> { where(labels: { purpose: :course_category}) },
            through: :labelable_labels,
            source: :label
+  has_many :courses
 
   # == Validations ============================================================
   validates :name, :phone_number, :email, :city, :street, :zip_code, :country, presence: true

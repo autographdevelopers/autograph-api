@@ -17,13 +17,7 @@ class Student < User
 
   def find_pending_invitation_and_relate_user_to_driving_school
     invitations = Invitation.where('lower(email) = ?', self.email)
-
-    ActiveRecord::Base.transaction do
-      invitations.each do |invitation|
-        invitation.invitable.update(student: self)
-      end
-
-      invitations.destroy_all
-    end
+    invitations.find_each { |invitation| invitation.invitable.update!(student: self) }
+    invitations.destroy_all
   end
 end

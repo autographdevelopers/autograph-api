@@ -55,6 +55,7 @@ class StudentDrivingSchool < ApplicationRecord
 
   # == Validations ============================================================
   validates :status, presence: true
+  # validates :student_id, uniqueness: true, scope: :driving_school_id
 
   # == State Machine ==========================================================
   aasm column: :status, enum: true do

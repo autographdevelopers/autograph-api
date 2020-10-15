@@ -1,6 +1,6 @@
 class CreateCourses < ActiveRecord::Migration[5.1]
   def change
-    create_table :course_participations do |t|
+    create_table :courses do |t|
       t.string :name, null: false
       t.text :description
       t.references :label
@@ -9,6 +9,8 @@ class CreateCourses < ActiveRecord::Migration[5.1]
       t.datetime :end_time
       t.integer :course_participations_limit
       t.integer :course_participations_count, default: 0, null: false
+
+      t.timestamps
     end
   end
 end

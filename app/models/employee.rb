@@ -23,13 +23,10 @@ class Employee < User
 
   def find_pending_invitation_and_relate_user_to_driving_school
     invitations = Invitation.where('lower(email) = ?', self.email)
-
-    ActiveRecord::Base.transaction do
-      invitations.each do |invitation|
-        invitation.invitable.update(employee: self)
-      end
-
-      invitations.destroy_all
-    end
+    invitations.find_each { |invitation| invitation.invitable.update!(employee: self) }
+    invitations.destroy_all
   end
 end
+
+# TODO: what if invite both: as an employee and student?
+# TODO: include status:active in query?

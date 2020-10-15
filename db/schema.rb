@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201006173000) do
+ActiveRecord::Schema.define(version: 20201015184322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,9 @@ ActiveRecord::Schema.define(version: 20201006173000) do
     t.datetime "end_time"
     t.integer "course_participations_limit"
     t.integer "course_participations_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0, null: false
     t.index ["driving_school_id"], name: "index_courses_on_driving_school_id"
     t.index ["label_id"], name: "index_courses_on_label_id"
   end
@@ -78,8 +81,8 @@ ActiveRecord::Schema.define(version: 20201006173000) do
     t.bigint "student_id", null: false
     t.bigint "employee_id", null: false
     t.bigint "driving_school_id", null: false
-    t.bigint "driving_course_id", null: false
-    t.index ["driving_course_id"], name: "index_driving_lessons_on_driving_course_id"
+    t.bigint "course_id", null: false
+    t.index ["course_id"], name: "index_driving_lessons_on_course_id"
     t.index ["driving_school_id"], name: "index_driving_lessons_on_driving_school_id"
     t.index ["employee_id"], name: "index_driving_lessons_on_employee_id"
     t.index ["student_id"], name: "index_driving_lessons_on_student_id"
@@ -274,7 +277,7 @@ ActiveRecord::Schema.define(version: 20201006173000) do
   add_foreign_key "activities", "users"
   add_foreign_key "course_participations", "courses"
   add_foreign_key "course_participations", "student_driving_schools"
-  add_foreign_key "driving_lessons", "course_participations", column: "driving_course_id"
+  add_foreign_key "driving_lessons", "courses"
   add_foreign_key "driving_lessons", "driving_schools"
   add_foreign_key "driving_lessons", "users", column: "employee_id"
   add_foreign_key "driving_lessons", "users", column: "student_id"
