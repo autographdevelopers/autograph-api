@@ -4,6 +4,7 @@ class Api::V1::CoursesController < ApplicationController
 
   before_action :set_employee_school
   before_action :set_school
+  before_action :set_course
 
   def index
     @courses = @school.courses
@@ -20,6 +21,8 @@ class Api::V1::CoursesController < ApplicationController
   end
 
   def update
+    authorize Course
+    @course.update!(course_params)
   end
 
   def archive
@@ -39,5 +42,9 @@ class Api::V1::CoursesController < ApplicationController
 
   def set_school
     @school = @employee_school.driving_school
+  end
+
+  def set_course
+    @course = @school.courses.find(params[:id])
   end
 end

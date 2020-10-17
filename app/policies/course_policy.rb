@@ -14,4 +14,8 @@ class CoursePolicy < ApplicationPolicy
   def create?
     user.employee?
   end
+
+  def update?
+    user.employee?
+  end
 end

@@ -11,8 +11,13 @@ module ErrorsHandlers
     rescue_from ActionController::BadRequest,       with: :bad_request
     rescue_from ActionController::ParameterMissing, with: :bad_request
     rescue_from ArgumentError,                      with: :argument_error
+    rescue_from ActiveRecord::ReadOnlyRecord,       with: :read_only_record
 
     private
+
+    def read_only_record(e)
+      render json: { error: e.message }, status: :unprocessable_entity
+    end
 
     def routes_not_found
       p "routes_not_found"
