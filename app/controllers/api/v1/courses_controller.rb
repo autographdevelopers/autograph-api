@@ -15,6 +15,8 @@ class Api::V1::CoursesController < ApplicationController
   end
 
   def create
+    authorize Course
+    @course = @school.courses.create!(course_params)
   end
 
   def update
@@ -24,6 +26,10 @@ class Api::V1::CoursesController < ApplicationController
   end
 
   private
+
+  def course_params
+    params.require(:course).permit(:name, :description, :course_participations_limit, :course_type_id)
+  end
 
   def set_employee_school
     @employee_school = current_user.user_driving_schools

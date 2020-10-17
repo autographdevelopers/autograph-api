@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :course do
-    name 'Test Course'
+    sequence(:name) { |n| "name-#{n}" }
     description 'Test Description'
     status :active
     start_time nil

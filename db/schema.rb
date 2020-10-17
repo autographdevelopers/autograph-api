@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201017172109) do
+ActiveRecord::Schema.define(version: 20201017181713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20201017172109) do
     t.bigint "course_type_id", null: false
     t.index ["course_type_id"], name: "index_courses_on_course_type_id"
     t.index ["driving_school_id"], name: "index_courses_on_driving_school_id"
+    t.index ["name", "driving_school_id", "status"], name: "index_courses_on_name_and_driving_school_id_and_status", unique: true
   end
 
   create_table "driving_lessons", force: :cascade do |t|

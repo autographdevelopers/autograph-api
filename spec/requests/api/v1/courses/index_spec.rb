@@ -153,7 +153,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/courses' do
                                       "results" => [
                                         {
                                            "id" => course.id,
-                                           "name" =>"Test Course",
+                                           "name" => course.name,
                                            "description" =>"Test Description",
                                            "status" =>"active",
                                            "start_time" =>nil,

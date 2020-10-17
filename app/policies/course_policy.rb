@@ -10,4 +10,8 @@ class CoursePolicy < ApplicationPolicy
       end
     end
   end
+
+  def create?
+    user.employee?
+  end
 end
