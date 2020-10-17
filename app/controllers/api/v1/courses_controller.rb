@@ -6,10 +6,12 @@ class Api::V1::CoursesController < ApplicationController
   before_action :set_school
 
   def index
-    authorize @employee_school, :is_owner?
-    @courses = @school.courses.order(created_at: :desc)
+    @courses = @school.courses
     @courses = apply_scopes(@courses)
-    @courses = @courses.page(params[:page]).per(params[:per] || 25)
+    @courses = policy_scope(@courses)
+    @courses = @courses.order('courses.created_at DESC')
+    @courses = @courses.includes(:course_type)
+    @courses = @courses.page(params[:page]).per(records_per_page)
   end
 
   def create

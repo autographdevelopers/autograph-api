@@ -1,11 +1,8 @@
 FactoryBot.define do
-  factory :course do
+  factory :course_type do
     name 'Test Course'
     description 'Test Description'
     status :active
-    start_time nil
-    end_time nil
     driving_school
-    course_type
   end
 end

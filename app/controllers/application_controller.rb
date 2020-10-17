@@ -8,11 +8,17 @@ class ApplicationController < ActionController::API
   before_action :configure_permitted_parameters, if: :devise_controller?
   # skip_before_action :authenticate_api_v1_user!, if: :devise_controller?
 
+  DEFAULT_RECORDS_PER_PAGE = 20
+
   def current_user
     @current_user = current_api_v1_user
   end
 
   protected
+
+  def records_per_page
+    params[:per] || DEFAULT_RECORDS_PER_PAGE
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [

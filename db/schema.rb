@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201015184322) do
+ActiveRecord::Schema.define(version: 20201017172109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,10 +57,20 @@ ActiveRecord::Schema.define(version: 20201015184322) do
     t.index ["student_driving_school_id"], name: "index_course_participations_on_student_driving_school_id"
   end
 
+  create_table "course_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.integer "status", default: 0, null: false
+    t.bigint "driving_school_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["driving_school_id"], name: "index_course_types_on_driving_school_id"
+    t.index ["name", "driving_school_id", "status"], name: "index_course_types_on_name_and_driving_school_id_and_status", unique: true
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
-    t.bigint "label_id"
     t.bigint "driving_school_id"
     t.datetime "start_time"
     t.datetime "end_time"
@@ -69,8 +79,9 @@ ActiveRecord::Schema.define(version: 20201015184322) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0, null: false
+    t.bigint "course_type_id", null: false
+    t.index ["course_type_id"], name: "index_courses_on_course_type_id"
     t.index ["driving_school_id"], name: "index_courses_on_driving_school_id"
-    t.index ["label_id"], name: "index_courses_on_label_id"
   end
 
   create_table "driving_lessons", force: :cascade do |t|
@@ -277,6 +288,7 @@ ActiveRecord::Schema.define(version: 20201015184322) do
   add_foreign_key "activities", "users"
   add_foreign_key "course_participations", "courses"
   add_foreign_key "course_participations", "student_driving_schools"
+  add_foreign_key "courses", "course_types"
   add_foreign_key "driving_lessons", "courses"
   add_foreign_key "driving_lessons", "driving_schools"
   add_foreign_key "driving_lessons", "users", column: "employee_id"

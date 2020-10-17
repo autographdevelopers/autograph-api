@@ -6,6 +6,4 @@ json.extract! course, :id,
               :end_time,
               :driving_school_id
 
-json.type course.type do |label|
-  json.partial! 'api/v1/labels/label', label: label
-end
+json.course_type { json.partial! 'api/v1/course_types/course_type', course_type: course.course_type }
