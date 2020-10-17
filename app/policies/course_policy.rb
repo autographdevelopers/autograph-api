@@ -18,4 +18,12 @@ class CoursePolicy < ApplicationPolicy
   def update?
     user.employee?
   end
+
+  def archive?
+    user.employee?
+  end
+
+  def index?
+    true
+  end
 end

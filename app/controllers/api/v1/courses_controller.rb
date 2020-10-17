@@ -2,9 +2,10 @@ class Api::V1::CoursesController < ApplicationController
   has_scope :status_active, as: :active, type: :boolean, only: :index
   has_scope :status_archived, as: :archived, type: :boolean, only: :index
 
+  before_action :authorize_action
   before_action :set_employee_school
   before_action :set_school
-  before_action :set_course
+  before_action :set_course, only: %i[update archive]
 
   def index
     @courses = @school.courses
@@ -16,22 +17,26 @@ class Api::V1::CoursesController < ApplicationController
   end
 
   def create
-    authorize Course
     @course = @school.courses.create!(course_params)
   end
 
   def update
-    authorize Course
     @course.update!(course_params)
   end
 
   def archive
+    @course.status_archived!
   end
 
   private
 
   def course_params
-    params.require(:course).permit(:name, :description, :course_participations_limit, :course_type_id)
+    params.require(:course).permit(
+      :name,
+      :description,
+      :course_participations_limit,
+      :course_type_id
+    )
   end
 
   def set_employee_school
@@ -46,5 +51,9 @@ class Api::V1::CoursesController < ApplicationController
 
   def set_course
     @course = @school.courses.find(params[:id])
+  end
+
+  def authorize_action
+    authorize Course
   end
 end
