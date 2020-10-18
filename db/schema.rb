@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201017181713) do
+ActiveRecord::Schema.define(version: 20201018201728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,14 +47,14 @@ ActiveRecord::Schema.define(version: 20201017181713) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "course_participations", force: :cascade do |t|
+  create_table "course_participation_details", force: :cascade do |t|
     t.bigint "student_driving_school_id"
     t.decimal "available_hours", default: "10.0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "course_id", null: false
-    t.index ["course_id"], name: "index_course_participations_on_course_id"
-    t.index ["student_driving_school_id"], name: "index_course_participations_on_student_driving_school_id"
+    t.index ["course_id"], name: "index_course_participation_details_on_course_id"
+    t.index ["student_driving_school_id"], name: "index_course_participation_details_on_student_driving_school_id"
   end
 
   create_table "course_types", force: :cascade do |t|
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20201017181713) do
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer "course_participations_limit"
-    t.integer "course_participations_count", default: 0, null: false
+    t.integer "course_participation_details_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0, null: false
@@ -287,8 +287,8 @@ ActiveRecord::Schema.define(version: 20201017181713) do
 
   add_foreign_key "activities", "driving_schools"
   add_foreign_key "activities", "users"
-  add_foreign_key "course_participations", "courses"
-  add_foreign_key "course_participations", "student_driving_schools"
+  add_foreign_key "course_participation_details", "courses"
+  add_foreign_key "course_participation_details", "student_driving_schools"
   add_foreign_key "courses", "course_types"
   add_foreign_key "driving_lessons", "courses"
   add_foreign_key "driving_lessons", "driving_schools"

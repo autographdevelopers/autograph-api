@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       resources :driving_schools, only: [:index, :create, :update, :show, :destroy] do
         resources :courses do
           put :archive, on: :member
+          resources :course_participation_details, only: :index
         end
         resources :labelable_labels, only: [:index]
 
@@ -38,7 +39,7 @@ Rails.application.routes.draw do
           end
         end
         resources :students, only: [:index] do
-          resources :course_participations, only: [:show, :update, :index, :create]
+          resources :course_participation_details, only: [:show, :update, :index, :create]
         end
         resources :employees, only: [:index] do
           resource :employee_privileges, only: [:update, :show]

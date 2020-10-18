@@ -1,4 +1,4 @@
-describe CourseParticipation do
+describe CourseParticipationDetail do
   context 'relations' do
     it { should belong_to(:student_driving_school) }
   end

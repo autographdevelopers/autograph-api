@@ -6,7 +6,7 @@ class DrivingLesson < ApplicationRecord
   belongs_to :student
   belongs_to :employee
   belongs_to :driving_school
-  belongs_to :course_participation
+  belongs_to :course_participation_detail
   has_many :slots
 
   # == Enumerators ============================================================
@@ -48,8 +48,8 @@ class DrivingLesson < ApplicationRecord
   private
 
   def decrement_student_driving_hours
-    self.course_participation.available_hours -= slots.count * 0.5
-    self.course_participation.save!
+    self.course_participation_detail.available_hours -= slots.count * 0.5
+    self.course_participation_detail.save!
   end
 
   def start_time_in_future?

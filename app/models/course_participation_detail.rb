@@ -1,4 +1,4 @@
-class CourseParticipation < ApplicationRecord
+class CourseParticipationDetail < ApplicationRecord
   SLOTS_TO_HOURS_CONVERSION_RATE = 0.5
 
   # == Relations ==============================================================

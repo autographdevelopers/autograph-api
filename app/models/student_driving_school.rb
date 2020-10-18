@@ -8,17 +8,11 @@ class StudentDrivingSchool < ApplicationRecord
   belongs_to :student, optional: true
   belongs_to :driving_school
   has_one :invitation, as: :invitable
-  has_many :course_participations
+  has_many :course_participation_details
   has_one :avatar_placeholder_color,
           -> { avatar_placeholder },
           as: :colorable,
           class_name: 'ColorableColor'.freeze
-
-  # == Callbacks ==============================================================
-  # after_create :create_driving_course
-
-  # == Callbacks ==============================================================
-  accepts_nested_attributes_for :course_participations
 
   # == Scopes =================================================================
   scope :active_with_active_driving_school, -> {
