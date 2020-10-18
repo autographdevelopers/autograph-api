@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201018201728) do
+ActiveRecord::Schema.define(version: 20201018215653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,7 +53,9 @@ ActiveRecord::Schema.define(version: 20201018201728) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "course_id", null: false
+    t.integer "status", default: 0, null: false
     t.index ["course_id"], name: "index_course_participation_details_on_course_id"
+    t.index ["student_driving_school_id", "course_id", "status"], name: "index_course_part_dets_on_stud_school_id_and_course_id_status", unique: true
     t.index ["student_driving_school_id"], name: "index_course_participation_details_on_student_driving_school_id"
   end
 

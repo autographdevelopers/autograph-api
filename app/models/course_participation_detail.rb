@@ -6,11 +6,16 @@ class CourseParticipationDetail < ApplicationRecord
   belongs_to :course, counter_cache: true
   has_many :driving_lessons
 
+  # == Enums ============================================================
+  enum status: { active: 0 }, _prefix: :status
+
   # == Validations ============================================================
   validates :available_hours, numericality: {
     greater_than_or_equal_to: 0
   }
   validate :validate_available_hours
+
+  validates :student_driving_school_id, uniqueness: { scope: [:course_id, :status] }
 
   def used_hours
     active_slots.past.count * SLOTS_TO_HOURS_CONVERSION_RATE

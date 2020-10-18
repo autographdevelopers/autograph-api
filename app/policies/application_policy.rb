@@ -62,6 +62,6 @@ class ApplicationPolicy
   private
 
   def get_employee_privileges(driving_school_id)
-    EmployeeDrivingSchool.find_by(employee_id: user.id, driving_school_id: driving_school_id).employee_privileges
+    EmployeeDrivingSchool.find_by!(employee_id: user.id, driving_school_id: driving_school_id).employee_privileges
   end
 end

@@ -16,6 +16,9 @@ Rails.application.routes.draw do
         resources :courses do
           put :archive, on: :member
           resources :course_participation_details, only: :index
+          resources :students, only: [] do
+            resources :course_participation_details, only: :create
+          end
         end
         resources :labelable_labels, only: [:index]
 

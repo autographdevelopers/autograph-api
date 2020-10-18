@@ -1,7 +1,9 @@
 class Api::V1::CourseParticipationDetailsController < ApplicationController
   # before_action :verify_current_user_to_be_employee, only: [:update]
   before_action :set_school
-  before_action :set_owning_record
+  before_action :set_owning_record, only: :index
+  before_action :set_course, only: :create
+  before_action :set_student_driving_school, only: :create
   # before_action :set_course_participation, only: [:update, :show]
 
   def index
@@ -12,12 +14,6 @@ class Api::V1::CourseParticipationDetailsController < ApplicationController
                                                   .per(records_per_page)
   end
 
-  # def show
-  #   authorize @course_participation
-  #
-  #   render @course_participation
-  # end
-  #
   # def update
   #   authorize @driving_school, :can_manage_students?
   #
@@ -28,20 +24,24 @@ class Api::V1::CourseParticipationDetailsController < ApplicationController
   #     render json: @course_participation.errors, status: :unprocessable_entity
   #   end
   # end
-  #
-  # def create
-  #   authorize @driving_school, :can_manage_students?
-  #
-  #   @student_school.update!(driving_courses_params)
-  #
-  #   head :ok
-  # end
+
+
+  # POST api/v1/driving_schools/:driving_school_id/courses/:course_id/students/:student_id/course_participation_details
+  def create
+    authorize @school, :can_manage_students?
+
+    @course_participation_detail = CourseParticipationDetail.create!(
+      course_participation_params.merge(
+        { course_id: @course.id, student_driving_school_id: @student_driving_school.id }
+      )
+    )
+  end
 
   private
   #
-  # def course_participation_params
-  #   params.require(:course_participation).permit(:available_hours)
-  # end
+  def course_participation_params
+    params.require(:course_participation_detail).permit(:available_hours)
+  end
 
   def set_school
     # Find me school requested by current user which is within her set of legally assigned active schools
@@ -53,10 +53,18 @@ class Api::V1::CourseParticipationDetailsController < ApplicationController
 
   def set_owning_record
     @owning_record = if params[:student_id].present?
-      @school.student_driving_schools.find_by!(student_id: params[:student_id])
+      set_student_driving_school
     elsif params[:course_id].present?
-      @school.courses.find_by!(id: params[:course_id])
+      set_course
     end
+  end
+
+  def set_course
+    @course = @school.courses.find(params[:course_id])
+  end
+
+  def set_student_driving_school
+    @student_driving_school = @school.student_driving_schools.find_by!(student_id: params[:student_id])
   end
 
   # def set_student_school
