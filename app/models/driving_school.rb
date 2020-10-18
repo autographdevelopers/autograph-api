@@ -20,6 +20,7 @@ class DrivingSchool < ApplicationRecord
            through: :labelable_labels,
            source: :label
   has_many :courses
+  has_many :course_participation_details
 
   # == Validations ============================================================
   validates :name, :phone_number, :email, :city, :street, :zip_code, :country, presence: true

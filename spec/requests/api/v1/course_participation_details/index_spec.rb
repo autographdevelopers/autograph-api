@@ -39,8 +39,8 @@ describe 'course participation details [INDEX]' do
     ->(record) { get "/api/v1/driving_schools/#{driving_school.id}/#{record.model_name.plural}/#{record.id}/course_participation_details", headers: current_user.create_new_auth_token, params: params }
   end
 
-  let!(:course_part_det_1) { create(:course_participation_detail, course: course_a, student_driving_school: student_driving_school)}
-  let!(:course_part_det_2) { create(:course_participation_detail, course: course_a, student_driving_school: student_driving_school_2)}
+  let!(:course_part_det_1) { create(:course_participation_detail, course: course_a, student_driving_school: student_driving_school, driving_school: driving_school)}
+  let!(:course_part_det_2) { create(:course_participation_detail, course: course_a, student_driving_school: student_driving_school_2, driving_school: driving_school)}
 
   context 'GET /api/v1/driving_schools/:driving_school_id/students/:student_id/course_participation_details' do
     let(:current_user) { student }

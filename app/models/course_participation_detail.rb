@@ -3,6 +3,7 @@ class CourseParticipationDetail < ApplicationRecord
 
   # == Relations ==============================================================
   belongs_to :student_driving_school
+  belongs_to :driving_school
   belongs_to :course, counter_cache: true
   has_many :driving_lessons
 
