@@ -106,8 +106,6 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/courses' do
         expect(json_response['pagination']['is_more']).to eq false
       end
     end
-
-
   end
 
   context 'Authorization' do
