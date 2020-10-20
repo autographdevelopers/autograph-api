@@ -6,8 +6,7 @@ class Api::V1::DrivingSchoolsController < ApplicationController
 
   def index
     # sleep 2
-    @user_driving_schools = current_user.user_driving_schools
-                              .eligible_for_viewing
+    @user_driving_schools = current_user.user_driving_schools.eligible_for_viewing #.kept
   end
 
   def show
@@ -42,7 +41,7 @@ class Api::V1::DrivingSchoolsController < ApplicationController
   end
 
   def destroy
-    @driving_school.destroy!
+    @driving_school.discard!
     head :ok
   end
 
@@ -81,12 +80,7 @@ class Api::V1::DrivingSchoolsController < ApplicationController
       :longitude,
       :email,
       :phone_number,
-      labelable_labels_attributes: [
-        :id,
-        :label_id,
-        :_destroy,
-        label_attributes: [:id, :name, :description, :purpose]
-      ]
+      course_types_attributes: [:id, :name, :description, :discarded_at]
     )
   end
 

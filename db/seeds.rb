@@ -36,7 +36,7 @@ IOS_COLORS.each do |color|
 end
 
 %w[A B C D].each do |letter|
-  label = Label.create!(name: "[Prebuilt] Course for category #{letter}", purpose: :course_category, prebuilt: true)
+  CourseType.create!(name: "[Prebuilt] Course for category #{letter}")
 end
 
 employee = FactoryBot.create(:employee, email: 'employee@gmail.com', password: 'Password1!')

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201018222422) do
+ActiveRecord::Schema.define(version: 20201020190728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,8 +68,10 @@ ActiveRecord::Schema.define(version: 20201018222422) do
     t.bigint "driving_school_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_course_types_on_discarded_at"
     t.index ["driving_school_id"], name: "index_course_types_on_driving_school_id"
-    t.index ["name", "driving_school_id", "status"], name: "index_course_types_on_name_and_driving_school_id_and_status", unique: true
+    t.index ["name", "driving_school_id", "status", "discarded_at"], name: "course_typ_name_school_id_status_discarded_at_uniq", unique: true
   end
 
   create_table "courses", force: :cascade do |t|
@@ -84,9 +86,12 @@ ActiveRecord::Schema.define(version: 20201018222422) do
     t.datetime "updated_at", null: false
     t.integer "status", default: 0, null: false
     t.bigint "course_type_id", null: false
+    t.boolean "created_automatically", default: false, null: false
+    t.datetime "discarded_at"
     t.index ["course_type_id"], name: "index_courses_on_course_type_id"
+    t.index ["discarded_at"], name: "index_courses_on_discarded_at"
     t.index ["driving_school_id"], name: "index_courses_on_driving_school_id"
-    t.index ["name", "driving_school_id", "status"], name: "index_courses_on_name_and_driving_school_id_and_status", unique: true
+    t.index ["name", "driving_school_id", "status", "discarded_at"], name: "courses_name_school_id_status_discarded_at_uniq", unique: true
   end
 
   create_table "driving_lessons", force: :cascade do |t|
@@ -123,6 +128,8 @@ ActiveRecord::Schema.define(version: 20201018222422) do
     t.string "country_code", null: false
     t.string "email"
     t.string "phone_number"
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_driving_schools_on_discarded_at"
     t.index ["name"], name: "index_driving_schools_on_name"
   end
 

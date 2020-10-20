@@ -1,6 +1,6 @@
 class Api::V1::CoursesController < ApplicationController
-  has_scope :status_active, as: :active, type: :boolean, only: :index
-  has_scope :status_archived, as: :archived, type: :boolean, only: :index
+  has_scope :kept, type: :boolean, only: :index
+  has_scope :discarded, type: :boolean, only: :index
 
   before_action :authorize_action
   before_action :set_employee_school
@@ -25,7 +25,7 @@ class Api::V1::CoursesController < ApplicationController
   end
 
   def archive
-    @course.status_archived!
+    @course.discard!
   end
 
   private

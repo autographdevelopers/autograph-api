@@ -39,7 +39,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/course_types' do
       let(:params) { { } }
 
       it 'returns all assigened course_type' do
-        expect(json_response['results'].pluck('id')).to contain_exactly course_type_a.id, course_type_b.id
+        expect(json_response.pluck('id')).to contain_exactly course_type_a.id, course_type_b.id
       end
 
       it 'returns 200 http status' do
@@ -51,7 +51,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/course_types' do
       let(:params) { { only_prebuilts: true } }
 
       it 'returns unassigned prebuilts' do
-        expect(json_response['results'].pluck('id')).to contain_exactly course_type_a2.id, course_type_b2.id, course_type_c1.id
+        expect(json_response.pluck('id')).to contain_exactly course_type_a2.id, course_type_b2.id, course_type_c1.id
       end
 
       it 'returns 200 http status' do
@@ -63,60 +63,11 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/course_types' do
       let(:params) { { only_prebuilts: true, reject_names: ['A', 'B'] } }
 
       it 'returns unassigned prebuilts' do
-        expect(json_response['results'].pluck('id')).to eq [course_type_c1.id]
+        expect(json_response.pluck('id')).to eq [course_type_c1.id]
       end
 
       it 'returns 200 http status' do
         expect(response).to have_http_status :ok
-      end
-    end
-  end
-
-  context 'Pagination' do
-    let!(:page_elements) { 2 }
-    let!(:batch_1_active_course_types) { create_list(:course_type, page_elements, driving_school: driving_school) }
-    let!(:batch_2_active_course_types) { create_list(:course_type, page_elements, driving_school: driving_school) }
-    let!(:batch_3_active_course_types) { create_list(:course_type, page_elements, driving_school: driving_school) }
-
-    context '1st page' do
-      let(:params) { { page: 1, per: page_elements } }
-
-      before { index_request.call }
-
-      it 'returns records from 1st page' do
-        expect(json_response['results'].pluck('id')).to eq batch_3_active_course_types.reverse.pluck :id
-      end
-
-      it 'returns pagination data indicating has_more -> true' do
-        expect(json_response['pagination']['is_more']).to eq true
-      end
-    end
-
-    context '2nd page' do
-      let(:params) { { page: 2, per: page_elements } }
-
-      before { index_request.call }
-
-      it 'returns records from 2nd page' do
-        expect(json_response['results'].pluck('id')).to eq batch_2_active_course_types.reverse.pluck :id
-      end
-
-      it 'returns pagination data indicating has_more -> true' do
-        expect(json_response['pagination']['is_more']).to eq true
-      end
-    end
-
-    context '3rd page (last)' do
-      let(:params) { { page: 3, per: page_elements } }
-
-      before { index_request.call }
-
-      it 'returns records from 2nd page' do
-        expect(json_response['results'].pluck('id')).to eq batch_1_active_course_types.reverse.pluck :id
-      end
-
-      it 'returns pagination data indicating has_more -> false' do
-        expect(json_response['pagination']['is_more']).to eq false
       end
     end
   end

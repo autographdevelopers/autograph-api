@@ -8,7 +8,5 @@ class CreateCourseTypes < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-
-    add_index :course_types, [:name, :driving_school_id, :status], unique: true
   end
 end

@@ -1,5 +1,6 @@
 class DrivingSchool < ApplicationRecord
   # == Extensions =============================================================
+  include Discard::Model
   include AASM
 
   # == Enumerators ============================================================
@@ -15,10 +16,6 @@ class DrivingSchool < ApplicationRecord
   has_many :activities, dependent: :destroy
   has_many :labelable_labels, as: :labelable
   has_many :labels, through: :labelable_labels
-  # has_many :course_categories,
-  #          -> { where(labels: { purpose: :course_category}) },
-  #          through: :labelable_labels,
-  #          source: :label
 
   has_many :courses
   has_many :course_types
@@ -47,7 +44,7 @@ class DrivingSchool < ApplicationRecord
   end
 
   # == Nested attributes ==========================================================
-  accepts_nested_attributes_for :labelable_labels, allow_destroy: true
+  accepts_nested_attributes_for :course_types, allow_destroy: true
 
   # == Instance Methods =======================================================
 
