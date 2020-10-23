@@ -14,7 +14,6 @@ class Api::V1::EmployeesController < ApplicationController
   has_scope :searchTerm
 
   def index
-    # sleep 1
     if current_user.student?
       @employee_driving_schools = @driving_school.employee_driving_schools
                                                  .active

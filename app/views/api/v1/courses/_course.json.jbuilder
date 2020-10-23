@@ -4,6 +4,7 @@ json.extract! course, :id,
               :status,
               :start_time,
               :end_time,
-              :driving_school_id
+              :driving_school_id,
+              :course_participation_details_count
 
 json.course_type { json.partial! 'api/v1/course_types/course_type', course_type: course.course_type }
