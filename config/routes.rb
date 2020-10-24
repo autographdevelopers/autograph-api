@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         resources :course_types, only: :index
         resources :courses do
           put :archive, on: :member
+          put :unarchive, on: :member
           resources :course_participation_details, only: :index
           resources :students, only: [] do
             resources :course_participation_details, only: :create

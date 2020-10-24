@@ -12,7 +12,7 @@ class Course < ApplicationRecord
   validates_numericality_of :course_participations_limit, only_integer: true, allow_nil: true, greater_than: 0
   validates :name, uniqueness: { scope: [:driving_school_id, :status, :discarded_at], message: 'There already exists such course with that status' }
 
-  def readonly?
-    course_participation_details.any?
-  end
+  # def readonly? what about discard?!
+  #   course_participation_details.any?
+  # end
 end

@@ -5,9 +5,10 @@ class Api::V1::CoursesController < ApplicationController
   before_action :authorize_action
   before_action :set_employee_school
   before_action :set_school
-  before_action :set_course, only: %i[update archive]
+  before_action :set_course, only: %i[update archive unarchive]
 
   def index
+    sleep 2
     @courses = @school.courses
     @courses = apply_scopes(@courses)
     @courses = policy_scope(@courses)
@@ -26,6 +27,10 @@ class Api::V1::CoursesController < ApplicationController
 
   def archive
     @course.discard!
+  end
+
+  def unarchive
+    @course.undiscard!
   end
 
   private

@@ -24,4 +24,8 @@ class CoursePolicy < ApplicationPolicy
   def archive?
     user.employee?
   end
+
+  def unarchive?
+    user.employee?
+  end
 end
