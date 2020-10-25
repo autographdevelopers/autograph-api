@@ -13,6 +13,7 @@ class Api::V1::StudentsController < ApplicationController
       @student_driving_schools = @employee_driving_school.driving_school
                                                          .student_driving_schools
                                                          .includes(:student, :invitation, :course_participation_details)
+                                                         .references(:student, :invitation)
                                                          .order(:id)
                                                          .page(params[:page])
                                                          .per(params[:per] || 20)

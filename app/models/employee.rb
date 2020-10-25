@@ -22,9 +22,9 @@ class Employee < User
   private
 
   def find_pending_invitation_and_relate_user_to_driving_school
-    invitations = Invitation.where('lower(email) = ?', self.email)
-    invitations.find_each { |invitation| invitation.invitable.update!(employee: self) }
-    invitations.destroy_all
+    # invitations = Invitation.where('lower(email) = ?', self.email)
+    # invitations.find_each { |invitation| invitation.invitable.update!(employee: self) } # BUG!
+    # invitations.destroy_all
   end
 end
 
