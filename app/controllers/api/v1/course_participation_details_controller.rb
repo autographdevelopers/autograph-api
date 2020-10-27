@@ -7,6 +7,7 @@ class Api::V1::CourseParticipationDetailsController < ApplicationController
   before_action :set_course_participation, only: :update
 
   def index
+    sleep 1
     authorize @owning_record, policy_class: CourseParticipationDetailPolicy
     @course_participation_details = @owning_record.course_participation_details
                                                   .includes(course: :course_type, student_driving_school: :student)
@@ -25,6 +26,7 @@ class Api::V1::CourseParticipationDetailsController < ApplicationController
 
   # POST api/v1/driving_schools/:driving_school_id/courses/:course_id/students/:student_id/course_participation_details
   def create
+    sleep rand 4
     authorize @school, :can_manage_students?
 
     @course_participation_detail = CourseParticipationDetail.create!(

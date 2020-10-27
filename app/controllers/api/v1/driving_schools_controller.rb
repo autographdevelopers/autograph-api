@@ -5,7 +5,44 @@ class Api::V1::DrivingSchoolsController < ApplicationController
 
 
   def index
+    # SOMETIME THIS RANDOMLY APPEARS IN RESPONSE
     # sleep 2
+    # Started GET "/api/v1/driving_schools" for 127.0.0.1 at 2020-10-26 19:31:05 +0100
+    # Processing by Api::V1::DrivingSchoolsController#index as JSON
+    #   User Load (0.1ms)  SELECT  "users".* FROM "users" WHERE "users"."uid" = $1 LIMIT $2  [["uid", "undefined"], ["LIMIT", 1]]
+    #   CACHE User Load (0.0ms)  SELECT  "users".* FROM "users" WHERE "users"."uid" = $1 LIMIT $2  [["uid", "undefined"], ["LIMIT", 1]]
+    # Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.1ms)
+    #
+    #
+    #
+    # NoMethodError (undefined method `user_driving_schools' for nil:NilClass):
+    #
+    # app/controllers/api/v1/driving_schools_controller.rb:9:in `index'
+    # Started GET "/__webpack_hmr" for 127.0.0.1 at 2020-10-26 19:31:06 +0100
+    #
+    # ActionController::RoutingError (No route matches [GET] "/__webpack_hmr"):
+    #
+    # actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+    # actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+    # railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+    # railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+    # activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+    # activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+    # activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+    # railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+    # actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+    # actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+    # rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+    # activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+    # actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+    # actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+    # rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+    # railties (5.1.6) lib/rails/engine.rb:522:in `call'
+    # puma (3.11.3) lib/puma/configuration.rb:225:in `call'
+    # puma (3.11.3) lib/puma/server.rb:624:in `handle_request'
+    # puma (3.11.3) lib/puma/server.rb:438:in `process_client'
+    # puma (3.11.3) lib/puma/server.rb:302:in `block in run'
+    # puma (3.11.3) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
     @user_driving_schools = current_user.user_driving_schools.eligible_for_viewing #.kept
   end
 

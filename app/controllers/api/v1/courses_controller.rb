@@ -5,7 +5,7 @@ class Api::V1::CoursesController < ApplicationController
   before_action :authorize_action
   before_action :set_employee_school
   before_action :set_school
-  before_action :set_course, only: %i[update archive unarchive]
+  before_action :set_course, only: %i[update archive unarchive show]
 
   def index
     sleep 2
@@ -16,6 +16,8 @@ class Api::V1::CoursesController < ApplicationController
     @courses = @courses.includes(:course_type)
     @courses = @courses.page(params[:page]).per(records_per_page)
   end
+
+  def show; end
 
   def create
     @course = @school.courses.create!(course_params)
