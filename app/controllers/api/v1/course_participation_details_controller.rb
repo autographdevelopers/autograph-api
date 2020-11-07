@@ -4,15 +4,17 @@ class Api::V1::CourseParticipationDetailsController < ApplicationController
   before_action :set_owning_record, only: :index
   before_action :set_course, only: :create
   before_action :set_student_driving_school, only: :create
-  before_action :set_course_participation, only: :update
+  before_action :set_course_participation, only: [:update, :discard]
 
+  has_scope :kept, type: :boolean
   def index
-    sleep 1
-    authorize @owning_record, policy_class: CourseParticipationDetailPolicy
+    # authorize @owning_record, policy_class: CourseParticipationDetailPolicy
     @course_participation_details = @owning_record.course_participation_details
                                                   .includes(course: :course_type, student_driving_school: :student)
                                                   .page(params[:page])
                                                   .per(records_per_page)
+
+    @course_participation_details = apply_scopes(@course_participation_details)
   end
 
   # PUT api/v1/driving_schools/:driving_school_id/course_participation_details/:id
@@ -23,10 +25,12 @@ class Api::V1::CourseParticipationDetailsController < ApplicationController
     create_activity
   end
 
+  def discard
+    @course_participation_detail.discard!
+  end
 
   # POST api/v1/driving_schools/:driving_school_id/courses/:course_id/students/:student_id/course_participation_details
   def create
-    sleep rand 4
     authorize @school, :can_manage_students?
 
     @course_participation_detail = CourseParticipationDetail.create!(

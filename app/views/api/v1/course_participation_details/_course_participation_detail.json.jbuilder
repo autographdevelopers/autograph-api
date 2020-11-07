@@ -1,5 +1,6 @@
 
-json.extract! course_participation_detail, :id, :available_hours, :booked_hours, :used_hours
+json.extract! course_participation_detail, :id, :available_hours, :booked_hours, :used_hours, :discarded_at, :course_id
+json.student_id { course_participation_detail.student_driving_school.student_id }
 
 json.student do
   json.partial! 'api/v1/students/student', locals: {

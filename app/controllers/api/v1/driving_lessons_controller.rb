@@ -4,6 +4,7 @@ class Api::V1::DrivingLessonsController < ApplicationController
   before_action :set_employee_driving_school, only: [:create]
   before_action :set_student, only: [:create]
   before_action :set_slots, only: [:create]
+  before_action :set_driving_course_participation, only: [:create]
 
   has_scope :student_id
   has_scope :employee_id
@@ -33,7 +34,6 @@ class Api::V1::DrivingLessonsController < ApplicationController
   end
 
   def create
-
     @driving_lesson = DrivingLessons::BuildService.new(
       current_user,
       @employee_driving_school,
@@ -45,14 +45,11 @@ class Api::V1::DrivingLessonsController < ApplicationController
 
     authorize @driving_lesson
 
-    if @driving_lesson.save
-      create_activity
-      render :create, locals: {
-        driving_lesson: @driving_lesson
-      }, status: :created
-    else
-      render json: @driving_lesson.errors, status: :unprocessable_entity
-    end
+    @driving_lesson.save!
+    create_activity
+    render :create, locals: {
+      driving_lesson: @driving_lesson
+    }, status: :created
   end
 
   private
@@ -75,7 +72,8 @@ class Api::V1::DrivingLessonsController < ApplicationController
                         .student_driving_schools
                         .active
                         .find_by!(student_id: params[:student_id])
-                        .course_participations.find(params[:course_participation_id])
+                        .course_participation_details
+                        .find(params[:course_participation_detail_id])
   end
 
   def set_employee_driving_school

@@ -1,5 +1,9 @@
 class AddSchoolRefToParicipationsTable < ActiveRecord::Migration[5.1]
-  def change
-    add_reference :course_participation_details, :driving_school, null: false, index: true
+  def up
+    add_reference :course_participation_details, :driving_school, null: false, index: true, foreign_key: true
+  end
+
+  def down
+    remove_reference :course_participation_details, :driving_school, null: false, index: true, foreign_key: true
   end
 end

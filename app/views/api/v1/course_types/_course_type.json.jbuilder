@@ -3,4 +3,5 @@ json.extract! course_type,
               :name,
               :description,
               :status,
-              :driving_school_id
+              :driving_school_id,
+              :discarded_at

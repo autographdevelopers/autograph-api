@@ -10,5 +10,5 @@ json.results do
 end
 
 json.pagination do
-  json.is_more !@student_driving_schools.last_page?
+  json.is_more (!@student_driving_schools.last_page? && !@student_driving_schools.out_of_range?)
 end

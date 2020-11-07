@@ -49,7 +49,7 @@ class EmployeeDrivingSchool < ApplicationRecord
 
   scope :eligible_for_viewing, -> {
     where(status: [:active, :pending])
-      .includes(:driving_school, :employee_privileges)
+      .includes(:driving_school, :employee_privileges).references(:driving_school).where(driving_schools: { discarded_at: nil })
   }
 
   scope :employee_ids, ->(ids) do

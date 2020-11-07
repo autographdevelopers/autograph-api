@@ -30,6 +30,10 @@ class StudentDrivingSchool < ApplicationRecord
         .includes(:driving_school)
   }
 
+  scope :ones_not_assigned_to_course, -> (course_id) {
+    left_joins(:course_participation_details).where.not(course_participation_details: { course_id: course_id })
+  }
+
   scope :searchTerm, ->(q) do
     where(%(
         users.name ILIKE :term
@@ -44,7 +48,7 @@ class StudentDrivingSchool < ApplicationRecord
 
   scope :eligible_for_viewing, -> {
     where(status: [:active, :pending], driving_schools: { status: [:active] })
-      .includes(:driving_school)
+      .includes(:driving_school).references(:driving_school).where(driving_schools: { discarded_at: nil })
   }
 
   # == Validations ============================================================

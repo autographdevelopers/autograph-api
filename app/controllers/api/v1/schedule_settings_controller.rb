@@ -6,16 +6,10 @@ class Api::V1::ScheduleSettingsController < ApplicationController
   def update
     authorize @schedule_settings
 
-    if @schedule_settings.update(schedule_settings_params)
-      render @schedule_settings, status: :ok
-    else
-      render json: @schedule_settings.errors, status: :unprocessable_entity
-    end
+    @schedule_settings.update!(schedule_settings_params)
   end
 
-  def show
-    render @schedule_settings
-  end
+  def show; end
 
   private 
 

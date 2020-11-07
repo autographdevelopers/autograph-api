@@ -13,8 +13,15 @@ Rails.application.routes.draw do
       end
 
       resources :driving_schools, only: [:index, :create, :update, :show, :destroy] do
-        resources :course_participation_details, only: :update
+        resources :course_participation_details, only: :update do
+          put :discard, on: :member
+        end
         resources :course_types, only: :index
+        resources :courses, only: [] do
+          resources :students, only: [] do
+            get :not_assigned_to_course, on: :collection
+          end
+        end
         resources :courses do
           put :archive, on: :member
           put :unarchive, on: :member

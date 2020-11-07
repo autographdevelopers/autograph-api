@@ -9,7 +9,7 @@ json.results do
 
 
 
-    if @current_user.employee?
+    if current_user.employee?
       json.privileges do
         json.partial! 'api/v1/employee_privileges/employee_privileges',
           employee_privileges: employee_driving_school.employee_privileges
@@ -19,6 +19,6 @@ json.results do
 end
 
 json.pagination do
-  json.is_more !@employee_driving_schools.last_page?
+  json.is_more !@employee_driving_schools.last_page? && !@employee_driving_schools.out_of_range?
 end
 

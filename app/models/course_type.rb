@@ -6,7 +6,7 @@ class CourseType < ApplicationRecord
 
   enum status: { default: 0 }, _prefix: :status
 
-  validates :name, presence: true, uniqueness: { scope: [:driving_school_id, :status, :discarded_at] }
+  validates :name, presence: true, uniqueness: { scope: [:driving_school_id, :status] }
   validates :status, presence: true
 
   scope :only_prebuilts, -> { where(driving_school_id: nil) }

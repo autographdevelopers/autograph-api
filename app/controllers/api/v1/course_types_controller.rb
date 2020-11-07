@@ -8,7 +8,6 @@ class Api::V1::CourseTypesController < ApplicationController
   has_scope :discarded, type: :boolean, only: :index
 
   def index
-    sleep 1
     authorize CourseType
     @course_types = CourseType.where(driving_school: params[:only_prebuilts] ? nil : @school).order(created_at: :desc)
     @course_types = apply_scopes(@course_types)

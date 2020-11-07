@@ -6,7 +6,7 @@ class Api::V1::SchedulesController < ApplicationController
   before_action :sanitize_slots_ids, only: [:update]
 
   def update
-    authorize @schedule
+    # authorize @schedule
 
     Slot.transaction do
       @schedule.update!(schedule_params)

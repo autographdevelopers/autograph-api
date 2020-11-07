@@ -6,6 +6,6 @@ json.results do
 end
 
 json.pagination do
-  json.is_more !@notifiable_user_activities.last_page?
+  json.is_more !@notifiable_user_activities.last_page? && !@notifiable_user_activities.out_of_range?
 end
 

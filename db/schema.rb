@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201020190728) do
+ActiveRecord::Schema.define(version: 20201103194037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,9 +55,11 @@ ActiveRecord::Schema.define(version: 20201020190728) do
     t.bigint "course_id", null: false
     t.integer "status", default: 0, null: false
     t.bigint "driving_school_id", null: false
+    t.datetime "discarded_at"
     t.index ["course_id"], name: "index_course_participation_details_on_course_id"
+    t.index ["discarded_at"], name: "index_course_participation_details_on_discarded_at"
     t.index ["driving_school_id"], name: "index_course_participation_details_on_driving_school_id"
-    t.index ["student_driving_school_id", "course_id", "status"], name: "index_course_part_dets_on_stud_school_id_and_course_id_status", unique: true
+    t.index ["student_driving_school_id", "course_id", "status", "discarded_at"], name: "index_course_part_dets_on_stud_school_id_and_course_id_status", unique: true
     t.index ["student_driving_school_id"], name: "index_course_participation_details_on_student_driving_school_id"
   end
 
@@ -71,7 +73,7 @@ ActiveRecord::Schema.define(version: 20201020190728) do
     t.datetime "discarded_at"
     t.index ["discarded_at"], name: "index_course_types_on_discarded_at"
     t.index ["driving_school_id"], name: "index_course_types_on_driving_school_id"
-    t.index ["name", "driving_school_id", "status", "discarded_at"], name: "course_typ_name_school_id_status_discarded_at_uniq", unique: true
+    t.index ["name", "driving_school_id", "status"], name: "course_typ_name_school_id_status_discarded_at_uniq", unique: true
   end
 
   create_table "courses", force: :cascade do |t|
@@ -102,8 +104,8 @@ ActiveRecord::Schema.define(version: 20201020190728) do
     t.bigint "student_id", null: false
     t.bigint "employee_id", null: false
     t.bigint "driving_school_id", null: false
-    t.bigint "course_id", null: false
-    t.index ["course_id"], name: "index_driving_lessons_on_course_id"
+    t.bigint "course_participation_detail_id", null: false
+    t.index ["course_participation_detail_id"], name: "index_driving_lessons_on_course_participation_detail_id"
     t.index ["driving_school_id"], name: "index_driving_lessons_on_driving_school_id"
     t.index ["employee_id"], name: "index_driving_lessons_on_employee_id"
     t.index ["student_id"], name: "index_driving_lessons_on_student_id"
@@ -299,9 +301,10 @@ ActiveRecord::Schema.define(version: 20201020190728) do
   add_foreign_key "activities", "driving_schools"
   add_foreign_key "activities", "users"
   add_foreign_key "course_participation_details", "courses"
+  add_foreign_key "course_participation_details", "driving_schools"
   add_foreign_key "course_participation_details", "student_driving_schools"
   add_foreign_key "courses", "course_types"
-  add_foreign_key "driving_lessons", "courses"
+  add_foreign_key "driving_lessons", "course_participation_details"
   add_foreign_key "driving_lessons", "driving_schools"
   add_foreign_key "driving_lessons", "users", column: "employee_id"
   add_foreign_key "driving_lessons", "users", column: "student_id"

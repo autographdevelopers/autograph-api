@@ -1,6 +1,6 @@
 class DrivingLessons::BuildService
   def initialize(current_user, employee_driving_school, student, driving_school, slots, course_participation)
-    @current_user = current_user
+    current_user = current_user
     @employee_driving_school = employee_driving_school
     @employee = employee_driving_school.employee
     @student = student
@@ -24,7 +24,7 @@ class DrivingLessons::BuildService
       student: student,
       driving_school: driving_school,
       start_time: earliest_slot_start_time,
-      course_participation: course_participation
+      course_participation_detail: course_participation
     )
 
     driving_lesson.slots = slots

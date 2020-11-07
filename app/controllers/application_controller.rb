@@ -3,15 +3,17 @@ class ApplicationController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
   include Pundit
 
-  # before_action :authenticate_api_v1_user!
-  before_action :current_user
+  before_action :authenticate_api_v1_user!
+  helper_method :current_user
   before_action :configure_permitted_parameters, if: :devise_controller?
-  # skip_before_action :authenticate_api_v1_user!, if: :devise_controller?
+  skip_before_action :authenticate_api_v1_user!, if: :devise_controller?
+
+  after_action { puts response.body }
 
   DEFAULT_RECORDS_PER_PAGE = 20
 
   def current_user
-    @current_user = current_api_v1_user
+    current_api_v1_user
   end
 
   protected

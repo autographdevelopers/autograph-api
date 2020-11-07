@@ -1,4 +1,6 @@
 class CourseParticipationDetail < ApplicationRecord
+  include Discard::Model
+
   SLOTS_TO_HOURS_CONVERSION_RATE = 0.5
 
   # == Relations ==============================================================
@@ -16,7 +18,7 @@ class CourseParticipationDetail < ApplicationRecord
   }
   validate :validate_available_hours
 
-  validates :student_driving_school_id, uniqueness: { scope: [:course_id, :status] }
+  validates :student_driving_school_id, uniqueness: { scope: [:course_id, :status, :discarded_at] }
 
   def used_hours
     active_slots.past.count * SLOTS_TO_HOURS_CONVERSION_RATE
