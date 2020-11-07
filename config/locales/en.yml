@@ -26,7 +26,7 @@ en:
       employee_invitation_rejected:
         "<b>%{user_full_name}</b> rejected invitation to driving school."
       driving_course_changed:
-        "<b>%{user_full_name}</b> changed number of available hours for <b>%{student_full_name}</b> to <b>%{available_hours}</b>."
+        "<b>%{user_full_name}</b> changed number of available hours for <b>%{student_full_name}</b> to <b>%{available_slot_credits}</b>."
       schedule_changed:
         "<b>%{user_full_name}</b> changed schedule for <b>%{employee_full_name}</b>."
       driving_lesson_canceled:

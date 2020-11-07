@@ -43,7 +43,7 @@ class Api::V1::CourseParticipationDetailsController < ApplicationController
   private
 
   def course_participation_params
-    params.require(:course_participation_detail).permit(:available_hours)
+    params.require(:course_participation_detail).permit(:available_slot_credits)
   end
 
   def set_school

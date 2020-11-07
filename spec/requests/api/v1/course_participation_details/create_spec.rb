@@ -3,8 +3,8 @@ describe 'POST api/v1/driving_schools/:driving_school_id/courses/:course_id/stud
   let(:student) { create(:student) }
   let(:student_2) { create(:student) }
   let(:is_owner) { true }
-  let(:available_hours) { 20 }
-  let(:params) { { course_participation_detail: { available_hours: available_hours } } }
+  let(:available_slot_credits) { 20 }
+  let(:params) { { course_participation_detail: { available_slot_credits: available_slot_credits } } }
   let(:driving_school) { create(:driving_school, status: :active) }
   let(:current_user) { employee }
 
@@ -75,7 +75,7 @@ describe 'POST api/v1/driving_schools/:driving_school_id/courses/:course_id/stud
 
   context 'when improper params' do
     context 'improper available hours attr' do
-      let(:available_hours) { -20 }
+      let(:available_slot_credits) { -20 }
 
       it 'does NOT create 1 new course_participation_details record' do
         expect { create_request.call(student) }.not_to change { CourseParticipationDetail.count }
@@ -88,7 +88,7 @@ describe 'POST api/v1/driving_schools/:driving_school_id/courses/:course_id/stud
 
       it 'contains proper error msg in response body' do
         create_request.call(student)
-        expect(json_response).to eq ({"available_hours"=>["must be greater than or equal to 0"]})
+        expect(json_response).to eq ({"available_slot_credits"=>["must be greater than or equal to 0"]})
       end
     end
   end

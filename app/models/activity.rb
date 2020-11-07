@@ -69,7 +69,7 @@ class Activity < ApplicationRecord
       when 'driving_course_changed'
         {
           student_full_name: target.student_driving_school.student.full_name,
-          available_hours: target.available_hours
+          available_slot_credits: target.available_slot_credits
         }
       when 'schedule_changed'
         {

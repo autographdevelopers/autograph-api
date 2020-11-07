@@ -23,7 +23,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
 
   let(:response_keys) do
     %w[
-      id available_hours booked_hours used_hours category_type
+      id available_slot_credits booked_hours used_hours category_type
     ]
   end
 
@@ -33,7 +33,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
   let(:params) do
     {
       driving_course: {
-        available_hours: 21.5
+        available_slot_credits: 21.5
       }
     }
   end
@@ -58,7 +58,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
         it 'updates DrivingCourse record' do
           driving_course.reload
           expect(driving_course.attributes).to include(
-            'available_hours' => params[:driving_course][:available_hours]
+            'available_slot_credits' => params[:driving_course][:available_slot_credits]
           )
         end
 
@@ -71,7 +71,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
 
           it 'attributes' do
             expect(subject).to include(
-              'available_hours' => params[:driving_course][:available_hours].to_s
+              'available_slot_credits' => params[:driving_course][:available_slot_credits].to_s
             )
           end
         end
@@ -82,7 +82,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
           let(:params) do
             {
               driving_course: {
-                available_hours: ''
+                available_slot_credits: ''
               }
             }
           end
@@ -93,7 +93,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
 
           it 'response contains proper error messages' do
             expect(json_response).to include(
-              'available_hours' => ["can't be blank", 'is not a number']
+              'available_slot_credits' => ["can't be blank", 'is not a number']
             )
           end
         end
@@ -111,7 +111,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
         it 'updates DrivingCourse record' do
           driving_course.reload
           expect(driving_course.attributes).to include(
-            'available_hours' => params[:driving_course][:available_hours]
+            'available_slot_credits' => params[:driving_course][:available_slot_credits]
           )
         end
 
@@ -124,7 +124,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
 
           it 'attributes' do
             expect(subject).to include(
-              'available_hours' => params[:driving_course][:available_hours].to_s
+              'available_slot_credits' => params[:driving_course][:available_slot_credits].to_s
             )
           end
         end
@@ -135,7 +135,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
           let(:params) do
             {
               driving_course: {
-                available_hours: ''
+                available_slot_credits: ''
               }
             }
           end
@@ -146,7 +146,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/students/:student_id/dr
 
           it 'response contains proper error messages' do
             expect(json_response).to include(
-              'available_hours' => ["can't be blank", 'is not a number']
+              'available_slot_credits' => ["can't be blank", 'is not a number']
             )
           end
         end

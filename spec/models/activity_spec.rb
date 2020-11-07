@@ -261,7 +261,7 @@ describe Activity do
           it 'assigns proper message to Activity' do
             expect(subject.message).to eq(
               "<b>#{user.full_name}</b> changed number of available hours for <b>#{student.full_name}</b> to " \
-              "<b>#{target.available_hours}</b>."
+              "<b>#{target.available_slot_credits}</b>."
             )
           end
         end

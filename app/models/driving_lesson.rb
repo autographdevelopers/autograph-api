@@ -13,7 +13,8 @@ class DrivingLesson < ApplicationRecord
   enum status: { active: 0, canceled: 1 }
 
   # == Callbacks ==============================================================
-  after_create :decrement_student_driving_hours
+  after_create :decrement_available_hours_credit
+  after_create :schedule_job_for_refreshing_counts_after_lesson_take_place
   after_commit :broadcast_changed_driving_lesson
 
   # == Validations ============================================================
@@ -35,7 +36,7 @@ class DrivingLesson < ApplicationRecord
     state :active, :canceled
 
     event :cancel do
-      transitions from: :active, to: :canceled, guard: [:start_time_in_future?]
+      transitions from: :active, to: :canceled, guard: [:start_time_in_future?], after: Proc.new {|*args| Courses::RefreshSlotCountsJob.perform_later(course_participation_detail.id) }
     end
   end
 
@@ -48,9 +49,16 @@ class DrivingLesson < ApplicationRecord
 
   private
 
-  def decrement_student_driving_hours
-    self.course_participation_detail.available_hours -= slots.count * 0.5
+  def decrement_available_hours_credit
+    self.course_participation_detail.available_slot_credits -= slots.count
     self.course_participation_detail.save!
+    self.course_participation_detail.refresh_slot_counts!
+  end
+
+  def schedule_job_for_refreshing_counts_after_lesson_take_place
+    Courses::RefreshSlotCountsJob
+      .set(wait_until: start_time + 1.second)
+      .perform_later(course_participation_detail.id)
   end
 
   def start_time_in_future?

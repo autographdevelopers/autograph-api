@@ -1,5 +1,4 @@
-
-json.extract! course_participation_detail, :id, :available_hours, :booked_hours, :used_hours, :discarded_at, :course_id
+json.extract! course_participation_detail, :id, :available_slot_credits, :discarded_at, :course_id, :booked_slots_count, :used_slots_count
 json.student_id { course_participation_detail.student_driving_school.student_id }
 
 json.student do

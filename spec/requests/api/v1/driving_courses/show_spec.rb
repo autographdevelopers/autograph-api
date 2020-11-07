@@ -75,7 +75,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students/:student_id/co
 
   let(:response_keys) do
     %w[
-      id available_hours booked_hours used_hours
+      id available_slot_credits booked_hours used_hours
     ]
   end
 
@@ -100,7 +100,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students/:student_id/co
 
       it 'attributes' do
         expect(subject).to include(
-          'available_hours' => driving_course.available_hours.to_f.to_s,
+          'available_slot_credits' => driving_course.available_slot_credits.to_f.to_s,
           'booked_hours' => 3.0,
           'used_hours' => 2.0,
         )
@@ -124,7 +124,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/students/:student_id/co
 
       it 'attributes' do
         expect(subject).to include(
-          'available_hours' => driving_course.available_hours.to_f.to_s,
+          'available_slot_credits' => driving_course.available_slot_credits.to_f.to_s,
           'booked_hours' => 3.0,
           'used_hours' => 2.0,
         )

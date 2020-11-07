@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201103194037) do
+ActiveRecord::Schema.define(version: 20201107205738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,13 +49,15 @@ ActiveRecord::Schema.define(version: 20201103194037) do
 
   create_table "course_participation_details", force: :cascade do |t|
     t.bigint "student_driving_school_id"
-    t.decimal "available_hours", default: "10.0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "course_id", null: false
     t.integer "status", default: 0, null: false
     t.bigint "driving_school_id", null: false
     t.datetime "discarded_at"
+    t.integer "booked_slots_count", default: 0, null: false
+    t.integer "used_slots_count", default: 0, null: false
+    t.integer "available_slot_credits", default: 0, null: false
     t.index ["course_id"], name: "index_course_participation_details_on_course_id"
     t.index ["discarded_at"], name: "index_course_participation_details_on_discarded_at"
     t.index ["driving_school_id"], name: "index_course_participation_details_on_driving_school_id"

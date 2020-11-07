@@ -13,35 +13,32 @@ class CourseParticipationDetail < ApplicationRecord
   enum status: { active: 0 }, _prefix: :status
 
   # == Validations ============================================================
-  validates :available_hours, numericality: {
-    greater_than_or_equal_to: 0
+  validates :available_slot_credits, :booked_slots_count, :used_slots_count, numericality: {
+    greater_than_or_equal_to: 0,
+    # only_integer: true dlaczego nie dziala ?
   }
-  validate :validate_available_hours
 
   validates :student_driving_school_id, uniqueness: { scope: [:course_id, :status, :discarded_at] }
 
-  def used_hours
-    active_slots.past.count * SLOTS_TO_HOURS_CONVERSION_RATE
-  end
 
-  def booked_hours
-    active_slots.future.count * SLOTS_TO_HOURS_CONVERSION_RATE
+  def refresh_slot_counts!
+    # TODO consider moving slots calculations to bg jobs
+    update_attributes!(
+      booked_slots_count: active_slots.merge(Slot.future).count,
+      used_slots_count: active_slots.merge(Slot.past).count,
+    )
   end
 
   private
 
   def active_slots
-    Slot.includes(:driving_lesson)
-        .where(driving_lessons: {
-                 driving_school_id: student_driving_school.driving_school_id,
-                 student_id: student_driving_school.student_id,
-                 status: :active
-               })
-  end
-
-  def validate_available_hours
-    if available_hours.present? && !(available_hours % SLOTS_TO_HOURS_CONVERSION_RATE).zero?
-      errors.add(:available_hours, 'must be divisible by 0.5')
-    end
+    driving_lessons.left_joins(:slots).where(driving_lessons: { status: :active })
+    # TODO rethink
+    # Slot.includes(:driving_lesson)
+    #     .where(driving_lessons: {
+    #              driving_school_id: student_driving_school.driving_school_id,
+    #              student_id: student_driving_school.student_id,
+    #              status: :active
+    #            })
   end
 end

@@ -28,7 +28,7 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
   let!(:driving_course) do
     create(:driving_course,
            student_driving_school: student_driving_school,
-           available_hours: 10.0)
+           available_slot_credits: 10.0)
   end
 
   let!(:slot_1) do
@@ -103,7 +103,7 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons' do
 
         it 'decrements student available hours count' do
           driving_course.reload
-          expect(driving_course.available_hours).to eq 8.5
+          expect(driving_course.available_slot_credits).to eq 8.5
         end
 
         it 'creates proper Activity record' do
