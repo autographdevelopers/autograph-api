@@ -4,7 +4,7 @@ FactoryBot.define do
     student
     employee
     driving_school
-
+    course_participation_detail
     # driving_course { student.student_driving_schools.find_by(driving_school) }
 
     transient do

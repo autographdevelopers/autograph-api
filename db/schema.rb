@@ -200,6 +200,22 @@ ActiveRecord::Schema.define(version: 20201114195734) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "body"
+    t.datetime "datetime"
+    t.string "notable_type", null: false
+    t.bigint "notable_id", null: false
+    t.bigint "driving_school_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "context", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["driving_school_id"], name: "index_notes_on_driving_school_id"
+    t.index ["notable_type", "notable_id"], name: "index_notes_on_notable_type_and_notable_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
   create_table "notifiable_user_activities", force: :cascade do |t|
     t.bigint "activity_id"
     t.bigint "user_id"
