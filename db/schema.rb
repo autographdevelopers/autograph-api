@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201107205738) do
+ActiveRecord::Schema.define(version: 20201114195734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20201107205738) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["colorable_type", "colorable_id"], name: "index_colorable_colors_on_colorable_type_and_colorable_id"
+    t.index ["hex_val", "colorable_type", "colorable_id", "application"], name: "index_col_col_hex_appl_uniq", unique: true
   end
 
   create_table "colors", force: :cascade do |t|
