@@ -8,6 +8,7 @@ class DrivingLesson < ApplicationRecord
   belongs_to :driving_school
   belongs_to :course_participation_detail
   has_many :slots
+  has_many :notes, as: :notable
 
   # == Enumerators ============================================================
   enum status: { active: 0, canceled: 1 }
