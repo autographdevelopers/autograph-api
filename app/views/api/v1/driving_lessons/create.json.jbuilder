@@ -12,6 +12,10 @@ json.student do
   json.surname driving_lesson.student.surname
 end
 
+json.course do
+  json.partial! 'api/v1/courses/course', course: driving_lesson.course_participation_detail.course
+end
+
 json.slots driving_lesson.slots do |slot|
   json.partial! 'api/v1/slots/slot', slot: slot
 end

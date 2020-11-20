@@ -50,7 +50,7 @@ Rails.application.routes.draw do
           member do
             put :cancel
           end
-          resources :notes, only: %i[create]
+          resources :notes, only: %i[create index update]
         end
         resources :students, only: [:index] do
           resources :course_participation_details, only: [:show, :update, :index, :create]
