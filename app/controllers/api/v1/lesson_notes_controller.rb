@@ -1,6 +1,6 @@
 class Api::V1::LessonNotesController < ApplicationController
   before_action :set_driving_school
-  before_action :set_lesson
+  before_action :set_lesson, except: :authored
   before_action :set_note, only: %i[update attach_file delete_file]
 
   def create

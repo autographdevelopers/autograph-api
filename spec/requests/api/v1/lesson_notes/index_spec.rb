@@ -3,41 +3,44 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/driving_lessons/:drivin
   let(:employee) { create(:employee) }
   let!(:employee_driving_school) do
     create(:employee_driving_school,
-           driving_school: driving_school,
-           status: :active,
-           employee: employee)
+      driving_school: driving_school,
+      status: :active,
+      employee: employee
+    )
   end
   let(:student) { create(:student) }
   let!(:student_driving_school) do
     create(:student_driving_school,
-           driving_school: driving_school,
-           status: :active,
-           student: student)
+      driving_school: driving_school,
+      status: :active,
+      student: student
+    )
   end
 
   let(:other_student) { create(:student) }
   let!(:other_student_driving_school) do
     create(:student_driving_school,
-           driving_school: driving_school,
-           status: :active,
-           student: other_student)
+      driving_school: driving_school,
+      status: :active,
+      student: other_student
+    )
   end
 
   let(:driving_lesson) do
     create(:driving_lesson,
-       employee: employee,
-       student: student,
-       driving_school: driving_school,
-       status: :active
+      employee: employee,
+      student: student,
+      driving_school: driving_school,
+      status: :active
     )
   end
 
   let(:other_driving_lesson) do
     create(:driving_lesson,
-           employee: employee,
-           student: student,
-           driving_school: driving_school,
-           status: :active
+      employee: employee,
+      student: student,
+      driving_school: driving_school,
+      status: :active
     )
   end
 
