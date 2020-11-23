@@ -19,6 +19,7 @@ class Api::V1::LessonNotesController < ApplicationController
   end
 
   def index
+    authorize @lesson, policy_class: LessonNotePolicy
     @notes = @lesson.lesson_notes.includes(
       :author,
       files_attachments: :blob

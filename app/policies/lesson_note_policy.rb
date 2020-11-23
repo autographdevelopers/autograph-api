@@ -6,4 +6,8 @@ class LessonNotePolicy < ApplicationPolicy
   def update?
     user == record.author
   end
+
+  def index?
+    user.employee? || record.student == user
+  end
 end
