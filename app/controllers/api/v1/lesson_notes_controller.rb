@@ -1,7 +1,7 @@
 class Api::V1::LessonNotesController < ApplicationController
   before_action :set_driving_school
   before_action :set_lesson, except: :authored
-  before_action :set_note, only: %i[update attach_file delete_file]
+  before_action :set_note, only: %i[update attach_file delete_file discard]
 
   def create
     authorize LessonNote
@@ -23,14 +23,14 @@ class Api::V1::LessonNotesController < ApplicationController
     @notes = @lesson.lesson_notes.includes(
       :author,
       files_attachments: :blob
-    ).order(created_at: :desc)
+    ).kept.order(created_at: :desc)
     @notes = @notes.page(params[:page]).per(records_per_page)
   end
 
   def authored
     @notes = @driving_school.lesson_notes.where(
       author: current_user
-    ).includes(
+    ).kept.includes(
       :author,
       files_attachments: :blob
     ).order(created_at: :desc)
@@ -39,11 +39,19 @@ class Api::V1::LessonNotesController < ApplicationController
   end
 
   def attach_file
+    authorize @note
     @note.files.attach(io: image_io, filename: image_name)
   end
 
   def delete_file
+    authorize @note
     @note.files.find(upload_doc_attachment[:file_id]).purge_later
+  end
+
+  def discard
+    authorize @note
+    @note.discard!
+    head :ok
   end
 
   private
@@ -66,7 +74,7 @@ class Api::V1::LessonNotesController < ApplicationController
   end
 
   def set_note
-    @note = @lesson.lesson_notes.find(params[:id])
+    @note = @lesson.lesson_notes.kept.find(params[:id])
   end
 
   def set_driving_school

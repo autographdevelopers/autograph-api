@@ -228,8 +228,10 @@ ActiveRecord::Schema.define(version: 2020_11_23_102452) do
     t.bigint "driving_lesson_id", null: false
     t.bigint "driving_school_id", null: false
     t.bigint "user_id", null: false
+    t.datetime "discarded_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["discarded_at"], name: "index_lesson_notes_on_discarded_at"
     t.index ["driving_lesson_id"], name: "index_lesson_notes_on_driving_lesson_id"
     t.index ["driving_school_id"], name: "index_lesson_notes_on_driving_school_id"
     t.index ["user_id"], name: "index_lesson_notes_on_user_id"

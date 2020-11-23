@@ -1,4 +1,4 @@
-class LessonNotePolicy < ApplicationPolicy
+class   LessonNotePolicy < ApplicationPolicy
   def create?
     user.employee?
   end
@@ -7,7 +7,19 @@ class LessonNotePolicy < ApplicationPolicy
     user == record.author
   end
 
+  def discard?
+    user == record.author
+  end
+
   def index?
     user.employee? || record.student == user
+  end
+
+  def attach_file?
+    user == record.author
+  end
+
+  def delete_file?
+    user == record.author
   end
 end

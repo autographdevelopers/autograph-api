@@ -56,6 +56,7 @@ Rails.application.routes.draw do
           resources :lesson_notes, only: %i[create index update] do
             put :attach_file, on: :member
             put :delete_file, on: :member
+            put :discard, on: :member
           end
         end
         resources :students, only: [:index] do

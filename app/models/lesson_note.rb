@@ -1,4 +1,6 @@
 class LessonNote < ApplicationRecord
+  include Discard::Model
+
   # == Associations =========================
   belongs_to :driving_lesson
   belongs_to :driving_school
