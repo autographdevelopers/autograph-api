@@ -46,11 +46,17 @@ Rails.application.routes.draw do
             delete :destroy
           end
         end
+        resources :lesson_notes, only: [] do
+          get :authored, on: :collection
+        end
         resources :driving_lessons, only: [:index, :create] do
           member do
             put :cancel
           end
-          resources :notes, only: %i[create index update]
+          resources :lesson_notes, only: %i[create index update] do
+            put :attach_file, on: :member
+            put :delete_file, on: :member
+          end
         end
         resources :students, only: [:index] do
           resources :course_participation_details, only: [:show, :update, :index, :create]

@@ -17,6 +17,7 @@ class DrivingSchool < ApplicationRecord
   has_many :labelable_labels, as: :labelable
   has_many :labels, through: :labelable_labels
 
+  has_many :lesson_notes
   has_many :courses
   has_many :course_types
   has_many :course_participation_details

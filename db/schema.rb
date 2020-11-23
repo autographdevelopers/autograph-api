@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201114195734) do
+ActiveRecord::Schema.define(version: 2020_11_23_102452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "activities", force: :cascade do |t|
     t.bigint "driving_school_id"
@@ -200,20 +221,18 @@ ActiveRecord::Schema.define(version: 20201114195734) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "notes", force: :cascade do |t|
+  create_table "lesson_notes", force: :cascade do |t|
     t.string "title", null: false
     t.text "body"
     t.datetime "datetime"
-    t.string "notable_type", null: false
-    t.bigint "notable_id", null: false
+    t.bigint "driving_lesson_id", null: false
     t.bigint "driving_school_id", null: false
     t.bigint "user_id", null: false
-    t.integer "context", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["driving_school_id"], name: "index_notes_on_driving_school_id"
-    t.index ["notable_type", "notable_id"], name: "index_notes_on_notable_type_and_notable_id"
-    t.index ["user_id"], name: "index_notes_on_user_id"
+    t.index ["driving_lesson_id"], name: "index_lesson_notes_on_driving_lesson_id"
+    t.index ["driving_school_id"], name: "index_lesson_notes_on_driving_school_id"
+    t.index ["user_id"], name: "index_lesson_notes_on_user_id"
   end
 
   create_table "notifiable_user_activities", force: :cascade do |t|
@@ -317,6 +336,7 @@ ActiveRecord::Schema.define(version: 20201114195734) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "activities", "driving_schools"
   add_foreign_key "activities", "users"
   add_foreign_key "course_participation_details", "courses"
