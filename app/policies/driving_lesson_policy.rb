@@ -9,10 +9,6 @@ class DrivingLessonPolicy < ApplicationPolicy
     true
   end
 
-  # def index_lesson_note_from_instructor?
-  #   true
-  # end
-
   class Scope < Scope
     def resolve
       if user.student?

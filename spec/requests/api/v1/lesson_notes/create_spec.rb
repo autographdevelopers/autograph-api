@@ -83,9 +83,9 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons/:drivi
 
   context 'with invalid url params' do
     context 'school does NOT exist' do
-      before { create_request.call(school_id: 'not-existing-id') }
-
       context 'HTTP response' do
+        before { create_request.call(school_id: 'not-existing-id') }
+
         it 'returns 404 HTTP status' do
           expect(response).to have_http_status :not_found
         end
@@ -99,9 +99,9 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons/:drivi
     end
 
     context 'lesson does NOT exist' do
-      before { create_request.call(lesson_id: 'not-existing-id') }
-
       context 'HTTP response' do
+        before { create_request.call(lesson_id: 'not-existing-id') }
+
         it 'returns 404 HTTP status' do
           expect(response).to have_http_status :not_found
         end
@@ -115,7 +115,7 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons/:drivi
     end
 
     context 'lesson does NOT belong to that school' do
-      let(:driving_lesson) do
+      let!(:driving_lesson) do
         create(:driving_lesson,
            employee: employee,
            student: student,
@@ -123,9 +123,9 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons/:drivi
         )
       end
 
-      before { create_request.call }
-
       context 'HTTP response' do
+        before { create_request.call }
+
         it 'returns 404 HTTP status' do
           expect(response).to have_http_status :not_found
         end
@@ -139,11 +139,12 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/driving_lessons/:drivi
     end
 
     context 'school in url param has no association to current_user' do
-      let(:current_user) { create(:employee) }
+      let!(:current_user) { create(:employee) }
 
-      before { create_request.call }
 
       context 'HTTP response' do
+        before { create_request.call }
+
         it 'returns 404 HTTP status' do
           expect(response).to have_http_status :not_found
         end

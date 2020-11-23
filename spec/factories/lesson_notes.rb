@@ -4,6 +4,7 @@ FactoryBot.define do
     body 'test-body'
     datetime Time.current
     driving_school
+    driving_lesson
     association :author, factory: :user
   end
 end

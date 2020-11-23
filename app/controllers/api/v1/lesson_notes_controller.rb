@@ -1,16 +1,21 @@
 class Api::V1::LessonNotesController < ApplicationController
-  before_action :verify_current_user_to_be_employee, only: %i[create update]
   before_action :set_driving_school
   before_action :set_lesson
   before_action :set_note, only: %i[update attach_file delete_file]
 
   def create
+    authorize LessonNote
     @note = @lesson.lesson_notes.create!(
       note_params.merge(
         author: current_user,
         driving_school: @driving_school
       )
     )
+  end
+
+  def update
+    authorize @note
+    @note.update!(note_params)
   end
 
   def index
@@ -30,10 +35,6 @@ class Api::V1::LessonNotesController < ApplicationController
     ).order(created_at: :desc)
 
     @notes = @notes.page(params[:page]).per(records_per_page)
-  end
-
-  def update
-    @note.update!(note_params)
   end
 
   def attach_file
