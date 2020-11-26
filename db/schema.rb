@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_23_102452) do
+ActiveRecord::Schema.define(version: 2020_11_24_153846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -245,6 +245,20 @@ ActiveRecord::Schema.define(version: 2020_11_23_102452) do
     t.datetime "updated_at", null: false
     t.index ["activity_id"], name: "index_notifiable_user_activities_on_activity_id"
     t.index ["user_id"], name: "index_notifiable_user_activities_on_user_id"
+  end
+
+  create_table "organization_notes", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "body"
+    t.datetime "datetime"
+    t.bigint "driving_school_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "discarded_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["discarded_at"], name: "index_organization_notes_on_discarded_at"
+    t.index ["driving_school_id"], name: "index_organization_notes_on_driving_school_id"
+    t.index ["user_id"], name: "index_organization_notes_on_user_id"
   end
 
   create_table "related_user_activities", force: :cascade do |t|

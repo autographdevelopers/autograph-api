@@ -1,4 +1,4 @@
-class LessonNotePolicy < ApplicationPolicy
+class OrganizationNotePolicy < ApplicationPolicy
   def create?
     user.employee?
   end
