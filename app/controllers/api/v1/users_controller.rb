@@ -14,6 +14,6 @@ class Api::V1::UsersController < DeviseTokenAuth::RegistrationsController
   private
 
   def create_avatar_placeholder
-    @resource.create_avatar_placeholder_color!(application: :avatar_placeholder, hex_val: Color.pluck(:hex_val).sample)
+    @resource.create_avatar_placeholder_color!(application: :avatar_placeholder, hex_val: Color.pluck(:hex_val).sample) if @resource.persisted?
   end
 end

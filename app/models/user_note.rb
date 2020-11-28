@@ -1,9 +1,10 @@
-class OrganizationNote < ApplicationRecord
+class UserNote < ApplicationRecord
   include Discard::Model
 
   # == Associations =========================
   belongs_to :driving_school
-  belongs_to :author, foreign_key: :user_id, class_name: 'User'
+  belongs_to :author, class_name: User.name
+  belongs_to :user
   has_many :comments, as: :commentable
   # == Files =============================
 

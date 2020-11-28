@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_24_153846) do
+ActiveRecord::Schema.define(version: 2020_11_28_104007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,21 @@ ActiveRecord::Schema.define(version: 2020_11_24_153846) do
     t.integer "application", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body", null: false
+    t.bigint "author_id", null: false
+    t.string "commentable_type", null: false
+    t.bigint "commentable_id", null: false
+    t.bigint "driving_school_id", null: false
+    t.datetime "discarded_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_comments_on_author_id"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.index ["discarded_at"], name: "index_comments_on_discarded_at"
+    t.index ["driving_school_id"], name: "index_comments_on_driving_school_id"
   end
 
   create_table "course_participation_details", force: :cascade do |t|
@@ -315,6 +330,22 @@ ActiveRecord::Schema.define(version: 2020_11_24_153846) do
     t.index ["student_id"], name: "index_student_driving_schools_on_student_id"
   end
 
+  create_table "user_notes", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "body"
+    t.datetime "datetime"
+    t.bigint "author_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "driving_school_id", null: false
+    t.datetime "discarded_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_user_notes_on_author_id"
+    t.index ["discarded_at"], name: "index_user_notes_on_discarded_at"
+    t.index ["driving_school_id"], name: "index_user_notes_on_driving_school_id"
+    t.index ["user_id"], name: "index_user_notes_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -355,6 +386,8 @@ ActiveRecord::Schema.define(version: 2020_11_24_153846) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "activities", "driving_schools"
   add_foreign_key "activities", "users"
+  add_foreign_key "comments", "driving_schools"
+  add_foreign_key "comments", "users", column: "author_id"
   add_foreign_key "course_participation_details", "courses"
   add_foreign_key "course_participation_details", "driving_schools"
   add_foreign_key "course_participation_details", "student_driving_schools"
@@ -374,4 +407,5 @@ ActiveRecord::Schema.define(version: 2020_11_24_153846) do
   add_foreign_key "slots", "employee_driving_schools"
   add_foreign_key "slots", "users", column: "locking_user_id"
   add_foreign_key "student_driving_schools", "users", column: "student_id"
+  add_foreign_key "user_notes", "users", column: "author_id"
 end

@@ -13,6 +13,13 @@ Rails.application.routes.draw do
       end
 
       resources :driving_schools, only: [:index, :create, :update, :show, :destroy] do
+        Comment::COMMENTABLE_TYPES.each do |c|
+          resources c.underscore.pluralize.to_sym, only: [] do
+            resources :comments, only: %i[create index] do
+              put :discard, on: :member
+            end
+          end
+        end
         resources :course_participation_details, only: :update do
           put :discard, on: :member
         end
@@ -52,6 +59,15 @@ Rails.application.routes.draw do
           put :attach_file, on: :member
           put :delete_file, on: :member
           put :discard, on: :member
+        end
+
+        resources :users, only: [] do
+          resources :user_notes, only: %i[create index update] do
+            get :authored, on: :collection
+            put :attach_file, on: :member
+            put :delete_file, on: :member
+            put :discard, on: :member
+          end
         end
 
         resources :lesson_notes, only: [] do

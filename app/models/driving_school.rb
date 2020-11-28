@@ -23,6 +23,7 @@ class DrivingSchool < ApplicationRecord
   has_many :courses
   has_many :course_types
   has_many :course_participation_details
+  has_many :user_notes
 
   # == Validations ============================================================
   validates :name, :phone_number, :email, :city, :street, :zip_code, :country, presence: true
