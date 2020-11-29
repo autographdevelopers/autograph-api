@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :driving_schools, only: [:index, :create, :update, :show, :destroy] do
         Comment::COMMENTABLE_TYPES.each do |c|
           resources c.underscore.pluralize.to_sym, only: [] do
-            resources :comments, only: %i[create index] do
+            resources :comments, only: %i[create index update] do
               put :discard, on: :member
             end
           end

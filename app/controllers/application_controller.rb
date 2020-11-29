@@ -26,6 +26,9 @@ class ApplicationController < ActionController::API
     devise_parameter_sanitizer.permit(:sign_up, keys: [
       :name, :surname, :birth_date, :gender, :type, :time_zone
     ])
+    devise_parameter_sanitizer.permit(:account_update, keys: [
+      :name, :surname, :email
+    ])
   end
 
   def verify_current_user_to_be_employee

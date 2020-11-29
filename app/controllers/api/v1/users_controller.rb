@@ -7,6 +7,10 @@ class Api::V1::UsersController < DeviseTokenAuth::RegistrationsController
     render :create
   end
 
+  def render_update_success
+    render :update
+  end
+
   def render_create_error
     render json: @resource.errors, status: :unprocessable_entity
   end

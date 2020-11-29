@@ -9,6 +9,7 @@ class UserNote < ApplicationRecord
   # == Files =============================
 
   has_many_attached :files
+  validates :files, limit: { min: 0, max: 3 } # does not work ;C
 
   # == Validations =========================
   validates :title, presence: true

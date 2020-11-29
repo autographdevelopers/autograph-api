@@ -1,7 +1,7 @@
 class Api::V1::CommentsController < ApplicationController
   before_action :set_school
   before_action :set_commentable
-  before_action :set_comment, only: :discard
+  before_action :set_comment, only: %i[discard update]
 
   def index
     @comments = @commentable.comments.kept.includes(:author)
@@ -15,6 +15,10 @@ class Api::V1::CommentsController < ApplicationController
         driving_school: @school,
       )
     )
+  end
+
+  def update
+    @comment.update!(comment_params)
   end
 
   def discard
