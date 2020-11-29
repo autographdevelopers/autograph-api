@@ -6,6 +6,13 @@ Rails.application.routes.draw do
         sessions: 'api/v1/sessions'
       }
 
+      devise_scope :api_v1_user do
+        resources :users, only: [] do
+          put :update_avatar, on: :collection
+          put :purge_avatar, on: :collection
+        end
+      end
+
       resources :colors, only: :index
       resources :labels
       resources :labelable_labels, only: [] do

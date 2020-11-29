@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
          # :confirmable
   include DeviseTokenAuth::Concerns::User
 
+  has_one_attached :avatar
+
   # == Enumerators ============================================================
   enum status: { active: 0, blocked: 1, removed: 2 }
   enum gender: { male: 0, female: 1 }
