@@ -53,10 +53,4 @@ RSpec.describe Color, type: :model do
       end
     end
   end
-
-  context '#find_rarest_color_in' do
-    let(:color_red) { build(:color, hex_val: hex_val, application: :general, palette_name: palette_name) }
-
-    context ''
-  end
 end

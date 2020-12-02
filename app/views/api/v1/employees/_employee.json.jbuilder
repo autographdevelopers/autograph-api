@@ -8,4 +8,3 @@ json.surname item.surname
 json.type User::EMPLOYEE
 json.status employee_driving_school.status
 json.invitation_sent_at employee_driving_school.created_at
-json.avatar_placeholder_color employee_driving_school.avatar_placeholder_color.hex_val

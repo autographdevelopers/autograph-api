@@ -9,10 +9,6 @@ class StudentDrivingSchool < ApplicationRecord
   belongs_to :driving_school
   has_one :invitation, as: :invitable
   has_many :course_participation_details
-  has_one :avatar_placeholder_color,
-          -> { avatar_placeholder },
-          as: :colorable,
-          class_name: 'ColorableColor'.freeze
 
   # == Scopes =================================================================
   scope :active_with_active_driving_school, -> {

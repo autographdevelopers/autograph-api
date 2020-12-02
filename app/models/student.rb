@@ -10,8 +10,6 @@ class Student < User
   # == Callbacks ==============================================================
   after_create :find_pending_invitation_and_relate_user_to_driving_school
 
-  DEFAULT_AVATAR_PLACEHOLDER_COLOR_HEX = '264653'.freeze
-
   # == Instance Methods =======================================================
   private
 

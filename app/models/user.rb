@@ -15,11 +15,6 @@ class User < ActiveRecord::Base
            through: :related_user_activities,
            source: :activity
 
-  has_one :avatar_placeholder_color,
-          -> { avatar_placeholder },
-          as: :colorable,
-          class_name: 'ColorableColor'.freeze
-
   has_many :received_user_notes, class_name: UserNote.name, foreign_key: :user_id
   has_many :authored_user_notes, class_name: UserNote.name, foreign_key: :author_id
 

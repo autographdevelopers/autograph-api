@@ -10,13 +10,6 @@ class DrivingSchools::CreateService
       employee_driving_school = EmployeeDrivingSchool.create!(
         employee: user, driving_school: driving_school, status: :active
       )
-      employee_driving_school.create_avatar_placeholder_color!(
-        hex_val: Color.find_rarest_color_in(
-          model: EmployeeDrivingSchool,
-          school_id: driving_school.id,
-          color_application: :avatar_placeholder
-        )
-      )
       EmployeePrivileges.create!(
         employee_driving_school: employee_driving_school,
         can_manage_employees: true,

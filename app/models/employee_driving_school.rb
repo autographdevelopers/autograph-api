@@ -11,11 +11,6 @@ class EmployeeDrivingSchool < ApplicationRecord
   has_one :employee_notifications_settings
   has_one :invitation, as: :invitable
   has_one :schedule
-  has_one :avatar_placeholder_color,
-                -> { avatar_placeholder },
-                as: :colorable,
-                class_name: 'ColorableColor'.freeze
-
 
   has_many :slots
 
