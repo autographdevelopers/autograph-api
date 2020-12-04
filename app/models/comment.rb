@@ -5,7 +5,7 @@ class Comment < ApplicationRecord
   belongs_to :author, class_name: 'User'
   belongs_to :commentable, polymorphic: true
 
-  COMMENTABLE_TYPES = [UserNote.name, OrganizationNote.name, LessonNote.name].freeze
+  COMMENTABLE_TYPES = [UserNote.name, OrganizationNote.name, LessonNote.name, InventoryItem.name].freeze
   validates :commentable_type, inclusion: { in: COMMENTABLE_TYPES }
   validates :body, presence: true
 end

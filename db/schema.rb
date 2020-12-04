@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_28_104007) do
+ActiveRecord::Schema.define(version: 2020_12_02_115343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -206,6 +206,20 @@ ActiveRecord::Schema.define(version: 2020_11_28_104007) do
     t.index ["employee_driving_school_id"], name: "index_employee_privileges_on_employee_driving_school_id"
   end
 
+  create_table "inventory_items", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.jsonb "properties_groups", default: []
+    t.bigint "driving_school_id", null: false
+    t.bigint "author_id", null: false
+    t.datetime "discarded_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_inventory_items_on_author_id"
+    t.index ["discarded_at"], name: "index_inventory_items_on_discarded_at"
+    t.index ["driving_school_id"], name: "index_inventory_items_on_driving_school_id"
+  end
+
   create_table "invitations", force: :cascade do |t|
     t.string "email", null: false
     t.string "name"
@@ -397,6 +411,8 @@ ActiveRecord::Schema.define(version: 2020_11_28_104007) do
   add_foreign_key "driving_lessons", "users", column: "employee_id"
   add_foreign_key "driving_lessons", "users", column: "student_id"
   add_foreign_key "employee_driving_schools", "users", column: "employee_id"
+  add_foreign_key "inventory_items", "driving_schools"
+  add_foreign_key "inventory_items", "users", column: "author_id"
   add_foreign_key "labelable_labels", "labels"
   add_foreign_key "notifiable_user_activities", "activities"
   add_foreign_key "notifiable_user_activities", "users"

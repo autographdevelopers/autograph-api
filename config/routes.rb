@@ -68,6 +68,12 @@ Rails.application.routes.draw do
           put :discard, on: :member
         end
 
+        resources :inventory_items, only: %i[create index update] do
+          put :attach_file, on: :member
+          put :delete_file, on: :member
+          put :discard, on: :member
+        end
+
         resources :users, only: [] do
           resources :user_notes, only: %i[create index update] do
             get :authored, on: :collection
