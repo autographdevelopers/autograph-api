@@ -1,6 +1,10 @@
 class Api::V1::InventoryItemsController < ApplicationController
   before_action :set_driving_school
   before_action :set_inventory_item, only: %i[update attach_file delete_file discard]
+  has_scope :with_any_tags, type: :array do |controller, scope, value|
+    scope.tagged_with(value, any: true)
+  end
+  has_scope :search_term
 
   def create
     authorize InventoryItem
@@ -20,9 +24,10 @@ class Api::V1::InventoryItemsController < ApplicationController
     authorize InventoryItem
     @inventory_items = @driving_school.inventory_items.includes(
       :author,
+      :tags,
       files_attachments: :blob
     ).kept.order(created_at: :desc)
-
+    @inventory_items = apply_scopes(@inventory_items)
     @inventory_items = @inventory_items.page(params[:page]).per(records_per_page)
   end
 
@@ -57,6 +62,7 @@ class Api::V1::InventoryItemsController < ApplicationController
     params.require(:inventory_item).permit(
       :name,
       :description,
+      tag_list: [],
       properties_groups: [
         :title,
         :order,
