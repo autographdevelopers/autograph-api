@@ -54,6 +54,32 @@ class Activity < ApplicationRecord
     )
   end
 
+  # Wydarzenie "Wynajem auta" zostało stworzone przez użtkownika Wojtek Pośpieszyński dnia 23.04.1202
+  # Wydarzenie "Zwrot auta" zostało stworzone przez użtkownika Wojtek Pośpieszyński dnia 24.04.1202. Zobacz notkę autora.
+  #
+  # auto -> InventoryItem -> CustomActivityType -> optional_target
+  #
+  # CustomActivityType: driving_school, name, optional_target_class, message_template, activity_receivers
+  # ex: 12, "InventoryItem", "Car rental", "%{user_name} zglosił wynajęcia auta %{car_name}"
+  # name should be "bezokolicznik"
+  # target => "message_template".replace(target.activity_props) --> message
+  #
+  # activity_props - { car_name: name }
+  # car_name etc. should all have a column name translations to be properly displayed on a CustomActivityType form
+  #
+  # -- Report car rental request -- > [custom_activity_type_id, target_id, comment]
+  #
+  #
+  # activity_receivers? Prepare some static options i.e "Owners", "Instructors", "Office Employees", "All Employees"
+  #
+  # Endpoint for testing the template string against some example data to make sure message builder is to be working fine in future. We can *build*
+  # a record in InventoryItem and provide it to some buildingfunction to imitate the way its gonna be used when reporrting functionality is up
+  # Show this example ona form before submission
+  #
+  # On Quick Actions screen
+  # 1. Fetch CustomActivityType records
+  # 2. Based on that records render buttons "Report #{CustomActivityType -> name}" (id)
+
   def translation_params
     case activity_type
       when 'student_invitation_sent', 'student_invitation_withdrawn'

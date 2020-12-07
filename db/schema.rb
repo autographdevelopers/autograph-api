@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_04_103120) do
+ActiveRecord::Schema.define(version: 2020_12_07_084054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,6 +133,21 @@ ActiveRecord::Schema.define(version: 2020_12_04_103120) do
     t.index ["discarded_at"], name: "index_courses_on_discarded_at"
     t.index ["driving_school_id"], name: "index_courses_on_driving_school_id"
     t.index ["name", "driving_school_id", "status", "discarded_at"], name: "courses_name_school_id_status_discarded_at_uniq", unique: true
+  end
+
+  create_table "custom_activity_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "message_template", null: false
+    t.string "target_type"
+    t.integer "notification_receivers", default: 0, null: false
+    t.bigint "driving_school_id", null: false
+    t.integer "datetime_input_config", default: 0
+    t.string "datetime_input_instructions"
+    t.integer "text_note_input_config", default: 0
+    t.string "text_note_input_instructions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["driving_school_id"], name: "index_custom_activity_types_on_driving_school_id"
   end
 
   create_table "driving_lessons", force: :cascade do |t|
