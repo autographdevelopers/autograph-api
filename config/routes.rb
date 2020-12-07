@@ -22,6 +22,8 @@ Rails.application.routes.draw do
       resources :driving_schools, only: [:index, :create, :update, :show, :destroy] do
         get '/:resources_name/tags' => 'tags#model_tags'
 
+        resources :custom_activity_types, only: %i[index create update discard]
+
         Comment::COMMENTABLE_TYPES.each do |c|
           resources c.underscore.pluralize.to_sym, only: [] do
             resources :comments, only: %i[create index update] do
