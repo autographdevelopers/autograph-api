@@ -1,7 +1,7 @@
 class Activity < ApplicationRecord
   # == Relations ==============================================================
   belongs_to :driving_school
-  belongs_to :target, polymorphic: true
+  belongs_to :target, polymorphic: true, optional: true
   belongs_to :custom_activity_type, optional: true
   belongs_to :user
   has_many :notifiable_user_activities
@@ -47,15 +47,38 @@ class Activity < ApplicationRecord
   after_commit :notify_about_activity, on: :create
 
   def determine_message_from_custom_type!
-    locale_keys_to_code_keys = I18n.t("activities.custom_messages.current_user")
-    if CustomActivityType::TARGET_TYPES.include?(custom_activity_type.target_type)
-      targets_locale_key_to_code_key = I18n.t("activities.custom_messages.#{custom_activity_type.target_type.underscore}")
-      locale_keys_to_code_keys = locale_keys_to_code_keys.merge(targets_locale_key_to_code_key)
-    end
-    locale_keys_to_code_keys.transform_values! { |v| "%{#{v}}" }.symbolize_keys!
-    message_with_accessor_keys_translated_to_code_domain = custom_activity_type.message_template % locale_keys_to_code_keys
+    p "======================="
+    p "======================="
+    p "======================="
+    p "======================="
 
-    code_keys_to_corresponding_values = target.message_merge_params.merge({ user_full_name: user.full_name }).symbolize_keys!.transform_values! { |v| "<b>#{v}</b>".html_safe }
+    locale_keys_to_code_keys = I18n.t('activities.custom_messages.current_user')
+    p "locale_keys_to_code_keys"
+    p locale_keys_to_code_keys
+    code_keys_to_corresponding_values = { user_full_name: user.full_name }
+
+
+    if target
+      targets_locale_key_to_code_key = I18n.t("activities.custom_messages.#{target.class.name.underscore}")
+      locale_keys_to_code_keys = locale_keys_to_code_keys.merge(targets_locale_key_to_code_key)
+      p "locale_keys_to_code_keys"
+      p locale_keys_to_code_keys
+      code_keys_to_corresponding_values = target.message_merge_params.merge(code_keys_to_corresponding_values)
+    end
+
+    p locale_keys_to_code_keys
+    p "locale_keys_to_code_keys"
+    locale_keys_to_code_keys = locale_keys_to_code_keys.transform_values { |v| "%{#{v}}" }.symbolize_keys!
+    p "locale_keys_to_code_keys"
+    p locale_keys_to_code_keys
+
+    message_with_accessor_keys_translated_to_code_domain = custom_activity_type.message_template % locale_keys_to_code_keys
+    p "message_with_accessor_keys_translated_to_code_domain"
+    p message_with_accessor_keys_translated_to_code_domain
+
+    code_keys_to_corresponding_values = code_keys_to_corresponding_values.symbolize_keys.transform_values { |v| "<b>#{v}</b>".html_safe }
+    p "code_keys_to_corresponding_values"
+    p code_keys_to_corresponding_values
 
     self.message = message_with_accessor_keys_translated_to_code_domain % code_keys_to_corresponding_values
   end

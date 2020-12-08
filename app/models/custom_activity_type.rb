@@ -27,7 +27,7 @@ class CustomActivityType < ApplicationRecord
   def init_test_activity(user: test_user)
     self.test_activity = Activity.new(
       custom_activity_type: self,
-      target: test_target,
+      target: target_type ? test_target : nil,
       driving_school: driving_school,
       user: user
     )
@@ -44,6 +44,8 @@ class CustomActivityType < ApplicationRecord
   end
 
   def message_template_contains_valid_interpolations
+    return unless message_template
+
     self.test_activity ||= init_test_activity
     self.test_activity.determine_message_from_custom_type!
   rescue KeyError => e
