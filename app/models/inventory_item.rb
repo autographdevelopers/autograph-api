@@ -11,11 +11,21 @@ class InventoryItem < ApplicationRecord
 
   validates :name, presence: true
 
+  ACTIVITY_PUBLIC_ATTRS = [:name]
+
   scope :search_term, ->(q) do
     where(%(
         inventory_items.name ILIKE :term OR
         inventory_items.description ILIKE :term
       ), term: "%#{q}%"
     )
+  end
+
+  def message_merge_params
+    attributes.symbolize_keys.slice(*ACTIVITY_PUBLIC_ATTRS)
+  end
+
+  def self.build_test_target
+    new(name: 'Test Item')
   end
 end

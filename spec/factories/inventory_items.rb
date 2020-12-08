@@ -5,7 +5,7 @@ FactoryBot.define do
     properties_groups do
       [
         {
-          section: 'Personal data',
+          title: 'Personal data',
           order: 1,
           data: [
             { propertyName: 'Name', propertyValue: 'john', order: 1 },
@@ -13,7 +13,7 @@ FactoryBot.define do
           ]
         },
         {
-          section: 'Location',
+          title: 'Location',
           order: 2,
           data: [
             { propertyName: 'City', propertyValue: 'New York', order: 1 },
@@ -23,5 +23,6 @@ FactoryBot.define do
       ]
     end
     driving_school
+    association :author, factory: :employee
   end
 end

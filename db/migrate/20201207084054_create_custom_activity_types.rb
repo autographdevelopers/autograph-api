@@ -12,6 +12,9 @@ class CreateCustomActivityTypes < ActiveRecord::Migration[5.2]
 
       t.integer :text_note_input_config, default: 0
       t.string :text_note_input_instructions
+
+      t.datetime :discarded_at, index: true
+
       t.timestamps
     end
   end

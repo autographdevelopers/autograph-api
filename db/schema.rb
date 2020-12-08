@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_07_084054) do
+ActiveRecord::Schema.define(version: 2020_12_07_162441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,10 @@ ActiveRecord::Schema.define(version: 2020_12_07_084054) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "message"
+    t.bigint "custom_activity_type_id"
+    t.text "note"
+    t.datetime "date"
+    t.index ["custom_activity_type_id"], name: "index_activities_on_custom_activity_type_id"
     t.index ["driving_school_id"], name: "index_activities_on_driving_school_id"
     t.index ["target_type", "target_id"], name: "index_activities_on_target_type_and_target_id"
     t.index ["user_id"], name: "index_activities_on_user_id"
@@ -145,8 +149,10 @@ ActiveRecord::Schema.define(version: 2020_12_07_084054) do
     t.string "datetime_input_instructions"
     t.integer "text_note_input_config", default: 0
     t.string "text_note_input_instructions"
+    t.datetime "discarded_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["discarded_at"], name: "index_custom_activity_types_on_discarded_at"
     t.index ["driving_school_id"], name: "index_custom_activity_types_on_driving_school_id"
   end
 
@@ -440,6 +446,7 @@ ActiveRecord::Schema.define(version: 2020_12_07_084054) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "activities", "custom_activity_types"
   add_foreign_key "activities", "driving_schools"
   add_foreign_key "activities", "users"
   add_foreign_key "comments", "driving_schools"

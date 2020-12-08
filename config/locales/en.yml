@@ -33,3 +33,8 @@ en:
         "<b>%{user_full_name}</b> canceled driving lesson which was to take place on <b>%{duration}</b> between <b>%{student_full_name}</b> <b>%{employee_full_name}</b>."
       driving_lesson_scheduled:
         "<b>%{user_full_name}</b> scheduled driving lesson for <b>%{student_full_name}</b> and <b>%{employee_full_name}</b> on <b>%{duration}</b>."
+    custom_messages:
+      current_user:
+        user-full-name: 'user_full_name'
+      inventory_item:
+        item-name: 'name'

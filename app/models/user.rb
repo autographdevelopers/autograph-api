@@ -47,6 +47,10 @@ class User < ActiveRecord::Base
     "#{name.capitalize} #{surname.capitalize}"
   end
 
+  def self.build_test_user
+    new(name: 'John', surname: 'Doe', email: 'test-user@test.com')
+  end
+
   private
 
   #TODO find minimal required age

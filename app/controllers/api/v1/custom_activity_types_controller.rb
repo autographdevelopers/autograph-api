@@ -15,7 +15,14 @@ class Api::V1::CustomActivityTypesController < ApplicationController
   end
 
   def index
-    @custom_activity_types = @driving_school.custom_activity_types
+    @custom_activity_types = @driving_school.custom_activity_types.kept
+  end
+
+  def assert_test_activity
+    @custom_activity_type = @driving_school.custom_activity_types.new(custom_activity_params)
+    @custom_activity_type.init_test_activity(user: current_user)
+    @custom_activity_type.validate!
+    render partial: 'api/v1/activities/activity', locals: { activity: @custom_activity_type.test_activity }
   end
 
   private

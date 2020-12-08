@@ -22,7 +22,9 @@ Rails.application.routes.draw do
       resources :driving_schools, only: [:index, :create, :update, :show, :destroy] do
         get '/:resources_name/tags' => 'tags#model_tags'
 
-        resources :custom_activity_types, only: %i[index create update discard]
+        resources :custom_activity_types, only: %i[index create update discard] do
+          get :assert_test_activity, on: :collection
+        end
 
         Comment::COMMENTABLE_TYPES.each do |c|
           resources c.underscore.pluralize.to_sym, only: [] do
@@ -50,7 +52,7 @@ Rails.application.routes.draw do
         end
         resources :labelable_labels, only: [:index]
 
-        resources :activities, only: [:index] do
+        resources :activities, only: [:index, :create] do
           get :my_activities, on: :collection
         end
         member do
