@@ -60,11 +60,50 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/custom_activity_types'
     }
   end
 
+  let(:current_user) { employee }
+
   let(:create_request) do
     -> () do
       post api_v1_driving_school_custom_activity_types_path(driving_school),
           params: params,
-          headers: employee.create_new_auth_token
+          headers: current_user.create_new_auth_token
+    end
+  end
+
+  context 'Authorization' do
+    before { create_request.call }
+
+    context 'when is an Employee' do
+      let(:current_user) { employee }
+
+      it 'returns success status' do
+        expect(response).to have_http_status :ok
+      end
+    end
+
+    context 'when is an Employee but from other org' do
+      let(:current_user) { create(:employee) }
+
+      it 'returns success status' do
+        expect(response).to have_http_status :not_found
+      end
+    end
+
+    context 'when is a Student' do
+      let!(:student) { create(:student) }
+
+      let!(:student_driving_school) do
+        create(:student_driving_school,
+               student: student,
+               driving_school: driving_school,
+               status: :active)
+      end
+
+      let(:current_user) { student }
+
+      it 'returns success status' do
+        expect(response).to have_http_status :unauthorized
+      end
     end
   end
 

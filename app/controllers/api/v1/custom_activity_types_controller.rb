@@ -1,4 +1,5 @@
 class Api::V1::CustomActivityTypesController < ApplicationController
+  before_action :perform_user_based_authorization
   before_action :set_driving_school
   before_action :set_custom_activity, only: %i[discard update]
 
@@ -47,5 +48,9 @@ class Api::V1::CustomActivityTypesController < ApplicationController
 
   def set_custom_activity
     @custom_activity_type = @driving_school.custom_activity_types.find(params[:id])
+  end
+
+  def perform_user_based_authorization
+    authorize CustomActivityType
   end
 end

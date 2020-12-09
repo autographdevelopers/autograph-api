@@ -1,1 +1,1 @@
-json.partial! 'api/v1/custom_activities/custom_activity', custom_activity_type: @custom_activity_type
+json.partial! 'api/v1/custom_activity_types/custom_activity_type', custom_activity_type: @custom_activity_type
