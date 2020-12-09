@@ -8,11 +8,14 @@ class Api::V1::CustomActivityTypesController < ApplicationController
   end
 
   def update
+    authorize @custom_activity_type
     @custom_activity_type.update!(custom_activity_params)
   end
 
   def discard
+    authorize @custom_activity_type
     @custom_activity_type.discard!
+    head :ok
   end
 
   def index

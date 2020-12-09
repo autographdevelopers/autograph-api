@@ -11,6 +11,10 @@ class CustomActivityTypePolicy < ApplicationPolicy
     user.employee?
   end
 
+  def discard?
+    user.employee?
+  end
+
   def assert_test_activity?
     user.employee?
   end
