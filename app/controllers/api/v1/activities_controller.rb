@@ -27,7 +27,26 @@ class Api::V1::ActivitiesController < ApplicationController
                                  .page(params[:page] || 1).per(params[:per] || 25)
   end
 
+  def create
+    @activity = @driving_school.activities.create!(
+      activity_params.merge({
+        user: current_user
+      })
+    )
+    head :ok
+  end
+
   private
+
+  def activity_params
+    params.require(:activity).permit(
+      :custom_activity_type_id,
+      :target_type,
+      :target_id,
+      :note,
+      :date
+    )
+  end
 
   def set_driving_school
     @driving_school = current_user.user_driving_schools

@@ -34,6 +34,7 @@ class Activity < ApplicationRecord
   validates :message, presence: true
   validates :note, presence: true, if: -> { custom_activity_type&.text_note_input_required? }
   validates :date, presence: true, if: -> { custom_activity_type&.datetime_input_required? }
+  validates :target_id, presence: true, if: -> { custom_activity_type.nil? || custom_activity_type.target_type }
 
   validate :activity_type_xor_custom_activity_type
 
@@ -44,6 +45,7 @@ class Activity < ApplicationRecord
 
   # == Callbacks ==============================================================
   before_validation :determine_message, on: :create
+
   after_commit :notify_about_activity, on: :create
 
   def determine_message_from_custom_type!
@@ -56,7 +58,6 @@ class Activity < ApplicationRecord
     p "locale_keys_to_code_keys"
     p locale_keys_to_code_keys
     code_keys_to_corresponding_values = { user_full_name: user.full_name }
-
 
     if target
       targets_locale_key_to_code_key = I18n.t("activities.custom_messages.#{target.class.name.underscore}")
