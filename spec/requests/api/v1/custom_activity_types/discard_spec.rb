@@ -22,7 +22,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/custom_activity_types/:
   let!(:custom_activity_type) do
     create(:custom_activity_type,
        driving_school: driving_school,
-       name: name,
+       title: name,
        message_template: message_template,
        target_type: target_type,
        notification_receivers: notification_receivers,

@@ -26,7 +26,7 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/custom_activity_types'
 
   let(:response_keys) do
     %w[
-      name
+      title
       message_template
       target_type
       notification_receivers
@@ -37,7 +37,7 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/custom_activity_types'
 
   let(:attrs_slice) do
     {
-      'name' => name,
+      'title' => name,
       'message_template' => message_template,
       'target_type' => target_type,
       'notification_receivers' => notification_receivers,
@@ -50,7 +50,7 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/custom_activity_types'
   let(:params) do
     {
       custom_activity_type: {
-        name: name,
+        title: name,
         message_template: message_template,
         target_type: target_type,
         notification_receivers: notification_receivers,
@@ -226,7 +226,7 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/custom_activity_types'
         end
 
         it 'returns proper JSON response' do
-          expect(json_response).to eq('name' => ["can't be blank"])
+          expect(json_response).to eq('title' => ["can't be blank"])
         end
       end
     end

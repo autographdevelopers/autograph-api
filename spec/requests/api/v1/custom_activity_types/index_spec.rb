@@ -13,7 +13,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/custom_activity_types' 
   let!(:custom_activity_types) do
     create_list(:custom_activity_type, 5,
            driving_school: driving_school,
-           name: 'Test Report',
+           title: 'Test Report',
            message_template: 'Test Report has been reported by ${user-full-name}',
            target_type: nil,
            notification_receivers: 'all_employees',
@@ -25,7 +25,7 @@ describe 'GET /api/v1/driving_schools/:driving_school_id/custom_activity_types' 
   let!(:discarded_custom_activity_types) do
     create_list(:custom_activity_type, 5,
                 driving_school: driving_school,
-                name: 'Test Report',
+                title: 'Test Report',
                 message_template: 'Test Report has been reported by ${user-full-name}',
                 target_type: nil,
                 notification_receivers: 'all_employees',

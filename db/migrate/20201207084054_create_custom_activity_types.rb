@@ -1,7 +1,9 @@
 class CreateCustomActivityTypes < ActiveRecord::Migration[5.2]
   def change
     create_table :custom_activity_types do |t|
-      t.string :name, null: false
+      t.string :title, null: false
+      t.string :subtitle
+      t.string :btn_bg_color
       t.string :message_template, null: false
       t.string :target_type
       t.integer :notification_receivers, null: false, default: 0

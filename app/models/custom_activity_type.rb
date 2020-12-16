@@ -7,7 +7,7 @@ class CustomActivityType < ApplicationRecord
 
   attr_accessor :test_activity
 
-  validates :name,
+  validates :title,
             :message_template,
             :notification_receivers,
             :datetime_input_config,

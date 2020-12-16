@@ -35,13 +35,6 @@ module HasPropertiesGroupsField
 
       def properties_groups_json_schema
         self.class.groups_properties_columns.each do |jsonb_column_name|
-          p "self[jsonb_column_name]"
-          p "self[jsonb_column_name]"
-          p "self[jsonb_column_name]"
-          p "self[jsonb_column_name]"
-          p self[jsonb_column_name]
-          p "JSON::Validator.validate(PROPERTIES_GROUPS_JSON_SCHEMA, self[jsonb_column_name])"
-          p JSON::Validator.validate(PROPERTIES_GROUPS_JSON_SCHEMA, self[jsonb_column_name])
           next if JSON::Validator.validate(PROPERTIES_GROUPS_JSON_SCHEMA, self[jsonb_column_name], strict: true)
           errors.add(jsonb_column_name, 'Invalid properties group schema')
         end

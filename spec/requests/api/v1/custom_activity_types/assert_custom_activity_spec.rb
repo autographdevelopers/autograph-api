@@ -25,7 +25,7 @@ describe 'GET api/v1/driving_schools/:driving_school_id/custom_activity_types/as
   let(:params) do
     {
       custom_activity_type: {
-        name: name,
+        title: name,
         message_template: message_template,
         target_type: target_type,
         notification_receivers: notification_receivers,

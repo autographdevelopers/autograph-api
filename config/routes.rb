@@ -23,7 +23,7 @@ Rails.application.routes.draw do
         get '/:resources_name/tags' => 'tags#model_tags'
 
         resources :custom_activity_types, only: %i[index create update] do
-          get :assert_test_activity, on: :collection
+          put :assert_test_activity, on: :collection
           put :discard, on: :member
         end
 

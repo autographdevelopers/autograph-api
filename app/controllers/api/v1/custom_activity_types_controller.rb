@@ -33,12 +33,16 @@ class Api::V1::CustomActivityTypesController < ApplicationController
 
   def custom_activity_params
     params.require(:custom_activity_type).permit(
-      :name,
+      :title,
+      :subtitle,
+      :btn_bg_color,
       :message_template,
       :target_type,
       :notification_receivers,
       :datetime_input_config,
-      :text_note_input_config
+      :text_note_input_config,
+      :datetime_input_instructions,
+      :text_note_input_instructions,
     )
   end
 

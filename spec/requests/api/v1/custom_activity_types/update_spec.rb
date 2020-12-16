@@ -27,7 +27,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/custom_activity_types/:
   let!(:custom_activity_type) do
     create(:custom_activity_type,
       driving_school: driving_school,
-      name: name,
+      title: name,
       message_template: message_template,
       target_type: target_type,
       notification_receivers: notification_receivers,
@@ -38,7 +38,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/custom_activity_types/:
 
   let(:create_attrs_slice) do
     {
-      'name' => name,
+      'title' => name,
       'message_template' => message_template,
       'target_type' => target_type,
       'notification_receivers' => notification_receivers,
@@ -49,7 +49,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/custom_activity_types/:
 
   let(:response_keys) do
     %w[
-      name
+      title
       message_template
       target_type
       notification_receivers
@@ -60,7 +60,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/custom_activity_types/:
 
   let(:updated_attrs_slice) do
     {
-      'name' => update_params[:custom_activity_type][:name],
+      'title' => update_params[:custom_activity_type][:title],
       'message_template' => update_params[:custom_activity_type][:message_template],
       'target_type' => update_params[:custom_activity_type][:target_type],
       'notification_receivers' => update_params[:custom_activity_type][:notification_receivers],
@@ -75,7 +75,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/custom_activity_types/:
   let(:update_params) do
     {
       custom_activity_type: {
-        name: name_update_val,
+        title: name_update_val,
         message_template: message_template_update_val,
         target_type: nil,
         datetime_input_config: 'required',
@@ -196,7 +196,7 @@ describe 'PUT /api/v1/driving_schools/:driving_school_id/custom_activity_types/:
         end
 
         it 'returns proper JSON response' do
-          expect(json_response).to eq('name' => ["can't be blank"])
+          expect(json_response).to eq('title' => ["can't be blank"])
         end
       end
     end

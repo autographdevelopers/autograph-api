@@ -140,7 +140,9 @@ ActiveRecord::Schema.define(version: 2020_12_07_162441) do
   end
 
   create_table "custom_activity_types", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "title", null: false
+    t.string "subtitle"
+    t.string "btn_bg_color"
     t.string "message_template", null: false
     t.string "target_type"
     t.integer "notification_receivers", default: 0, null: false
