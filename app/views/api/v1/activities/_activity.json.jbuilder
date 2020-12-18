@@ -6,4 +6,8 @@ json.extract! activity,
               :user_id,
               :activity_type,
               :message,
+              :note,
+              :date,
               :created_at
+
+json.user { json.partial! 'api/v1/users/user', user: activity.user }
