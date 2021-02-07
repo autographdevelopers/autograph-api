@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 
   # == Extensions =============================================================
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :invitable
          # :confirmable
   include DeviseTokenAuth::Concerns::User
 
@@ -31,7 +31,15 @@ class User < ActiveRecord::Base
   enum gender: { male: 0, female: 1 }
 
   # == Validations ============================================================
-  validates :name, :surname, :gender, :birth_date, :type, :time_zone, presence: true
+  validates :name,
+            :surname,
+            # :gender,
+            # :birth_date,
+            :type,
+            # :time_zone,
+            presence: true
+  # some valdiations are commented out as they made invitation flow impossible
+
   validate :birth_date_not_to_be_in_past
 
   # == Instance Methods =======================================================
@@ -44,7 +52,7 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    "#{name.capitalize} #{surname.capitalize}"
+    [name, surname].reject(&:blank?).join(' ').presence
   end
 
   def self.build_test_user

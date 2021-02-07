@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_07_162441) do
+ActiveRecord::Schema.define(version: 2021_02_05_131424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -426,14 +426,14 @@ ActiveRecord::Schema.define(version: 2020_12_07_162441) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.string "name", null: false
-    t.string "surname", null: false
+    t.string "name"
+    t.string "surname"
     t.string "email", null: false
-    t.integer "gender", null: false
+    t.integer "gender"
     t.integer "status", default: 0
-    t.date "birth_date", null: false
+    t.date "birth_date"
     t.string "type", null: false
-    t.string "time_zone", null: false
+    t.string "time_zone"
     t.string "avatar"
     t.string "phone_number"
     t.json "tokens"
@@ -441,8 +441,16 @@ ActiveRecord::Schema.define(version: 2020_12_07_162441) do
     t.datetime "updated_at", null: false
     t.boolean "allow_password_change"
     t.string "player_id"
+    t.string "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer "invitation_limit"
+    t.integer "invited_by_id"
+    t.string "invited_by_type"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end

@@ -1,20 +1,20 @@
 class Invitations::DestroyService
-  def initialize(driving_school:, invited_user_type:, invitation_id:)
+  def initialize(driving_school:, invited_user_type:, user_id:)
     @driving_school = driving_school
     @invited_user_type = invited_user_type
-    @invitation_id = invitation_id
+    @user_id = user_id
 
     validate_invited_user_type
   end
 
   def call
-    user_driving_school.archive!
+    user_driving_school.archived!
     user_driving_school
   end
 
   private
 
-  attr_reader :driving_school, :invited_user_type, :invitation_id
+  attr_reader :driving_school, :invited_user_type, :user_id
 
   def validate_invited_user_type
     raise ActiveRecord::SubclassNotFound unless User::TYPES.include?(invited_user_type)
@@ -22,19 +22,9 @@ class Invitations::DestroyService
 
   def user_driving_school
     if invited_user_type == User::EMPLOYEE
-      @driving_school.employee_driving_schools
-                     .left_outer_joins(:invitation)
-                     .find_by!(
-                       '"employee_driving_schools"."employee_id" = :invitation_id OR "invitations"."id" = :invitation_id',
-                       invitation_id: invitation_id.to_i
-                     )
+      @driving_school.employee_driving_schools.find_by!(employee_id: user_id)
     elsif invited_user_type == User::STUDENT
-      @driving_school.student_driving_schools
-                     .left_outer_joins(:invitation)
-                     .find_by!(
-                       '"student_driving_schools"."student_id" = :invitation_id OR "invitations"."id" = :invitation_id',
-                       invitation_id: invitation_id.to_i
-                     )
+      @driving_school.student_driving_schools.find_by!(student_id: user_id)
     end
   end
 end

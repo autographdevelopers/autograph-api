@@ -6,16 +6,4 @@ class Student < User
 
   # == Aliases ================================================================
   alias_attribute :user_driving_schools, :student_driving_schools
-
-  # == Callbacks ==============================================================
-  after_create :find_pending_invitation_and_relate_user_to_driving_school
-
-  # == Instance Methods =======================================================
-  private
-
-  def find_pending_invitation_and_relate_user_to_driving_school
-    invitations = Invitation.where('lower(email) = ?', self.email)
-    invitations.find_each { |invitation| invitation.invitable.update!(student: self) }
-    invitations.destroy_all
-  end
 end

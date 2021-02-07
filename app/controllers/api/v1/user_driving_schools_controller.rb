@@ -16,7 +16,7 @@ class Api::V1::UserDrivingSchoolsController < ApplicationController
   def find_user_school_relation!(user_schools)
     user_schools.joins(:student, :invitations)
                 .find_by!(
-                  'users.email = :email OR invitations.email = :email',
+                  'users.email = :email',
                   email: params[:email]
                 )
   end

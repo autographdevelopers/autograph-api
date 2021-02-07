@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      mount_devise_token_auth_for 'User', at: 'auth', controllers: {
+      mount_devise_token_auth_for 'User', at: 'auth', skip: [:invitations], controllers: {
         registrations: 'api/v1/users',
         sessions: 'api/v1/sessions',
-        token_validations: 'api/v1/token_validations'
+        token_validations: 'api/v1/token_validations',
       }
+
+      devise_for :users, path: "auth", only: [:invitations],
+         controllers: { invitations: 'api/v1/devise_invitations' }
 
       devise_scope :api_v1_user do
         resources :users, only: [] do

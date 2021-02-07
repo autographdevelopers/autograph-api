@@ -43,7 +43,7 @@ class Api::V1::InvitationsController < ApplicationController
     authorize @driving_school, :can_manage_students? if params[:type] == User::STUDENT
 
     user_driving_school = Invitations::DestroyService.new(
-      invitation_id: params[:user_id],
+      user_id: params[:user_id],
       invited_user_type: params[:type],
       driving_school: @driving_school
     ).call

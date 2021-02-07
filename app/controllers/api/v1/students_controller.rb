@@ -13,8 +13,8 @@ class Api::V1::StudentsController < ApplicationController
     if employee_privileges.is_owner? || employee_privileges.can_manage_students?
       @student_driving_schools = @employee_driving_school.driving_school
                                                          .student_driving_schools
-                                                         .includes(:student, :invitation)
-                                                         .references(:student, :invitation)
+                                                         .includes(:student)
+                                                         .references(:student)
                                                          .order(:id)
                                                          .page(params[:page])
                                                          .per(params[:per] || 20)

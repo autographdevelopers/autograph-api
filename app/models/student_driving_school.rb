@@ -5,9 +5,8 @@ class StudentDrivingSchool < ApplicationRecord
   enum status: { pending: 0, active: 1, archived: 2, rejected: 3 }
 
   # == Relations ==============================================================
-  belongs_to :student, optional: true
+  belongs_to :student
   belongs_to :driving_school
-  has_one :invitation, as: :invitable
   has_many :course_participation_details
 
   # == Scopes =================================================================
@@ -35,9 +34,6 @@ class StudentDrivingSchool < ApplicationRecord
         users.name ILIKE :term
         OR users.surname ILIKE :term
         OR users.email ILIKE :term
-        OR invitations.email ILIKE :term
-        OR invitations.name ILIKE :term
-        OR invitations.surname ILIKE :term
       ), term: "%#{q}%"
     )
   end
@@ -49,7 +45,7 @@ class StudentDrivingSchool < ApplicationRecord
 
   # == Validations ============================================================
   validates :status, presence: true
-  # validates :student_id, uniqueness: true, scope: :driving_school_id
+  validates :student_id, uniqueness: { scope: :driving_school_id }
 
   # == State Machine ==========================================================
   aasm column: :status, enum: true do
@@ -70,10 +66,10 @@ class StudentDrivingSchool < ApplicationRecord
   end
 
   def student_full_name
-    student&.full_name || invitation.full_name
+    student.full_name
   end
 
   def student_email
-    student&.email || invitation.email
+    student.email
   end
 end

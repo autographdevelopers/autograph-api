@@ -24,7 +24,7 @@ class Api::V1::EmployeesController < ApplicationController
       authorize @driving_school, :can_manage_employees?
 
       @employee_driving_schools = @driving_school.employee_driving_schools
-                                                 .includes(:employee, :invitation, :employee_privileges)
+                                                 .includes(:employee, :employee_privileges)
                                                  .order('users.surname')
     end
 

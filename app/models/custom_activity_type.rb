@@ -29,7 +29,8 @@ class CustomActivityType < ApplicationRecord
       custom_activity_type: self,
       target: target_type ? test_target : nil,
       driving_school: driving_school,
-      user: user
+      user: user,
+      created_at: Time.current
     )
   end
 

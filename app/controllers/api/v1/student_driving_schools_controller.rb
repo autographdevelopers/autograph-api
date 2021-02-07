@@ -4,7 +4,7 @@ class Api::V1::StudentDrivingSchoolsController < ApplicationController
       .student_driving_schools
       .left_joins(:student, :invitation)
       .find_by!(
-        'users.email = :email OR invitations.email = :email',
+        'users.email = :email',
         email: params[:email]
       )
   end

@@ -5,11 +5,10 @@ class EmployeeDrivingSchool < ApplicationRecord
   enum status: { pending: 0, active: 1, archived: 2, rejected: 3 }
 
   # == Relations ==============================================================
-  belongs_to :employee, optional: true
+  belongs_to :employee
   belongs_to :driving_school
   has_one :employee_privileges
   has_one :employee_notifications_settings
-  has_one :invitation, as: :invitable
   has_one :schedule
 
   has_many :slots
@@ -18,6 +17,7 @@ class EmployeeDrivingSchool < ApplicationRecord
   scope :active_with_active_driving_school, -> {
     where(status: :active, driving_schools: { status: :active })
         .includes(:driving_school)
+    # TODO: fix duplicated records!
   }
 
   scope :pending_with_active_driving_school, -> {
@@ -35,9 +35,6 @@ class EmployeeDrivingSchool < ApplicationRecord
         users.name ILIKE :term
         OR users.surname ILIKE :term
         OR users.email ILIKE :term
-        OR invitations.email ILIKE :term
-        OR invitations.name ILIKE :term
-        OR invitations.surname ILIKE :term
       ), term: "%#{q}%"
     )
   end
@@ -53,7 +50,7 @@ class EmployeeDrivingSchool < ApplicationRecord
 
   # == Validations ============================================================
   validates :status, presence: true
-
+  validates :employee_id, uniqueness: { scope: :driving_school_id }
   # == Callbacks ==============================================================
   after_create :create_schedule
 
@@ -76,36 +73,10 @@ class EmployeeDrivingSchool < ApplicationRecord
   end
 
   def employee_full_name
-    employee&.full_name || invitation.full_name
+    employee.full_name
   end
 
   def employee_email
-    employee&.email || invitation.email
+    employee.email
   end
 end
-
-# # Find least popular avatar color
-# Color
-#   .joins('LEFT JOIN colorable_colors on colorable_colors.hex_val = colors.hex_val')
-#   .joins("LEFT JOIN employee_driving_schools ON colorable_colors.colorable_type = 'EmployeeDrivingSchool'")
-#   .where('employee_driving_schools.driving_school_id = ? OR employee_driving_schools.id IS NULL', 61)
-#   .group('colors.hex_val')
-#   .select("SUM(CASE WHEN colorable_colors.colorable_id IS NOT NULL THEN 1 ELSE 0 END) AS usages_count, colors.hex_val")
-#   .order('usages_count ASC')
-#   .limit(1)
-#
-# # Alternative:
-#
-# EmployeeDrivingSchool
-#   .where('driving_school_id = ? OR driving_school_id IS NULL', 61)
-#   .joins("LEFT JOIN colorable_colors ON colorable_colors.colorable_type = 'EmployeeDrivingSchool' AND colorable_colors.colorable_id = employee_driving_schools.id AND colorable_colors.application = 0")
-#   .joins('RIGHT JOIN colors ON colors.hex_val = colorable_colors.hex_val')
-#   .group('colors.hex_val')
-#   .select("SUM(CASE WHEN colorable_colors.colorable_id IS NOT NULL THEN 1 ELSE 0 END) AS usages_count, colors.hex_val")
-#   .order('usages_count ASC')
-#   .limit(1)
-#
-# # Variables in query:
-# # - class ( EmployeeDrivingSchool )
-# # - driving_school_id
-# # - colorable_colors.application ?

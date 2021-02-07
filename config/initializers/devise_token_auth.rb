@@ -18,6 +18,7 @@ DeviseTokenAuth.setup do |config|
   # auth token. This setting determines how far apart the requests can be while
   # still using the same auth token.
   config.batch_request_buffer_throttle = 5.seconds
+  # config.parent_controller = 'ActionController::Base'
 
   # This route will be the prefix for all oauth2 redirect callbacks. For
   # example, using the default '/omniauth', the github oauth2 provider will

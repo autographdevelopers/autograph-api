@@ -31,5 +31,8 @@ module AutographApi
     # Skip views, helpers and assets when generating a new user_driving_schools.
     config.api_only = true
     config.active_job.queue_adapter = :sidekiq
+
+    # for synchronous requests from email form i.e set password. Without this put methods are not properly understood and thus are treated as POSt
+    config.middleware.insert_after Rack::Runtime, Rack::MethodOverride
   end
 end

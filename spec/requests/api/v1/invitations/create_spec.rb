@@ -142,10 +142,6 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
               expect { subject.call }.to change { EmployeeNotificationsSettings.count }.by 1
             end
 
-            it 'creates Invitation' do
-              expect { subject.call }.to change { Invitation.count }.by 1
-            end
-
             it 'creates Activity record' do
               expect { subject.call }.to change { Activity.count }.by 1
             end
@@ -173,17 +169,6 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
                 'weekly_emails_reports_enabled' => false,
                 'monthly_emails_reports_enabled' => false,
                 'employee_driving_school_id' => EmployeeDrivingSchool.last.id
-              )
-            end
-
-            it 'creates proper Invitation record' do
-              subject.call
-              expect(Invitation.last.attributes).to include(
-                'email' => params[:user][:email],
-                'name' => params[:user][:name],
-                'surname' => params[:user][:surname],
-                'invitable_type' => 'EmployeeDrivingSchool',
-                'invitable_id' => EmployeeDrivingSchool.last.id
               )
             end
 
@@ -258,10 +243,6 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
               expect { subject.call }.to change { Activity.count }.by 1
             end
 
-            it 'creates Invitation' do
-              expect { subject.call }.to change { Invitation.count }.by 1
-            end
-
             it 'creates StudentDrivingSchool record' do
               expect { subject.call }.to change { StudentDrivingSchool.count }.by 1
             end
@@ -271,17 +252,6 @@ describe 'POST /api/v1/driving_schools/:driving_school_id/invitations' do
               expect(StudentDrivingSchool.last.attributes).to include(
                 'student_id' => nil,
                 'driving_school_id' => driving_school.id
-              )
-            end
-
-            it 'creates proper Invitation record' do
-              subject.call
-              expect(Invitation.last.attributes).to include(
-                'email' => params[:user][:email],
-                'name' => params[:user][:name],
-                'surname' => params[:user][:surname],
-                'invitable_type' => 'StudentDrivingSchool',
-                'invitable_id' => StudentDrivingSchool.last.id
               )
             end
 

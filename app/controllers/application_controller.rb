@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
   helper_method :current_user
   before_action :configure_permitted_parameters, if: :devise_controller?
   # skip_before_action :authenticate_api_v1_user!, if: :devise_controller?
-
+  helper_method :protect_against_forgery?
   after_action { puts response.body }
 
   DEFAULT_RECORDS_PER_PAGE = 20
@@ -37,5 +37,10 @@ class ApplicationController < ActionController::API
 
   def verify_current_user_to_be_student
     authorize current_user, :student?
+  end
+
+  def protect_against_forgery?
+    # without this set password form from invitation email does not work
+    false
   end
 end
