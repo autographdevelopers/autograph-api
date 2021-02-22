@@ -16,9 +16,10 @@ gem 'redis'
 gem 'discard', '~> 1.2'
 gem 'json-schema'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
+  gem 'dotenv-rails', require: 'dotenv/rails-now'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
