@@ -1,0 +1,18 @@
+<h2><%= t 'devise.invitations.edit.header' %></h2>
+
+<%= form_for [:api, :v1, resource], :as => resource_name, namespace: nil, :url => api_v1_user_invitation_path(resource_name), :html => { :method => :put } do |f| %>
+
+  <%= devise_error_messages! %>
+  <%= hidden_field_tag :invitation_token, resource.invitation_token  %>
+  <%= hidden_field_tag :_method, :put %>
+
+  <% if f.object.class.require_password_on_accepting %>
+  <p><%= label_tag :password %><br />
+  <%= password_field_tag :password %></p>
+
+  <p><%= label_tag :password_confirmation %><br />
+  <%= password_field_tag :password_confirmation %></p>
+  <% end %>
+
+  <p><%= f.submit t("devise.invitations.edit.submit_button") %></p>
+<% end %>
