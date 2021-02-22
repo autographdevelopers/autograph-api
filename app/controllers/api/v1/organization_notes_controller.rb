@@ -1,6 +1,6 @@
 class Api::V1::OrganizationNotesController < ApplicationController
   before_action :set_driving_school
-  before_action :set_note, only: %i[update attach_file delete_file discard]
+  before_action :set_note, only: %i[update attach_file delete_file discard publish]
 
   def create
     authorize OrganizationNote
@@ -20,19 +20,24 @@ class Api::V1::OrganizationNotesController < ApplicationController
     @notes = @driving_school.organization_notes.includes(
       :author,
       files_attachments: :blob
-    ).kept.order(created_at: :desc)
+    ).kept.published.order(created_at: :desc)
     @notes = @notes.page(params[:page]).per(records_per_page)
   end
 
   def authored
     @notes = @driving_school.organization_notes.where(
       author: current_user
-    ).kept.includes(
+    ).kept.published.includes(
       :author,
       files_attachments: :blob
     ).order(created_at: :desc)
 
     @notes = @notes.page(params[:page]).per(records_per_page)
+  end
+
+  def publish
+    authorize @note
+    @note.published!
   end
 
   def attach_file

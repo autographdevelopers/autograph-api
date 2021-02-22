@@ -1,5 +1,5 @@
 class Api::V1::ActivitiesController < ApplicationController
-  before_action :verify_current_user_to_be_employee, only: :index
+  # before_action :verify_current_user_to_be_employee, only: :index
   before_action :set_driving_school
   after_action :set_as_read, only: :my_activities
 

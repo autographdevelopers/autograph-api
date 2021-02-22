@@ -74,9 +74,12 @@ Rails.application.routes.draw do
 
         resources :organization_notes, only: %i[create index update] do
           get :authored, on: :collection
-          put :attach_file, on: :member
-          put :delete_file, on: :member
-          put :discard, on: :member
+          member do
+            put :attach_file
+            put :delete_file
+            put :discard
+            put :publish
+          end
         end
 
         resources :inventory_items, only: %i[create index update] do
@@ -88,9 +91,12 @@ Rails.application.routes.draw do
         resources :users, only: [] do
           resources :user_notes, only: %i[create index update] do
             get :authored, on: :collection
-            put :attach_file, on: :member
-            put :delete_file, on: :member
-            put :discard, on: :member
+            member do
+              put :attach_file
+              put :delete_file
+              put :discard
+              put :publish
+            end
           end
         end
 
@@ -101,9 +107,12 @@ Rails.application.routes.draw do
         resources :driving_lessons, only: [:index, :create] do
           put :cancel, on: :member
           resources :lesson_notes, only: %i[create index update] do
-            put :attach_file, on: :member
-            put :delete_file, on: :member
-            put :discard, on: :member
+            member do
+              put :attach_file
+              put :delete_file
+              put :discard
+              put :publish
+            end
           end
         end
         resources :students, only: [:index] do

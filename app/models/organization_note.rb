@@ -11,4 +11,7 @@ class OrganizationNote < ApplicationRecord
 
   # == Validations =========================
   validates :title, presence: true
+
+  # == Enum =========================
+  enum status: { draft: 0, published: 1 }
 end

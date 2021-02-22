@@ -1,6 +1,7 @@
 class UserNotePolicy < ApplicationPolicy
   def create?
-    user.employee?
+    # user.employee?
+    true
   end
 
   def update?
@@ -8,6 +9,10 @@ class UserNotePolicy < ApplicationPolicy
   end
 
   def discard?
+    user == record.author
+  end
+
+  def publish?
     user == record.author
   end
 

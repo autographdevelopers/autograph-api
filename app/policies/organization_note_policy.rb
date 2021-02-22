@@ -3,6 +3,10 @@ class OrganizationNotePolicy < ApplicationPolicy
     user.employee?
   end
 
+  def publish?
+    user.employee? && user == record.author
+  end
+
   def update?
     user == record.author
   end

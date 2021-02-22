@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_05_131424) do
+ActiveRecord::Schema.define(version: 2021_02_12_140926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -283,6 +283,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_131424) do
     t.datetime "discarded_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["discarded_at"], name: "index_lesson_notes_on_discarded_at"
     t.index ["driving_lesson_id"], name: "index_lesson_notes_on_driving_lesson_id"
     t.index ["driving_school_id"], name: "index_lesson_notes_on_driving_school_id"
@@ -308,6 +309,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_131424) do
     t.datetime "discarded_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["discarded_at"], name: "index_organization_notes_on_discarded_at"
     t.index ["driving_school_id"], name: "index_organization_notes_on_driving_school_id"
     t.index ["user_id"], name: "index_organization_notes_on_user_id"
@@ -404,6 +406,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_131424) do
     t.datetime "discarded_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["author_id"], name: "index_user_notes_on_author_id"
     t.index ["discarded_at"], name: "index_user_notes_on_discarded_at"
     t.index ["driving_school_id"], name: "index_user_notes_on_driving_school_id"

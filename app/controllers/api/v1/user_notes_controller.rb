@@ -1,7 +1,7 @@
 class Api::V1::UserNotesController < ApplicationController
   before_action :set_user
   before_action :set_driving_school
-  before_action :set_note, only: %i[update attach_file delete_file discard]
+  before_action :set_note, only: %i[update attach_file delete_file discard publish]
 
   def create
     authorize UserNote
@@ -18,13 +18,18 @@ class Api::V1::UserNotesController < ApplicationController
     @note.update!(note_params)
   end
 
+  def publish
+    authorize @note
+    @note.published!
+  end
+
   def index
     # authorize @user, policy_class: UserNote
     @notes = @user.received_user_notes.includes(
       :author,
       :user,
       files_attachments: :blob
-    ).kept.order(created_at: :desc)
+    ).kept.published.where(driving_school: @driving_school).order(created_at: :desc)
 
     @notes = @notes.page(params[:page]).per(records_per_page)
   end
@@ -34,7 +39,7 @@ class Api::V1::UserNotesController < ApplicationController
       :author,
       :user,
       files_attachments: :blob
-    ).kept.order(created_at: :desc)
+    ).kept.published.where(driving_school: @driving_school).order(created_at: :desc)
 
     @notes = @notes.page(params[:page]).per(records_per_page)
   end

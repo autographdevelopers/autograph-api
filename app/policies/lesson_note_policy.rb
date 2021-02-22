@@ -7,6 +7,10 @@ class LessonNotePolicy < ApplicationPolicy
     user == record.author
   end
 
+  def publish?
+    user.employee? && user == record.author
+  end
+
   def discard?
     user == record.author
   end
