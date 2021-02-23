@@ -1,0 +1,13 @@
+{
+  "header": "Properties / traits groups",
+  "addPropertyGroup": "Add Group",
+  "addPropertyGroupHint": "Introduce section that groups individual properties. For instance, you may create a group \"Physical Properties\" and later on attach to it properties such as \"Weight\", \"Size\". If you have no idea how to name a group, simply call it something like \"General Information\"",
+  "addPropertyToGroup": "Add property to section: {{sectionTitle}}",
+  "addPropertyToGroupHint": "I.e \"Serial number\" (property name) -> \"XYZ\" (property value)",
+  "propName": "Property Name",
+  "propValue": "Property Value",
+  "addPropBtn": "Add Property",
+  "noPropertiesPlaceholderTitle": "No properties defined",
+  "noPropertiesPlaceholderSubtitle":
+    "Edit this section to describe in details group of properties"
+}

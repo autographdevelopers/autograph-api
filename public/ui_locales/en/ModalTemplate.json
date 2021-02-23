@@ -1,0 +1,7 @@
+{
+  "defaultSuccessTitle": "Congratulation!",
+  "defaultSuccessMsg": "Your request has been processed successfully!",
+  "defaultErrorTitle": "Oh no! Something went wrong :(",
+  "defaultErrorMsg":
+    "Make sure you provided valid data and have proper privileges. If problem persists, please contact our support"
+}

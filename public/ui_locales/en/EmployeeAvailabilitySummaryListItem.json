@@ -1,0 +1,5 @@
+{
+  "checkSchedule": "Schedule",
+  "bookedLessons": "Booked lessons ({{lessonsCount}})",
+  "availableHours": "Available around hours: "
+}

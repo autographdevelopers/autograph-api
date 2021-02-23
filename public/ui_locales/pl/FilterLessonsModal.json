@@ -1,0 +1,12 @@
+{
+  "modalTitle": "Filtruj lekcje",
+  "modalSubtitle":
+    "Wybierz status lub przedział czasowy aby szybko znaleźć lekcje",
+  "status": "Status",
+  "from": "Od",
+  "to": "Do",
+  "all": "Wszystkie",
+  "active": "Aktywne",
+  "canceled": "Anulowane",
+  "upcoming": "Nadchodzące",
+  "past": "Odbyte"}

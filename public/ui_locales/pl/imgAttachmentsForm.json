@@ -1,0 +1,7 @@
+{
+  "header": "Załączone zdjęcia",
+  "add": "Dodaj zdjęcie",
+  "noFilesPlaceholderTitle": "Brak załączonych zdjęć",
+  "noFilesPlaceholderSubtitle":
+    "Edytuj tę sekcję aby przypisać zdjęcia do tego obiektu",
+  "attachmentsNoLimitExceeded": "Przekroczono limit zdjęć ({{limit}})"}

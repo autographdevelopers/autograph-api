@@ -1,0 +1,11 @@
+{
+  "basicInfoHeader": "Basic Info",
+  "imgsHeader": "Attached Images",
+  "commentsHeader": "Comments",
+  "noAttachmentsPlaceholderTitle": "No attached photos",
+  "noAttachmentsPlaceholderSubtitle":
+    "If you are an author of the note, you can edit its attachments.",
+  "title": "Title",
+  "body": "Body",
+  "author": "Author",
+  "date": "Date"}

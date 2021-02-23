@@ -1,0 +1,20 @@
+{
+  "reportingSectionTitle": "Raportowanie",
+
+  "notesSectionTitle": "Notatki",
+
+  "addLessonNoteTitle": "Dodaj notatkę do lekcji",
+  "addLessonNoteSubtitle":
+    "Wprowadź informację tekstową lub załącz obrazek to umówionej lekcji",
+  "addOrganizationNoteTitle": "Dodaj notatkę organizacyjną (ogłoszenie)",
+  "addOrganizationNoteSubtitle":
+    "Stwórz ogłoszenie wprowadzjąc informację tekstową lub załącznik.",
+
+  "inventoryItemsSectionTitle": "Obiekty inwentaryzacji",
+
+  "createInventoryItemTitle": "Dodaj obiekt",
+  "createInventoryItemSubtitle":
+    "Zarządzaj inwentarzem dowolnych obiektów np. samochodami, dokumentami, wyposażeniem.",
+  "browseInventoryItemTitle": "Przeglądaj obiekty inwentarza",
+  "browseInventoryItemSubtitle":
+    "Znajdź wybrane obiekty używając tagów lub wyszukiwarki i zarządzaj nimi."}

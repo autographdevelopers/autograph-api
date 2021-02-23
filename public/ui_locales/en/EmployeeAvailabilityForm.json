@@ -1,0 +1,4 @@
+{
+  "applyScheduleFromPrompt": "When the new schedule should start applying?",
+  "fromNow": "Now",
+  "fromFuture": "Future"}

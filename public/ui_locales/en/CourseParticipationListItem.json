@@ -1,0 +1,7 @@
+{
+  "slot": "{{count}} slot",
+  "available": "Available",
+  "booked": "Booked",
+  "used": "Used",
+  "active": "Active",
+  "archived": "Archived"}

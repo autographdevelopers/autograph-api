@@ -1,0 +1,10 @@
+{
+  "noRecordsPlaceholderTitle":
+    "Tutaj wyświetli się lista {{resourceNameGenitiveForm}}",
+  "noRecordsPlaceholderSubtitle": "Aktualnie brak takich wpisów.",
+  "createCallToAction": "Dodaj teraz +",
+
+  "noResultsPlaceholderTitle":
+    "Brak rezultatów dla takich kryteriów wyszukiwania",
+  "noResultsPlaceholderSubtitle":
+    "Upewnij się, że wpis istnieje lub dostosuj kryteria wyszukiwania / filtrowania"}

@@ -1,0 +1,11 @@
+{
+  "basicInfoHeader": "Informacje",
+  "imgsHeader": "Załączone obrazki",
+  "commentsHeader": "Komentarze",
+  "noAttachmentsPlaceholderTitle": "Brak załączonych zdjęć",
+  "noAttachmentsPlaceholderSubtitle":
+    "Jeśli jesteś autorem notki, może edytować jej załączniki",
+  "title": "Tytuł",
+  "body": "Treść",
+  "author": "Autor",
+  "date": "Data"}

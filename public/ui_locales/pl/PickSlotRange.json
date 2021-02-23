@@ -1,0 +1,8 @@
+{
+  "selectedTimeRangesDesc": "Wybrane przedziały godzinowe ({{rangesCount}})",
+  "helperText":
+    "Kliknij w skrajne godziny aby wybrać przedział czasowy, w którym możliwe będzie odbywanie lekcji jazdy",
+  "showEveningSlots": "Pokaż wieczorne sloty",
+  "hideEveningSlots": "Ukryj wieczorne sloty",
+  "showNightSlots": "Pokaż nocne sloty",
+  "hideNightSlots": "Ukryj nocne sloty"}

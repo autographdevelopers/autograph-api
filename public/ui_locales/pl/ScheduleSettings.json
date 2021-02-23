@@ -1,0 +1,17 @@
+{
+  "bookingAdvancePeriodInWeeks":
+    "Zapisy z maksymalnym wyprzedzeniem(w tygodniach)",
+  "minimumSlotsCountPerDrivingLesson":
+    "Z ilu minimalnie 30 minutowych slotów musi składać sie lekcja?",
+  "maximumSlotsCountPerDrivingLesson":
+    "Z ilu maxymalnie 30 minutowych slotów może składać sie lekcja?",
+  "lastMinuteBookingEnabledTitle": "Zapisy \"na ostatnią chwilę\"",
+  "lastMinuteBookingEnabledSubtitle":
+    "Pozwalaj na zapisy mniej niż dzień przed planowaną lekcją",
+  "holidaysEnrollmentEnabledTitle": "Święta i dni wolne od pracy",
+  "holidaysEnrollmentEnabledSubtitle":
+    "Zablokuj możliwoś zapisów w dnia ustawowo wolne od pracy.",
+  "canStudentBookDrivingLessonTitle": "Pozwalaj studentom na samodzielne zapisy",
+  "canStudentBookDrivingLessonSubtitle":
+    "Możesz kontrolować czy w Twojej orgazniacji, zapisami zajmować się będą tylko odpowiedni pracownicy lub czy kursanci będą mogli zapisywać się sami używając kalendarza w aplikacji."
+}

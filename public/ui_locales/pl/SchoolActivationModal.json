@@ -1,0 +1,7 @@
+{
+  "modalTitle": "Aktywuj placówkę!",
+  "modalMsg":
+    "Aktywuj szkołę używając kodu wysłanego na podany przy rejestracji adres",
+  "activationCodeLabel": "Kod aktywacyjny",
+  "activateBtn": "Aktywuj!",
+  "termRequiredError": "Kod aktywacyjny jest wymagany"}

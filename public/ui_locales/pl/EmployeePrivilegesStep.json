@@ -1,0 +1,16 @@
+{
+  "manageEmployeesTitle": "Zarządzaj pracownikami",
+  "manageEmployeesDesc":
+    "Użytkownik będzie mógł dodawać usuwać pracowników oraz zarządzać ich uprawnieniami",
+
+  "manageStudentsTitle": "Zarządzaj kursantami",
+  "manageStudentsDesc":
+    "Użytkownik będzie mógł dodawać usuwać kursantów oraz zarządzać ich kursami / dostępnymi godzinami do wyjeżdżenia",
+
+  "allowToChangeScheduleTitle": "Pozwalaj na ustawianie grafiku",
+  "allowToChangeScheduleDesc":
+    "Użytkownik będzie mógł ustawiac grafik dla innych instruktorów",
+
+  "isInstructorTitle": "Jest instruktorem?",
+  "isInstructorDesc":
+    "Użytkownik, ktory jest instruktorem będzie miał swój grafik, ktory umożliwi zapisywanie się na lekcje."}

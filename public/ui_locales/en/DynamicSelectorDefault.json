@@ -1,0 +1,6 @@
+{
+  "fetchingOptionsPending": "Fetching options...",
+  "noOptionsAvailable":
+    "No options available. Make sure relevant records were created.",
+  "select": "Select",
+  "selectModalTitle": "Select Option"}

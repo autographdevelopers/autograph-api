@@ -1,0 +1,7 @@
+{
+  "header": "Attached Images",
+  "add": "Add Photo",
+  "noFilesPlaceholderTitle": "There are no images attached to this record",
+  "noFilesPlaceholderSubtitle":
+    "Edit this section in order to upload photos associated with that object",
+  "attachmentsNoLimitExceeded": "Exceeded attachments limit ({{limit}})"}

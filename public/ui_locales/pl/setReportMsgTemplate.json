@@ -1,0 +1,9 @@
+{
+  "header":
+    "Zdefiniuj jak raportowane zdarzenie będzie wyglądać w dzienniku aktywności",
+  "subheader":
+    "W celu zawarcia zmiennej w wiadomości np. imię użytkownika użyj zapisu klamerkowego z procentem. Przykład: \"%{user-full-name} zaraportował wynajęcie auta\". Dostępne zmienne: \"user-full-name\", \"item-name\".",
+  "msgTemplate": "Szablon wiadomości",
+  "previewCaption":
+    "Podgląd przykładowej aktywności jaka wyświetli się w dzienniku"
+}

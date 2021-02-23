@@ -1,0 +1,11 @@
+{
+  "info": "Informacje",
+  "status": "Status",
+  "when": "Kiedy?",
+  "employee": "Pracownik",
+  "student": "Kursant",
+  "course": "Kurs",
+  "notes": "Notatki",
+  "notesListPlaceholderTitle": "Brak notek skojarzonych z tą lekcją",
+  "notesListPlaceholderSubtitle":
+    "Instruktor nie dodał jeszcze notatek do tej lekcji"}

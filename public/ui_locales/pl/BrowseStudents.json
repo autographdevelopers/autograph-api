@@ -1,0 +1,18 @@
+{
+  "activeSegmentLabel": "Aktywni",
+  "pendingSegmentLabel": "Zaproszeni",
+  "archivedSegmentLabel": "Zarchiwizowani",
+  "searchInputPlaceholder": "Znajdź w grupie \"{{scopeName}}\"",
+
+  "activeSegmentPlaceholderTitle": "Brak aktywnych kursantów",
+  "activeSegmentPlaceholderDesc":
+    "Wygląda na to, że nia ma aktwnych kursantów związanych z Twoją szkołą dla danego zapytania. Zmień kryterium wyszukiwania lub zaproś nowych kursantów i poczekaj na ich akceptację.",
+
+  "pendingSegmentPlaceholderTitle": "Brak oczekujących zaproszeń",
+  "pendingSegmentPlaceholderDesc":
+    "Wygląda na to, że nia ma oczekujących zaproszeń dla danego zapytania. Zmień kryterium wyszukiwania lub zaproś nowych kursantów.",
+
+  "archivedSegmentPlaceholderTitle": "Brak zarchiwizowanych kursantów",
+  "archivedSegmentPlaceholderDesc":
+    "Wygląda na to, że nia ma zarchiwizowanych kursantów dla danego zapytania. Zmień kryterium wyszukiwania i spróbuj ponownie."
+}

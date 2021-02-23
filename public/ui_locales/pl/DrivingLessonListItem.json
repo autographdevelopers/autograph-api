@@ -1,0 +1,7 @@
+{
+  "cancel": "Odwołaj",
+  "canceled": "Odwołana",
+  "userInfo": "Z {{name}}",
+  "timeInfo": "Start: {{time}}",
+  "courseInfo": "Kurs: {{course}}"
+}

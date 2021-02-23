@@ -1,0 +1,10 @@
+{
+  "noRecordsPlaceholderTitle":
+    "A list of {{resourceNameGenitiveForm}} will be displayed here",
+  "noRecordsPlaceholderSubtitle":
+    "Currently, there are no such records for this organization.",
+  "createCallToAction": "Create one now +",
+
+  "noResultsPlaceholderTitle": "No results found for this query criteria",
+  "noResultsPlaceholderSubtitle":
+    "Please make sure that the records exist, adjust search / filter criteria or create new record now!"}

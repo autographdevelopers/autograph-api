@@ -1,0 +1,6 @@
+{
+  "noSelectionBtnText": "Najpierw wybierz studentów",
+  "submitMultipleBtnText": "Potwierdź dla zaznaczonych ({{itemsCount}})",
+  "noStudentsPlaceholderTitle": "Brak kursantów dla wybranego kryterium",
+  "noStudentsPlaceholderSubtitle":
+    "Upewnij się, że kursant istnieje lub zmień kryteria wyszukiwania / filtrowania."}

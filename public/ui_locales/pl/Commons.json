@@ -1,0 +1,62 @@
+{
+  "inputPlaceholder": "Proszę wprowadź {{label}}",
+
+  "create": "Stwórz",
+  "edit": "Edytuj",
+  "save": "Zapisz",
+  "next": "Dalej",
+  "back": "Wstecz",
+  "skip": "Pomiń",
+  "confirm": "Potwierdź",
+  "add": "Dodaj",
+  "remove": "Usuń",
+  "ok": "Ok",
+  "cancel": "Anuluj",
+
+  "monday": "Poniedziałek",
+  "tuesday": "Wtorek",
+  "wednesday": "Środa",
+  "thursday": "Czwartek",
+  "friday": "Piątek",
+  "saturday": "Sobota",
+  "sunday": "Niedziela",
+
+  "email": "Email",
+  "name": "Nazwa",
+  "description": "Opis",
+  "tags": "Tagi",
+
+  "applyToAllDay": "Zastosuj dla każdego dnia",
+  "closed": "Zamknięte",
+
+  "more": "Więcej",
+  "showMore": "Pokaż więcej",
+
+  "all": "Wszystkie",
+  "showAll": "Pokaż wszystkie",
+
+  "status": "Status",
+
+  "active": "Aktywne",
+  "archived": "Zarchiwizowane",
+
+  "findRecordPlaceholder": "Znajdź obiekt...",
+  "applyingSearchCriteria": "Zastosuj kryteria wyszukiwania...",
+  "enterTag": "Wpisz słowa kluczowe oddzielone przecinkiem",
+  "noTagsPlaceholderTitle": "Brak zdefiniowanych tagów",
+  "noTagsPlaceholderSubtitle":
+    "Tagi to słowa kluczowe pozwlające zgrupować obiekty i później łatwiej je odnaleźć. Edytuj tę sekcję i użyj pola tekstowego aby wpisać słowa opisuąjce ten obiekt",
+
+  "preview": "Podgląd",
+  "success": "Sukces",
+  "search": "Szukaj...",
+  "sending": "Wysyłam...",
+  "removing": "Usuwam...",
+  "error": "Błąd",
+  "sent": "Wysłano",
+
+  "invite": "Zaproś",
+
+  "saveImages": "Zapisz obrazki",
+
+  "apply": "Zastosuj"}

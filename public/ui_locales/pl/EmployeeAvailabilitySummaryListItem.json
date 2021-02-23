@@ -1,0 +1,5 @@
+{
+  "checkSchedule": "Grafik",
+  "bookedLessons": "Umówione jazdy ({{lessonsCount}})",
+  "availableHours": "Wolne terminy w godzinach: "
+}

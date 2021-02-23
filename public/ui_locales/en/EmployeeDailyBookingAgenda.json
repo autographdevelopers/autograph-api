@@ -1,0 +1,19 @@
+{
+  "bookedLesson": "Booked Lesson",
+  "myLesson": "My Lesson!",
+  "break": "Break",
+  "someoneIsBookingThisSlot": "Someone is booking this slot",
+  "book": "Book Lesson",
+  "wastedSlot": "Wasted Slot",
+  "selected": "Selected",
+  "lostSocketConnectionError":
+    "Lost connection with a server. Make sure you have stale internet connection or restart application.",
+  "maxLessonTimeExceededError": "You have reach allowed lesson duration limit",
+  "slotsNotAdjacent": "Select adjacent slots",
+  "selectAtLeastXSlots": "Select at least {{count}} slots to create a lesson",
+  "bookLessonTriggerBtn": "Book {{time}} ->",
+  "remainingBookingTimeInSec": "Booking time left: {{seconds}} seconds",
+  "hours": "{{hoursCount}} hour(s)",
+  "lessonWith": "Lesson with",
+  "inTermsOf": "In terms of: {{course}}"
+}

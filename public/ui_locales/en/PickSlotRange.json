@@ -1,0 +1,8 @@
+{
+  "selectedTimeRangesDesc": "Selected time ranges for this day ({{rangesCount}})",
+  "helperText":
+    "Press on slots to select the time range during which it will be possible to book a lesson",
+  "showEveningSlots": "Show evening slots",
+  "hideEveningSlots": "Hide evening slots",
+  "showNightSlots": "Show night slots",
+  "hideNightSlots": "Hide night slots"}

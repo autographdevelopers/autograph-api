@@ -1,0 +1,14 @@
+{
+  "birthDayInputLabel": "Data urodzenia",
+  "userTypeInputLabel": "Typ użytkownika",
+  "nameInputLabel": "Imię",
+  "surnameInputLabel": "Nazwisko",
+  "genderInputLabel": "Płeć",
+  "emailInputLabel": "Email",
+  "passwordInputLabel": "Hasło",
+  "passwordConfirmationInputLabel": "Powtórzone hasło",
+  "createAccountBtn": "Stwórz konto!",
+  "termsAndConditionsLabel":
+    "Zrozumialem i akceptuje warunki korzystania z serwisu Autograph",
+  "termsAndConditionsNotAcceptedError":
+    "Musisz zaakceptować warunki korzystania z serwisu"}

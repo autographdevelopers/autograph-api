@@ -1,0 +1,7 @@
+{
+  "defaultSuccessTitle": "Gratulajce!",
+  "defaultSuccessMsg": "Żądanie przetworzone pomyślnie",
+  "defaultErrorTitle": "O nie! Coś poszło nie tak :(",
+  "defaultErrorMsg":
+    "Upewnij się, że wprowadziłeś poprawne dane oraz masz wymagane uprawnienia. Jeśli problem nie ustąpi, skontaktuj się z naszym działem wsparcia"
+}

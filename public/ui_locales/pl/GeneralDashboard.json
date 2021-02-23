@@ -1,0 +1,14 @@
+{
+  "activeSchoolsPlaceholder": "Tutaj wyświetlą się szkoły, do których należysz.",
+  "schoolInvitationsPlaceholder": "Tutaj wyświetlą się zaproszenia do szkół.",
+
+  "activeSchoolsSectionTitle": "Moje szkoły",
+  "draftSchoolsSectionTitle": "Dokończ rejestrację",
+  "awaitingActivationSchoolsSectionTitle": "Aktywuj szkoły",
+  "invitingSchoolsSectionTitle": "Zaproszenia do współpracy",
+
+  "addSchoolBtn": "Stwórz szkołę",
+  "rejectInvitationBtn": "Odrzuć",
+  "acceptInvitationBtn": "Akceptuj",
+
+  "settingsAndInfoBtn": "Ustawienia i informacje"}

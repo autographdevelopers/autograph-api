@@ -1,0 +1,16 @@
+{
+  "bookingAdvancePeriodInWeeks": "Booking advance period in weeks",
+  "minimumSlotsCountPerDrivingLesson":
+    "Minimum number of a 30 min slots that constitute a valid lesson.",
+  "maximumSlotsCountPerDrivingLesson":
+    "Maximum number of a 30 min slots that constitute a valid lesson.",
+  "lastMinuteBookingEnabledTitle": "Last minute booking",
+  "lastMinuteBookingEnabledSubtitle":
+    "Allow booking a lesson less than a day before",
+  "holidaysEnrollmentEnabledTitle": "Holidays and days off-work",
+  "holidaysEnrollmentEnabledSubtitle":
+    "Block possibility to book to national days-off",
+  "canStudentBookDrivingLessonTitle":
+    "Allow students to book the lessons themselves",
+  "canStudentBookDrivingLessonSubtitle":
+    "You can control weather in your organization booking process will be managed by a dedicated employee or students can sign up themselves"}

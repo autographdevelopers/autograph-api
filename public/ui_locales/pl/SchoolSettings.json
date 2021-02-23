@@ -1,0 +1,33 @@
+{
+  "schoolSettingsSectionTitle": "Ustawienia szkoły",
+  "basicInfoTitle": "Podstawowe informacje",
+  "basicInfoSubtitle": "Edytuj nazwę, opis itp.",
+  "contactInfoTitle": "Kontakt",
+  "contactInfoSubtitle": "Edytuj adres, email, witrynę itp.",
+
+  "scheduleSettingsSectionTitle": "Ustawienia kalendarza",
+  "validTimeFramesTitle": "Godziny otwarcia",
+  "validTimeFramesSubtitle": "Edytuj godziny pracy organizacji",
+  "calendarSettingsTitle": "Ustawienia kalendarza",
+  "calendarSettingsSubtitle": "Edytuj ustawienia grafiku / procesu zapisów",
+
+  "coursesSectionTitle": "Kursy",
+  "courseCategoriesTitle": "Kategorie kursów",
+  "courseCategoriesSubtitle": "Edytuj typy przeprowadzanych kursów",
+  "coursesTitle": "Kursy",
+  "coursesSubtitle": "Zarządzaj konkretnymi instancjami kursów",
+
+  "inventorySectionTitle": "Inwentarz",
+  "inventoryItemsModuleTitle": "Obiekty inwentarza",
+  "inventoryItemsModuleSubtitle":
+    "Zarządzaj inwentarzem dowolnych obiektów np.samochodami, dokumentami, wyposażeniem.",
+
+  "reportingSectionTitle": "Raportowanie",
+  "customActivityTypesTitle": "Procesy raportowania",
+  "customActivityTypesSubtitle":
+    "Zdefiniuj spersonalizowane procesy raportowania zdarzeń dla swoich pracowników",
+
+  "actionsTitle": "Akcje",
+  "removeSchoolTitle": "Usuń szkołę",
+  "removeSchoolSubTitle":
+    "Organizacja przestanie być widoczna w Twoim głownym panelu"}

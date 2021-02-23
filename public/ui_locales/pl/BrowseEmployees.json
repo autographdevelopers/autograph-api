@@ -1,0 +1,18 @@
+{
+  "activeSegmentLabel": "Aktywni",
+  "pendingSegmentLabel": "Zaproszeni",
+  "archivedSegmentLabel": "Zarchiwizowani",
+  "searchInputPlaceholder": "Znajdź w grupie \"{{scopeName}}\"",
+
+  "activeSegmentPlaceholderTitle": "Brak aktywnych pracowników",
+  "activeSegmentPlaceholderDesc":
+    "Wygląda na to, że nia ma aktwnych pracowników związanych z Twoją szkołą dla danego zapytania. Zmień kryterium wyszukiwania lub zaproś nowych pracowników i poczekaj na ich akceptację.",
+
+  "pendingSegmentPlaceholderTitle": "Brak oczekujących zaproszeń",
+  "pendingSegmentPlaceholderDesc":
+    "Wygląda na to, że nia ma oczekujących zaproszeń dla danego zapytania. Zmień kryterium wyszukiwania lub zaproś nowych pracowników.",
+
+  "archivedSegmentPlaceholderTitle": "Brak zarchiwizowanych pracowników",
+  "archivedSegmentPlaceholderDesc":
+    "Wygląda na to, że nia ma zarchiwizowanych pracowników dla danego zapytania. Zmień kryterium wyszukiwania i spróbuj ponownie."
+}

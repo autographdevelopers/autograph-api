@@ -1,0 +1,7 @@
+{
+  "title": "Do you want to publish this record?",
+  "subtitle": "It will become immediately visible for the concerned user group",
+  "publish": "Publish",
+  "abort": "Abort",
+  "publishErrorTitle":
+    "Failed to publish the record. Make sure you have stale internet connection and try again later"}

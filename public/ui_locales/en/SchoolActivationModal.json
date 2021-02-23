@@ -1,0 +1,6 @@
+{
+  "modalTitle": "Activate School",
+  "modalMsg": "Activate your school using a key sent to your mail",
+  "activationCodeLabel": "Activation Code",
+  "activateBtn": "Activate!",
+  "termRequiredError": "Activation key is required"}

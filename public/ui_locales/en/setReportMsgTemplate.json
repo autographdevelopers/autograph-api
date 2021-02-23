@@ -1,0 +1,8 @@
+{
+  "header": "Define how message will present itself on a feed",
+  "subheader":
+    "In order to inject a variable i.e user name put it inside %{here}. Example: \"%{user-full-name} reported car rental\". Available variables are: \"user-full-name\", \"item-name\".",
+  "msgTemplate": "Message Template",
+  "previewCaption":
+    "Preview of the activity list item that will appear in activity feed"
+}

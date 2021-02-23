@@ -1,0 +1,11 @@
+{
+  "modalTitle": "Filter lessons",
+  "modalSubtitle": "Select status or time period to quickly find the lesson",
+  "status": "Status",
+  "from": "From",
+  "to": "To",
+  "all": "All",
+  "active": "Active",
+  "canceled": "Canceled",
+  "upcoming": "Upcoming",
+  "past": "Past"}

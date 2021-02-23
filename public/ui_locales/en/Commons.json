@@ -1,0 +1,62 @@
+{
+  "inputPlaceholder": "Please enter {{label}}",
+
+  "create": "Create",
+  "edit": "Edit",
+  "save": "Save",
+  "next": "Next",
+  "back": "Back",
+  "skip": "Skip",
+  "confirm": "Confirm",
+  "add": "Add",
+  "remove": "Remove",
+  "ok": "Ok",
+  "cancel": "Cancel",
+
+  "monday": "Monday",
+  "tuesday": "Tuesday",
+  "wednesday": "Wednesday",
+  "thursday": "Thursday",
+  "friday": "Friday",
+  "saturday": "Saturday",
+  "sunday": "Sunday",
+
+  "email": "Email",
+  "name": "Name",
+  "description": "Description",
+  "tags": "Tags",
+
+  "applyToAllDay": "Apply to all days",
+  "closed": "Closed",
+
+  "more": "More",
+  "showMore": "Show More",
+
+  "all": "All",
+  "showAll": "Show All",
+
+  "status": "Status",
+
+  "active": "Active",
+  "archived": "Archived",
+
+  "findRecordPlaceholder": "Find object...",
+  "applyingSearchCriteria": "Applying search criteria...",
+  "enterTag": "Please enter coma-separated category / keyword / tag",
+  "noTagsPlaceholderTitle": "No Tags",
+  "noTagsPlaceholderSubtitle":
+    "Tags are keywords used for grouping objects of common category. Edit this section and use text input to enter tags that accurately describe your record",
+
+  "preview": "Preview",
+  "success": "Success",
+  "search": "Search...",
+  "sending": "Sending...",
+  "removing": "Removing...",
+  "error": "Error",
+  "sent": "Sent",
+
+  "invite": "Invite",
+
+  "saveImages": "Save Images",
+
+  "apply": "Apply"}

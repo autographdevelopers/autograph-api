@@ -1,0 +1,46 @@
+{
+  "removeActionConfirmationPromptTitle": "Czy na pewno chcesz usunąć ten wpis?",
+  "removeActionConfirmationPromptSubtitle":
+    "Ta akcja usunie wpis bezpowrotnie. Nie będzie możliwości odzyskania go.",
+
+  "archiveActionConfirmationPromptTitle":
+    "Czy na pewno chcesz zarchiwizować ten wpis?",
+  "archiveActionConfirmationPromptSubtitle":
+    "Wpis widoczny będzie tylko na liście zarchiwizowanych. Możesz odzyskać go później.",
+
+  "recoverActionConfirmationPromptTitle": "Chcesz odzyskać ten wpis?",
+  "recoverActionConfirmationPromptSubtitle":
+    "Wpis ponownie stanie się dostępny na liscie aktywnych wpisów",
+
+  "confirmationText": "Tak, potwierdzam",
+
+  "noticeSuccess": "Udało się!",
+
+  "saveSuccessSimple": "Zmiany zostały pomyślnie zapisane",
+  "saveErrorSimple": "Nie udało się zapisać zmian",
+  "saveErrorSimpleSubtitle": "Upewnij się, że wprowadziłeś poprawne dane",
+  "notFoundErrorSimple": "Błąd 404 - Nie znaleziono zasobu",
+  "notFoundErrorSimpleSubtitle": "Obiekt mógł zostać usuniety przez kogoś innego",
+
+  "noticeCreateActionSuccess": "Wpis został pomyślnie stworzony",
+  "noticeUpdateActionSuccess": "Wpis został pomyślnie zaktualizowany",
+  "noticeSaveActionSuccess": "Wpis został pomyślnie zapisany",
+  "noticeRemoveActionSuccess": "Wpis został pomyślnie usunięty",
+  "noticeArchiveActionSuccess": "Wpis został pomyślnie zarchiwizowany",
+  "noticeRecoverActionSuccess": "Wpis został pomyślnie odzyskany",
+
+  "loginErrorTitle": "Nie udało się zalogować",
+  "loginErrorSubtitle": "Niepoprawny login lub hasło",
+  "logoutErrorTitle": "Nie udało się wylogować użytkownika",
+  "signUpErrorTitle": "Wystąpił problem podczas tworzenia konta",
+  "signUpErrorTitleSubtitle": "Upewnij się, że wprowadziłeś poprawne dane",
+  "resetPasswordSentTitle": "Sprawdź swojego maila",
+  "resetPasswordSentSubtitle":
+    "Wysłaliśmy Ci dalsze instrukcje jak zresetować hasło.",
+  "unableToOpenCameraRollError": "Nie udało się otworzyć galerii",
+  "unableToOpenCameraRollErrorSubtitle":
+    "Upewnij się, że aplikacja ma uprawnienia do otwierania galerii. Możesz też użyć naszej aplikacji webowej do wysłania plików.",
+  "fileUploadError": "Nie udało się przesłać {{count}} plików",
+  "fileUploadErrorSubtitle":
+    "Upewnij się, że masz stabilne połączenie internetowe. Jeśli problem wciąż będzie występował spróbuj użyć naszej aplikacji webowej "
+}

@@ -1,0 +1,8 @@
+{
+  "emailLabel": "Email",
+  "emailInputPlaceholder": "Wprowadź swój email",
+  "passwordInputPlaceholder": "Wprowadź swoje hasło",
+  "passwordLabel": "Hasło",
+  "signInBtn": "ZALOGUJ SIĘ",
+  "resetPassBtn": "Zresetuj hasło"
+}

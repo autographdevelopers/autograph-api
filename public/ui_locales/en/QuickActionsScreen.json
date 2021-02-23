@@ -1,0 +1,20 @@
+{
+  "reportingSectionTitle": "Reporting",
+
+  "notesSectionTitle": "Notes",
+
+  "addLessonNoteTitle": "Add Lesson Note",
+  "addLessonNoteSubtitle":
+    "Input text information and/or attach an image to a scheduled lesson.",
+  "addOrganizationNoteTitle": "Add Organization Note",
+  "addOrganizationNoteSubtitle":
+    "Create announcement by inputting text information and/or attaching an image",
+
+  "inventoryItemsSectionTitle": "Inventory Items",
+
+  "createInventoryItemTitle": "Create Inventory Item",
+  "createInventoryItemSubtitle":
+    "Maintain the inventory of an arbitrary objects i.e cars, documents, equipment.",
+  "browseInventoryItemTitle": "Browse Inventory Items",
+  "browseInventoryItemSubtitle":
+    "Query against your items pool, manage individual objects."}

@@ -1,0 +1,33 @@
+{
+  "schoolSettingsSectionTitle": "School Settings",
+  "basicInfoTitle": "Basic School Information",
+  "basicInfoSubtitle": "Edit name, description etc.",
+  "contactInfoTitle": "Contact",
+  "contactInfoSubtitle": "Edit address, website, email etc.",
+
+  "scheduleSettingsSectionTitle": "Schedule Settings",
+  "validTimeFramesTitle": "Opening hours",
+  "validTimeFramesSubtitle": "Edit school business hours",
+  "calendarSettingsTitle": "Schedule Settings",
+  "calendarSettingsSubtitle": "Edit schedule / booking settings",
+
+  "coursesSectionTitle": "Courses",
+  "courseCategoriesTitle": "Course Categories",
+  "courseCategoriesSubtitle": "Edit type of courses that are conducted",
+  "coursesTitle": "Courses",
+  "coursesSubtitle": "Manage specific course instances",
+
+  "inventorySectionTitle": "Inventory",
+  "inventoryItemsModuleTitle": "Inventory Items",
+  "inventoryItemsModuleSubtitle":
+    "Manage the inventory of an arbitrary objects i.e cars, documents, equipment.",
+
+  "reportingSectionTitle": "Reporting",
+  "customActivityTypesTitle": "Custom reporting workflow",
+  "customActivityTypesSubtitle":
+    "Define workflow for reporting custom activities by your employees",
+
+  "actionsTitle": "Actions",
+  "removeSchoolTitle": "Remove school",
+  "removeSchoolSubTitle":
+    "The organization will stop appearing in your main dashboard"}

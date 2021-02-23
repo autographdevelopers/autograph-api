@@ -1,0 +1,164 @@
+import { CommonLocales } from "./Commons";
+import { LaunchScreenLocales } from "./LaunchScreen";
+import { SignInScreenLocales } from "./SignInScreen";
+import { SignUpScreenLocales } from "./SignUpScreen";
+import { ResetPasswordScreenLocales } from "./ResetPasswordScreen";
+import { ScreenHeadersLocales } from "./ScreenHeaders";
+import { GeneralDashboardLocales } from "./GeneralDashboard";
+import { PersonalSettingsLocales } from "./PersonalSettings";
+import { SchoolBasicInfoLocales } from "./SchoolBasicInfo";
+import { SchoolContactLocales } from "./SchoolContact";
+import { NotificationSettingsLocales } from "./NotificationSettings";
+import { ScheduleSettingsLocales } from "./ScheduleSettings";
+import { PickSlotRangeLocales } from "./PickSlotRange";
+import { CourseCategoriesLocales } from "./CourseCategories";
+import { ConfirmSchoolRegistrationLocales } from "./ConfirmSchoolRegistration";
+import { EditAvatarLocales } from "./EditAvatar";
+import { TabsNavLocales } from "./TabsNav";
+import { ChooseMemberTypeModuleScreenLocales } from "./ChooseMemberTypeModuleScreen";
+import { QuickActionsScreenLocales } from "./QuickActionsScreen";
+import { SchoolSettingsLocales } from "./SchoolSettings";
+import { FeedDashboardLocales } from "./FeedDashboard";
+import { EmployeeAvailabilitySummaryListItemLocales } from "./EmployeeAvailabilitySummaryListItem";
+import { BrowseEmployeesLocales } from "./BrowseEmployees";
+import { WithdrawInvitationConfirmationModalLocales } from "./WithdrawInvitationConfirmationModal";
+import { ConfirmDestructiveActionModalLocales } from "./ConfirmDestructiveActionModal";
+import { EmployeeRolesSubtitleLocales } from "./EmployeeRolesSubtitle";
+import { InvitationInformationSubtitleLocales } from "./InvitationInformationSubtitle";
+import { ModalTemplateLocales } from "./ModalTemplate";
+import { SchoolActivationModalLocales } from "./SchoolActivationModal";
+import { EmployeePersonalDataStepLocales } from "./EmployeePersonalDataStep";
+import { EmployeePrivilegesStepLocales } from "./EmployeePrivilegesStep";
+import { BrowseStudentsLocales } from "./BrowseStudents";
+import { InviteStudentLocales } from "./InviteStudent";
+import { EmployeeProfileLocales } from "./EmployeeProfile";
+import { CourseParticipationListItemLocales } from "./CourseParticipationListItem";
+import { StudentProfileLocales } from "./StudentProfile";
+import { EditCourseParticipationDetailsLocales } from "./EditCourseParticipationDetails";
+import { CreateCourseScreenLocales } from "./CreateCourseScreen";
+import { CourseDetailsScreenLocales } from "./CourseDetailsScreen";
+import { AccountCreatedWelcomeScreenLocales } from "./AccountCreatedWelcomeScreen";
+import { CommentFormLocales } from "./CommentForm";
+import { noteBasicAttributesLocales } from "./noteBasicAttributes";
+import { imgAttachmentsFormLocales } from "./imgAttachmentsForm";
+import { noteDetailsLocales } from "./noteDetails";
+import { commentsDetailsLocales } from "./commentsDetails";
+import { InventoryItemPropertiesLocales } from "./InventoryItemProperties";
+import { inventoryItemDetailsLocales } from "./inventoryItemDetails";
+import { activityDetailsLocales } from "./activityDetails";
+import { CustomActivityTypeConfigureBtnFormLocales } from "./customActivityTypeConfigureBtnForm";
+import { selectReportTargetLocales } from "./selectReportTarget";
+import { setReportMsgTemplateLocales } from "./setReportMsgTemplate";
+import { configureReportInputsLocales } from "./configureReportInputs";
+import { configureCustomActivityReceiversLocales } from "./configureCustomActivityReceivers";
+import { CreateCustomActivityTypeSuccessLocales } from "./createCustomActivityTypeSuccess";
+import { CustomActivityTypeDetailsLocales } from "./CustomActivityTypeDetails";
+import { ConfirmActivityCreationLocales } from "./ConfirmActivityCreation";
+import { CreateCustomActivitySuccessLocales } from "./CreateCustomActivitySuccess";
+import { LessonDetailsScreenLocales } from "./LessonDetailsScreen";
+import { EmployeeAvailabilityFormLocales } from "./EmployeeAvailabilityForm";
+import { AssignStudentToCourseLocales } from "./AssignStudentToCourse";
+import { UniversalBrowseStudentsContainerLocales } from "./UniversalBrowseStudentsContainer";
+import { DatePickerInputLocales } from "./DatePickerInput";
+import { DynamicSelectorDefaultLocales } from "./DynamicSelectorDefault";
+import { ListPlaceholdersLocales } from "./ListPlaceholders";
+import { resourceNameGenitiveFormLocales } from "./resourceNameGenitiveForm";
+import { errorMessagesLocales } from "./errorMessages";
+import { flashMessagesLocales } from "./flashMessages";
+import { FullAvailabilitySummaryLocales } from "./FullAvailabilitySummary";
+import { EmployeeDailyBookingAgendaLocales } from "./EmployeeDailyBookingAgenda";
+import { CreateOrganizationNoteSuccessLocales } from "./CreateOrganizationNoteSuccess";
+import { CreateLessonNoteSuccessLocales } from "./CreateLessonNoteSuccess";
+import { CreateUserNoteSuccessLocales } from "./CreateUserNoteSuccess";
+import { CreateInventoryItemSuccessLocales } from "./CreateInventoryItemSuccess";
+import { CreateSchoolSuccessLocales } from "./CreateSchoolSuccess";
+import { InviteEmployeeSuccessLocales } from "./InviteEmployeeSuccess";
+import { InviteStudentSuccessLocales } from "./InviteStudentSuccess";
+import { SchoolInfoLocales } from "./SchoolInfo";
+import { ConfirmPublicationLocales } from "./ConfirmPublication";
+import { FilterMyActivitiesResultsModalLocales } from "./FilterMyActivitiesResultsModal";
+import { FilterLessonsModalLocales } from "./FilterLessonsModal";
+import { DrivingLessonListItemLocales } from "./DrivingLessonListItem";
+
+{
+  "Commons": CommonLocales,
+  "LaunchScreen": LaunchScreenLocales,
+  "SignInScreen": SignInScreenLocales,
+  "SignUpScreen": SignUpScreenLocales,
+  "ResetPasswordScreen": ResetPasswordScreenLocales,
+  "ScreenHeaders": ScreenHeadersLocales,
+  "GeneralDashboard": GeneralDashboardLocales,
+  "PersonalSettings": PersonalSettingsLocales,
+  "SchoolBasicInfo": SchoolBasicInfoLocales,
+  "SchoolContact": SchoolContactLocales,
+  "NotificationSettings": NotificationSettingsLocales,
+  "ScheduleSettings": ScheduleSettingsLocales,
+  "PickSlotRange": PickSlotRangeLocales,
+  "CourseCategories": CourseCategoriesLocales,
+  "ConfirmSchoolRegistration": ConfirmSchoolRegistrationLocales,
+  "EditAvatar": EditAvatarLocales,
+  "TabsNav": TabsNavLocales,
+  "ChooseMemberTypeModuleScreen": ChooseMemberTypeModuleScreenLocales,
+  "QuickActionsScreen": QuickActionsScreenLocales,
+  "SchoolSettings": SchoolSettingsLocales,
+  "FeedDashboard": FeedDashboardLocales,
+  "EmployeeAvailabilitySummaryListItem": EmployeeAvailabilitySummaryListItemLocales,
+  "BrowseEmployees": BrowseEmployeesLocales,
+  "WithdrawInvitationConfirmationModal": WithdrawInvitationConfirmationModalLocales,
+  "ConfirmDestructiveActionModal": ConfirmDestructiveActionModalLocales,
+  "EmployeeRolesSubtitle": EmployeeRolesSubtitleLocales,
+  "InvitationInformationSubtitle": InvitationInformationSubtitleLocales,
+  "ModalTemplate": ModalTemplateLocales,
+  "SchoolActivationModal": SchoolActivationModalLocales,
+  "EmployeePersonalDataStep": EmployeePersonalDataStepLocales,
+  "EmployeePrivilegesStep": EmployeePrivilegesStepLocales,
+  "BrowseStudents": BrowseStudentsLocales,
+  "InviteStudent": InviteStudentLocales,
+  "EmployeeProfile": EmployeeProfileLocales,
+  "CourseParticipationListItem": CourseParticipationListItemLocales,
+  "StudentProfile": StudentProfileLocales,
+  "EditCourseParticipationDetails": EditCourseParticipationDetailsLocales,
+  "CreateCourseScreen": CreateCourseScreenLocales,
+  "CourseDetailsScreen": CourseDetailsScreenLocales,
+  "AccountCreatedWelcomeScreen": AccountCreatedWelcomeScreenLocales,
+  "CommentForm": CommentFormLocales,
+  "noteBasicAttributes": noteBasicAttributesLocales,
+  "imgAttachmentsForm": imgAttachmentsFormLocales,
+  "noteDetails": noteDetailsLocales,
+  "commentsDetails": commentsDetailsLocales,
+  "InventoryItemProperties": InventoryItemPropertiesLocales,
+  "inventoryItemDetails": inventoryItemDetailsLocales,
+  "activityDetails": activityDetailsLocales,
+  "CustomActivityTypeConfigureBtnForm": CustomActivityTypeConfigureBtnFormLocales,
+  "selectReportTarget": selectReportTargetLocales,
+  "setReportMsgTemplate": setReportMsgTemplateLocales,
+  "configureReportInputs": configureReportInputsLocales,
+  "configureCustomActivityReceivers": configureCustomActivityReceiversLocales,
+  "CreateCustomActivityTypeSuccess": CreateCustomActivityTypeSuccessLocales,
+  "CustomActivityTypeDetails": CustomActivityTypeDetailsLocales,
+  "ConfirmActivityCreation": ConfirmActivityCreationLocales,
+  "CreateCustomActivitySuccess": CreateCustomActivitySuccessLocales,
+  "LessonDetailsScreen": LessonDetailsScreenLocales,
+  "EmployeeAvailabilityForm": EmployeeAvailabilityFormLocales,
+  "AssignStudentToCourse": AssignStudentToCourseLocales,
+  "UniversalBrowseStudentsContainer": UniversalBrowseStudentsContainerLocales,
+  "DatePickerInput": DatePickerInputLocales,
+  "DynamicSelectorDefault": DynamicSelectorDefaultLocales,
+  "ListPlaceholders": ListPlaceholdersLocales,
+  "resourceNameGenitiveForm": resourceNameGenitiveFormLocales,
+  "errorMessages": errorMessagesLocales,
+  "flashMessages": flashMessagesLocales,
+  "FullAvailabilitySummary": FullAvailabilitySummaryLocales,
+  "EmployeeDailyBookingAgenda": EmployeeDailyBookingAgendaLocales,
+  "CreateOrganizationNoteSuccess": CreateOrganizationNoteSuccessLocales,
+  "CreateLessonNoteSuccess": CreateLessonNoteSuccessLocales,
+  "CreateUserNoteSuccess": CreateUserNoteSuccessLocales,
+  "CreateInventoryItemSuccess": CreateInventoryItemSuccessLocales,
+  "CreateSchoolSuccess": CreateSchoolSuccessLocales,
+  "InviteEmployeeSuccess": InviteEmployeeSuccessLocales,
+  "InviteStudentSuccess": InviteStudentSuccessLocales,
+  "SchoolInfo": SchoolInfoLocales,
+  "ConfirmPublication": ConfirmPublicationLocales,
+  "FilterMyActivitiesResultsModal": FilterMyActivitiesResultsModalLocales,
+  "FilterLessonsModal": FilterLessonsModalLocales,
+  "DrivingLessonListItem": DrivingLessonListItemLocales}

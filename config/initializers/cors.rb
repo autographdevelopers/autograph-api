@@ -7,10 +7,12 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins Rails.application.secrets.fe_app_url
+    # origins Rails.application.secrets.fe_app_url TODO: adjust that!
+    origins '*'
 
     resource '*',
       headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head]
+      methods: [:get, :post, :put, :patch, :delete, :options, :head],
+      expose: ['access-token', 'token-type', 'client', 'expiry', 'uid']
   end
 end

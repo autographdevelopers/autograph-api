@@ -1,0 +1,8 @@
+{
+  "name": "Name",
+  "description": "Description",
+  "studentsLimit": "Max no. of students",
+  "courseType": "Course Type",
+  "noCourseCategoriesInfo":
+    "You do not have available courses specified in your organization",
+  "createThemNow": "Create it now"}

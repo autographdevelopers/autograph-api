@@ -1,0 +1,6 @@
+{
+  "header": "Require users to select object whilst reporting activity?",
+  "subheader":
+    "Require users to select object whilst reporting activity. This is optional, if you don't select anything users will not be redirected to this step",
+  "targetType": "Object Type",
+  "inventoryItem": "Inventory Item"}

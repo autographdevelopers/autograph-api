@@ -1,0 +1,13 @@
+{
+  "btnConfigHeader": "Button config",
+  "title": "Title",
+  "subtitle": "Subtitle",
+  "color": "Color",
+  "additionalInputs": "Additional Inputs",
+  "associateReportWithRecord": "Associate reports with a record",
+  "datetimeField": "Date-time field",
+  "datetimeFieldInstructions": "Date-time field Instructions",
+  "textField": "Text Field",
+  "textFieldInstructions": "Text Field Instructions",
+  "messageTemplateHeader": "Message Format",
+  "messageTemplate": "Message Template"}

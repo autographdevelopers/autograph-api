@@ -1,0 +1,16 @@
+{
+  "schools": "schools",
+  "employees": "employees",
+  "students": "students",
+  "activities": "activities",
+  "lessonNotes": "lesson's notes",
+  "organizationNotes": "announcements",
+  "userNotes": "profile notes",
+  "inventoryItems": "inventory item's",
+  "lessons": "lessons",
+  "comments": "comments",
+  "coursesParticipation": "course's participation",
+  "participants": "participants",
+  "courses": "courses",
+  "customActivityTypes": "reporting procedures workflows"
+}

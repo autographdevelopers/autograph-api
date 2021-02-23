@@ -1,0 +1,7 @@
+{
+  "noSelectionBtnText": "Please select students first",
+  "submitMultipleBtnText": "Submit ({{itemsCount}})",
+  "noStudentsPlaceholderTitle": "There are no students for a given criteria",
+  "noStudentsPlaceholderSubtitle":
+    "Make sure such students exists or adjust search / filter criteria"
+}

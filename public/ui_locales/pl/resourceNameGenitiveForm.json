@@ -1,0 +1,16 @@
+{
+  "schools": "placówek",
+  "employees": "pracowników",
+  "students": "kursantów",
+  "activities": "aktywności",
+  "lessonNotes": "notatek z lekcji",
+  "organizationNotes": "ogłoszeń",
+  "userNotes": "notatek do profilu użytkownika",
+  "inventoryItems": "obiektów inwentaryzacji",
+  "lessons": "lekcji",
+  "comments": "komentarzy",
+  "coursesParticipation": "uczestnictw w kursach",
+  "participants": "uczestników",
+  "courses": "kursów",
+  "customActivityTypes": "procedur raportowania"
+}

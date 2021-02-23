@@ -1,0 +1,14 @@
+{
+  "header": "Zgrupowane właściwości",
+  "addPropertyGroup": "Dodaj grupę",
+  "addPropertyGroupHint": "Dodaj sekcję, która zgrupuje cechy, które później dodasz. Na przykład może stworzyć grupę \"Właściwości fizyczne\" i później dodać tam cechy takie jak \"waga\", \"rozmiar\". Jeśli nie masz pomysłu na podział możesz nazwać grupe np \"Ogólne Informacje\"",
+  "addPropertyToGroup": "Dodaj cechę do grupy: \"{{sectionTitle}}\"",
+  "addPropertyToGroupHint":
+    "Np. \"Numer seryjny\" (nazwa cechy) -> \"XYZ\" (wartość cechy)",
+  "propName": "Nazwa cechy",
+  "propValue": "Wartość cechy",
+  "addPropBtn": "Dodaj cechę",
+  "noPropertiesPlaceholderTitle": "Brak zdefiniowanych właściwości",
+  "noPropertiesPlaceholderSubtitle":
+    "Edytuj tą sekcję aby dodać grupy właściwości szczegółowo opisujące obiekt"
+}

@@ -1,0 +1,15 @@
+{
+  "activeSchoolsPlaceholder":
+    "Here, you will find schools that you currently belong to.",
+  "schoolInvitationsPlaceholder": "Here, you will find invitations to schools.",
+
+  "activeSchoolsSectionTitle": "My Schools",
+  "draftSchoolsSectionTitle": "Finish Registration",
+  "awaitingActivationSchoolsSectionTitle": "Activate Schools",
+  "invitingSchoolsSectionTitle": "Invitations to Schools",
+
+  "addSchoolBtn": "Add School",
+  "rejectInvitationBtn": "Reject",
+  "acceptInvitationBtn": "Accept",
+
+  "settingsAndInfoBtn": "Settings and Information"}

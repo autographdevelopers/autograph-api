@@ -1,0 +1,5 @@
+{
+  "inputLabel": "Wpisz \"{{term}}\" by potwierdzić akcję",
+  "termRequiredError": "Proszę wprowadź potwierdzający tekst",
+  "termInvalidError": "Wpisany tekst jest niepoprawny"
+}

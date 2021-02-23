@@ -1,0 +1,6 @@
+{
+  "header": "Wymagaj od użytkowników wybrania obiektu wybranego typu?",
+  "subheader":
+    "Krok jest opcjonalny. Jeśli nic nie wybierzesz użytkownicy nie będą poproszeni o powiązania aktywności z istniejącym obiektem.",
+  "targetType": "Typ obiektu",
+  "inventoryItem": "Obiekt inwentarza"}

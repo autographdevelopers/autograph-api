@@ -1,0 +1,20 @@
+{
+  "activeSegmentLabel": "Active",
+  "pendingSegmentLabel": "Invited",
+  "archivedSegmentLabel": "Archived",
+  "searchInputPlaceholder": "Find in scope '{{scopeName}}'",
+
+  "activeSegmentPlaceholderTitle": "No active employees",
+  "activeSegmentPlaceholderDesc":
+    "It seems as though there are no active employees associated with this organization for the given search query. Change search query or invite new employees and then wait for their invitation approval.",
+
+  "pendingSegmentPlaceholderTitle": "No pending invitations at the moment",
+  "pendingSegmentPlaceholderDesc":
+    "After you invite a user, she will appear here until she accepts the invitation. You can withdraw the invitation in any moment",
+
+  "archivedSegmentPlaceholderTitle": "No archived employees",
+  "archivedSegmentPlaceholderDesc":
+    "After you will have archived the employee or withdrawn her invitation, she will appear here",
+
+  "withdrawInvitationModalTitle":
+    "Are you sure you want to withdraw the invitation?"}

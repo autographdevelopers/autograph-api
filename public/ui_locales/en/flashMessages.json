@@ -1,0 +1,46 @@
+{
+  "removeActionConfirmationPromptTitle": "Do you want to remove this record?",
+  "removeActionConfirmationPromptSubtitle":
+    "This action deletes record permanently. You won’t be able to recover it.",
+
+  "archiveActionConfirmationPromptTitle": "Do you want to archive this record?",
+  "archiveActionConfirmationPromptSubtitle":
+    "This will make it visible only on the archived records list. You will be able to recover it later.",
+
+  "recoverActionConfirmationPromptTitle": "Do you want to recover this record?",
+  "recoverActionConfirmationPromptSubtitle":
+    "It will become visible in all areas of the app where similar records are displayed.",
+
+  "confirmationText": "Yes, I confirm",
+
+  "noticeSuccess": "All set!",
+
+  "saveSuccessSimple": "Changes were successfully saved",
+  "saveErrorSimple": "Failed to save changes",
+  "saveErrorSimpleSubtitle": "Make sure you provided valid data",
+  "notFoundErrorSimple": "404 Error - Not Found",
+  "notFoundErrorSimpleSubtitle":
+    "The record could have been removed ina meantime or you lost access to it",
+
+  "noticeCreateActionSuccess": "The resource was successfully created",
+  "noticeUpdateActionSuccess": "The resource was successfully updated",
+  "noticeSaveActionSuccess": "The resource was successfully saved",
+  "noticeRemoveActionSuccess": "The resource was successfully removed",
+  "noticeArchiveActionSuccess": "The resource was successfully archived",
+  "noticeRecoverActionSuccess": "The resource was successfully recovered",
+
+  "loginErrorTitle": "Failed to log-in",
+  "loginErrorSubtitle": "Invalid login or password",
+  "logoutErrorTitle": "Failed to log-out",
+  "signUpErrorTitle": "There was an error while creating your account",
+  "signUpErrorTitleSubtitle": "Make sure you provided valid data",
+  "resetPasswordSentTitle": "Check your email!",
+  "resetPasswordSentSubtitle":
+    "We have sent reset password instructions to your email",
+  "unableToOpenCameraRollError": "Unable to use camera roll",
+  "unableToOpenCameraRollErrorSubtitle":
+    "Please ensure that the app have privileges. If problem persists you can always try using our web portal for file uploading",
+  "fileUploadError": "Failed to upload {{count}} files",
+  "fileUploadErrorSubtitle":
+    "Make sure you have a stale internet connection. If problem persists you can always try using our web portal for file uploading"
+}

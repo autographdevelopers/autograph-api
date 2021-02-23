@@ -1,0 +1,12 @@
+{
+  "header": "Do you want to ask for some additional text / date information?",
+  "subheader":
+    "You have 2 optional inputs (text and date) that might be displayed to the user when creating a report",
+  "datetimeInput": "Datetime input",
+  "textInput": "Text input",
+  "none": "None (don't ask)",
+  "optional": "Optional",
+  "required": "Required",
+  "datetimeInputInstructions": "Instructions: What should the user describe in date input?",
+  "textInputInstructions": "Instructions: What should the user describe in text input?"
+}

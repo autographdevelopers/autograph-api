@@ -1,0 +1,8 @@
+{
+  "emailLabel": "Email",
+  "emailInputPlaceholder": "Please enter your email",
+  "passwordInputPlaceholder": "Please enter your password",
+  "passwordLabel": "Password",
+  "signInBtn": "SIGN IN",
+  "resetPassBtn": "Reset Password"
+}

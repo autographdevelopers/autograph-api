@@ -1,0 +1,6 @@
+{
+  "fetchingOptionsPending": "Pobieranie opcji...",
+  "noOptionsAvailable":
+    "Brak dostępnych opcji. Upewnij się, że zostały one wcześniej stworzone, jeśli nie - przejdź do odpowiedniego formularza i dodaj nowy rekord",
+  "select": "Wybierz",
+  "selectModalTitle": "Opcje wyboru"}

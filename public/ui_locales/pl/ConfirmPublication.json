@@ -1,0 +1,8 @@
+{
+  "title": "Czy chcesz opublikować ten wpis?",
+  "subtitle":
+    "Stanie się on widoczny w aplikacji dla uprawnionej grupy użytkowników",
+  "publish": "Opublikuj",
+  "abort": "Porzuć",
+  "publishErrorTitle":
+    "Nie udało się opublikować wpisu. Upewnij się, że masz stabilne łącze internetowe i spróbuj ponownie później"}

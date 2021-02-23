@@ -1,0 +1,12 @@
+{
+  "header": "Czy chcesz zapytać o dodatkowe informacje tekstowe lub datę?",
+  "subheader":
+    "Możesz skonfigurować 2 dodatkowe pola, które użytkownik będzie mógł/musiał wykorzystać do wprowadzenia dodatkowych informacji dotyczącaych raportowanej aktywności.",
+  "datetimeInput": "Pole daty / czasu",
+  "textInput": "Pole tekstowe",
+  "none": "Brak (nie pytaj)",
+  "optional": "Opcjonalne",
+  "required": "Wymagane",
+  "datetimeInputInstructions": "Instrukcje: O jaką datę zapytasz użytkownika?",
+  "textInputInstructions": "Instrukcje: Co użytkownik powinien opisać w polu tekstowym?"
+}

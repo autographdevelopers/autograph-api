@@ -1,0 +1,8 @@
+{
+  "name": "Nazwa",
+  "description": "Opis",
+  "studentsLimit": "Maksymalna liczba studentów",
+  "courseType": "Rodzaj kursu",
+  "noCourseCategoriesInfo":
+    "Brak dostępnych typów kursów / kategorii w tej organizacji",
+  "createThemNow": "Stwórz je teraz"}

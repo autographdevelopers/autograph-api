@@ -1,0 +1,11 @@
+{
+  "info": "Information",
+  "status": "Status",
+  "when": "When?",
+  "employee": "Employee",
+  "student": "Student",
+  "course": "Course",
+  "notes": "Notes",
+  "notesListPlaceholderTitle": "There are no notes associated with this lesson",
+  "notesListPlaceholderSubtitle":
+    "Instructor has not added any notes for this lesson yet."}

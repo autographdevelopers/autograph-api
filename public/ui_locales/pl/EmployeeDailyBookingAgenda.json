@@ -1,0 +1,20 @@
+{
+  "bookedLesson": "Umówiona lekcja",
+  "myLesson": "Moja lekcja!",
+  "break": "Przerwa",
+  "someoneIsBookingThisSlot": "Ktoś właśnie rezerwuje ten slot",
+  "book": "Umów lekcję",
+  "wastedSlot": "Niewykorzystany slot",
+  "selected": "Wybrano",
+  "lostSocketConnectionError":
+    "Utracono połączenie z serwerem. Upewnij się, że masz stabilne połączenie z internetem lub zrestartuj appke.",
+  "maxLessonTimeExceededError":
+    "Wybrałeś już maksymalną dozwoloną długość lekcji",
+  "slotsNotAdjacent": "Wybierz przystające sloty",
+  "selectAtLeastXSlots": "Zaznacz co najmniej {{count}} sloty by stworzyc lekcję",
+  "bookLessonTriggerBtn": "Zarezerwuj {{time}} ->",
+  "remainingBookingTimeInSec": "Czas pozotały do dokończenia zapisu: {{seconds}} sekund",
+  "hours": "{{hoursCount}} godzin(y)",
+  "lessonWith": "Lekcja z",
+  "inTermsOf": "W ramach: {{course}}"
+}

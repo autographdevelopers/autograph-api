@@ -1,0 +1,16 @@
+{
+  "manageEmployeesTitle": "Manage Employees",
+  "manageEmployeesDesc":
+    "User will be allowed to add / remove employees and manage theirs privileges",
+
+  "manageStudentsTitle": "Manage Students",
+  "manageStudentsDesc":
+    "User will be allowed to add / remove students and manage theirs courses, allowed lessons credits etc.",
+
+  "allowToChangeScheduleTitle": "Allow schedule change",
+  "allowToChangeScheduleDesc":
+    "The user will be able to set schedule for other employees (which are \"Instructors\")",
+
+  "isInstructorTitle": "Is instructor?",
+  "isInstructorDesc":
+    "The user will have their own schedule that will be used for lessons booking"}

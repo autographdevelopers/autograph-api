@@ -1,0 +1,13 @@
+{
+  "btnConfigHeader": "Konfiguracja przycisku",
+  "title": "Tytuł",
+  "subtitle": "Podtytuł",
+  "color": "Kolor",
+  "additionalInputs": "Dodatkowe pola",
+  "associateReportWithRecord": "Powiązuj raporty z obiektami wybranego typu",
+  "datetimeField": "Pole daty",
+  "datetimeFieldInstructions": "Instrukcje do pola daty",
+  "textField": "Pole tekstowe",
+  "textFieldInstructions": "Instrukcje do pola tekstowego",
+  "messageTemplateHeader": "Wiadomość",
+  "messageTemplate": "Szablon wiadomości"}
