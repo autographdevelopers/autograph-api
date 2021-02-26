@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :inventory_item do
-    name 'Item'
-    description 'Desc'
+    name { 'Item' }
+    description { 'Desc' }
     properties_groups do
       [
         {

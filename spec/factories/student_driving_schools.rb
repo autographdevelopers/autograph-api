@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :student_driving_school do
     student
     driving_school
-    status [:pending, :active, :archived].sample
+    status { [:pending, :active, :archived].sample }
 
     after(:create) do |student_driving_school, evaluator|
       # student_driving_school.driving_courses.create!(

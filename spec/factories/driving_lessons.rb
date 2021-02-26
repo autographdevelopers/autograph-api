@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :driving_lesson do
-    start_time 7.days.from_now
+    start_time { 7.days.from_now }
     student
     employee
     driving_school
@@ -8,7 +8,7 @@ FactoryBot.define do
     # driving_course { student.student_driving_schools.find_by(driving_school) }
 
     transient do
-      slots_count 0
+      slots_count { 0 }
     end
 
     after(:build) do |driving_lesson|

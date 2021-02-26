@@ -47,7 +47,7 @@ DeviseTokenAuth.setup do |config|
   # do so by enabling this flag. NOTE: This feature is highly experimental!
   # config.enable_standard_devise_support = false
 
-  #change in future
+  #TODO: change in future
   config.default_confirm_success_url = "http://localhost:3000/api/v1/"
   config.default_password_reset_url = "http://localhost:3000/api/v1/"
 end

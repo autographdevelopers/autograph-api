@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :notifiable_user_activity do
-    activity nil
-    user nil
-    read false
+    activity { nil }
+    user { nil }
+    read { false }
   end
 end

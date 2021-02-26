@@ -3,6 +3,6 @@ FactoryBot.define do
     student_driving_school
     driving_school
     course
-    available_slot_credits 40
+    available_slot_credits { 40 }
   end
 end

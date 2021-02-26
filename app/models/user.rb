@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  extend Devise::Models
+
   TYPES = ['Employee', 'Student'].freeze
   EMPLOYEE = 'Employee'.freeze
   STUDENT = 'Student'.freeze
