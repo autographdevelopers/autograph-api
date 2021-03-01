@@ -25,7 +25,7 @@ class ApplicationController < ActionController::API
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [
-      :name, :surname, :birth_date, :gender, :type, :time_zone
+      :name, :surname, :birth_date, :type, :time_zone
     ])
     devise_parameter_sanitizer.permit(:account_update, keys: [
       :name, :surname, :email

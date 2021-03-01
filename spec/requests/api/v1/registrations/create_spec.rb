@@ -1,7 +1,7 @@
 describe 'POST /api/v1/auth' do
   let(:response_keys) do
     %w[
-      id email name surname gender birth_date type time_zone
+      id email name surname birth_date type time_zone
     ]
   end
 
@@ -12,7 +12,6 @@ describe 'POST /api/v1/auth' do
       confirm_password: 'Password1!',
       name: 'TestName',
       surname: 'TestSurname',
-      gender: 'male',
       type: type,
       birth_date: 18.years.ago,
       time_zone: '+00:00'
@@ -70,10 +69,6 @@ describe 'POST /api/v1/auth' do
           expect(subject['surname']).to eq params[:surname]
         end
 
-        it 'gender' do
-          expect(subject['gender']).to eq params[:gender]
-        end
-
         it 'type' do
           expect(subject['type']).to eq params[:type]
         end
@@ -118,10 +113,6 @@ describe 'POST /api/v1/auth' do
 
         it 'response contains surname error message' do
           expect(json_response['surname']).to eq ["can't be blank"]
-        end
-
-        it 'response contains gender error message' do
-          expect(json_response['gender']).to eq ["can't be blank"]
         end
 
         it 'response contains type error message' do
@@ -211,10 +202,6 @@ describe 'POST /api/v1/auth' do
           expect(subject['surname']).to eq params[:surname]
         end
 
-        it 'gender' do
-          expect(subject['gender']).to eq params[:gender]
-        end
-
         it 'type' do
           expect(subject['type']).to eq params[:type]
         end
@@ -259,10 +246,6 @@ describe 'POST /api/v1/auth' do
 
         it 'response contains surname error message' do
           expect(json_response['surname']).to eq ["can't be blank"]
-        end
-
-        it 'response contains gender error message' do
-          expect(json_response['gender']).to eq ["can't be blank"]
         end
 
         it 'response contains type error message' do

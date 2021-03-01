@@ -59,4 +59,7 @@
 
   "saveImages": "Zapisz obrazki",
 
-  "apply": "Zastosuj"}
+  "apply": "Zastosuj",
+  "employee": "Pracownik",
+  "student": "Kursant"
+}

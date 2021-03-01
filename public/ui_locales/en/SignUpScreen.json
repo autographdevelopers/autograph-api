@@ -3,7 +3,6 @@
   "userTypeInputLabel": "User Type",
   "nameInputLabel": "Name",
   "surnameInputLabel": "Surname",
-  "genderInputLabel": "Gender",
   "emailInputLabel": "Email",
   "passwordInputLabel": "Password",
   "passwordConfirmationInputLabel": "Password Confirmation",

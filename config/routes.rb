@@ -5,6 +5,7 @@ Rails.application.routes.draw do
         registrations: 'api/v1/users',
         sessions: 'api/v1/sessions',
         token_validations: 'api/v1/token_validations',
+        passwords: 'api/v1/passwords',
       }
 
       devise_for :users, path: "auth", only: [:invitations],

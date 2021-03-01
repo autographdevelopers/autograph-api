@@ -59,4 +59,7 @@
 
   "saveImages": "Save Images",
 
-  "apply": "Apply"}
+  "apply": "Apply",
+  "employee": "Employee",
+  "student": "Student"
+}

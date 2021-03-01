@@ -30,12 +30,10 @@ class User < ActiveRecord::Base
 
   # == Enumerators ============================================================
   enum status: { active: 0, blocked: 1, removed: 2 }
-  enum gender: { male: 0, female: 1 }
 
   # == Validations ============================================================
   validates :name,
             :surname,
-            # :gender,
             # :birth_date,
             :type,
             # :time_zone,

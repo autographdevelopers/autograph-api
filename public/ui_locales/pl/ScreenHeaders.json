@@ -1,4 +1,6 @@
 {
+  "signIn": "Zaloguj się",
+  "resetPassword": "Resetuj hasło",
   "signUp": "Załóż konto",
   "editLanguage": "Język",
   "generalDashboard": "Panel Główny",

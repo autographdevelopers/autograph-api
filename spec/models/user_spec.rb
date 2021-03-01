@@ -1,7 +1,6 @@
 describe User do
   context 'enumerators' do
     it {should define_enum_for(:status).with([:active, :blocked, :removed]) }
-    it {should define_enum_for(:gender).with([:male, :female]) }
   end
 
   context 'validations' do

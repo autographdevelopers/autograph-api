@@ -1,6 +1,6 @@
 describe 'POST /api/v1/auth/sign_in' do
   let(:response_keys) { %w(
-    id email name surname gender birth_date type time_zone
+    id email name surname birth_date type time_zone
   ) }
 
   let(:params) { { email: email, password: password } }
@@ -39,10 +39,6 @@ describe 'POST /api/v1/auth/sign_in' do
 
       it 'surname' do
         expect(subject['surname']).to eq user.surname
-      end
-
-      it 'gender' do
-        expect(subject['gender']).to eq user.gender
       end
 
       it 'type' do
