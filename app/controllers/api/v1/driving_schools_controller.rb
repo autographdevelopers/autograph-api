@@ -43,7 +43,7 @@ class Api::V1::DrivingSchoolsController < ApplicationController
     # puma (3.11.3) lib/puma/server.rb:438:in `process_client'
     # puma (3.11.3) lib/puma/server.rb:302:in `block in run'
     # puma (3.11.3) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
-    @user_driving_schools = current_user.user_driving_schools.eligible_for_viewing #.kept
+    @user_driving_schools = current_user.user_driving_schools.eligible_for_viewing
   end
 
   def show
