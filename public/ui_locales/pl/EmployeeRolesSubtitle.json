@@ -1,5 +1,7 @@
 {
+  "yourRoles": "Twoje Role: {{roles}}",
   "owner": "Admin",
   "instructor": "Instruktor",
   "officeWorker": "Pracownik biurowy",
-  "noPrivileges": "Brak uprawnień"}
+  "noPrivileges": "Brak uprawnień"
+}

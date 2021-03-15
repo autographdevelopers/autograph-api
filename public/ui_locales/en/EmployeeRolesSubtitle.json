@@ -1,5 +1,7 @@
 {
+  "yourRoles": "Your Roles: {{roles}}",
   "owner": "Owner",
   "instructor": "Instructor",
   "officeWorker": "Office Worker",
-  "noPrivileges": "No Privileges"}
+  "noPrivileges": "No Privileges"
+}

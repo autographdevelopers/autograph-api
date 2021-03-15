@@ -11,5 +11,7 @@
   "addSchoolBtn": "Add School",
   "rejectInvitationBtn": "Reject",
   "acceptInvitationBtn": "Accept",
-
-  "settingsAndInfoBtn": "Settings and Information"}
+  "activate": "Activate",
+  "finishRegistration": "Finish Registration",
+  "settingsAndInfoBtn": "Settings and Information"
+}

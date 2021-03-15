@@ -10,5 +10,7 @@
   "addSchoolBtn": "Stwórz szkołę",
   "rejectInvitationBtn": "Odrzuć",
   "acceptInvitationBtn": "Akceptuj",
-
-  "settingsAndInfoBtn": "Ustawienia i informacje"}
+  "activate": "Aktywuj",
+  "finishRegistration": "Dokończ rejestrację",
+  "settingsAndInfoBtn": "Ustawienia i informacje"
+}
