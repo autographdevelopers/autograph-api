@@ -22,6 +22,14 @@
   "saturday": "Sobota",
   "sunday": "Niedziela",
 
+  "mondayShort": "Pon",
+  "tuesdayShort": "Wt",
+  "wednesdayShort": "Śr",
+  "thursdayShort": "Czw",
+  "fridayShort": "Pt",
+  "saturdayShort": "Sob",
+  "sundayShort": "Nd",
+
   "email": "Email",
   "name": "Nazwa",
   "description": "Opis",

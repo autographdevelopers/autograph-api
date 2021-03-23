@@ -42,5 +42,6 @@
     "Please ensure that the app have privileges. If problem persists you can always try using our web portal for file uploading",
   "fileUploadError": "Failed to upload {{count}} files",
   "fileUploadErrorSubtitle":
-    "Make sure you have a stale internet connection. If problem persists you can always try using our web portal for file uploading"
+    "Make sure you have a stale internet connection. If problem persists you can always try using our web portal for file uploading",
+  "unsavedChangesAlert": "You might have had unsaved changes on this page. Are you sure you want to leave?"
 }

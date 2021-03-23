@@ -42,5 +42,6 @@
     "Upewnij się, że aplikacja ma uprawnienia do otwierania galerii. Możesz też użyć naszej aplikacji webowej do wysłania plików.",
   "fileUploadError": "Nie udało się przesłać {{count}} plików",
   "fileUploadErrorSubtitle":
-    "Upewnij się, że masz stabilne połączenie internetowe. Jeśli problem wciąż będzie występował spróbuj użyć naszej aplikacji webowej "
+    "Upewnij się, że masz stabilne połączenie internetowe. Jeśli problem wciąż będzie występował spróbuj użyć naszej aplikacji webowej ",
+  "unsavedChangesAlert": "Wygląda na to, że możesz mieć niezapisane zmiany na tej stronie. Czy na pewno chcesz opuścić tę stronę?"
 }
