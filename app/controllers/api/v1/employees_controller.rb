@@ -11,7 +11,8 @@ class Api::V1::EmployeesController < ApplicationController
   has_scope :active_with_active_driving_school, as: :active, type: :boolean
   has_scope :pending_with_active_driving_school, as: :pending, type: :boolean
   has_scope :archived_with_active_driving_school, as: :archived, type: :boolean
-  has_scope :searchTerm
+  has_scope :with_status_in_active_school, as: :status
+  has_scope :search, as: 'search-term'
 
   def index
     if current_user.student?

@@ -46,8 +46,8 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.action_mailer.default_url_options = { host: 'localhost:3007' }
-
+  config.action_mailer.default_url_options = { host: ENV['API_HOST'] }
+  Rails.application.routes.default_url_options[:host] = ENV['API_HOST']
 
   # Store files locally.
   config.active_storage.service = :local

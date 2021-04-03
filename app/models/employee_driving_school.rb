@@ -14,6 +14,14 @@ class EmployeeDrivingSchool < ApplicationRecord
   has_many :slots
 
   # == Scopes =================================================================
+  scope :with_status_in_active_school, -> (status) {
+    where(status: status, driving_schools: { status: :active })
+        .includes(:driving_school)
+    # TODO: fix duplicated records!
+  }
+
+  # == Legacy start =================================================================
+  # TODO unify query params approach on web and mobile
   scope :active_with_active_driving_school, -> {
     where(status: :active, driving_schools: { status: :active })
         .includes(:driving_school)
@@ -29,8 +37,9 @@ class EmployeeDrivingSchool < ApplicationRecord
     where(status: :archived, driving_schools: { status: :active })
         .includes(:driving_school)
   }
+  # == Legacy end =================================================================
 
-  scope :searchTerm, ->(q) do
+  scope :search, ->(q) do
     where(%(
         users.name ILIKE :term
         OR users.surname ILIKE :term

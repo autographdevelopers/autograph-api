@@ -14,5 +14,12 @@
 
   "archivedSegmentPlaceholderTitle": "Brak zarchiwizowanych pracowników",
   "archivedSegmentPlaceholderDesc":
-    "Wygląda na to, że nia ma zarchiwizowanych pracowników dla danego zapytania. Zmień kryterium wyszukiwania i spróbuj ponownie."
+    "Wygląda na to, że nia ma zarchiwizowanych pracowników dla danego zapytania. Zmień kryterium wyszukiwania i spróbuj ponownie.",
+
+  "withdrawInvitationModalTitle": "Czy na pewno chcesz wycofać zaproszenie?",
+
+  "column_header_name": "Imię",
+  "column_header_surname": "Nazwisko",
+  "column_header_email": "Email",
+  "column_header_privileges": "Role"
 }

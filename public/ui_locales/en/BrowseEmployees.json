@@ -17,4 +17,10 @@
     "After you will have archived the employee or withdrawn her invitation, she will appear here",
 
   "withdrawInvitationModalTitle":
-    "Are you sure you want to withdraw the invitation?"}
+    "Are you sure you want to withdraw the invitation?",
+
+  "column_header_name": "Name",
+  "column_header_surname": "Surname",
+  "column_header_email": "Email",
+  "column_header_privileges": "Privileges"
+}
