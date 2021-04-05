@@ -7,6 +7,7 @@ class Invitations::CreateService
 
     validate_invited_user_type
 
+    # bug email sent but got "employee_id":["has already been taken"]} error later on
     @invited_user = User.invite!(
       email: invited_user_params[:email],
       type: invited_user_type,

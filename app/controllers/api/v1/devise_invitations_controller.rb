@@ -16,6 +16,13 @@ class Api::V1::DeviseInvitationsController < Devise::InvitationsController
   # def edit
   #   redirect_to "#{client_api_url}?invitation_token=#{params[:invitation_token]}"
   # end
+  #
+  def edit
+    sign_out send("current_#{resource_name}") if send("#{resource_name}_signed_in?")
+    set_minimum_password_length
+    resource.invitation_token = params[:invitation_token]
+    redirect_to Rails.application.secrets.fe_app_host + "/sign-up-from-invitation?invitation_token=#{params[:invitation_token]}"
+  end
 
   def update
     @user = User.accept_invitation!(accept_invitation_params)
