@@ -1,5 +1,6 @@
 {
   "withdrawInvitationModalTitle":
     "Are you sure you want to withdraw the invitation?",
-  "withdrawBtnTitle": "Withdraw"
+  "withdrawBtnTitle": "Withdraw",
+  "successFlashMsg": "You have successfully archived this person"
 }

@@ -1,11 +1,9 @@
 class Api::V1::StudentsController < ApplicationController
   before_action :verify_current_user_to_be_employee
   before_action :set_employee_driving_school
-  has_scope :active_with_active_driving_school, as: :active, type: :boolean
-  has_scope :pending_with_active_driving_school, as: :pending, type: :boolean
-  has_scope :archived_with_active_driving_school, as: :archived, type: :boolean
   has_scope :ones_not_assigned_to_course, as: :ones_not_assigned_to_course
-  has_scope :searchTerm
+  has_scope :search, as: 'search-term'
+  has_scope :with_status_in_active_school, as: :status
 
   def index
     employee_privileges = @employee_driving_school.employee_privileges

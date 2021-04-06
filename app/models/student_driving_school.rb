@@ -29,7 +29,12 @@ class StudentDrivingSchool < ApplicationRecord
     left_joins(:course_participation_details).where.not(course_participation_details: { course_id: course_id })
   }
 
-  scope :searchTerm, ->(q) do
+  scope :with_status_in_active_school, -> (status) {
+    where(status: status, driving_schools: { status: :active })
+        .includes(:driving_school)
+  }
+
+  scope :search, ->(q) do
     where(%(
         users.name ILIKE :term
         OR users.surname ILIKE :term

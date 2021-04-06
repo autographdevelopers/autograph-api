@@ -1,3 +1,5 @@
+json.partial! 'api/v1/helper/pagination', locals: { collection: @student_driving_schools }
+
 json.results do
   json.array! @student_driving_schools.each do |student_driving_schools|
     json.partial! 'student', locals: {
@@ -5,8 +7,4 @@ json.results do
       student_driving_school: student_driving_schools
     }
   end
-end
-
-json.pagination do
-  json.is_more (!@student_driving_schools.last_page? && !@student_driving_schools.out_of_range?)
 end

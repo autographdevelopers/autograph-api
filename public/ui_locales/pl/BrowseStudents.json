@@ -14,5 +14,9 @@
 
   "archivedSegmentPlaceholderTitle": "Brak zarchiwizowanych kursantów",
   "archivedSegmentPlaceholderDesc":
-    "Wygląda na to, że nia ma zarchiwizowanych kursantów dla danego zapytania. Zmień kryterium wyszukiwania i spróbuj ponownie."
+    "Wygląda na to, że nia ma zarchiwizowanych kursantów dla danego zapytania. Zmień kryterium wyszukiwania i spróbuj ponownie.",
+
+  "column_header_name": "Imię",
+  "column_header_surname": "Nazwisko",
+  "column_header_email": "Email"
 }

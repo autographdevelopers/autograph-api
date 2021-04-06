@@ -1,3 +1,5 @@
 {
   "withdrawInvitationModalTitle": "Czy na pewno chcesz wycofać zaproszenie?",
-  "withdrawBtnTitle": "Wycofaj"}
+  "withdrawBtnTitle": "Wycofaj",
+  "successFlashMsg": "Udało się, ta osoba została pomyślnie zarchiwizowana"
+}

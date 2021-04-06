@@ -14,8 +14,4 @@ json.results do
   end
 end
 
-json.pagination do
-  json.is_more !@employee_driving_schools.last_page? && !@employee_driving_schools.out_of_range?
-  json.total_pages @employee_driving_schools.total_pages
-  json.total_count @employee_driving_schools.total_count
-end
+json.partial! 'api/v1/helper/pagination', locals: { collection: @employee_driving_schools }
