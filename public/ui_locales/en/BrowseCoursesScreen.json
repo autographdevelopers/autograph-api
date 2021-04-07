@@ -1,0 +1,8 @@
+{
+  "column_header_name": "Course",
+  "column_header_description":"Description",
+  "column_header_status": "Status",
+  "column_header_start_time": "Start Time",
+  "column_header_end_time": "End Time",
+  "column_header_course_type": "Course Category"
+}

@@ -6,6 +6,7 @@ class Api::V1::CoursesController < ApplicationController
   before_action :set_employee_school
   before_action :set_school
   before_action :set_course, only: %i[update archive unarchive show]
+  has_scope :search, as: 'search-term'
 
   def index
     sleep 2

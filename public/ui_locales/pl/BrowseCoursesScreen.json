@@ -1,0 +1,8 @@
+{
+  "column_header_name": "Kurs",
+  "column_header_description": "Opis",
+  "column_header_status": "Status",
+  "column_header_start_time": "Data startu",
+  "column_header_end_time": "Data zakończenia",
+  "column_header_course_type": "Kategoria"
+}
