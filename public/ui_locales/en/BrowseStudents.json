@@ -21,5 +21,7 @@
 
   "column_header_name": "Name",
   "column_header_surname": "Surname",
-  "column_header_email": "Email"
+  "column_header_email": "Email",
+  "column_header_available_slot_credits": "Available slots (30min)",
+  "column_header_used_slots_count": "Used slots"
 }

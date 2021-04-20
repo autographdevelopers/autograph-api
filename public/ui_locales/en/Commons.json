@@ -72,5 +72,15 @@
   "employee": "Employee",
   "student": "Student",
   "settings": "Settings",
-  "education": "Education"
+  "education": "Education",
+  "details": "Details",
+  "info": "Information",
+  "yes": "yes",
+  "archive": "archive",
+  "unarchive": "unarchive",
+  "select": "select",
+  "unselect": "unselect",
+  "myOrganizations": "My Organizations",
+  "announcements": "Announcements",
+  "recentActivities": "Recent Activities"
 }

@@ -17,6 +17,10 @@ class CoursePolicy < ApplicationPolicy
     user.employee?
   end
 
+  def show?
+    user.employee?
+  end
+
   def update?
     user.employee?
   end

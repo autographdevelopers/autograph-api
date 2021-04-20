@@ -1,3 +1,11 @@
 {
   "info":
-    "(i) Każdy ze studentów otrzyma dostępne saldo czasowe ({{creditsNo}}), ktore będzie mogło być wykorzystane wykonania zapisów na lekcje. Możesz edytować to saldo później na profilu kursanta."}
+    "(i) Każdy ze studentów otrzyma dostępne saldo czasowe ({{creditsNo}}), ktore będzie mogło być wykorzystane wykonania zapisów na lekcje. Możesz edytować to saldo później na profilu kursanta.",
+  "bulkAssignmentSuccessMsg": "Pomyślnie przypisano {{number}} studentów",
+  "bulkAssignmentErrorMsg": "Nie udało się przypisać {{number}} studentów",
+  "bulkRemoveAssignmentSuccessMsg": "Pomyślnie usunięto {{number}} studentów z tego kursu",
+  "bulkRemoveAssignmentErrorMsg": "Nie udało się usunąć {{number}} studentów z teog kursu",
+  "webStep1Title": "Wybierz studetów, których chcesz zapisać na kurs",
+  "webStep2Title": "Potwierdź przypisanie wybranych studentów",
+  "enrollActionBtnTitle": "Przypisz studentów ({{count}})"
+}

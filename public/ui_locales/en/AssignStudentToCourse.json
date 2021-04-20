@@ -1,4 +1,11 @@
 {
   "info":
-    "(i) Each of the students will receive {{creditsNo}} credit to be use to enroll for a lesson. Later you can change it on a student profile"
+    "(i) Each of the students will receive {{creditsNo}} credit to be use to enroll for a lesson. Later you can change it on a student profile",
+  "bulkAssignmentSuccessMsg": "Successfully enrolled {{number}} students",
+  "bulkAssignmentErrorMsg": "Failed to enroll {{number}} students",
+  "bulkRemoveAssignmentSuccessMsg": "Successfully removed {{number}} students from this course",
+  "bulkRemoveAssignmentErrorMsg": "Failed to remove {{number}} students from this course",
+    "webStep1Title": "Select students you want to enroll for a course",
+  "webStep2Title": "Confirm enrollment for current selection",
+  "enrollActionBtnTitle": "Enroll students ({{count}})"
 }

@@ -79,4 +79,7 @@
   "assignStudentsToCourse": "Zapisz kursantów na kurs",
 
   "EmployeeDailyBookingAgenda": "Umów jazdę",
-  "SelectCourseParticipationForLessonBooking": "Wybierz kurs"}
+  "SelectCourseParticipationForLessonBooking": "Wybierz kurs",
+  "enrollStudentsToCourse": "Zapisz studentów",
+  "recentActivities": "Ostatnie aktywności"
+}

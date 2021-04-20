@@ -9,6 +9,7 @@ class Api::V1::CourseTypesController < ApplicationController
 
   def index
     authorize CourseType
+    # sleep 5
     @course_types = CourseType.where(driving_school: params[:only_prebuilts] ? nil : @school).order(created_at: :desc)
     @course_types = apply_scopes(@course_types)
     # @course_types = @course_types .page(params[:page]).per(records_per_page)

@@ -72,5 +72,15 @@
   "employee": "Pracownik",
   "student": "Kursant",
   "settings": "Ustawienia",
-  "education": "Kształcenie"
+  "education": "Kształcenie",
+  "details": "Szczegóły",
+  "info": "Informacje",
+  "yes": "tak",
+  "archive": "zarchiwizuj",
+  "unarchive": "odzyskaj",
+  "select": "wybierz",
+  "unselect": "cofnij",
+  "myOrganizations": "Moje organizacje",
+  "announcements": "Ogłoszenia",
+  "recentActivities": "Ostatnie aktywności"
 }

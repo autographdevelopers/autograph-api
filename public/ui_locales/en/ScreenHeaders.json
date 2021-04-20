@@ -80,4 +80,7 @@
   "assignStudentsToCourse": "Assign Students to Course",
 
   "EmployeeDailyBookingAgenda": "Book Lesson",
-  "SelectCourseParticipationForLessonBooking": "Select Course"}
+  "SelectCourseParticipationForLessonBooking": "Select Course",
+  "enrollStudentsToCourse": "Enroll Students",
+  "recentActivities": "Recent Activities"
+}

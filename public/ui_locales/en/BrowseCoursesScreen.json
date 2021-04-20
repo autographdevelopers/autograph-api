@@ -4,5 +4,6 @@
   "column_header_status": "Status",
   "column_header_start_time": "Start Time",
   "column_header_end_time": "End Time",
-  "column_header_course_type": "Course Category"
+  "column_header_course_type": "Course Category",
+  "assignParticipants": "Assign Participants"
 }
