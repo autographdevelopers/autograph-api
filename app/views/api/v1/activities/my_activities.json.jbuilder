@@ -5,7 +5,4 @@ json.results do
   end
 end
 
-json.pagination do
-  json.is_more !@notifiable_user_activities.last_page? && !@notifiable_user_activities.out_of_range?
-end
-
+json.partial! 'api/v1/helper/pagination', locals: { collection: @notifiable_user_activities }

@@ -17,6 +17,7 @@ class Api::V1::ActivitiesController < ApplicationController
                                     .page(params[:page])
                                     .per(params[:per] || 25)
                                     .order('activities.created_at DESC')
+
   end
 
   # Add authorization
@@ -25,6 +26,13 @@ class Api::V1::ActivitiesController < ApplicationController
                                  .related_to_user(related_user_id)
                                  .order('activities.created_at DESC')
                                  .page(params[:page] || 1).per(params[:per] || 25)
+  end
+
+  def show
+    @activity = @notifiable_user_activities = current_user.notifiable_user_activities
+                                      .includes(:activity)
+                                      .find_by(activities: { id: params[:id] })
+                                      .activity
   end
 
   def create

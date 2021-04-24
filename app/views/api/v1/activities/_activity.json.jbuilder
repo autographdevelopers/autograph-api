@@ -10,4 +10,4 @@ json.extract! activity,
               :date,
               :created_at
 
-json.user { json.partial! 'api/v1/users/user', user: activity.user }
+json.user { json.partial! 'api/v1/users/user_min', user: activity.user }

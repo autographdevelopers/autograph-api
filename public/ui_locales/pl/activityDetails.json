@@ -1,7 +1,9 @@
 {
   "message": "Wiadomość",
+  "activityType": "Typ aktywności",
   "details": "Szczegóły",
   "date": "Data",
   "author": "Autor",
   "authorsTextComment": "Komentarz od autora (tekst)",
-  "authorsDateComment": "Komentarz od autora (data)"}
+  "authorsDateComment": "Komentarz od autora (data)"
+}

@@ -58,7 +58,7 @@ Rails.application.routes.draw do
         end
         resources :labelable_labels, only: [:index]
 
-        resources :activities, only: [:index, :create] do
+        resources :activities, only: [:index, :create, :show] do
           get :my_activities, on: :collection
         end
         member do

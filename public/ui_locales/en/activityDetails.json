@@ -1,5 +1,6 @@
 {
   "message": "Message",
+  "activityType": "Activity Type",
   "details": "Details",
   "date": "Date",
   "author": "Author",
