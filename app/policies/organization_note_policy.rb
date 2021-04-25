@@ -7,11 +7,19 @@ class OrganizationNotePolicy < ApplicationPolicy
     user.employee? && user == record.author
   end
 
+  def show?
+    user.employee?
+  end
+
   def update?
     user == record.author
   end
 
   def discard?
+    user == record.author
+    end
+
+  def undiscard?
     user == record.author
   end
 
@@ -20,6 +28,10 @@ class OrganizationNotePolicy < ApplicationPolicy
   end
 
   def attach_file?
+    user == record.author
+  end
+
+  def attach_file_web?
     user == record.author
   end
 

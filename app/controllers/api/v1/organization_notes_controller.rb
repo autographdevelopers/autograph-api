@@ -1,6 +1,6 @@
 class Api::V1::OrganizationNotesController < ApplicationController
   before_action :set_driving_school
-  before_action :set_note, only: %i[update attach_file delete_file discard publish]
+  before_action :set_note, only: %i[update show attach_file attach_file_web delete_file discard undiscard publish]
 
   def create
     authorize OrganizationNote
@@ -9,6 +9,10 @@ class Api::V1::OrganizationNotesController < ApplicationController
         author: current_user,
       )
     )
+  end
+
+  def show
+    authorize @note
   end
 
   def update
@@ -42,7 +46,13 @@ class Api::V1::OrganizationNotesController < ApplicationController
 
   def attach_file
     authorize @note
+    byebug
     @note.files.attach(io: image_io, filename: image_name)
+  end
+
+  def attach_file_web
+    authorize @note
+    @note.files.attach(params[:organization_note][:file])
   end
 
   def delete_file
@@ -56,9 +66,16 @@ class Api::V1::OrganizationNotesController < ApplicationController
     head :ok
   end
 
+  def undiscard
+    authorize @note
+    @note.undiscard!
+    head :ok
+  end
+
   private
 
   def image_io
+    byebug
     decoded_image = Base64.decode64(params[:organization_note][:file][:base64])
     StringIO.new(decoded_image)
   end

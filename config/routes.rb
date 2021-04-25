@@ -73,12 +73,14 @@ Rails.application.routes.draw do
           end
         end
 
-        resources :organization_notes, only: %i[create index update] do
+        resources :organization_notes, only: %i[create index update show] do
           get :authored, on: :collection
           member do
             put :attach_file
+            put :attach_file_web
             put :delete_file
             put :discard
+            put :undiscard
             put :publish
           end
         end

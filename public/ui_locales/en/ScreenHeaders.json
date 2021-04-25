@@ -82,5 +82,6 @@
   "EmployeeDailyBookingAgenda": "Book Lesson",
   "SelectCourseParticipationForLessonBooking": "Select Course",
   "enrollStudentsToCourse": "Enroll Students",
-  "recentActivities": "Recent Activities"
+  "recentActivities": "Recent Activities",
+  "announcements": "Announcements"
 }

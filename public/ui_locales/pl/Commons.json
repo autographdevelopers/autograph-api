@@ -83,5 +83,9 @@
   "myOrganizations": "Moje organizacje",
   "announcements": "Ogłoszenia",
   "recentActivities": "Ostatnie aktywności",
-  "filter": "Filtruj"
+  "filter": "Filtruj",
+  "publish": "Opublikuj",
+  "date": "Data",
+  "attachments": "Załączniki",
+  "author": "Autor"
 }

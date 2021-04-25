@@ -83,5 +83,9 @@
   "myOrganizations": "My Organizations",
   "announcements": "Announcements",
   "recentActivities": "Recent Activities",
-  "filter": "Filter"
+  "filter": "Filter",
+  "publish": "Publish",
+  "date": "Date",
+  "attachments": "Attachments",
+  "author": "Author"
 }
