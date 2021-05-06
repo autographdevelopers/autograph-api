@@ -87,5 +87,14 @@
   "publish": "Publish",
   "date": "Date",
   "attachments": "Attachments",
-  "author": "Author"
+  "author": "Author",
+  "download": "Download",
+  "saved": "Saved",
+  "unsaved": "Unsaved",
+  "close": "Close",
+  "drafts": "Drafts",
+  "published": "Published",
+  "archived": "Archived",
+  "fullName": "Full Name",
+  "phoneNo": "Phone Number"
 }

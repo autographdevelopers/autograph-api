@@ -1,3 +1,8 @@
+if @user
+  json.user { json.partial! 'api/v1/users/user_min', user: @user }
+end
+
+
 json.results do
   json.array! @course_participation_details,
               partial: 'api/v1/course_participation_details/course_participation_detail',

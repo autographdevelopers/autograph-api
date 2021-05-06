@@ -23,6 +23,10 @@ class Api::V1::StudentsController < ApplicationController
     @student_driving_schools = apply_scopes(@student_driving_schools)
   end
 
+  def show
+    @student_driving_school = @employee_driving_school.driving_school.student_driving_schools.find_by(student_id: params[:id])
+  end
+
   def not_assigned_to_course
 
     participation_student_driving_schools = @employee_driving_school.driving_school.course_participation_details.kept.where(course_id: params[:course_id]).pluck(:student_driving_school_id)

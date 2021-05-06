@@ -1,7 +1,7 @@
 class Api::V1::LessonNotesController < ApplicationController
   before_action :set_driving_school
   before_action :set_lesson, except: :authored
-  before_action :set_note, only: %i[update attach_file delete_file publish discard]
+  before_action :set_note, only: %i[update attach_file delete_file publish discard show attach_file_web]
 
   def create
     authorize LessonNote
@@ -16,6 +16,10 @@ class Api::V1::LessonNotesController < ApplicationController
   def update
     authorize @note
     @note.update!(note_params)
+  end
+
+  def show
+    authorize @note
   end
 
   def publish
@@ -46,6 +50,11 @@ class Api::V1::LessonNotesController < ApplicationController
   def attach_file
     authorize @note
     @note.files.attach(io: image_io, filename: image_name)
+  end
+
+  def attach_file_web
+    authorize @note
+    @note.files.attach(params[:lesson_note][:file])
   end
 
   def delete_file

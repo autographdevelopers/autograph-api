@@ -5,10 +5,6 @@ class DrivingLessonPolicy < ApplicationPolicy
         can_modify_schedules_in_driving_school?(record.driving_school.id)))
   }
 
-  def create_lesson_note_from_instructor?
-    true
-  end
-
   class Scope < Scope
     def resolve
       if user.student?

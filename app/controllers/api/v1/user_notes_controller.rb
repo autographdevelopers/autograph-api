@@ -1,7 +1,7 @@
 class Api::V1::UserNotesController < ApplicationController
   before_action :set_user
   before_action :set_driving_school
-  before_action :set_note, only: %i[update attach_file delete_file discard publish]
+  before_action :set_note, only: %i[update show attach_file_web attach_file delete_file discard publish]
 
   def create
     authorize UserNote
@@ -16,6 +16,10 @@ class Api::V1::UserNotesController < ApplicationController
   def update
     authorize @note
     @note.update!(note_params)
+  end
+
+  def show
+    authorize @note
   end
 
   def publish
@@ -47,6 +51,11 @@ class Api::V1::UserNotesController < ApplicationController
   def attach_file
     authorize @note
     @note.files.attach(io: image_io, filename: image_name)
+  end
+
+  def attach_file_web
+    authorize @note
+    @note.files.attach(params[:user_note][:file])
   end
 
   def delete_file

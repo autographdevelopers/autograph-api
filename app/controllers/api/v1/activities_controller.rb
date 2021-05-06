@@ -22,6 +22,7 @@ class Api::V1::ActivitiesController < ApplicationController
 
   # Add authorization
   def index
+    @user = User.find(related_user_id)
     @activities = @driving_school.activities
                                  .related_to_user(related_user_id)
                                  .order('activities.created_at DESC')

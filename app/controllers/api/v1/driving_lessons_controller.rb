@@ -1,6 +1,6 @@
 class Api::V1::DrivingLessonsController < ApplicationController
   before_action :set_driving_school
-  before_action :set_driving_lesson, only: [:cancel]
+  before_action :set_driving_lesson, only: [:cancel, :show]
   before_action :set_employee_driving_school, only: [:create]
   before_action :set_student, only: [:create]
   before_action :set_slots, only: [:create]
@@ -17,11 +17,17 @@ class Api::V1::DrivingLessonsController < ApplicationController
   has_scope :to_date_time
 
   def index
-    sleep 2
+    @student = params[:student_id].try { |id| User.find(id) }
+    @employee = params[:employee_id].try { |id| User.find(id) }
+
     @driving_lessons = apply_scopes(
       policy_scope(@driving_school.driving_lessons)
     ).includes(:employee, :student, :driving_school,
                slots: :employee_driving_school).page(params[:page]).per(params[:per] || 20)
+  end
+
+  def show
+
   end
 
   def cancel
@@ -47,9 +53,6 @@ class Api::V1::DrivingLessonsController < ApplicationController
 
     @driving_lesson.save!
     create_activity
-    render :create, locals: {
-      driving_lesson: @driving_lesson
-    }, status: :created
   end
 
   private
@@ -62,9 +65,7 @@ class Api::V1::DrivingLessonsController < ApplicationController
   end
 
   def set_driving_lesson
-    @driving_lesson = DrivingLesson.where(driving_school_id: @driving_school.id)
-                                   .upcoming
-                                   .find(params[:id])
+    @driving_lesson = DrivingLesson.find_by(driving_school_id: @driving_school.id, id: params[:id])
   end
 
   def set_driving_course_participation

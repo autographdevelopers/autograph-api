@@ -92,11 +92,12 @@ Rails.application.routes.draw do
         end
 
         resources :users, only: [] do
-          resources :user_notes, only: %i[create index update] do
+          resources :user_notes, only: %i[create index update show] do
             get :authored, on: :collection
             member do
               put :attach_file
               put :delete_file
+              put :attach_file_web
               put :discard
               put :publish
             end
@@ -107,18 +108,19 @@ Rails.application.routes.draw do
           get :authored, on: :collection
         end
 
-        resources :driving_lessons, only: [:index, :create] do
+        resources :driving_lessons, only: [:index, :create, :show] do
           put :cancel, on: :member
-          resources :lesson_notes, only: %i[create index update] do
+          resources :lesson_notes, only: %i[create index update show] do
             member do
               put :attach_file
+              put :attach_file_web
               put :delete_file
               put :discard
               put :publish
             end
           end
         end
-        resources :students, only: [:index] do
+        resources :students, only: [:index, :show] do
           resources :course_participation_details, only: [:show, :update, :index, :create]
         end
         resources :employees, only: [:index] do

@@ -43,6 +43,7 @@ module ErrorsHandlers
     def record_not_found(e)
       p "record_not_found"
       p e
+      # byebug
       render json: {
         error: 'Some record could not be found. it might have been removed in a meantime. Please try again later.'
       }, status: :not_found

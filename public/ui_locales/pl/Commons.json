@@ -87,5 +87,14 @@
   "publish": "Opublikuj",
   "date": "Data",
   "attachments": "Załączniki",
-  "author": "Autor"
+  "author": "Autor",
+  "download": "Pobierz",
+  "saved": "Zapisane",
+  "unsaved": "Niezapisane",
+  "close": "Zamknij",
+  "drafts": "Wersje robocze",
+  "published": "Opublikowane",
+  "archived": "Zarchiwizowane",
+  "fullName": "Imię i nazwisko",
+  "phoneNo": "Numer telefonu"
 }

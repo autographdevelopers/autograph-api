@@ -1,6 +1,7 @@
 class Api::V1::OrganizationNotesController < ApplicationController
   before_action :set_driving_school
   before_action :set_note, only: %i[update show attach_file attach_file_web delete_file discard undiscard publish]
+  has_scope :with_status, as: :status
 
   def create
     authorize OrganizationNote
@@ -24,7 +25,8 @@ class Api::V1::OrganizationNotesController < ApplicationController
     @notes = @driving_school.organization_notes.includes(
       :author,
       files_attachments: :blob
-    ).kept.published.order(created_at: :desc)
+    ).order(created_at: :desc)
+    @notes = apply_scopes(@notes)
     @notes = @notes.page(params[:page]).per(records_per_page)
   end
 
@@ -46,7 +48,6 @@ class Api::V1::OrganizationNotesController < ApplicationController
 
   def attach_file
     authorize @note
-    byebug
     @note.files.attach(io: image_io, filename: image_name)
   end
 
@@ -93,7 +94,7 @@ class Api::V1::OrganizationNotesController < ApplicationController
   end
 
   def set_note
-    @note = @driving_school.organization_notes.kept.find(params[:id])
+    @note = @driving_school.organization_notes.find(params[:id])
   end
 
   def set_driving_school

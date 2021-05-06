@@ -9,6 +9,7 @@ class Api::V1::CourseParticipationDetailsController < ApplicationController
   has_scope :kept, type: :boolean
   def index
     # authorize @owning_record, policy_class: CourseParticipationDetailPolicy
+    @user = User.find_by(id: params[:student_id])
     @course_participation_details = @owning_record.course_participation_details
                                                   .includes(course: :course_type, student_driving_school: :student)
                                                   .page(params[:page])

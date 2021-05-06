@@ -14,4 +14,12 @@ class OrganizationNote < ApplicationRecord
 
   # == Enum =========================
   enum status: { draft: 0, published: 1 }
+
+  scope :with_status, ->(status) {
+    # byebug
+    return self.kept.published if status == 'active'
+    return self.discarded if status == 'archived'
+    return self.draft if status == 'draft'
+    return self
+  }
 end

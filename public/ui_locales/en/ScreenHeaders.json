@@ -26,11 +26,13 @@
   "studentProfile": "Student Profile",
   "editCourseParticipation": "Edit Course Participation",
   "userLessons": "User Lessons",
+  "userLessonsVerbose": "Lessons related to user {{userLabel}}",
   "userActivities": "User-related Activities",
   "browseCourses": "Courses",
+  "userActivitiesVerbose": "Activities associated with user {{userLabel}}",
   "createCourse": "Create a Course",
   "courseDetails": "Course Details",
-
+  "userCoursesVerbose": "{{userLabel}} - courses",
   "createComment": "Create Comment",
   "editComment": "Edit Comment",
   "commentDetails": "Comment Details",
@@ -46,6 +48,7 @@
   "lessonNoteDetails": "Lesson Note",
   "userNoteDetails": "User Note",
   "userNotes": "User Notes",
+  "userNotesVerbose": "Posts on wall of user {{userLabel}}",
 
   "fullScreenImgPreview": "Image Preview",
 

@@ -6,6 +6,14 @@ class UserNotePolicy < ApplicationPolicy
 
   def update?
     user == record.author
+    end
+
+  def attach_file_web?
+    user == record.author
+  end
+
+  def show?
+    true
   end
 
   def discard?
