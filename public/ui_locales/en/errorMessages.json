@@ -1,4 +1,5 @@
 {
   "fieldRequired": "This field is required",
+  "mustBePositive": "Number must be positive",
   "passwordsMustMatch": "Password and password confirmation must match",
   "invalidEmailFormat": "Email format is invalid"}

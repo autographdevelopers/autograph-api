@@ -39,6 +39,13 @@ module Slots
       end
 
       def parse_to_date_time(date, time)
+        # what if date is actually datetime? how does this merges
+        p %(driving_school_time_zone.local_to_utc("#{date} #{time}".to_datetime))
+        p driving_school_time_zone.local_to_utc("#{date} #{time}".to_datetime)
+
+        p " czcasddas.to_datetime "
+        p "#{date} #{time}".to_datetime
+
         driving_school_time_zone.local_to_utc("#{date} #{time}".to_datetime)
       end
 

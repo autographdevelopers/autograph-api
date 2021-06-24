@@ -2,13 +2,17 @@
 # Basing on passed schedule and date it schedules slots for given date
 module Slots
   class ScheduleService
-    attr_reader :employee_driving_school, :schedule, :driving_school, :date,
+    attr_reader :employee_driving_school,
+                :schedule,
+                :driving_school,
+                :date,
                 :new_template_binding_from
 
     def initialize(schedule, date)
       @employee_driving_school = schedule.employee_driving_school
       @schedule = schedule
       @driving_school = @employee_driving_school.driving_school
+      # new_template_binding_from - does not consider timezone - probably a bug
       @new_template_binding_from = schedule.new_template_binding_from
       @date = date
     end
@@ -39,9 +43,7 @@ module Slots
     end
 
     def use_new_template?
-      return false unless new_template_binding_from.present?
-
-      date >= new_template_binding_from
+      new_template_binding_from.present? && date >= new_template_binding_from
     end
 
     def weekday_name

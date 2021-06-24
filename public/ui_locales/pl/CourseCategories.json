@@ -3,6 +3,6 @@
   "assignFromPrebuilts": "Predefiniowane kategorie",
   "customCategories": "Moje kategorie",
   "archived": "Przywróć zarchiwizowane",
-
-  "addCourseCategoryModalTitle":
-    "Stwórz własny typ kursu (np. bazując na kategorii)"}
+  "addCourseCategoryModalTitle": "Stwórz własny typ kursu (np. bazując na kategorii)",
+  "saveError": "Błąd - upewnij się, że kategorie nie powtarzają się - jeśli istnieje już zarchiwizowana kategoria o tej samej nazwie, przywróć ją zamiast tworzyć nową."
+}

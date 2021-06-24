@@ -31,6 +31,10 @@ class Api::V1::EmployeesController < ApplicationController
     @employee_driving_schools = apply_scopes(@employee_driving_schools)
   end
 
+  def show
+    @employee_driving_school = @driving_school.employee_driving_schools.find_by(employee_id: params[:id])
+  end
+
   private
 
   def set_driving_school

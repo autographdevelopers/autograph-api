@@ -10,6 +10,8 @@ module Slots
       @employee_driving_school = schedule.employee_driving_school
       @schedule = schedule
       @driving_school = @employee_driving_school.driving_school
+      # date type column not time nor timezone
+      # new_template_binding_from - does not consider timezone - probably a bug
       @new_template_binding_from = schedule.new_template_binding_from
     end
 
@@ -31,13 +33,14 @@ module Slots
       date_times_to_create << extract_date_times(dates_ranges[0], schedule.current_template)
       date_times_to_create << extract_date_times(dates_ranges[1], schedule.new_template)
 
+      #ensures only date-times in future are processed
       date_times_to_create.flatten.select { |date_time| date_time.utc > DateTime.now.utc }.to_a
     end
 
     def get_dates_ranges
       dates_ranges = []
 
-      if (today..last_day_of_possible_booking).cover?(new_template_binding_from)
+      if (today..last_day_of_possible_booking).cover?(new_template_binding_from) # there will be a change in schedule
         dates_ranges << (today..new_template_binding_from.yesterday)
         dates_ranges << (new_template_binding_from..last_day_of_possible_booking)
       else
@@ -49,6 +52,9 @@ module Slots
         dates_ranges.map! { |dates| filter_out_holidays(dates) }
       end
 
+      p "dates_ranges"
+      p dates_ranges
+
       dates_ranges
     end
 
@@ -59,11 +65,17 @@ module Slots
         slot_start_times_ids = schedule_template[weekday]
         next unless slot_start_times_ids.present?
 
-        dates = dates_range.to_a.select { |day| day.wday == weekday_index }
-        times = slot_start_times_ids.map { |id| ScheduleConstants::SLOT_START_TIMES[id] }
+        dates = dates_range.to_a.select { |day| day.wday == weekday_index } # get all days which are mondays, then - in next iteration, take tuesdays etc..
+        times = slot_start_times_ids.map { |id| ScheduleConstants::SLOT_START_TIMES[id] } # get all start times for particular weekday
+
+        # this algorithm scans calendar vertically
 
         dates.each do |date|
           times.each do |time|
+            p "<>date<>"
+            p date
+            p "<>time<>"
+            p time
             date_times << parse_to_date_time(date, time)
           end
         end

@@ -1,5 +1,6 @@
 json.id employee.id
 json.email employee.email
+json.full_name employee.full_name
 json.phone_number employee.phone_number
 json.name employee.name
 json.surname employee.surname

@@ -3,6 +3,10 @@ class InventoryItemPolicy < ApplicationPolicy
     user.employee?
   end
 
+  def show?
+    user.employee?
+  end
+
   def update?
     user == record.author
   end
@@ -16,6 +20,10 @@ class InventoryItemPolicy < ApplicationPolicy
   end
 
   def attach_file?
+    user == record.author
+  end
+
+  def attach_file_web?
     user == record.author
   end
 

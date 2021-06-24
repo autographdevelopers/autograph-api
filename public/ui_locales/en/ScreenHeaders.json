@@ -86,5 +86,7 @@
   "SelectCourseParticipationForLessonBooking": "Select Course",
   "enrollStudentsToCourse": "Enroll Students",
   "recentActivities": "Recent Activities",
-  "announcements": "Announcements"
+  "announcements": "Announcements",
+  "assets": "Assets",
+  "reportActivity": "Report Activity"
 }

@@ -85,8 +85,9 @@ Rails.application.routes.draw do
           end
         end
 
-        resources :inventory_items, only: %i[create index update] do
+        resources :inventory_items, only: %i[create index show update] do
           put :attach_file, on: :member
+          put :attach_file_web, on: :member
           put :delete_file, on: :member
           put :discard, on: :member
         end
@@ -123,7 +124,7 @@ Rails.application.routes.draw do
         resources :students, only: [:index, :show] do
           resources :course_participation_details, only: [:show, :update, :index, :create]
         end
-        resources :employees, only: [:index] do
+        resources :employees, only: [:index, :show] do
           resource :employee_privileges, only: [:update, :show]
           resource :schedule, only: [:update, :show]
         end

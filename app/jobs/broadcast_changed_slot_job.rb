@@ -3,6 +3,7 @@ class BroadcastChangedSlotJob < ApplicationJob
 
   def perform(slot_id)
     slot = Slot.find(slot_id)
+    # sleep 3
 
     ActionCable.server.broadcast(
       build_channel_string(slot.employee_driving_school_id),

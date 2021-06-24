@@ -13,6 +13,8 @@
   "selectAtLeastXSlots": "Select at least {{count}} slots to create a lesson",
   "bookLessonTriggerBtn": "Book {{time}} ->",
   "remainingBookingTimeInSec": "Booking time left: {{seconds}} seconds",
+  "noEmployeesSelected": "Please select instructors for which you want to see the schedule",
+  "dataSyncingInProgress": "Data is being synced, please wait - we are just finishing",
   "hours": "{{hoursCount}} hour(s)",
   "lessonWith": "Lesson with",
   "inTermsOf": "In terms of: {{course}}"

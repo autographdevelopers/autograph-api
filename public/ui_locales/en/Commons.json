@@ -96,5 +96,8 @@
   "published": "Published",
   "archived": "Archived",
   "fullName": "Full Name",
-  "phoneNo": "Phone Number"
+  "phoneNo": "Phone Number",
+  "assets": "Assets",
+  "properties": "Properties",
+  "callOff": "Cancel"
 }

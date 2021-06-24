@@ -5,4 +5,6 @@
   "courseType": "Rodzaj kursu",
   "noCourseCategoriesInfo":
     "Brak dostępnych typów kursów / kategorii w tej organizacji",
-  "createThemNow": "Stwórz je teraz"}
+  "createThemNow": "Stwórz je teraz",
+  "noCategoriesToAssign": "Brak aktywnych kategorii. Kliknij aby stworzyć potrzebne wpisy."
+}

@@ -1,17 +1,24 @@
 class SlotsChannel < ApplicationCable::Channel
   def subscribed
-    driving_school_id = params[:driving_school_id]
-    employee_id = params[:employee_id]
+    @driving_school_id = params[:driving_school_id]
+    @employee_id = params[:employee_id]
 
-    employee_driving_school = set_employee_driving_school(
-      driving_school_id, employee_id
+    @employee_driving_school = set_employee_driving_school(
+      @driving_school_id, @employee_id
     )
 
-    if employee_driving_school.present?
-      stream_from build_channel_string(employee_driving_school.id)
+    if @employee_driving_school.present?
+      stream_from build_channel_string(@employee_driving_school.id)
     else
       reject
     end
+  end
+
+  def unsubscribed
+    Slot.available.future.locked.where(
+      locking_user_id: current_user.id,
+      employee_driving_school_id: @employee_driving_school.id,
+    )&.find_each(&:unlock_during_booking)
   end
 
   def lock_slot(data)

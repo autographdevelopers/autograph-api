@@ -23,6 +23,10 @@ class LessonNotePolicy < ApplicationPolicy
     user.employee? || record.student == user
   end
 
+  def attach_file_web?
+    user == record.author
+  end
+
   def attach_file?
     user == record.author
   end

@@ -1,6 +1,7 @@
 {
   "managePrivilegesBtn": "Manage Privileges",
   "availability": "Availability / Schedule",
-  "postsSectionTitle": "Posts",
+    "postsSectionTitle": "Posts",
   "upcomingLessons": "Upcoming Lessons",
-  "recentActivities": "Recent Activities"}
+  "recentActivities": "Recent Activities"
+}

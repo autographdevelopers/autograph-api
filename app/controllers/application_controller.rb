@@ -8,8 +8,8 @@ class ApplicationController < ActionController::API
   before_action :configure_permitted_parameters, if: :devise_controller?
   # skip_before_action :authenticate_api_v1_user!, if: :devise_controller?
   helper_method :protect_against_forgery?
-  after_action { puts response.body }
-  before_action { sleep 1 }
+  # after_action { puts response.body }
+  # before_action { sleep 1 }
 
   DEFAULT_RECORDS_PER_PAGE = 20
 

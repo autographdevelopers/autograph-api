@@ -3,5 +3,6 @@
   "assignFromPrebuilts": "Prebuilt",
   "customCategories": "Custom",
   "archived": "Archived",
-
-  "addCourseCategoryModalTitle": "Add New Custom Course Type"}
+  "addCourseCategoryModalTitle": "Add New Custom Course Type",
+  "saveError": "Error - please make sure the categories are not duplicated - if there is an archived one with that name, please activate it rather than creating duplicated one."
+}

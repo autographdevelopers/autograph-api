@@ -13,6 +13,8 @@
   "slotsNotAdjacent": "Wybierz przystające sloty",
   "selectAtLeastXSlots": "Zaznacz co najmniej {{count}} sloty by stworzyc lekcję",
   "bookLessonTriggerBtn": "Zarezerwuj {{time}} ->",
+  "noEmployeesSelected": "Wybierz instruktorów, dla których chcesz zobaczyć kalendarze",
+  "dataSyncingInProgress": "Synchronizowanie danych, proszę poczekaj chwilę, zaraz kończymy",
   "remainingBookingTimeInSec": "Czas pozotały do dokończenia zapisu: {{seconds}} sekund",
   "hours": "{{hoursCount}} godzin(y)",
   "lessonWith": "Lekcja z",

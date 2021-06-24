@@ -5,4 +5,6 @@
   "courseType": "Course Type",
   "noCourseCategoriesInfo":
     "You do not have available courses specified in your organization",
-  "createThemNow": "Create it now"}
+  "createThemNow": "Create it now",
+  "noCategoriesToAssign": "No active categories. Click to create some and come back here."
+}

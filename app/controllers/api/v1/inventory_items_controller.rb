@@ -1,6 +1,6 @@
 class Api::V1::InventoryItemsController < ApplicationController
   before_action :set_driving_school
-  before_action :set_inventory_item, only: %i[update attach_file delete_file discard]
+  before_action :set_inventory_item, only: %i[update attach_file attach_file_web delete_file discard show]
   has_scope :with_any_tags, type: :array do |controller, scope, value|
     scope.tagged_with(value, any: true)
   end
@@ -36,9 +36,18 @@ class Api::V1::InventoryItemsController < ApplicationController
     @inventory_item.files.attach(io: image_io, filename: image_name)
   end
 
+  def attach_file_web
+    authorize @inventory_item
+    @inventory_item.files.attach(params[:inventory_item][:file])
+  end
+
   def delete_file
     authorize @inventory_item
     @inventory_item.files.find(upload_doc_attachment[:file_id]).purge_later
+  end
+
+  def show
+    authorize @inventory_item
   end
 
   def discard

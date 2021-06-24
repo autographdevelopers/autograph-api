@@ -14,7 +14,7 @@ class BroadcastChangedDrivingLessonJob < ApplicationJob
       type: 'DRIVING_LESSON_CHANGED',
       driving_lesson: JSON.parse(
         ApplicationController.renderer.render(
-          template: 'api/v1/driving_lessons/create.json',
+          template: 'api/v1/driving_lessons/_driving_lesson.json',
           locals: { driving_lesson: driving_lesson }
         )
       )

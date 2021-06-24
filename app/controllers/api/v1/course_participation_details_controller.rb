@@ -7,6 +7,7 @@ class Api::V1::CourseParticipationDetailsController < ApplicationController
   before_action :set_course_participation, only: [:update, :discard]
 
   has_scope :kept, type: :boolean
+
   def index
     # authorize @owning_record, policy_class: CourseParticipationDetailPolicy
     @user = User.find_by(id: params[:student_id])

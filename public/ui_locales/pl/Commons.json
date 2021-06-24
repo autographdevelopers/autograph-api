@@ -96,5 +96,8 @@
   "published": "Opublikowane",
   "archived": "Zarchiwizowane",
   "fullName": "Imię i nazwisko",
-  "phoneNo": "Numer telefonu"
+  "phoneNo": "Numer telefonu",
+  "assets": "Zasoby",
+  "properties": "Właściwości",
+  "callOff": "Odwołaj",
 }
