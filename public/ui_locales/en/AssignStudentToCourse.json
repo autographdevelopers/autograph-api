@@ -7,5 +7,6 @@
   "bulkRemoveAssignmentErrorMsg": "Failed to remove {{number}} students from this course",
     "webStep1Title": "Select students you want to enroll for a course",
   "webStep2Title": "Confirm enrollment for current selection",
-  "enrollActionBtnTitle": "Enroll students ({{count}})"
+  "enrollActionBtnTitle": "Enroll students ({{count}})",
+  "bulkAssignmentGeneralError": "Failed to assign some of the students. Please ensure they are not already assigned and come back later."
 }

@@ -19,7 +19,7 @@ class OrganizationNote < ApplicationRecord
     # byebug
     return self.kept.published if status == 'active'
     return self.discarded if status == 'archived'
-    return self.draft if status == 'draft'
+    return self.draft.kept if status == 'draft'
     return self
   }
 end

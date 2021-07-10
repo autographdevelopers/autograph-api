@@ -1,7 +1,10 @@
 {
   "infoTab": "Info",
+  "courseDetails": "Course Details",
   "activeParticipants": "Active Participants",
   "readonlyStateDesc":
     "(i) This course has already assigned participants or is archived and you cannot edit its fields.",
-  "bulkUnassign": "Unassign ({{count}})"
+  "bulkUnassign": "Unassign ({{count}})",
+  "enroll": "Enroll students",
+  "bulkUnassignParticipantsGeneralError": "Failed to discard some of the participants. Make sure they haven't been removed in a meantime (either by other user or in a different browser tab/window)"
 }

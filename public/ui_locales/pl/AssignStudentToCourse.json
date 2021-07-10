@@ -7,5 +7,6 @@
   "bulkRemoveAssignmentErrorMsg": "Nie udało się usunąć {{number}} studentów z teog kursu",
   "webStep1Title": "Wybierz studetów, których chcesz zapisać na kurs",
   "webStep2Title": "Potwierdź przypisanie wybranych studentów",
-  "enrollActionBtnTitle": "Przypisz studentów ({{count}})"
+  "enrollActionBtnTitle": "Przypisz studentów ({{count}})",
+  "bulkAssignmentGeneralError": "Nie udało się przypisać niektórych studentów. Upewnij się, że nie są oni już przypisani do tego kursu."
 }

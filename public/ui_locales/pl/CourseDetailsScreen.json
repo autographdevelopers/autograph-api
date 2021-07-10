@@ -1,7 +1,10 @@
 {
   "info": "Info",
+  "courseDetails": "Szczegóły kursu",
   "activeParticipants": "Aktywni uczestnicy",
   "readonlyStateDesc":
     "Ten kurs ma już przypisanych aktywnych uczestników lub został zarchiwizowany więc nie możesz już go edytować",
-  "bulkUnassign": "Wypisz ({{count}})"
+  "bulkUnassign": "Wypisz ({{count}})",
+  "enroll": "Zapisz studentów",
+  "bulkUnassignParticipantsGeneralError": "Nie udało się wypisać niektórych użytkowników. Upewnij się, że nie zostali oni usunieci w międzyczasie (np. przez innego pracownika lub w innej karcie/oknie przeglądarki)"
 }

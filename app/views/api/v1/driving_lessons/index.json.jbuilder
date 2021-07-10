@@ -4,6 +4,4 @@ json.results do
               as: :driving_lesson
 end
 
-json.pagination do
-  json.is_more !@driving_lessons.last_page? && !@driving_lessons.out_of_range?
-end
+json.partial! 'api/v1/helper/pagination', locals: { collection: @driving_lessons }

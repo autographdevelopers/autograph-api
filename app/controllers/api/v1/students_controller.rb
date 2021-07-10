@@ -36,6 +36,7 @@ class Api::V1::StudentsController < ApplicationController
       .student_driving_schools
       .where.not(id: participation_student_driving_schools)
       .includes(:student)
+      .references(:student)
       .page(params[:page])
       .per(params[:per] || 20)
 

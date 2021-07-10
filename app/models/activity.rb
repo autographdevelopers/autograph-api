@@ -27,7 +27,8 @@ class Activity < ApplicationRecord
     driving_course_changed: 8,
     schedule_changed: 9,
     driving_lesson_canceled: 10,
-    driving_lesson_scheduled: 11
+    driving_lesson_scheduled: 11,
+    custom_report: 12
   }
 
   # == Validations ============================================================
@@ -36,7 +37,7 @@ class Activity < ApplicationRecord
   validates :date, presence: true, if: -> { custom_activity_type&.datetime_input_required? }
   validates :target_id, presence: true, if: -> { custom_activity_type.nil? || custom_activity_type.target_type }
 
-  validate :activity_type_xor_custom_activity_type
+  # validate :activity_type_xor_custom_activity_type
 
   # == Scopes =================================================================
   scope :related_to_user, ->(value) do

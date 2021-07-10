@@ -39,7 +39,8 @@ class Api::V1::ActivitiesController < ApplicationController
   def create
     @activity = @driving_school.activities.create!(
       activity_params.merge({
-        user: current_user
+        user: current_user,
+        activity_type: :custom_report
       })
     )
     head :ok
