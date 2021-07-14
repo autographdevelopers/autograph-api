@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_01_210036) do
+ActiveRecord::Schema.define(version: 2021_07_10_210124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -320,6 +320,18 @@ ActiveRecord::Schema.define(version: 2021_03_01_210036) do
     t.bigint "activity_id"
     t.index ["activity_id"], name: "index_related_user_activities_on_activity_id"
     t.index ["user_id"], name: "index_related_user_activities_on_user_id"
+  end
+
+  create_table "relationships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "source_type", null: false
+    t.bigint "source_id", null: false
+    t.string "target_type", null: false
+    t.bigint "target_id", null: false
+    t.string "verb", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["source_type", "source_id"], name: "index_relationships_on_source_type_and_source_id"
+    t.index ["target_type", "target_id"], name: "index_relationships_on_target_type_and_target_id"
   end
 
   create_table "schedule_settings", force: :cascade do |t|

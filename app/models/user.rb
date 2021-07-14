@@ -20,6 +20,9 @@ class User < ActiveRecord::Base
   has_many :received_user_notes, class_name: UserNote.name, foreign_key: :user_id
   has_many :authored_user_notes, class_name: UserNote.name, foreign_key: :author_id
 
+  has_many :source_relationships, as: :source, class_name: Relationship.name
+  has_many :target_relationships, as: :target, class_name: Relationship.name
+
   # == Extensions =============================================================
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :invitable
@@ -57,6 +60,10 @@ class User < ActiveRecord::Base
 
   def self.build_test_user
     new(name: 'John', surname: 'Doe', email: 'test-user@test.com')
+  end
+
+  def display_name
+    email
   end
 
   private

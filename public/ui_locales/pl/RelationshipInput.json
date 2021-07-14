@@ -1,0 +1,16 @@
+{
+  "verbOptions": {
+    "relatesTo": "Dotyczy",
+    "isOwnedBy": "Jest własnością",
+    "isResponsibleFor": "Odpowiada za"
+  },
+  "targetTypeOptions": {
+    "InventoryItem": "Objekt",
+    "Student": "Student",
+    "Employee": "Pracownik",
+    "Course": "Kurs"
+  },
+  "addRelation": "Dodaj powiązanie",
+  "emptyTitle": "Brak zdefiniowanych powiązań",
+  "emptyDesc": "Edytuj tę sekcję aby powiązać ten wpis z dowolnym innym wpisem w platformie"
+}

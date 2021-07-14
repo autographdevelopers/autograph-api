@@ -6,4 +6,8 @@ class Student < User
 
   # == Aliases ================================================================
   alias_attribute :user_driving_schools, :student_driving_schools
+
+  def display_name
+    email
+  end
 end

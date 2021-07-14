@@ -1,0 +1,16 @@
+{
+  "verbOptions": {
+    "relatesTo": "Relates To",
+    "isOwnedBy": "Is Owned By",
+    "isResponsibleFor": "Is Responsible For"
+  },
+  "targetTypeOptions": {
+    "InventoryItem": "InventoryItem",
+    "Student": "Student",
+    "Employee": "Employee",
+    "Course": "Course"
+  },
+  "addRelation": "Add Relationship",
+  "emptyTitle": "No relationships defined",
+  "emptyDesc": "Edit this section to associate this record with anything on the platform"
+}

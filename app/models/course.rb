@@ -6,6 +6,9 @@ class Course < ApplicationRecord
 
   has_many :course_participation_details
 
+  has_many :source_relationships, as: :source, class_name: Relationship.name
+  has_many :target_relationships, as: :target, class_name: Relationship.name
+
   enum status: { default: 0 }, _prefix: :status
 
   validates :name, :status, :course_type_id, presence: true
@@ -18,5 +21,9 @@ class Course < ApplicationRecord
         OR courses.description ILIKE :term
       ), term: "%#{q}%"
     )
+  end
+
+  def display_name
+    name
   end
 end

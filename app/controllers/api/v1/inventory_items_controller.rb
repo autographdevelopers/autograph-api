@@ -24,9 +24,9 @@ class Api::V1::InventoryItemsController < ApplicationController
     authorize InventoryItem
     @inventory_items = @driving_school.inventory_items.includes(
       :author,
-      :tags,
-      files_attachments: :blob
-    ).kept.order(created_at: :desc)
+      files_attachments: :blob,
+      tags: :taggings # https://github.com/mbleigh/acts-as-taggable-on/issues/91#issuecomment-668683692
+    ).preload(source_relationships: :target).kept.order(created_at: :desc)
     @inventory_items = apply_scopes(@inventory_items)
     @inventory_items = @inventory_items.page(params[:page]).per(records_per_page)
   end
@@ -76,6 +76,13 @@ class Api::V1::InventoryItemsController < ApplicationController
         :title,
         :order,
         data: [:propertyName, :propertyValue, :order]
+      ],
+      source_relationships_attributes: [
+        :id,
+        :_destroy,
+        :verb,
+        :target_type,
+        :target_id,
       ]
     )
   end

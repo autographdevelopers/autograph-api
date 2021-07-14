@@ -15,6 +15,10 @@ class Employee < User
   def is_owner?(driving_school)
     self.employee_driving_schools.find_by(driving_school: driving_school).employee_privileges.is_owner?
   end
+
+  def display_name
+    email
+  end
 end
 
 # TODO: what if invite both: as an employee and student?
