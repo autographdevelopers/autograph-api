@@ -5,6 +5,13 @@ class User < ActiveRecord::Base
   EMPLOYEE = 'Employee'.freeze
   STUDENT = 'Student'.freeze
 
+  AVATAR_VARIANTS = {
+    xs: [50, 50],
+    sm: [100, 100],
+    md: [300, 300],
+    lg: [600, 600],
+  }.freeze
+
   # == Relations ==============================================================
   has_many :locked_slots, class_name: 'Slot', foreign_key: 'locking_user_id'
   has_many :notifiable_user_activities
@@ -45,6 +52,10 @@ class User < ActiveRecord::Base
 
   validate :birth_date_not_to_be_in_past
 
+  validates :avatar,
+            content_type: %w[image/png image/jpg image/jpeg],
+            size: { less_than: Rails.application.secrets.avatar_size_limit_in_megabytes.megabytes }
+
   # == Instance Methods =======================================================
   def employee?
     is_a? Employee
@@ -65,6 +76,7 @@ class User < ActiveRecord::Base
   def display_name
     email
   end
+
 
   private
 

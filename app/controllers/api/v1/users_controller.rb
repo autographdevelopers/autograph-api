@@ -2,8 +2,8 @@ class Api::V1::UsersController < DeviseTokenAuth::RegistrationsController
   skip_before_action :authenticate_api_v1_user!, only: :create
 
   def update_avatar
-    current_user.avatar.purge
-    current_user.avatar.attach(params[:avatar])
+    current_user.update!(avatar: params[:avatar])
+    AvatarVariantsGeneratorJob.perform_later(current_user.id)
     render :update_avatar
   end
 

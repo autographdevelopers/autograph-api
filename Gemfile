@@ -17,6 +17,8 @@ gem 'discard', '~> 1.2'
 gem 'json-schema'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
+# gem 'mini_magick', '>= 4.9.5'
+gem 'image_processing', '~> 1.2'
 
 group :development, :test do
   gem 'dotenv-rails', require: 'dotenv/rails-now'
