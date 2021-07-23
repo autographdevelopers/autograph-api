@@ -7,8 +7,8 @@ end
 
 ruby '2.5.7'
 
-gem 'rails', '~> 5.2.4.4'
-gem 'pg', '~> 0.18'
+gem 'rails', '~> 6.1'
+gem 'pg'
 gem 'puma', '~> 3.7'
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -60,4 +60,4 @@ gem 'sidekiq-cron', '~> 0.6.3'
 gem 'one_signal'
 gem 'kaminari'
 gem 'active_storage_validations'
-gem 'acts-as-taggable-on', '~> 6.0'
+gem 'acts-as-taggable-on', '~> 7.0'
