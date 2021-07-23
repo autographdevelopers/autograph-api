@@ -1,10 +1,16 @@
 class Relationship < ApplicationRecord
-  belongs_to :source, polymorphic: true
-  belongs_to :target, polymorphic: true
+  belongs_to :subject, polymorphic: true
+  belongs_to :object, polymorphic: true
 
   validates :verb, presence: true
 
-  def target_label
-    target.display_name
+  enum voice: { active: 'active', passive: 'passive' }
+
+  def object_label
+    object.display_name
+  end
+
+  def subject_label
+    subject.display_name
   end
 end

@@ -1,8 +1,30 @@
 {
   "verbOptions": {
-    "relatesTo": "Dotyczy",
-    "isOwnedBy": "Jest własnością",
-    "isResponsibleFor": "Odpowiada za"
+    "isRelatedTo": {
+      "label": "Dotyczy",
+      "voice": "passive"
+    },
+    "relatesTo": {
+      "label": "Dotyczy",
+      "voice": "active"
+    },
+
+    "isOwnedBy": {
+      "label": "Jest własnością",
+      "voice": "passive"
+    },
+    "owns": {
+      "label": "Posiada",
+      "voice": "active"
+    },
+    "isDuplicatedBy": {
+      "label": "Jest zduplikowany przez",
+      "voice": "passive"
+    },
+    "duplicates": {
+      "label": "Duplikuje",
+      "voice": "active"
+    }
   },
   "targetTypeOptions": {
     "InventoryItem": "Objekt",

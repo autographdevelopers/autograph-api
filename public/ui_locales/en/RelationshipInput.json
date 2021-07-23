@@ -1,8 +1,30 @@
 {
   "verbOptions": {
-    "relatesTo": "Relates To",
-    "isOwnedBy": "Is Owned By",
-    "isResponsibleFor": "Is Responsible For"
+    "isRelatedTo": {
+      "label": "Is Related To",
+      "voice": "passive"
+    },
+    "relatesTo": {
+      "label": "Relates to",
+      "voice": "active"
+    },
+
+    "isOwnedBy": {
+      "label": "Is Owned by",
+      "voice": "passive"
+    },
+    "owns": {
+      "label": "Owns",
+      "voice": "active"
+    },
+    "isDuplicatedBy": {
+      "label": "Is duplicated By",
+      "voice": "passive"
+    },
+    "duplicates": {
+      "label": "Duplicates",
+      "voice": "active"
+    }
   },
   "targetTypeOptions": {
     "InventoryItem": "InventoryItem",

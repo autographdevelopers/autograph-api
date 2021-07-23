@@ -1,0 +1,13 @@
+{
+  "header": "Change Avatar",
+  "saveAvatar": "Save Avatar",
+  "dragAndDropInstructions": "Drag and drop file here",
+  "browseFiles": "Browse Files",
+  "constraints": "Max file size: {{megabytes}} MB. Supported file formats: {{formats}}",
+  "fileRequiredError": "Please select file to upload first",
+  "fileTooLargeError": "The selected file is too large",
+  "unsupportedFormatError": "The format of the selected file is not supported",
+  "serverErrorGeneric": "Failed to upload image. Please ensure that selected file meets all requirements",
+  "changeAvatar": "Change Avatar",
+  "removeAvatar": "Remove Avatar"
+}

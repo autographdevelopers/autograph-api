@@ -26,7 +26,10 @@ class Api::V1::InventoryItemsController < ApplicationController
       :author,
       files_attachments: :blob,
       tags: :taggings # https://github.com/mbleigh/acts-as-taggable-on/issues/91#issuecomment-668683692
-    ).preload(source_relationships: :target).kept.order(created_at: :desc)
+    ).preload(
+      relationships_as_subject: :object,
+      relationships_as_object: :subject
+    ).kept.order(created_at: :desc)
     @inventory_items = apply_scopes(@inventory_items)
     @inventory_items = @inventory_items.page(params[:page]).per(records_per_page)
   end
@@ -75,14 +78,27 @@ class Api::V1::InventoryItemsController < ApplicationController
       properties_groups: [
         :title,
         :order,
-        data: [:propertyName, :propertyValue, :order]
+        data: [
+          :propertyName,
+          :propertyValue,
+          :order
+        ]
       ],
-      source_relationships_attributes: [
+      relationships_as_subject_attributes: [
         :id,
-        :_destroy,
         :verb,
-        :target_type,
-        :target_id,
+        :voice,
+        :object_type,
+        :object_id,
+        :_destroy,
+      ],
+      relationships_as_object_attributes: [
+        :id,
+        :verb,
+        :voice,
+        :subject_type,
+        :subject_id,
+        :_destroy,
       ]
     )
   end

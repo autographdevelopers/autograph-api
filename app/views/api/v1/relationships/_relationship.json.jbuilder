@@ -1,1 +1,10 @@
-json.extract! relationship, :id, :verb, :target_type, :target_id, :target_label
+json.extract! relationship,
+              :id,
+              :verb,
+              :subject_type,
+              :subject_id,
+              :object_type,
+              :object_id,
+              :object_label,
+              :subject_label,
+              :voice

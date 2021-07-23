@@ -6,8 +6,8 @@ class Course < ApplicationRecord
 
   has_many :course_participation_details
 
-  has_many :source_relationships, as: :source, class_name: Relationship.name
-  has_many :target_relationships, as: :target, class_name: Relationship.name
+  has_many :relationships_as_subject, as: :subject, class_name: Relationship.name
+  has_many :relationships_as_object, as: :object, class_name: Relationship.name
 
   enum status: { default: 0 }, _prefix: :status
 

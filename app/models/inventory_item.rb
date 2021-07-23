@@ -7,10 +7,11 @@ class InventoryItem < ApplicationRecord
   belongs_to :author, class_name: User.name
   has_many :comments, as: :commentable
 
-  has_many :source_relationships, as: :source, class_name: Relationship.name
-  has_many :target_relationships, as: :target, class_name: Relationship.name
+  has_many :relationships_as_subject, as: :subject, class_name: Relationship.name
+  has_many :relationships_as_object, as: :object, class_name: Relationship.name
 
-  accepts_nested_attributes_for :source_relationships, allow_destroy: true
+  accepts_nested_attributes_for :relationships_as_subject, allow_destroy: true
+  accepts_nested_attributes_for :relationships_as_object, allow_destroy: true
 
   has_many_attached :files
 

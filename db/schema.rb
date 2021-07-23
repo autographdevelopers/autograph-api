@@ -323,15 +323,16 @@ ActiveRecord::Schema.define(version: 2021_07_10_210124) do
   end
 
   create_table "relationships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "source_type", null: false
-    t.bigint "source_id", null: false
-    t.string "target_type", null: false
-    t.bigint "target_id", null: false
+    t.string "subject_type", null: false
+    t.bigint "subject_id", null: false
+    t.string "object_type", null: false
+    t.bigint "object_id", null: false
+    t.string "voice", null: false
     t.string "verb", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["source_type", "source_id"], name: "index_relationships_on_source_type_and_source_id"
-    t.index ["target_type", "target_id"], name: "index_relationships_on_target_type_and_target_id"
+    t.index ["object_type", "object_id"], name: "index_relationships_on_object_type_and_object_id"
+    t.index ["subject_type", "subject_id"], name: "index_relationships_on_subject_type_and_subject_id"
   end
 
   create_table "schedule_settings", force: :cascade do |t|

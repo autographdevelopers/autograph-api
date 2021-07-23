@@ -3,7 +3,7 @@ class Api::V1::UsersController < DeviseTokenAuth::RegistrationsController
 
   def update_avatar
     current_user.avatar.purge
-    current_user.avatar.attach(io: avatar_io, filename: 'XXXXX')
+    current_user.avatar.attach(params[:avatar])
     render :update_avatar
   end
 
@@ -20,11 +20,6 @@ class Api::V1::UsersController < DeviseTokenAuth::RegistrationsController
 
   def render_update_success
     render :update
-  end
-
-  def avatar_io
-    decoded_image = Base64.decode64(params[:avatar_base64])
-    StringIO.new(decoded_image)
   end
 
   def render_create_error

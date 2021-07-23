@@ -20,8 +20,8 @@ class User < ActiveRecord::Base
   has_many :received_user_notes, class_name: UserNote.name, foreign_key: :user_id
   has_many :authored_user_notes, class_name: UserNote.name, foreign_key: :author_id
 
-  has_many :source_relationships, as: :source, class_name: Relationship.name
-  has_many :target_relationships, as: :target, class_name: Relationship.name
+  has_many :relationships_as_subject, as: :subject, class_name: Relationship.name
+  has_many :relationships_as_object, as: :object, class_name: Relationship.name
 
   # == Extensions =============================================================
   devise :database_authenticatable, :registerable,

@@ -1,0 +1,13 @@
+{
+  "header": "Zmień avatar",
+  "saveAvatar": "Zapisz avatar",
+  "dragAndDropInstructions": "Upuść plik tutaj",
+  "browseFiles": "Przeglądaj pliki",
+  "constraints": "Maksymalny rozmiar: {{megabytes}} MB. Wspierane formaty to: {{formats}}",
+  "fileRequiredError": "Wybierz plik przed zapisem",
+  "fileTooLargeError": "Wybrany plik jest zbyt duży",
+  "unsupportedFormatError": "Format wybranego pliku nie jest wspierany",
+  "serverErrorGeneric": "Nie udało się przesłać pliku. Upewnij sie, że plik spełnia wszystkie wymagania",
+  "changeAvatar": "Zmień avatar",
+  "removeAvatar": "Usuń avatar"
+}
